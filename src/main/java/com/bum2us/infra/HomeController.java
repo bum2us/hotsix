@@ -33,4 +33,12 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/codeGroupList", method = RequestMethod.GET)
+	public String codeGroupList(Locale locale, Model model) {
+		return "codeGroupList";
+	}
+	@RequestMapping(value = "/codeList", method = RequestMethod.GET)
+	public String codeList(Locale locale, Model model) {
+		return "codeList";
+	}
 }

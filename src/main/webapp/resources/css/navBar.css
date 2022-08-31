@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans',sans-serif;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.logoImage {
+    height: 30px;
+    margin-bottom: 9px;
+}
+
+.logoName {
+    margin-left: 10px;
+    font-size: 20pt;
+    font-weight: bold;
+    color: white;
+}
+
+.logoName2 {
+    color: red;
+}
+nav li,a,i {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav_links{
+    list-style: none;
+    margin-top: 18px;
+    margin-left: auto;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.nav_links li a:horver {
+    color: #fff;
+}
+
+header {
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    /* justify-content: flex-end; */
+    align-items: center;
+    padding: 10px 10%;
+}
+
+.administrator {
+    color: #fff;
+    font-weight: 700;
+    margin: 0 30px 0 10px;
+}
+
+.profile {
+    margin: 0 0 0 40px;
+}
+
+.imgBox {
+    width: 30px;
+    height: 30px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logoutBtn {
+    background: transparent;
+    border: 0;
+}
