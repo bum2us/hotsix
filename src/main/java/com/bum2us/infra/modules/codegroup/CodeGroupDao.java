@@ -17,5 +17,5 @@ public class CodeGroupDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.codegroup.CodeGroupMapper";
 	
-	public List<CodeGroup> selectList() { return sqlSession.selectList(namespace + ".selectList",""); }
+	public List<CodeGroup> selectList(){ return sqlSession.selectList(namespace + ".selectList", ""); }
 }

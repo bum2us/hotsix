@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/codegroup/")
 public class CodeGroupController {
-	
 	@Autowired
 	CodeGroupServiceImpl service;
 	
+
 	@RequestMapping(value = "codeGroupList")
 	public String codeGroupList(Model model) throws Exception {
-		
+
 		List<CodeGroup> list = service.selectList();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		
 		return "infra/codegroup/adnnin/codeGroupList";
 	}
