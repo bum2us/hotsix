@@ -4,17 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
-
 <!DOCTYPE html>
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>코드 그룹 관리</title>
+<title>멤버 관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-	
 	<header>
 		<div class="logo">
 			<img src="../../images/mark_white.png" class="logoImage" alt="">
@@ -24,6 +22,7 @@
 			<ul class="nav_links">
 				<li><a href="./codeGroupList.html">코드그룹</a></li>
 				<li><a href="./codeList.html">코드</a></li>
+				<li><a href="./codeList.html">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">
@@ -38,7 +37,7 @@
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
-				<span class="page_title">코드 그룹 관리</span>
+				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
 		<div class="row mt-4 searchForm">
@@ -86,31 +85,29 @@
 					<tr>
 						<th><input class="form-check-input" type="checkbox"></th>
 						<th>#</th>
-						<th>코드그룹 코드</th>
-						<th>코드그룹 이름(한글)</th>
-						<th>사용여부</th>
-						<th>코드갯수</th>
-						<th>등록일</th>
-						<th>수정일</th>
+						<th>이름</th>
+						<th>ID</th>
+						<th>닉네임</th>
+						<th>생년월일</th>
+						<th>email</th>
+						<th>휴대전화</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="list" varStatus="status">
-					<c:set var="now" value="<%=new java.util.Date()%>" />
 						<tr>
 							<td>
 								<input class="form-check-input" type="checkbox">
 							</td>
 							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.groupName }"/></td>
-							<td><c:out value="${list.useNy}"/></td>
-							<td><c:out value="${list.codeCount}"/><td>
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+							<td><c:out value="${list.name }"/></td>
+							<td><c:out value="${list.id }"/></td>
+							<td><c:out value="${list.nickname }"/></td>
+							<td><c:out value="${list.dob }"/></td>
+							<td><c:out value="${list.email }"/></td>
+							<td><c:out value="${list.phone }"/></td>
 						</tr>
-							
-					</c:forEach>
+					</c:forEach>	
 				</tbody>
 			</table>
 		</div>
@@ -137,11 +134,11 @@
     </div>
 	<footer class="footer-bottom">
 		<ul class="socials">
-		  <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
-		  <li><a href="#"><i class="fa-brands fa-square-twitter"></i></a></li>
-		  <li><a href="#"><i class="fa-brands fa-square-google-plus"></i></a></li>
-		  <li><a href="#"><i class="fa-brands fa-square-youtube"></i></a></li>
-		  <li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+			<li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+			<li><a href="#"><i class="fa-brands fa-square-twitter"></i></a></li>
+			<li><a href="#"><i class="fa-brands fa-square-google-plus"></i></a></li>
+			<li><a href="#"><i class="fa-brands fa-square-youtube"></i></a></li>
+			<li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
 		</ul>
 		<p>copyright &copy;2022 ALBUM'S. designed by <span>bum2us</span></p>
 	</footer>

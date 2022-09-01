@@ -5,6 +5,8 @@ public class CodeGroup {
 	private Integer seq;
 	private String groupName;
 	private Integer useNy;
+	private Integer codeCount;
+	
 	public Integer getSeq() {
 		return seq;
 	}
@@ -22,6 +24,12 @@ public class CodeGroup {
 	}
 	public void setUseNy(Integer useNy) {
 		this.useNy = useNy;
+	}
+	public Integer getCodeCount() {
+		return codeCount;
+	}
+	public void setCodeCount(Integer codeCount) {
+		this.codeCount = codeCount;
 	}
 
 	

@@ -10,10 +10,13 @@
 	
 	<select id="selectList" resultMap="resultMapObj">
 		SELECT
-			a.*
+			a.seq
+		    ,a.groupName
+		    ,a.useNy
+		    ,count(b.groupSeq) as codeCount
 		FROM ccg a
-		WHERE 1=1
-			AND useNy = 1
+		JOIN cc b ON b.groupSeq = a.seq
+		GROUP BY b.groupSeq;
 	</select>
 
 </mapper>	

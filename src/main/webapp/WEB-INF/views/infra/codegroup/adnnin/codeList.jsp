@@ -9,12 +9,11 @@
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>코드 그룹 관리</title>
+<title>코드 관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-	
 	<header>
 		<div class="logo">
 			<img src="../../images/mark_white.png" class="logoImage" alt="">
@@ -38,7 +37,7 @@
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
-				<span class="page_title">코드 그룹 관리</span>
+				<span class="page_title">코드 관리</span>
 			</div>
 		</div>
 		<div class="row mt-4 searchForm">
@@ -79,7 +78,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="row my-4 justify-content-center">
 			<table>
 				<thead>
@@ -87,9 +85,11 @@
 						<th><input class="form-check-input" type="checkbox"></th>
 						<th>#</th>
 						<th>코드그룹 코드</th>
-						<th>코드그룹 이름(한글)</th>
-						<th>사용여부</th>
-						<th>코드갯수</th>
+						<th>코드그룹 이름</th>
+						<th>코드</th>
+						<th>코드이름</th>
+						<th>사용</th>
+						<th>순서</th>
 						<th>등록일</th>
 						<th>수정일</th>
 					</tr>
@@ -101,15 +101,16 @@
 							<td>
 								<input class="form-check-input" type="checkbox">
 							</td>
-							<td><c:out value="${list.seq }"/></td>
+							<td><c:out value="${list.codeSeq }"/></td>
 							<td><c:out value="${list.seq }"/></td>
 							<td><c:out value="${list.groupName }"/></td>
-							<td><c:out value="${list.useNy}"/></td>
-							<td><c:out value="${list.codeCount}"/><td>
+							<td><c:out value="${list.codeKey }"/></td>
+							<td><c:out value="${list.codeName }"/></td>
+							<td></td>
+							<td><c:out value="${list.codeKey}"/></td>
 							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 						</tr>
-							
 					</c:forEach>
 				</tbody>
 			</table>
@@ -150,7 +151,10 @@
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-
+		
 	</script>		
 </body>
 </html>
+
+					
+				
