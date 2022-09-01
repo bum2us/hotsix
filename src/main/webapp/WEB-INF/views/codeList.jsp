@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-	<div id="headers"></div>
 	<div class="container">
         <br><br>
 		<div class="row justify-content-center">

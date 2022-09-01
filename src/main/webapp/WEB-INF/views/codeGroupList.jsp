@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
-	<div id="headers"></div>
 	<div class="container">
         <br><br>
 		<div class="row justify-content-center">
@@ -202,13 +201,6 @@
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		$(document).ready( function() {
-				$("#headers").load("./navbar.jsp");
-			});
-
-		$(document).ready( function() {
-			$("#footers").load("./footer.jsp");
-		});
 
 	</script>		
 </body>
