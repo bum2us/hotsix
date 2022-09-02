@@ -18,4 +18,6 @@ public class MemberDao {
 	private String namespace = "com.bum2us.infra.modules.member.MemberMapper";
 	
 	public List<Member> selectList() { return sqlSession.selectList(namespace + ".selectList", ""); } 
+	
+	public List<Member> selectList(MemberVo vo) { return sqlSession.selectList(namespace + ".selectList2", vo); } 
 }

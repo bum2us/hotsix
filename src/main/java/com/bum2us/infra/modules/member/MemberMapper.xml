@@ -14,5 +14,25 @@
 		WHERE 1=1
 	
 	</select>
+	
+	<resultMap id="resultMapObj2" type="com.bum2us.infra.modules.member.Member"></resultMap>
+	
+	<select id="selectList2" resultMap = "resultMapObj2">
+		
+		SELECT
+			*
+		FROM member
+		WHERE 
+		
+		<choose>
+			<when test="shOption == 1"> name </when>
+			<when test="shOption == 2"> Id </when>
+			<when test="shOption == 3"> nickname </when>
+			<when test="shOption == 4"> email </when>
+			<when test="shOption == 5"> phone </when>
+		</choose>
+		LIKE CONCAT ('%',#{shValue},'%')
+	
+	</select>
 
 </mapper>

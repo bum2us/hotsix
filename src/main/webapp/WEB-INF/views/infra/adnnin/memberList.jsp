@@ -40,45 +40,56 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
-		<div class="row mt-4 searchForm">
-			<div class="col">
-				<div class="row my-3">
-					<h6>검색조건</h6>
-				</div>
-				<div class="row mb-4">
-					<div class="col-3">
-						<select id="">
-							<option value="" disabled selected>사용여부</option>
-							<option value="1">N</option>
-							<option value="2">Y</option>
-						</select>
+		<form action="http://localhost:8080/member/memberListsearch">
+			<div class="row mt-4 searchForm">
+				<div class="col">
+					<div class="row my-3">
+						<h6>검색조건</h6>
 					</div>
-					<div class="col-3">
-						<select id="" >
-							<option value="" disabled selected>검색구분</option>
-							<option value="1">수정일</option>
-							<option value="2">등록일</option>
-						</select>
+					<div class="row mb-4">
+						<div class="col-3">
+							<select id="">
+								<option value="" disabled selected>사용여부</option>
+								<option value="1">N</option>
+								<option value="2">Y</option>
+							</select>
+						</div>
+						<div class="col-3">
+							<select id="" >
+								<option value="" disabled selected>검색구분</option>
+								<option value="1">수정일</option>
+								<option value="2">등록일</option>
+							</select>
+						</div>
+						<div class="col-3">
+							<input type="text" placeholder="시작일">
+						</div>
+						<div class="col-3">
+							<input type="text" placeholder="종료일">
+						</div>
 					</div>
-					<div class="col-3">
-						<input type="text" placeholder="시작일">
+					<div class="row mb-4">
+						<div class="col-2">
+							<select name="shOption" id="shOption" >
+								<option value="" disabled selected>검색 위치</option>
+								<option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
+								<option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>ID</option>
+								<option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>닉네임</option>
+								<option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>email</option>
+								<option value="5" <c:if test="${vo.shOption eq 5}">selected</c:if>>휴대전화</option>
+							</select>
+						</div>
+						<div class="col">
+							<input type="text" name="shValue" placeholder="검색어" value="<c:out value="${vo.shValue }"/>"> 
+						</div>
 					</div>
-					<div class="col-3">
-						<input type="text" placeholder="종료일">
+					<div class="row mb-3">
+						<button type="submit">검색</button>
+						<button type="button">리셋</button>
 					</div>
-				</div>
-				<div class="row mb-4">
-					<div class="col">
-						<input type="text" placeholder="검색어">
-					</div>
-				</div>
-				<div class="row mb-3">
-					<button type="button">검색</button>
-					<button type="button">리셋</button>
 				</div>
 			</div>
-		</div>
-		
+		</form>
 		<div class="row my-4 justify-content-center">
 			<table>
 				<thead>
@@ -105,7 +116,7 @@
 							<td><c:out value="${list.nickname }"/></td>
 							<td><c:out value="${list.dob }"/></td>
 							<td><c:out value="${list.email }"/></td>
-							<td><c:out value="${list.phone }"/></td>
+							<td><c:out value="${fn:substring(list.phone,0,3)}-${fn:substring(list.phone,3,7)}-${fn:substring(list.phone,7,11)}"/></td>
 						</tr>
 					</c:forEach>	
 				</tbody>

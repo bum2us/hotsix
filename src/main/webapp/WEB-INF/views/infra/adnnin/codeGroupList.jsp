@@ -24,6 +24,7 @@
 			<ul class="nav_links">
 				<li><a href="./codeGroupList.html">코드그룹</a></li>
 				<li><a href="./codeList.html">코드</a></li>
+				<li><a href="./codeList.html">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">
@@ -95,22 +96,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var="list" varStatus="status">
-					<c:set var="now" value="<%=new java.util.Date()%>" />
-						<tr>
-							<td>
-								<input class="form-check-input" type="checkbox">
-							</td>
-							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.groupName }"/></td>
-							<td><c:out value="${list.useNy}"/></td>
-							<td><c:out value="${list.codeCount}"/><td>
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-						</tr>
-							
-					</c:forEach>
+					<c:choose>
+						<c:when test="${fn:length(list) eq 3}">
+							<tr>
+								<td colspan="8" style="text-align: center;">No data...!<td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="list" varStatus="status">
+							<c:set var="now" value="<%=new java.util.Date()%>" />
+								<tr>
+									<td>
+										<input class="form-check-input" type="checkbox">
+									</td>
+									<td><c:out value="${list.seq }"/></td>
+									<td><c:out value="${list.seq }"/></td>
+									<td><c:out value="${list.groupName }"/></td>
+									<td><c:out value="${list.useNy}"/></td>
+									<td><c:out value="${list.codeCount}"/></td>
+									<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+									<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+								</tr>	
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 		</div>

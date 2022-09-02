@@ -19,6 +19,17 @@ public class MemberController {
 		List<Member> list = service.selectList();
 		model.addAttribute("list", list);
 		
-		return "infra/codegroup/adnnin/memberList";
+		return "infra/adnnin/memberList";
+	}
+	
+	@RequestMapping(value="/member/memberListsearch")
+	public String memberList(Model model, MemberVo vo) throws Exception{
+		
+		System.out.println(vo.getShValue());
+		
+		List<Member> list = service.selectList(vo);
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/memberList";
 	}
 }
