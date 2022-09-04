@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace ="com.bum2us.infra.modules.regform.RegisterMapper">
+	
+	<resultMap id ="resultMapObj" type ="com.bum2us.infra.modules.regform.Register"></resultMap>
+
+	<insert id = "insertList" parameterType="java.lang.String">
+		
+		INSERT INTO member(
+		name
+		,Id
+		,password
+		,gender
+		,email
+		,phone
+		)VALUES(
+		
+		#{rgName}
+		,#{rgId}
+		,#{rgPassword}
+		,#{rgGender}
+		,#{rgEmail}
+		,CONCAT ('010',#{rgPhone1},,#{rgPhone2})
+		)
+		
+	</insert>
+
+</mapper>

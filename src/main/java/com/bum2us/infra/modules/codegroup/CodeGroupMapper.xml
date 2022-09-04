@@ -9,6 +9,7 @@
     <resultMap id="resultMapObj" type="com.bum2us.infra.modules.codegroup.CodeGroup"></resultMap>
 	
 	<select id="selectList" resultMap="resultMapObj">
+		<!-- 
 		SELECT
 			a.seq
 		    ,a.groupName
@@ -17,6 +18,20 @@
 		FROM ccg a
 		JOIN cc b ON b.groupSeq = a.seq
 		GROUP BY b.groupSeq;
+		 -->
+		 
+		 SELECT
+		 	seq
+		 	,groupName
+		 	,useNy
+		 	,(
+		 	SELECT
+		 		COUNT(groupSeq) 
+		 	FROM cc
+		 	WHERE groupSeq = a.seq 
+		 	) AS codeCount
+		 FROM ccg a
+		 
 	</select>
 
 </mapper>	

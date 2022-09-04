@@ -40,7 +40,7 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
-		<form action="http://localhost:8080/member/memberListsearch">
+		<form action="/member/memberListsearch">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-3">
