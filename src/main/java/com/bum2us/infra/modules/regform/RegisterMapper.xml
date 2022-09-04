@@ -22,7 +22,7 @@
 		,#{rgPassword}
 		,#{rgGender}
 		,#{rgEmail}
-		,CONCAT ('010',#{rgPhone1},,#{rgPhone2})
+		,CONCAT ('010',#{rgPhone1},#{rgPhone2})
 		)
 		
 	</insert>
