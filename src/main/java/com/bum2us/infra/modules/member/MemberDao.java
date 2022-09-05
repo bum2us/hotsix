@@ -10,14 +10,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MemberDao {
-	
+
 	@Inject
-	@Resource(name = "sqlSession")
+	@Resource(name ="sqlSession")
 	private SqlSession sqlSession;
 	
-	private String namespace = "com.bum2us.infra.modules.member.MemberMapper";
+	private static String namespace = "com.bum2us.infra.modules.member.MemberMapper";
 	
-	public List<Member> selectList() { return sqlSession.selectList(namespace + ".selectList", ""); } 
+	public List<Member> selectList() { return sqlSession.selectList(namespace + ".selectList", ""); }
 	
-	public List<Member> selectList(MemberVo vo) { return sqlSession.selectList(namespace + ".selectList2", vo); } 
+	public void insertList(MemberVo vo) { sqlSession.insert(namespace + ".insertList", vo); }
+	
 }

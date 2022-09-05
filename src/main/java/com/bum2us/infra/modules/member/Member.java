@@ -1,35 +1,19 @@
 package com.bum2us.infra.modules.member;
 
 public class Member {
-	
 	private String seq;
 	private String name;
-	private String id;
 	private String password;
 	private String dob;
 	private Integer gender;
-	private String email;
-	private String phone1;
-	private String phone2;
-	private String phone;
 	private Integer telecom;
+	private String phone;
+	private String email;
+	private String id;
+	private String createDate;
 	private String comment;
 	private String nickname;
-	private String createDate;
 	
-
-	public String getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 	public String getSeq() {
 		return seq;
 	}
@@ -41,12 +25,6 @@ public class Member {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getPassword() {
 		return password;
@@ -66,29 +44,35 @@ public class Member {
 	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
+	public Integer getTelecom() {
+		return telecom;
+	}
+	public void setTelecom(Integer telecom) {
+		this.telecom = telecom;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone1() {
-		return phone1;
+	public String getId() {
+		return id;
 	}
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getPhone2() {
-		return phone2;
+	public String getCreateDate() {
+		return createDate;
 	}
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
-	}
-	public Integer getTelecom() {
-		return telecom;
-	}
-	public void setTelecom(Integer telecom) {
-		this.telecom = telecom;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 	public String getComment() {
 		return comment;
@@ -102,8 +86,6 @@ public class Member {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
-	
 	
 	
 	

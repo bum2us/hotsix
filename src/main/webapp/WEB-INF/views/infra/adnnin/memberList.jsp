@@ -57,10 +57,10 @@
 						</div>
 						<div class="col-3">
 							<select name = "shDateRange" >
-								<option value="0"<c:if test="${vo.shDateRange eq 0}">selected</c:if> disabled selected>검색구분</option>
-								<option value="1"<c:if test="${vo.shDateRange eq 1}">selected</c:if>>수정일</option>
-								<option value="2"<c:if test="${vo.shDateRange eq 2}">selected</c:if>>등록일</option>
-								<option value="3"<c:if test="${vo.shDateRange eq 3}">selected</c:if>>생년월일</option>
+								<option value="0" disabled selected>검색구분</option>
+								<option value="1">수정일</option>
+								<option value="2">등록일</option>
+								<option value="3">생년월일</option>
 							</select>
 						</div>
 						<div class="col-3">
@@ -73,16 +73,16 @@
 					<div class="row mb-4">
 						<div class="col-2">
 							<select name="shOption" id="shOption" >
-								<option value="0" <c:if test="${vo.shOption eq 0}">selected</c:if> disabled selected>검색 위치</option>
-								<option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
-								<option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>ID</option>
-								<option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>닉네임</option>
-								<option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>email</option>
-								<option value="5" <c:if test="${vo.shOption eq 5}">selected</c:if>>휴대전화</option>
+								<option value="0"  disabled selected>검색 위치</option>
+								<option value="1">이름</option>
+								<option value="2">ID</option>
+								<option value="3">닉네임</option>
+								<option value="4">email</option>
+								<option value="5">휴대전화</option>
 							</select>
 						</div>
 						<div class="col">
-							<input type="text" name="shValue" placeholder="검색어" value="<c:out value="${vo.shValue }"/>"> 
+							<input type="text" name="shValue" placeholder="검색어" value=""> 
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -108,21 +108,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var="list" varStatus="status">
+					<c:forEach items="${list}" var ="list" varStatus="status">
 						<tr>
 							<td>
 								<input class="form-check-input" type="checkbox">
 							</td>
-							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.name }"/></td>
-							<td><c:out value="${list.id }"/></td>
-							<td><c:out value="${list.nickname }"/></td>
-							<td><c:out value="${list.dob }"/></td>
-							<td><c:out value="${list.email }"/></td>
-							<td><c:out value="${fn:substring(list.phone,0,3)}-${fn:substring(list.phone,3,7)}-${fn:substring(list.phone,7,11)}"/></td>
+							<td><c:out value="${list.seq}"/></td>
+							<td><c:out value="${list.name}"/></td>
+							<td><c:out value="${list.id}"/></td>
+							<td><c:out value="${list.nickname}"/></td>
+							<td><c:out value="${list.dob}"/></td>
+							<td><c:out value="${list.email}"/></td>
+							<td><c:out value="${list.phone}"/></td>
 							<td><c:out value="${list.createDate}"/></td>
-						</tr>
-					</c:forEach>	
+						</tr>	
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

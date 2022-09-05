@@ -13,8 +13,8 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl service;
 	
-	@RequestMapping(value="/member/memberList")
-	public String memberList(Model model) throws Exception{
+	@RequestMapping(value = "/member/memberList")
+	public String memberList (Model model) throws Exception {
 		
 		List<Member> list = service.selectList();
 		model.addAttribute("list", list);
@@ -22,14 +22,11 @@ public class MemberController {
 		return "infra/adnnin/memberList";
 	}
 	
-	@RequestMapping(value="/member/memberListsearch")
-	public String memberList(Model model, MemberVo vo) throws Exception{
+	@RequestMapping(value = "/member/src")
+	public String src(MemberVo vo) throws Exception {
 		
-		System.out.println(vo.getShValue());
+		service.insertList(vo);
 		
-		List<Member> list = service.selectList(vo);
-		model.addAttribute("list", list);
-		
-		return "infra/adnnin/memberList";
+		return "Redirect:";
 	}
 }

@@ -4,40 +4,18 @@
 	
 <mapper namespace = "com.bum2us.infra.modules.member.MemberMapper">
 
-	<resultMap id="resultMapObj" type="com.bum2us.infra.modules.member.Member"></resultMap>
+	<resultMap id = "resultObj" type="com.bum2us.infra.modules.member.Member"></resultMap>
 	
-	<select id="selectList" resultMap = "resultMapObj">
-		
+	<select id="selectList" resultMap = "resultObj">
+	
 		SELECT
 			*
 		FROM member
-		WHERE 1=1
-	
-	</select>
-	
-	<resultMap id="resultMapObj2" type="com.bum2us.infra.modules.member.Member"></resultMap>
-	
-	<select id="selectList2" resultMap = "resultMapObj2">
 		
-		SELECT
-			*
-		FROM member
-		WHERE 
-		<choose>
-			<when test="shOption == 1"> name </when>
-			<when test="shOption == 2"> Id </when>
-			<when test="shOption == 3"> nickname </when>
-			<when test="shOption == 4"> email </when>
-			<when test="shOption == 5"> phone </when>
-		</choose>
-		LIKE CONCAT ('%',#{shValue},'%')
-		AND 
-		<choose>
-			<when test="shDateRange == 1"> name </when>
-			<when test="shDateRange == 2"> createDate </when>
-			<when test="shDateRange == 3"> dob </when>
-		</choose>
-		BETWEEN #{shDateStart} AND #{shDateEnd} 
 	</select>
+	
+	<insert id="insertList">
+	
+	</insert>
 
-</mapper>
+</mapper> 
