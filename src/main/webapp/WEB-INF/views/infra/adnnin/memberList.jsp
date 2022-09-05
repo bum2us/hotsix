@@ -41,7 +41,7 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
-		<form action="/member/memberListsearch">
+		<form action="/member/src">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-3">
@@ -56,7 +56,7 @@
 							</select>
 						</div>
 						<div class="col-3">
-							<select name = "shDateRange" >
+							<select name = "shDateOption" >
 								<option value="0" disabled selected>검색구분</option>
 								<option value="1">수정일</option>
 								<option value="2">등록일</option>

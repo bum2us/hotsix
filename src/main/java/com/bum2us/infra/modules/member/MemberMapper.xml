@@ -14,8 +14,30 @@
 		
 	</select>
 	
-	<insert id="insertList">
+	<resultMap id="resultObjSrc" type="com.bum2us.infra.modules.member.Member"></resultMap>
 	
-	</insert>
+	<select id="selectSrc" resultMap="resultObjSrc">
+		
+		SELECT
+			*
+		FROM member
+		WHERE
+		<choose>
+			<when test= "shOption == 1"> name </when>
+			<when test= "shOption == 2"> id </when>
+			<when test= "shOption == 3"> nickname </when>
+			<when test= "shOption == 4"> email </when>
+			<when test= "shOption == 5"> phone </when>
+		</choose>
+		LIKE CONCAT ('%',#{shValue},'%')
+		AND 
+		<choose>
+			<when test="shDateOption == 1">  </when>
+			<when test="shDateOption == 2"> createDate </when>
+			<when test="shDateOption == 3"> dob </when>
+		</choose>
+		BETWEEN #{shDateStart} AND #{shDateEnd}
+		
+	</select>
 
 </mapper> 

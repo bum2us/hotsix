@@ -23,10 +23,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/member/src")
-	public String src(MemberVo vo) throws Exception {
+	public String src(Model model,MemberVo vo) throws Exception {
 		
-		service.insertList(vo);
 		
-		return "Redirect:";
+		System.out.println(vo.getShOption());
+		System.out.println(vo.getShValue());
+		System.out.println(vo.getShDateOption());
+		System.out.println(vo.getShDateStart());
+		System.out.println(vo.getShDateEnd());	
+		
+		List<Member>list = service.insertList(vo);
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/memberList";
 	}
 }

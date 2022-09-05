@@ -5,5 +5,5 @@ import java.util.List;
 public interface MemberService {
 	public List<Member> selectList();
 	
-	public void insertList(MemberVo vo);
+	public List<Member> insertList(MemberVo vo);
 }
