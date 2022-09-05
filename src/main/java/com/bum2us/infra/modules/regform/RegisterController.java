@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bum2us.infra.modules.member.Member;
+
 @Controller
 public class RegisterController {
 
@@ -14,15 +16,15 @@ public class RegisterController {
 	@RequestMapping(value = "/register/register")
 	public String register(Model model) {
 		
-		return "infra/adnnin/regForm";
+		return "infra/user/regForm";
 	}
 	
 	@RequestMapping(value = "/register/Result")
-	public String result(Register rg) {
+	public String result(Member mb) {
 		
-		System.out.println("hello test");
+		System.out.println(mb.getGender());
 		
-		service.insertList(rg);
+		service.insertList(mb);
 		
 		return "infra/adnnin/memberList";
 	}

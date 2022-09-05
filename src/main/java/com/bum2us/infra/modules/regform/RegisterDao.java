@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bum2us.infra.modules.member.Member;
+
 @Repository
 public class RegisterDao {
 	
@@ -15,5 +17,5 @@ public class RegisterDao {
 	
 	private String namespace = "com.bum2us.infra.modules.regform.RegisterMapper";
 	
-	public void insertList(Register rg) { sqlSession.insert(namespace + ".insertList", rg); }
+	public void insertList(Member mb) { sqlSession.insert(namespace + ".insertList", mb); }
 }

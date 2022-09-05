@@ -8,26 +8,14 @@
 	
 	<select id="selectList" resultMap ="resultMapObj">
 	
-		<!-- SELECT
+		SELECT
 			a.seq
 			,a.groupName
 			,b.seq as codeSeq
 			,b.codeKey
 			,b.codeName
 		FROM  ccg a
-		JOIN cc b ON b.groupSeq = a.seq -->
-		
-		SELECT DISTINCT
-			a.seq
-		    ,a.groupName
-		    ,(
-		    SELECT 
-				COUNT(groupSeq)
-		    FROM cc 
-		    WHERE groupSeq = a.seq
-			)AS codeCount
-		FROM ccg a
-		JOIN cc b ON b.groupSeq = a.seq;
+		JOIN cc b ON b.groupSeq = a.seq
 		
 	</select>
 

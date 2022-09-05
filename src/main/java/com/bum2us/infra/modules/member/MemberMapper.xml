@@ -23,7 +23,6 @@
 			*
 		FROM member
 		WHERE 
-		
 		<choose>
 			<when test="shOption == 1"> name </when>
 			<when test="shOption == 2"> Id </when>
@@ -32,7 +31,13 @@
 			<when test="shOption == 5"> phone </when>
 		</choose>
 		LIKE CONCAT ('%',#{shValue},'%')
-	
+		AND 
+		<choose>
+			<when test="shDateRange == 1"> name </when>
+			<when test="shDateRange == 2"> createDate </when>
+			<when test="shDateRange == 3"> dob </when>
+		</choose>
+		BETWEEN #{shDateStart} AND #{shDateEnd} 
 	</select>
 
 </mapper>

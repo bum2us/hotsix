@@ -11,6 +11,7 @@
 <title>멤버 관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <body>
 	<header>
@@ -20,9 +21,9 @@
 		</div>
 		<nav>
 			<ul class="nav_links">
-				<li><a href="./codeGroupList.html">코드그룹</a></li>
-				<li><a href="./codeList.html">코드</a></li>
-				<li><a href="./codeList.html">멤버</a></li>
+				<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
+				<li><a href="/code/CodeList">코드</a></li>
+				<li><a href="#">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">
@@ -55,23 +56,24 @@
 							</select>
 						</div>
 						<div class="col-3">
-							<select id="" >
-								<option value="" disabled selected>검색구분</option>
-								<option value="1">수정일</option>
-								<option value="2">등록일</option>
+							<select name = "shDateRange" >
+								<option value="0"<c:if test="${vo.shDateRange eq 0}">selected</c:if> disabled selected>검색구분</option>
+								<option value="1"<c:if test="${vo.shDateRange eq 1}">selected</c:if>>수정일</option>
+								<option value="2"<c:if test="${vo.shDateRange eq 2}">selected</c:if>>등록일</option>
+								<option value="3"<c:if test="${vo.shDateRange eq 3}">selected</c:if>>생년월일</option>
 							</select>
 						</div>
 						<div class="col-3">
-							<input type="text" placeholder="시작일">
+							<input id="startDate" type="text" name="shDateStart" placeholder="시작일" value="" style="backcolor: black;">
 						</div>
 						<div class="col-3">
-							<input type="text" placeholder="종료일">
+							<input id="endDate" type="text" name="shDateEnd" placeholder="종료일" value="" style="backcolor: black;">
 						</div>
 					</div>
 					<div class="row mb-4">
 						<div class="col-2">
 							<select name="shOption" id="shOption" >
-								<option value="" disabled selected>검색 위치</option>
+								<option value="0" <c:if test="${vo.shOption eq 0}">selected</c:if> disabled selected>검색 위치</option>
 								<option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>이름</option>
 								<option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>ID</option>
 								<option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>닉네임</option>
@@ -102,6 +104,7 @@
 						<th>생년월일</th>
 						<th>email</th>
 						<th>휴대전화</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -117,6 +120,7 @@
 							<td><c:out value="${list.dob }"/></td>
 							<td><c:out value="${list.email }"/></td>
 							<td><c:out value="${fn:substring(list.phone,0,3)}-${fn:substring(list.phone,3,7)}-${fn:substring(list.phone,7,11)}"/></td>
+							<td><c:out value="${list.createDate}"/></td>
 						</tr>
 					</c:forEach>	
 				</tbody>
@@ -156,9 +160,28 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
-
+	  $( function() {
+	    $( "#startDate" ).datepicker({
+	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	yearRange: "1900:2023",
+	    	dateFormat: "yy-mm-dd"
+	    });
+	  } );
+	  $( function() {
+	    $( "#endDate" ).datepicker({
+	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	yearRange: "1900:2023",
+	    	dateFormat: "yy-mm-dd"
+	    });
+	  } );
 	</script>		
 </body>
 </html>

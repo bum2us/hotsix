@@ -4,26 +4,33 @@
 	
 <mapper namespace ="com.bum2us.infra.modules.regform.RegisterMapper">
 	
-	<resultMap id ="resultMapObj" type ="com.bum2us.infra.modules.regform.Register"></resultMap>
-
-	<insert id = "insertList" parameterType="java.lang.String">
+	<insert id = "insertList">
 		
 		INSERT INTO member(
 		name
-		,Id
+		,id
 		,password
 		,gender
 		,email
+		,telecom
 		,phone
+		,comment
+		,nickname
+		,dob
 		)VALUES(
 		
-		#{rgName}
-		,#{rgId}
-		,#{rgPassword}
-		,#{rgGender}
-		,#{rgEmail}
-		,CONCAT ('010',#{rgPhone1},#{rgPhone2})
+		#{name}
+		,#{id}
+		,#{password}
+		,#{gender}
+		,#{email}
+		,#{telecom}
+		,CONCAT ('010',#{phone1},#{phone2})
+		,#{comment}
+		,#{nickname}
+		,#{dob}
 		)
+		
 		
 	</insert>
 

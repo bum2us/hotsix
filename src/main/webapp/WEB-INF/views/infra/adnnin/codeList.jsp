@@ -21,8 +21,9 @@
 		</div>
 		<nav>
 			<ul class="nav_links">
-				<li><a href="./codeGroupList.html">코드그룹</a></li>
-				<li><a href="./codeList.html">코드</a></li>
+				<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
+				<li><a href="#">코드</a></li>
+				<li><a href="/member/memberList">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">

@@ -22,9 +22,9 @@
 		</div>
 		<nav>
 			<ul class="nav_links">
-				<li><a href="./codeGroupList.html">코드그룹</a></li>
-				<li><a href="./codeList.html">코드</a></li>
-				<li><a href="./codeList.html">멤버</a></li>
+				<li><a href="#">코드그룹</a></li>
+				<li><a href="/code/CodeList">코드</a></li>
+				<li><a href="/member/memberList">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">
@@ -97,7 +97,7 @@
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${fn:length(list) eq 3}">
+						<c:when test="${fn:length(list) eq 0}">
 							<tr>
 								<td colspan="8" style="text-align: center;">No data...!<td>
 							</tr>

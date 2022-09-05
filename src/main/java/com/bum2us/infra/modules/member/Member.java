@@ -1,21 +1,35 @@
 package com.bum2us.infra.modules.member;
 
-import java.util.Date;
-
 public class Member {
 	
 	private String seq;
 	private String name;
 	private String id;
 	private String password;
-	private Date dob;
-	private String gender;
+	private String dob;
+	private Integer gender;
 	private String email;
+	private String phone1;
+	private String phone2;
 	private String phone;
 	private Integer telecom;
 	private String comment;
 	private String nickname;
+	private String createDate;
 	
+
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getSeq() {
 		return seq;
 	}
@@ -40,16 +54,16 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
-	public String getGender() {
+	public Integer getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 	public String getEmail() {
@@ -58,11 +72,17 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPhone() {
-		return phone;
+	public String getPhone1() {
+		return phone1;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
 	}
 	public Integer getTelecom() {
 		return telecom;
@@ -82,6 +102,9 @@ public class Member {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
+	
+	
 	
 	
 }
