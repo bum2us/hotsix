@@ -13,7 +13,6 @@
 		SELECT
 			a.seq
 		    ,a.groupName
-		    ,a.useNy
 		    ,count(b.groupSeq) as codeCount
 		FROM ccg a
 		JOIN cc b ON b.groupSeq = a.seq
@@ -23,7 +22,6 @@
 		 SELECT
 		 	seq
 		 	,groupName
-		 	,useNy
 		 	,(
 		 	SELECT
 		 		COUNT(groupSeq) 
@@ -33,5 +31,20 @@
 		 FROM ccg a
 		 
 	</select>
+	
+	<insert id="insertGroupCode">
+		
+		INSERT INTO ccg
+		(
+			groupName
+			,groupUseNy
+		)
+		VALUES
+		(
+			#{groupName}
+			,#{groupUseNy}
+		)
+		
+	</insert>
 
 </mapper>	

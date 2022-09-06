@@ -23,5 +23,18 @@ public class CodeGroupController {
 		return "infra/adnnin/codeGroupList";
 	}
 	
+	@RequestMapping(value = "codeGroupForm")
+	public String codeGroupForm() throws Exception {
+		
+		return "infra/adnnin/codeGroupForm";
+	}
+	
+	@RequestMapping(value = "Add")
+	public String codeGroupAdd(CodeGroup cg) throws Exception {
+		
+		service.insertGroup(cg);
+		
+		return "infra/adnnin/codeGroupList";
+	}
 	
 }

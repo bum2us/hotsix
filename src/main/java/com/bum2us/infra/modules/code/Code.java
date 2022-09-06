@@ -3,17 +3,13 @@ package com.bum2us.infra.modules.code;
 public class Code {
 	
 	private String seq;
-	private String codeSeq;
 	private String groupName;
-	private String codeName;
+	private String groupSeq;
 	private String codeKey;
-	
-	public String getGroupName() {
-		return groupName;
-	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
+	private String codeName;
+	private Integer useNy;
+	private String createDate;
+	private String editDate;
 	
 	public String getSeq() {
 		return seq;
@@ -21,18 +17,17 @@ public class Code {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-	
-	public String getCodeSeq() {
-		return codeSeq;
+	public String getGroupName() {
+		return groupName;
 	}
-	public void setCodeSeq(String codeSeq) {
-		this.codeSeq = codeSeq;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
-	public String getCodeName() {
-		return codeName;
+	public String getGroupSeq() {
+		return groupSeq;
 	}
-	public void setCodeName(String codeName) {
-		this.codeName = codeName;
+	public void setGroupSeq(String groupSeq) {
+		this.groupSeq = groupSeq;
 	}
 	public String getCodeKey() {
 		return codeKey;
@@ -40,7 +35,29 @@ public class Code {
 	public void setCodeKey(String codeKey) {
 		this.codeKey = codeKey;
 	}
-	
-	
+	public String getCodeName() {
+		return codeName;
+	}
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
+	}
+	public Integer getUseNy() {
+		return useNy;
+	}
+	public void setUseNy(Integer useNy) {
+		this.useNy = useNy;
+	}
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getEditDate() {
+		return editDate;
+	}
+	public void setEditDate(String editDate) {
+		this.editDate = editDate;
+	}
 	
 }

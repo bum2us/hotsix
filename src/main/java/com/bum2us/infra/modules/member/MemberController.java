@@ -37,4 +37,27 @@ public class MemberController {
 		
 		return "infra/adnnin/memberList";
 	}
+	
+	@RequestMapping(value = "/signup")
+	public String register() throws Exception {
+		
+		return "infra/user/regForm";
+	}
+	
+	@RequestMapping(value = "/info")
+	public String result(Model model,Member mb) throws Exception {
+				
+		service.insertList(mb);
+		model.addAttribute("meminfo", mb);
+		
+		return "infra/user/info";
+	}
+	
+	@RequestMapping(value ="/login")
+	public String login() throws Exception {
+		
+		return "infra/user/login";
+	}
+	
+	
 }

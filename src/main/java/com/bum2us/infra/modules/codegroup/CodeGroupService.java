@@ -6,4 +6,6 @@ public interface CodeGroupService {
 	
 	public List<CodeGroup> selectList() throws Exception; 
 	
+	public void insertGroup(CodeGroup cg) throws Exception;
+	
 }

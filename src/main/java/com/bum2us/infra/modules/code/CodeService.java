@@ -5,4 +5,10 @@ import java.util.List;
 public interface CodeService {
 	
 	public List<Code> selectList() throws Exception;
+	
+	public void insertCode(Code cd) throws Exception;
+	
+	public List<Code> searchCode(CodeVo vo) throws Exception;
+	
+	public List<Code> selectListGroupName() throws Exception;
 }

@@ -6,8 +6,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<!-- mysql s 2022.02.15 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://mydb-tutorial01.cni7oy3qcayc.ap-northeast-2.rds.amazonaws.com:33063/maplestory" />
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:mysql://mydb-tutorial01.cni7oy3qcayc.ap-northeast-2.rds.amazonaws.com:33063/maplestory" />
 		<property name="username" value="adnnin" />
 		<property name="password" value="Passw0rd!!" />
 	</bean>

@@ -11,6 +11,7 @@
 <title>alBum's SignUp</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <style>
         div {
             /* border: 1px solid orange; */
@@ -26,7 +27,7 @@
 				<span class="page_title">회원 가입</span>
 			</div>
 		</div>
-		<form action="http://localhost:8080/register/Result">
+		<form action="http://localhost:8080/info">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-4">
@@ -50,7 +51,7 @@
 							<span style="font-size:9pt; text-align:right; font-weight: 600;">생년월일</span>
                         </div>
                         <div class="col-4">
-							<input type="date" name="dob">
+							<input id="dob" type="text" name="dob">
                         </div>
 						<div class="col-3">
 							<select name="gender" id="gender" >
@@ -100,9 +101,9 @@
 						<textarea name="comment" id="comment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;"></textarea>
 					</div>
 					<div class="row mb-3 justify-content-end">
-						<button type="button">이전</button>
-						<button type="button">리셋</button>
-						<button type="submit">가입</button>
+						<button type="button" class="basebutton" onclick = "location.href='/login'">이전</button>
+						<button type="button" class="basebutton">리셋</button>
+						<button type="submit" class="basebutton">가입</button>
 					</div>
 				</div>
 			</div>
@@ -121,6 +122,19 @@
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
+<script>
+$( function() {
+    $( "#dob" ).datepicker({
+    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	yearRange: "1900:2023",
+    	dateFormat: "yy-mm-dd"
+    });
+  } );
+</script>
 </body>
 </html>

@@ -19,4 +19,9 @@ public class CodeDao {
 	
 	public List<Code> selectList() { return sqlSession.selectList(namespace + ".selectList",""); }
 	
+	public void insertCode(Code cd) { sqlSession.insert(namespace+".insertCode", cd); }
+
+	public List<Code> searchCode(CodeVo vo) { return sqlSession.selectList(namespace + ".searchCode", vo);	}
+
+	public List<Code> selectListGroupName() { return sqlSession.selectList(namespace + ".groupName","");	}
 }

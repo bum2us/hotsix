@@ -15,6 +15,12 @@ public class CodeGroupServiceImpl implements CodeGroupService{
 	public List<CodeGroup> selectList() throws Exception {
 		return dao.selectList();
 	}
+
+	@Override
+	public void insertGroup(CodeGroup cg) throws Exception {
+		// TODO Auto-generated method stub
+		dao.insertGroup(cg);
+	}
 	
 	
 }

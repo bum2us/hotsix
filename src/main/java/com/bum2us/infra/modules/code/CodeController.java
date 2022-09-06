@@ -21,4 +21,30 @@ public class CodeController {
 		
 		return "infra/adnnin/codeList";
 	}
+	
+	@RequestMapping(value = "/codeForm")
+	public String codeForm(Model model) throws Exception {
+		
+		List<Code> list = service.selectListGroupName();
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/codeForm";
+	}
+	
+	@RequestMapping(value = "/code/src")
+	public String codeSrc(Model model,CodeVo vo) throws Exception {
+		
+		List<Code> list = service.searchCode(vo);
+		model.addAttribute("list", list);		
+		
+		return "infra/adnnin/codeList";
+	}
+	
+	@RequestMapping(value="/codeForm/add")
+	public String codeAdd(Code cd) throws Exception {
+		
+		service.insertCode(cd);
+		
+		return "infra/adnnin/codeList";
+	}
 }

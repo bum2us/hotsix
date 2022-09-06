@@ -75,8 +75,8 @@
 					</div>
 				</div>
 				<div class="row mb-3">
-					<button type="button">검색</button>
-					<button type="button">리셋</button>
+					<button type="button" class="basebutton">검색</button>
+					<button type="button" class="basebutton">리셋</button>
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,6 @@
 						<th>#</th>
 						<th>코드그룹 코드</th>
 						<th>코드그룹 이름(한글)</th>
-						<th>사용여부</th>
 						<th>코드갯수</th>
 						<th>등록일</th>
 						<th>수정일</th>
@@ -112,7 +111,6 @@
 									<td><c:out value="${list.seq }"/></td>
 									<td><c:out value="${list.seq }"/></td>
 									<td><c:out value="${list.groupName }"/></td>
-									<td><c:out value="${list.useNy}"/></td>
 									<td><c:out value="${list.codeCount}"/></td>
 									<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 									<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
@@ -140,7 +138,7 @@
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
 			</div>
 			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='./codeForm.html'"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick="location.href='/codegroup/codeGroupForm'"><i class="fa-solid fa-plus"></i></button>
 			</div>
 		</div>
     </div>

@@ -41,44 +41,55 @@
 				<span class="page_title">코드 관리</span>
 			</div>
 		</div>
-		<div class="row mt-4 searchForm">
-			<div class="col">
-				<div class="row my-3">
-					<h6>검색조건</h6>
-				</div>
-				<div class="row mb-4">
-					<div class="col-3">
-						<select id="">
-							<option value="" disabled selected>사용여부</option>
-							<option value="1">N</option>
-							<option value="2">Y</option>
-						</select>
+		<form action="/code/src">
+			<div class="row mt-4 searchForm">
+				<div class="col">
+					<div class="row my-3">
+						<h6>검색조건</h6>
 					</div>
-					<div class="col-3">
-						<select id="" >
-							<option value="" disabled selected>검색구분</option>
-							<option value="1">수정일</option>
-							<option value="2">등록일</option>
-						</select>
+					<div class="row mb-4">
+						<div class="col-3">
+							<select name="shUseNy">
+								<option value="" disabled selected>사용여부</option>
+								<option value="1">N</option>
+								<option value="2">Y</option>
+							</select>
+						</div>
+						<div class="col-3">
+							<select name="shDateOption">
+								<option value="" disabled selected>검색구분</option>
+								<option value="1">수정일</option>
+								<option value="2">등록일</option>
+							</select>
+						</div>
+						<div class="col-3">
+							<input name="shDateStart" id="startDate" type="text" placeholder="시작일">
+						</div>
+						<div class="col-3">
+							<input name="shDateEnd" id="endDate" type="text" placeholder="종료일">
+						</div>
 					</div>
-					<div class="col-3">
-						<input type="text" placeholder="시작일">
+					<div class="row mb-4">
+						<div class="col-3">
+							<select name="shOption" >
+								<option value="0" disabled selected>검색위치</option>
+								<option value="1">그룹코드</option>
+								<option value="2">코드</option>
+								<option value="3">코드이름</option>
+								<option value="4">순서</option>
+							</select>
+						</div>
+						<div class="col">
+							<input name="shValue" type="text" placeholder="검색어">
+						</div>
 					</div>
-					<div class="col-3">
-						<input type="text" placeholder="종료일">
+					<div class="row mb-3">
+						<button type="submit" class="basebutton">검색</button>
+						<button type="button" class="basebutton">리셋</button>
 					</div>
-				</div>
-				<div class="row mb-4">
-					<div class="col">
-						<input type="text" placeholder="검색어">
-					</div>
-				</div>
-				<div class="row mb-3">
-					<button type="button">검색</button>
-					<button type="button">리셋</button>
 				</div>
 			</div>
-		</div>
+		</form>
 		<div class="row my-4 justify-content-center">
 			<table>
 				<thead>
@@ -89,7 +100,7 @@
 						<th>코드그룹 이름</th>
 						<th>코드</th>
 						<th>코드이름</th>
-						<th>사용</th>
+						<th>사용여부</th>
 						<th>순서</th>
 						<th>등록일</th>
 						<th>수정일</th>
@@ -102,15 +113,25 @@
 							<td>
 								<input class="form-check-input" type="checkbox">
 							</td>
-							<td><c:out value="${list.codeSeq }"/></td>
 							<td><c:out value="${list.seq }"/></td>
+							<td><c:out value="${list.groupSeq }"/></td>
 							<td><c:out value="${list.groupName }"/></td>
 							<td><c:out value="${list.codeKey }"/></td>
 							<td><c:out value="${list.codeName }"/></td>
-							<td></td>
+							<%-- <td><c:out value="${list.useNy}"/></td> --%>
+							<td>
+							<c:choose>
+								<c:when test="${list.useNy eq 0}">N</c:when>
+								<c:when test="${list.useNy eq 1}">Y</c:when>
+							</c:choose>
+							</td>
 							<td><c:out value="${list.codeKey}"/></td>
+							<td><c:out value="${list.createDate}"/></td>
+							<td><c:out value="${list.editDate}"/></td>
+							<%-- 	
 							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+							 --%>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -133,7 +154,7 @@
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
 			</div>
 			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='./codeForm.html'"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick="location.href='/codeForm'"><i class="fa-solid fa-plus"></i></button>
 			</div>
 		</div>
     </div>
@@ -152,7 +173,24 @@
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		
+	  $( function() {
+	    $( "#startDate" ).datepicker({
+	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	yearRange: "1900:2023",
+	    	dateFormat: "yy-mm-dd"
+	    });
+	  } );
+	  $( function() {
+	    $( "#endDate" ).datepicker({
+	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	yearRange: "1900:2023",
+	    	dateFormat: "yy-mm-dd"
+	    });
+	  } );
 	</script>		
 </body>
 </html>

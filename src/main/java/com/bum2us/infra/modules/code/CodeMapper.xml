@@ -7,16 +7,73 @@
 	<resultMap id="resultMapObj" type= "com.bum2us.infra.modules.code.Code"></resultMap>
 	
 	<select id="selectList" resultMap ="resultMapObj">
-	
+		
 		SELECT
-			a.seq
-			,a.groupName
-			,b.seq as codeSeq
-			,b.codeKey
-			,b.codeName
-		FROM  ccg a
-		JOIN cc b ON b.groupSeq = a.seq
+			*
+			,b.seq as groupSeq
+			,b.groupName
+		FROM cc a
+		JOIN ccg b ON a.groupSeq = b.seq
 		
 	</select>
+	
+	<resultMap id="searchResultObj" type="com.bum2us.infra.modules.code.Code"></resultMap>
+
+	<select id="searchCode" resultMap="searchResultObj">
+		
+		SELECT
+			*
+			,b.seq as groupSeq
+			,b.groupName
+		FROM cc a
+		JOIN ccg b ON a.groupSeq = b.seq
+		WHERE 
+			1=1
+		<choose>
+			<when test="shOption == 1"> AND groupSeq LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 2"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 3"> AND codeName LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 4"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
+		</choose>
+		<choose>
+			<when test="shUseNy == 0"></when>
+			<when test="shUseNy == 1"> AND useNy LIKE 0</when>
+			<when test="shUseNy == 2"> AND useNy LIKE 1</when>
+		</choose>
+		<choose>
+			<when test="shDateOption == 1"> AND editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shDateOption == 2"> AND createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+		
+	</select>
+	
+	<resultMap id="groupListResultObj" type="com.bum2us.infra.modules.code.Code"></resultMap>
+	
+	<select id="groupName" resultMap = "groupListResultObj">
+		
+		SELECT
+			groupName
+		FROM ccg 
+		
+	</select>
+
+	<insert id="insertCode">
+		
+		INSERT INTO cc
+		(
+			groupSeq
+			,codeName
+			,codeKey
+			,useNy
+		)VALUES
+		(
+			#{groupSeq}
+			,#{codeName}
+			,#{codeKey}
+			,#{useNy}
+		)
+		
+		
+	</insert>
 
 </mapper>

@@ -86,8 +86,8 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<button type="submit">검색</button>
-						<button type="button">리셋</button>
+						<button type="submit" class="basebutton">검색</button>
+						<button type="button" class="basebutton">리셋</button>
 					</div>
 				</div>
 			</div>

@@ -48,6 +48,11 @@ public class MemberServiceImpl implements MemberService{
 		return dao.insertList(vo);
 	}
 	
-	
+	@Override
+	public void insertList(Member mb) {
+				
+		// TODO Auto-generated method stub
+		dao.insertList(mb);
+	}
 	
 }

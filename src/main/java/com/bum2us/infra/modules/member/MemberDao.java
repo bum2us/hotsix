@@ -21,4 +21,6 @@ public class MemberDao {
 	
 	public List<Member> insertList(MemberVo vo) {return sqlSession.selectList(namespace + ".selectSrc", vo); }
 	
+	public void insertList(Member mb) { sqlSession.insert(namespace + ".insertList", mb); }
+	
 }

@@ -18,4 +18,6 @@ public class CodeGroupDao {
 	private static String namespace = "com.bum2us.infra.modules.codegroup.CodeGroupMapper";
 	
 	public List<CodeGroup> selectList(){ return sqlSession.selectList(namespace + ".selectList", ""); }
+	
+	public void insertGroup(CodeGroup cg) { sqlSession.insert(namespace + ".insertGroupCode", cg); }
 }

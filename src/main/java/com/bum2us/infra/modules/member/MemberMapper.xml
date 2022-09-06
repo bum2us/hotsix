@@ -40,4 +40,32 @@
 		
 	</select>
 
+	<insert id = "insertList">
+		
+		INSERT INTO member(
+		name
+		,id
+		,password
+		,gender
+		,email
+		,telecom
+		,phone
+		,comment
+		,nickname
+		,dob
+		)VALUES(
+		
+		#{name}
+		,#{id}
+		,#{password}
+		,#{gender}
+		,#{email}
+		,#{telecom}
+		,CONCAT ('010',#{phone1},#{phone2})
+		,#{comment}
+		,#{nickname}
+		,#{dob}
+		)
+		
+	</insert>
 </mapper> 

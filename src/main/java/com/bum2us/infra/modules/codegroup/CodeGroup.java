@@ -4,9 +4,16 @@ public class CodeGroup {
 	
 	private Integer seq;
 	private String groupName;
-	private Integer useNy;
 	private Integer codeCount;
+	private Integer groupUseNy;
 	
+	
+	public Integer getGroupUseNy() {
+		return groupUseNy;
+	}
+	public void setGroupUseNy(Integer groupUseNy) {
+		this.groupUseNy = groupUseNy;
+	}
 	public Integer getSeq() {
 		return seq;
 	}
@@ -18,12 +25,6 @@ public class CodeGroup {
 	}
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
-	}
-	public Integer getUseNy() {
-		return useNy;
-	}
-	public void setUseNy(Integer useNy) {
-		this.useNy = useNy;
 	}
 	public Integer getCodeCount() {
 		return codeCount;
