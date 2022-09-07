@@ -6,8 +6,24 @@ public class CodeGroup {
 	private String groupName;
 	private Integer codeCount;
 	private Integer groupUseNy;
+	private String createDate;
+	private String editDate;
 	
 	
+	
+	
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+	public String getEditDate() {
+		return editDate;
+	}
+	public void setEditDate(String editDate) {
+		this.editDate = editDate;
+	}
 	public Integer getGroupUseNy() {
 		return groupUseNy;
 	}

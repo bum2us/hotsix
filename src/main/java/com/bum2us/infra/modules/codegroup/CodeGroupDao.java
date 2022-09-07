@@ -20,4 +20,6 @@ public class CodeGroupDao {
 	public List<CodeGroup> selectList(){ return sqlSession.selectList(namespace + ".selectList", ""); }
 	
 	public void insertGroup(CodeGroup cg) { sqlSession.insert(namespace + ".insertGroupCode", cg); }
+
+	public List<CodeGroup> srcList(CodeGroupVo vo) { return sqlSession.selectList(namespace + ".srcList", vo); 	}
 }

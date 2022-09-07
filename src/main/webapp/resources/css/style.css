@@ -209,6 +209,10 @@ nav li,a,i {
     padding-left: 20px;
 }
 
+.nav_links li a {
+	color: #fff;
+}
+
 .nav_links li a:horver {
     color: #fff;
 }

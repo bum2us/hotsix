@@ -37,4 +37,12 @@ public class CodeGroupController {
 		return "infra/adnnin/codeGroupList";
 	}
 	
+	@RequestMapping(value = "Src")
+	public String codeGroupSrc(Model model, CodeGroupVo vo) throws Exception {
+		
+		List<CodeGroup> list = service.srcList(vo);
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/codeGroupList";
+	}
 }

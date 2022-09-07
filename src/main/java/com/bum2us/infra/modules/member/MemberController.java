@@ -50,14 +50,36 @@ public class MemberController {
 		service.insertList(mb);
 		model.addAttribute("meminfo", mb);
 		
-		return "infra/user/info";
+		return "infra/user/infoForm";
 	}
 	
 	@RequestMapping(value ="/login")
 	public String login() throws Exception {
 		
-		return "infra/user/login";
+		return "infra/user/loginForm";
 	}
 	
+	@RequestMapping(value = "/main")
+	public String main() throws Exception {
+		
+		return "infra/user/mainForm";
+	}
 	
+	@RequestMapping(value = "/bookmark")
+	public String bookmark() throws Exception {
+		
+		return "infra/user/bookmarkForm";
+	}
+	
+	@RequestMapping(value = "/chat")
+	public String chat() throws Exception {
+		
+		return "infra/user/chatForm";
+	}
+	
+	@RequestMapping(value = "/upload")
+	public String upload() throws Exception {
+		
+		return "infra/user/uploadForm";
+	}
 }

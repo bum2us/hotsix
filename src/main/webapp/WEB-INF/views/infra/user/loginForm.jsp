@@ -18,26 +18,26 @@
 	</style>
 </head>
 <body style="background-color:#000;">
-	<form action="">
 		<div class="container">
-			<div class="row" style="margin-top: 200px;">
-				<div class="col-9">
-					<div class="gallery">
-						<span style="--i:1;"><img src="/resources/images/temp01.jpg" alt=""></span>
-						<span style="--i:2;"><img src="/resources/images/temp02.jpg" alt=""></span>
-						<span style="--i:3;"><img src="/resources/images/temp03.jpg" alt=""></span>
-						<span style="--i:4;"><img src="/resources/images/temp04.jpg" alt=""></span>
-						<span style="--i:5;"><img src="/resources/images/temp05.jpg" alt=""></span>
-						<span style="--i:6;"><img src="/resources/images/tom.png" alt=""></span>
-						<span style="--i:7;"><img src="/resources/images/temp07.jpg" alt=""></span>
-						<span style="--i:8;"><img src="/resources/images/temp08.jpg" alt=""></span>
-						<span style="--i:9;"><img src="/resources/images/temp09.jpg" alt=""></span>
-						<span style="--i:10;"><img src="/resources/images/temp10.jpg" alt=""></span>
-						<span style="--i:11;"><img src="/resources/images/temp11.jpg" alt=""></span>
-						<span style="--i:12;"><img src="/resources/images/temp06.jpg" alt=""></span>
+			<form action="/main" id="loginform">
+				<div class="row" style="margin-top: 200px;">
+					<div class="col-9">
+						<div class="gallery">
+							<span style="--i:1;"><img src="/resources/images/temp01.jpg" alt=""></span>
+							<span style="--i:2;"><img src="/resources/images/temp02.jpg" alt=""></span>
+							<span style="--i:3;"><img src="/resources/images/temp03.jpg" alt=""></span>
+							<span style="--i:4;"><img src="/resources/images/temp04.jpg" alt=""></span>
+							<span style="--i:5;"><img src="/resources/images/temp05.jpg" alt=""></span>
+							<span style="--i:6;"><img src="/resources/images/tom.png" alt=""></span>
+							<span style="--i:7;"><img src="/resources/images/temp07.jpg" alt=""></span>
+							<span style="--i:8;"><img src="/resources/images/temp08.jpg" alt=""></span>
+							<span style="--i:9;"><img src="/resources/images/temp09.jpg" alt=""></span>
+							<span style="--i:10;"><img src="/resources/images/temp10.jpg" alt=""></span>
+							<span style="--i:11;"><img src="/resources/images/temp11.jpg" alt=""></span>
+							<span style="--i:12;"><img src="/resources/images/temp06.jpg" alt=""></span>
+						</div>
 					</div>
-				</div>
-				<form action="/main" id="loginform">
+					
 					<div class="col-3">
 						<div class="row" style="object-fit: cover;">
 							<img src="/resources/images/logo_white.png" alt="">
@@ -59,8 +59,8 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-4 p-0">
-								<a onclick="submitform()" style="--clr:#FF9F29">
+							<div class="col-4 p-0"> 
+								<a style="--clr:#FF9F29; color:gray;" onclick="submitform()">
 									<span></span><span></span><span></span><span></span>Login
 								</a>
 							</div>
@@ -76,17 +76,32 @@
 							</div>
 						</div>
 					</div>
-				</form>	
-			</div>
+				</div>
+			</form>	
 		</div>
-	</form>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		function submitform(){
-			document.getElementById('loginform').submit();
+			
+			if($('input[name=id]').val() == null || $('input[name=id]').val().length < 1)
+			{
+				alert("아이디를 입력하세요");
+				$('input[name=id]').focus();			
+				return false;
+			}
+			
+			if($('input[name=password]').val() == null || $('input[name=password]').val().length < 1)
+			{
+				alert("비밀번호를 입력하세요");
+				$('input[name=password]').focus();
+				return false;
+			}
+			
+			$('#loginform').submit();
+
 		}
 	</script>
 </body>
