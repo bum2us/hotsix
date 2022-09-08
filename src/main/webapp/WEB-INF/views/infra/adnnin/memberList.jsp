@@ -31,7 +31,7 @@
 				<img src="/resources/images/temp08.jpg" alt="">
 			</div>
 		</div>
-		<span class="administrator">beomsu</span>
+		<span class="administrator">${item.nickname}</span>
 		<button class="logoutBtn" type="button" onclick="location.href='../user/member/loginForm.html'"><i class="fa-solid fa-right-from-bracket"></i></button>
 	</header>
 	<div class="container">

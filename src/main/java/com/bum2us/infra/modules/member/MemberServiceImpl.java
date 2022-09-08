@@ -54,5 +54,20 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		dao.insertList(mb);
 	}
+
+
+	@Override
+	public Member selectOne(MemberVo vo) {
+		// TODO Auto-generated method stub
+		return dao.selectOne(vo);
+	}
+
+	@Override
+	public Member chkLogin(MemberVo vo) {
+		// TODO Auto-generated method stub
+		return dao.selectOne(vo);
+	}
+	
+	
 	
 }

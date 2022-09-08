@@ -1,7 +1,8 @@
 package com.bum2us.infra.modules.member;
 
 public class Member {
-	private String seq;
+	
+	private Integer seq;
 	private String name;
 	private String password;
 	private String dob;
@@ -28,10 +29,10 @@ public class Member {
 	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
-	public String getSeq() {
+	public Integer getSeq() {
 		return seq;
 	}
-	public void setSeq(String seq) {
+	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}
 	public String getName() {

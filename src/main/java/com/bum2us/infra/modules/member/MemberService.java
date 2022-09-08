@@ -9,4 +9,8 @@ public interface MemberService {
 	public List<Member> insertList(MemberVo vo);
 	
 	public void insertList(Member mb);
+	
+	public Member selectOne(MemberVo vo);
+	
+	public Member chkLogin(MemberVo vo);
 }

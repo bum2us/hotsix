@@ -14,9 +14,7 @@
 		
 	</select>
 	
-	<resultMap id="resultObjSrc" type="com.bum2us.infra.modules.member.Member"></resultMap>
-	
-	<select id="selectSrc" resultMap="resultObjSrc">
+	<select id="selectSrc" resultMap="resultObj">
 		
 		SELECT
 			*
@@ -68,4 +66,14 @@
 		)
 		
 	</insert>
+	
+	<select id="selectOne" resultMap="resultObj">
+		
+		SELECT
+			*
+		FROM member
+		WHERE id LIKE #{shId} AND password LIKE #{shPassword}
+		
+	</select>
+	
 </mapper> 

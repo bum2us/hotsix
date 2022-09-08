@@ -45,7 +45,7 @@
 						<div class="row mb-4">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="text" required="required" name="id">
+									<input type="text" required="required" name="shId">
 									<span>USER ID</span>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 						<div class="row mb-3">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="password" required="required" name="password">
+									<input type="password" required="required" name="shPassword">
 									<span>PASSWORD</span>
 								</div>
 							</div>
@@ -75,6 +75,15 @@
 								</a>
 							</div>
 						</div>
+						<c:choose>
+							<c:when test ="${item eq 0}"> 
+								<div class="row text-center mt-3">
+									<span style="font-size:8pt; color:red;">잘못된 아이디/비밀번호 입니다. 다시 시도하세요.</span>
+								</div>
+							</c:when>
+							<c:otherwise>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</form>	
@@ -86,23 +95,25 @@
 	<script type="text/javascript">
 		function submitform(){
 			
-			if($('input[name=id]').val() == null || $('input[name=id]').val().length < 1)
+			if($('input[name=shId]').val() == null || $('input[name=shId]').val().length < 1)
 			{
 				alert("아이디를 입력하세요");
-				$('input[name=id]').focus();			
+				$('input[name=shId]').focus();			
 				return false;
 			}
 			
-			if($('input[name=password]').val() == null || $('input[name=password]').val().length < 1)
+			if($('input[name=shPassword]').val() == null || $('input[name=shPassword]').val().length < 1)
 			{
 				alert("비밀번호를 입력하세요");
-				$('input[name=password]').focus();
+				$('input[name=shPassword]').focus();
 				return false;
 			}
 			
 			$('#loginform').submit();
 
 		}
+		
+		
 	</script>
 </body>
 </html>
