@@ -8,4 +8,5 @@ public interface CodeGroupService {
 	
 	public void insertGroup(CodeGroup cg) throws Exception;
 	
+	public List<CodeGroup> srcList(CodeGroupVo vo) throws Exception;
 }

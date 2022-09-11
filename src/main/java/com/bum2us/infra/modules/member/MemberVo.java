@@ -2,11 +2,28 @@ package com.bum2us.infra.modules.member;
 
 public class MemberVo {
 	
+	private String shId;
+	private String shPassword;
+
+	public String getShId() {
+		return shId;
+	}
+	public void setShId(String shId) {
+		this.shId = shId;
+	}
+	public String getShPassword() {
+		return shPassword;
+	}
+	public void setShPassword(String shPassword) {
+		this.shPassword = shPassword;
+	}
+	
 	private String shValue;
 	private Integer shOption;
 	private Integer shDateOption;
 	private String shDateStart;
 	private String shDateEnd;
+	
 	
 	public String getShValue() {
 		return shValue;

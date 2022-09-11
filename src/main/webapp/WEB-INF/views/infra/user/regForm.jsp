@@ -27,7 +27,7 @@
 				<span class="page_title">회원 가입</span>
 			</div>
 		</div>
-		<form action="http://localhost:8080/info">
+		<form action="http://localhost:8080/infoReg">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-4">

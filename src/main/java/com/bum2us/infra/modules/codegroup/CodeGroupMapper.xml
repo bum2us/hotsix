@@ -22,6 +22,9 @@
 		 SELECT
 		 	seq
 		 	,groupName
+		 	,groupUseNy
+		 	,createDate
+		 	,editDate
 		 	,(
 		 	SELECT
 		 		COUNT(groupSeq) 
@@ -30,6 +33,33 @@
 		 	) AS codeCount
 		 FROM ccg a
 		 
+	</select>
+	
+	<select id="srcList" resultMap = "resultMapObj">
+		
+		SELECT
+			*
+			,(
+			SELECT
+				COUNT(groupSeq)
+			FROM cc
+			WHERE a.seq = groupSeq
+			) AS codeCount
+		FROM ccg a
+		WHERE 1=1
+		<choose>
+			<when test="shOption == 1"> AND seq LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 2"> AND groupName LIKE CONCAT ('%',#{shValue},'%')</when>
+		</choose>
+		<choose>
+			<when test="shUseNy == 0"> AND groupUseNy LIKE 0</when>
+			<when test="shUseNy == 1"> AND groupUseNy LIKE 1</when> 
+		</choose>
+		<choose>
+			<when test="shDateOption == 1">AND editDate BETWEEN #{shDateStart} AND  #{shDateEnd} </when>
+			<when test="shDateOption == 2">AND createDate BETWEEN #{shDateStart} AND  #{shDateEnd} </when>
+		</choose>
+		
 	</select>
 	
 	<insert id="insertGroupCode">
