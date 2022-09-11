@@ -204,6 +204,10 @@ nav li,a,i {
     margin-left: auto;
 }
 
+.nav_links li a {
+	color: #fff;
+}
+
 .nav_links li{
     display: inline-block;
     padding-left: 20px;
