@@ -37,11 +37,11 @@
 				<li><a href="/profile"><i class="fa-solid fa-user"></i></a></li>
 				<li><a href="/"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 			</ul>
-		</nav>
+		</nav>s
 	</header>
 	<div class="grid-wrapper">
 		<div>
-			<a href="./postForm.html"><img src="/resources/images/image_01.jpg" alt=""></a>
+			<a href="/postForm"><img src="/resources/images/image_01.jpg" alt=""></a>
 		</div>
 		<div>
 			<a href=""><img src="/resources/images/image_02.jpg" alt=""></a>

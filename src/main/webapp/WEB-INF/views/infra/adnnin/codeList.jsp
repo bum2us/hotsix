@@ -109,9 +109,8 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="list" varStatus="status">
-					<c:set var="now" value="<%=new java.util.Date()%>" />
-						<tr>
-							<td>
+						<tr onclick="editCode(this)">
+							<td onclick="event.stopPropagation()">
 								<input class="form-check-input" type="checkbox">
 							</td>
 							<td><c:out value="${list.seq }"/></td>
@@ -119,7 +118,6 @@
 							<td><c:out value="${list.groupName }"/></td>
 							<td><c:out value="${list.codeKey }"/></td>
 							<td><c:out value="${list.codeName }"/></td>
-							<%-- <td><c:out value="${list.useNy}"/></td> --%>
 							<td>
 							<c:choose>
 								<c:when test="${list.useNy eq 0}">N</c:when>
@@ -129,10 +127,6 @@
 							<td><c:out value="${list.codeKey}"/></td>
 							<td><c:out value="${list.createDate}"/></td>
 							<td><c:out value="${list.editDate}"/></td>
-							<%-- 	
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-							<td><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-							 --%>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -194,6 +188,27 @@
 	    	dateFormat: "yy-mm-dd"
 	    });
 	  } );
+	  
+	  function editCode(mytag){
+		  
+		  var tds = mytag.children;
+/* 		  
+		  alert(tds[1].textContent + " " +
+			  tds[2].textContent + " " +
+			  tds[3].textContent + " " +
+			  tds[4].textContent + " " +
+			  tds[5].textContent + " " +
+			  tds[6].textContent + " " +
+			  tds[7].textContent + " " +
+			  tds[8].textContent);    
+*/	  
+
+		  location.href="/codeForm/?shOption="+ tds[1].textContent
+				  +"&upCodeSeq=" + tds[4].textContent
+				  +"&upCodeGroupName=" + tds[3].textContent
+				  +"&upCodeName=" + tds[5].textContent
+				  +"&upUseNy="+ tds[6].textContent;
+	  }
 	</script>		
 </body>
 </html>

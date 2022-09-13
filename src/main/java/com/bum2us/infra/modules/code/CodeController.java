@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -23,7 +24,7 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/codeForm")
-	public String codeForm(Model model) throws Exception {
+	public String codeForm(@ModelAttribute("vo") CodeVo vo ,Model model) throws Exception {
 		
 		List<Code> list = service.selectListGroupName();
 		model.addAttribute("list", list);
@@ -46,5 +47,13 @@ public class CodeController {
 		service.insertCode(cd);
 		
 		return "infra/adnnin/codeList";
+	}
+	
+	@RequestMapping(value="/codeForm/upd")
+	public String codeUpdate(Model model,Code cd) throws Exception {
+		
+		service.updateCode(cd); 
+		
+		return "redirect:/infra/adnnin/codeList";
 	}
 }

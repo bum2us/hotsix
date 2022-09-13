@@ -75,5 +75,41 @@
 		
 		
 	</insert>
+	
+	<delete id="deleteCode">
+		
+		DELETE 
+		FROM 
+			cc 
+		WHERE
+			1=1
+			AND codeName LIKE '우주인'
+		
+	</delete>
 
+	<update id="updateCode">
+		
+		UPDATE
+			cc
+		SET
+			codeName = #{upCodeName}
+			,useNy = #{upUseNy}
+			,codeKey = #{upCodeKey}
+			,groupSeq = (
+				SELECT
+					seq
+				FROM
+					ccg
+				WHERE
+					groupName = #{upCodeGroupName}
+			)
+		WHERE
+			1=1
+		AND
+			seq = #{upCodeSeq}
+			
+		
+	
+	</update>
+	
 </mapper>

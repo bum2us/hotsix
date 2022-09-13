@@ -116,6 +116,11 @@ public class MemberController {
 		return "infra/user/profileForm";
 	}
 	
+	@RequestMapping(value = "/post")
+	public String postForm() throws Exception {
+		return "infra/user/postForm";
+	}
+	
 	@RequestMapping(value = "/administrator/login")
 	public String adnninLogin() throws Exception{
 		

@@ -53,7 +53,15 @@ public class CodeServiceImpl implements CodeService{
 	public List<Code> selectListGroupName() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectListGroupName();
-	}	
+	}
+
+	@Override
+	public void updateCode(Code cd) throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateCode(cd);
+	}
+
+	
 	
 	
 }

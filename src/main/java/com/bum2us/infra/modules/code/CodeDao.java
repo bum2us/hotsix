@@ -24,4 +24,6 @@ public class CodeDao {
 	public List<Code> searchCode(CodeVo vo) { return sqlSession.selectList(namespace + ".searchCode", vo);	}
 
 	public List<Code> selectListGroupName() { return sqlSession.selectList(namespace + ".groupName","");	}
+
+	public void updateCode(Code cd) { sqlSession.update(namespace + ".updateCode", cd); }
 }
