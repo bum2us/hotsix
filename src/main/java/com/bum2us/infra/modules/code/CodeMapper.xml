@@ -37,12 +37,12 @@
 		</choose>
 		<choose>
 			<when test="shUseNy == 0"></when>
-			<when test="shUseNy == 1"> AND useNy LIKE 0</when>
-			<when test="shUseNy == 2"> AND useNy LIKE 1</when>
+			<when test="shUseNy == 1"> AND a.useNy LIKE 0</when>
+			<when test="shUseNy == 2"> AND a.useNy LIKE 1</when>
 		</choose>
 		<choose>
-			<when test="shDateOption == 1"> AND editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shDateOption == 2"> AND createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shDateOption == 1"> AND a.editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shDateOption == 2"> AND a.createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 		</choose>
 		
 	</select>

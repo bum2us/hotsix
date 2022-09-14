@@ -56,9 +56,12 @@ public class CodeServiceImpl implements CodeService{
 	}
 
 	@Override
-	public void updateCode(Code cd) throws Exception {
+	public void updateCode(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		dao.updateCode(cd);
+		
+		vo.printAll2();
+		
+		dao.updateCode(vo); 
 	}
 
 	

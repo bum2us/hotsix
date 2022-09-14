@@ -24,7 +24,7 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/codeForm")
-	public String codeForm(@ModelAttribute("vo") CodeVo vo ,Model model) throws Exception {
+	public String codeForm(CodeVo vo ,Model model) throws Exception {
 		
 		List<Code> list = service.selectListGroupName();
 		model.addAttribute("list", list);
@@ -33,7 +33,7 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value = "/code/src")
-	public String codeSrc(Model model,CodeVo vo) throws Exception {
+	public String codeSrc(Model model,@ModelAttribute("vo") CodeVo vo) throws Exception {
 		
 		List<Code> list = service.searchCode(vo);
 		model.addAttribute("list", list);		
@@ -50,10 +50,10 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value="/codeForm/upd")
-	public String codeUpdate(Model model,Code cd) throws Exception {
+	public String codeUpdate(Model model,CodeVo vo) throws Exception {
+		 
+		service.updateCode(vo); 
 		
-		service.updateCode(cd); 
-		
-		return "redirect:/infra/adnnin/codeList";
+		return "redirect:/code/CodeList";
 	}
 }

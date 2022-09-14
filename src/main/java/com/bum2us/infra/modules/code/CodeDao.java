@@ -25,5 +25,5 @@ public class CodeDao {
 
 	public List<Code> selectListGroupName() { return sqlSession.selectList(namespace + ".groupName","");	}
 
-	public void updateCode(Code cd) { sqlSession.update(namespace + ".updateCode", cd); }
+	public void updateCode(CodeVo vo) { sqlSession.update(namespace + ".updateCode", vo); }
 }

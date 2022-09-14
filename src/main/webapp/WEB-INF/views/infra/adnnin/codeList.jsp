@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -17,7 +18,7 @@
 <body>
 	<header>
 		<div class="logo">
-			<img src="../../images/mark_white.png" class="logoImage" alt="">
+			<img src="/resources/images/mark_white.png" class="logoImage" alt="">
 			<span class="logoName">AL<span class="logoName2">BUM</span>'S</span>
 		</div>
 		<nav>
@@ -51,9 +52,7 @@
 					<div class="row mb-4">
 						<div class="col-3">
 							<select name="shUseNy">
-								<option value="" disabled selected>사용여부</option>
-								<option value="1">N</option>
-								<option value="2">Y</option>
+								<bs:selector myKey="${vo.shUseNy}"></bs:selector>
 							</select>
 						</div>
 						<div class="col-3">
@@ -81,18 +80,18 @@
 							</select>
 						</div>
 						<div class="col">
-							<input name="shValue" type="text" placeholder="검색어">
+							<input name="shValue" type="text" placeholder="검색어" value="<c:out value="${vo.shValue}"/>">
 						</div>
 					</div>
 					<div class="row mb-3">
 						<button type="submit" class="basebutton">검색</button>
-						<button type="button" class="basebutton">리셋</button>
+						<button type="button" class="basebutton" onclick="location.href='http://localhost:8080/code/CodeList'">리셋</button>
 					</div>
 				</div>
 			</div>
 		</form>
 		<div class="row my-4 justify-content-center">
-			<table>
+			<table  id="tableData">
 				<thead>
 					<tr>
 						<th><input class="form-check-input" type="checkbox"></th>
@@ -146,7 +145,7 @@
 		<div class="row">
 			<div class="col-2">
 				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
-				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
+				<button type="button" class="buttons" onclick="delCode()"><i class="fa-solid fa-trash-can"></i></button>
 			</div>
 			<div class="col-1 offset-9 text-end">
 				<button type="button" class="buttons" onclick="location.href='/codeForm'"><i class="fa-solid fa-plus"></i></button>
@@ -202,13 +201,20 @@
 			  tds[7].textContent + " " +
 			  tds[8].textContent);    
 */	  
-
 		  location.href="/codeForm/?shOption="+ tds[1].textContent
-				  +"&upCodeSeq=" + tds[4].textContent
+				  +"&upCodeKey=" + tds[4].textContent
 				  +"&upCodeGroupName=" + tds[3].textContent
 				  +"&upCodeName=" + tds[5].textContent
-				  +"&upUseNy="+ tds[6].textContent;
+				  +"&upUseNy=" + tds[6].textContent; 
 	  }
+	  
+	  function delCode(){
+		  
+		  var tbody = $('#tableData');
+		  
+	  }
+	  
+	  
 	</script>		
 </body>
 </html>

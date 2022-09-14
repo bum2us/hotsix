@@ -82,8 +82,7 @@ public class CodeVo {
 	}
 	public void setUpCodeKey(Integer upCodeKey) {
 		this.upCodeKey = upCodeKey;
-	}
-	
+	}	
 	
 	public void printAll() {
 		System.out.println("------------");
@@ -93,5 +92,14 @@ public class CodeVo {
 		System.out.println(shDateEnd);
 		System.out.println(shOption);
 		System.out.println(shValue);
+	}
+	
+	public void printAll2() {
+		System.out.println("-----------");
+		System.out.println(upCodeGroupName);
+		System.out.println(upCodeName);
+		System.out.println(upCodeSeq);
+		System.out.println(upUseNy);
+		System.out.println(upCodeKey);
 	}
 }

@@ -41,33 +41,46 @@
 				<div class="col">
 					<div class="row my-4">
 						<div class="col-6">
-							<select name="groupSeq">
-								<option value="" disabled selected>코드그룹이름</option>
-								<c:choose>
-									<c:when test="${vo.shOption eq null}">
+							<c:choose>
+								<c:when test="${vo.shOption eq null}">
+									<select name="groupSeq">
+										<option value="" disabled selected>코드그룹이름</option>
 										<c:forEach items="${list}" var ="list" varStatus="status">
 											<option value="<c:out value="${status.count}"/>"><c:out value="${list.groupName}"></c:out></option>									
 										</c:forEach>	
-									</c:when>
-									<c:otherwise>
-										<option value="" selected><c:out value="${vo.upCodeGroupName}"/></option>
-									</c:otherwise>
-								</c:choose>								
-							</select>
+									</select>
+								</c:when>
+								<c:otherwise>
+									<select name="upCodeGroupName">
+										<option value="<c:out value="${vo.upCodeGroupName}"/>" selected><c:out value="${vo.upCodeGroupName}"/></option>									
+									</select>
+								</c:otherwise>
+							</c:choose>								
 						</div>
 						<div class="col-6">
-							<select name="useNy">
-								<c:choose>
-									<c:when test="${vo.shOption eq null}">
+							<c:choose>
+								<c:when test="${vo.shOption eq null}">
+									<select name="useNy">
 										<option value="" disabled selected>사용여부</option>
 										<option value="0">N</option>
 										<option value="1">Y</option>
-									</c:when>
-									<c:otherwise>
-										<option selected><c:out value="${vo.upUseNy}"/></option>
-									</c:otherwise>
-								</c:choose>
-							</select>
+									</select>
+								</c:when>
+								<c:otherwise>
+									<select name="upUseNy">
+										<c:choose>
+											<c:when test="${vo.upUseNy eq 'N'}">
+												<option value="0" selected>N</option>
+												<option value="1">Y</option>
+											</c:when>
+											<c:when test="${vo.upUseNy eq 'Y'}">
+												<option value="0">N</option>
+												<option value="1" selected>Y</option>
+											</c:when>
+										</c:choose>
+									</select>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -77,7 +90,7 @@
 									<input type="text" placeholder="코드" name="codeKey">
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드" name="codeKey" value="<c:out value="${vo.upCodeSeq}"/>">
+									<input type="text" placeholder="코드" name="upCodeKey" value="<c:out value="${vo.upCodeKey}"/>">
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -87,7 +100,7 @@
 									<input type="text" placeholder="코드이름" name="codeName">	
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드이름" name="codeName" value="<c:out value="${vo.upCodeName}"/>">
+									<input type="text" placeholder="코드이름" name="upCodeName" value="<c:out value="${vo.upCodeName}"/>">
 								</c:otherwise>
 							</c:choose>
 						</div>

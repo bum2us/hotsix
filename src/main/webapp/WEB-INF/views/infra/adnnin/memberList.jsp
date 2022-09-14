@@ -23,7 +23,7 @@
 			<ul class="nav_links">
 				<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
 				<li><a href="/code/CodeList">코드</a></li>
-				<li><a href="#">멤버</a></li>
+				<li><a href="/member/memberList">멤버</a></li>
 			</ul>
 		</nav>
 		<div class="profile">
@@ -108,7 +108,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var ="list" varStatus="status">
+					<c:forEach items="${list}" var ="list" varStatus="status" begin="${pi.pageRangeStart}" end="${pi.pageRangeEnd - 1}">
 						<tr>
 							<td>
 								<input class="form-check-input" type="checkbox">
@@ -126,24 +126,29 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center"> 
 			<ul class="pagination">
 				<li class="pageList"><a class="prev" href="#">Previous</a></li>
-				<li class="pageList pageNumber active"><a href="#">1</a></li>
-				<li class="pageList pageNumber"><a href="#">2</a></li>
-				<li class="pageList pageNumber"><a href="#">3</a></li>
-				<li class="pageList pageNumber"><a href="#">4</a></li>
-				<li class="pageList pageNumber"><a href="#">5</a></li>
+				<c:forEach begin="0" end="${fn:length(list) / 10}" varStatus="status">
+					<c:choose>
+						<c:when test="${pi.pageNumber eq status.count}">
+							<li class="pageList pageNumber active"><a href="/member/memberList/?pageNumber=${status.count}"><c:out value="${status.count}"/></a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="pageList pageNumber"><a href="/member/memberList/?pageNumber=${status.count}"><c:out value="${status.count}"/></a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 				<li class="pageList"><a class="next" href="#">Next</a></li>
 			</ul>	
 		</div>
 		<div class="row">
 			<div class="col-2">
 				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
-				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
+				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
 			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='./codeForm.html'"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick=""><i class="fa-solid fa-plus"></i></button>
 			</div>
 		</div>
     </div>

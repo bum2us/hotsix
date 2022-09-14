@@ -7,7 +7,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bum2us.infra.modules.PageInfo;
 
 @Controller
 public class MemberController {
@@ -16,7 +19,15 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-	public String memberList (Model model) throws Exception {
+	public String memberList (@ModelAttribute("pi") PageInfo pi, Model model,HttpSession httpSession) throws Exception {
+				
+		if(pi.getPageNumber() == null)
+			pi.setPageNumber(1);
+		
+		pi.setPageRangeStart(pi.getPageNumber()*pi.getPageSize()-10);
+		pi.setPageRangeEnd(pi.getPageNumber()*pi.getPageSize());
+		
+		pi.showAll();
 		
 		List<Member> list = service.selectList();
 		model.addAttribute("list", list);
