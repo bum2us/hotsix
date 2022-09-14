@@ -5,6 +5,16 @@ public class MemberVo {
 	private String shId;
 	private String shPassword;
 
+	private String shValue;
+	private Integer shOption;
+	private Integer shDateOption;
+	private String shDateStart;
+	private String shDateEnd;
+	
+	private Integer pageNumber;
+	private Integer pageSize;
+	private Integer pageRange;
+
 	public String getShId() {
 		return shId;
 	}
@@ -17,14 +27,6 @@ public class MemberVo {
 	public void setShPassword(String shPassword) {
 		this.shPassword = shPassword;
 	}
-	
-	private String shValue;
-	private Integer shOption;
-	private Integer shDateOption;
-	private String shDateStart;
-	private String shDateEnd;
-	
-	
 	public String getShValue() {
 		return shValue;
 	}
@@ -55,6 +57,28 @@ public class MemberVo {
 	public void setShDateEnd(String shDateEnd) {
 		this.shDateEnd = shDateEnd;
 	}
+	public Integer getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(Integer pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+	public Integer getPageRange() {
+		return pageRange;
+	}
+	public void setPageRange(Integer pageRange) {
+		this.pageRange = pageRange;
+	}
 	
-	
+	public void showPageAll() {
+		System.err.println("[ALL PAGE INFO]");
+		System.out.println("pageNumber:"+pageNumber);
+		System.out.println("pageSize:"+pageSize);
+	}
 }

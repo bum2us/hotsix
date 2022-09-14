@@ -11,6 +11,9 @@
 		SELECT
 			*
 		FROM member
+		WHERE
+			1=1
+		LIMIT #{pageSize} OFFSET #{pageRange}  
 		
 	</select>
 	

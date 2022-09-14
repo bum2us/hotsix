@@ -17,7 +17,7 @@ public class MemberDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.member.MemberMapper";
 	
-	public List<Member> selectList() { return sqlSession.selectList(namespace + ".selectList", ""); }
+	public List<Member> selectList(MemberVo vo) { return sqlSession.selectList(namespace + ".selectList", vo); }
 	
 	public List<Member> insertList(MemberVo vo) {return sqlSession.selectList(namespace + ".selectSrc", vo); }
 	

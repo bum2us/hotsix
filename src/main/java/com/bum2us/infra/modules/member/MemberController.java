@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bum2us.infra.modules.PageInfo;
-
 @Controller
 public class MemberController {
 
@@ -19,17 +17,11 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-	public String memberList (@ModelAttribute("pi") PageInfo pi, Model model,HttpSession httpSession) throws Exception {
-				
-		if(pi.getPageNumber() == null)
-			pi.setPageNumber(1);
+	public String memberList (@ModelAttribute("vo") MemberVo vo, Model model,HttpSession httpSession) throws Exception {
 		
-		pi.setPageRangeStart(pi.getPageNumber()*pi.getPageSize()-10);
-		pi.setPageRangeEnd(pi.getPageNumber()*pi.getPageSize());
 		
-		pi.showAll();
 		
-		List<Member> list = service.selectList();
+		List<Member> list = service.selectList(vo);
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";

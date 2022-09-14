@@ -14,9 +14,18 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public List<Member> selectList() {
+	public List<Member> selectList(MemberVo vo) {
 		// TODO Auto-generated method stub
-		return dao.selectList();
+		
+		if(vo.getPageNumber() == null)
+			vo.setPageNumber(1);
+		if(vo.getPageSize() == null)
+			vo.setPageSize(10);
+		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
+		
+		vo.showPageAll();
+		
+		return dao.selectList(vo);
 	}
 
 

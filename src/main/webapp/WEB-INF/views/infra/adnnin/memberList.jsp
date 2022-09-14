@@ -108,7 +108,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list}" var ="list" varStatus="status" begin="${pi.pageRangeStart}" end="${pi.pageRangeEnd - 1}">
+					<c:forEach items="${list}" var ="list" varStatus="status">
 						<tr>
 							<td>
 								<input class="form-check-input" type="checkbox">
@@ -124,23 +124,35 @@
 						</tr>	
 					</c:forEach>
 				</tbody>
-			</table>
+			</table> 
 		</div>
 		<div class="row justify-content-center"> 
 			<ul class="pagination">
 				<li class="pageList"><a class="prev" href="#">Previous</a></li>
-				<c:forEach begin="0" end="${fn:length(list) / 10}" varStatus="status">
+				<c:choose>
+					<c:when test="${vo.pageNumber < 4}">
+						<c:set var="startIdx" value="1"/>
+						<c:set var="endIdx" value="5"/>  
+					</c:when>
+					<c:when test="${vo.pageNumber > 3 }">
+						<c:set var="startIdx" value="${vo.pageNumber-2}"/>
+						<c:set var="endIdx" value="${vo.pageNumber+2}"/>
+					</c:when> 
+				</c:choose>
+				<c:set var ="countIdx" value="${startIdx}"/>
+				<c:forEach begin="${startIdx}" end="${endIdx}" varStatus="status">
 					<c:choose>
-						<c:when test="${pi.pageNumber eq status.count}">
-							<li class="pageList pageNumber active"><a href="/member/memberList/?pageNumber=${status.count}"><c:out value="${status.count}"/></a></li>
+						<c:when test="${vo.pageNumber eq countIdx}"> 
+							<li class="pageList pageNumber active"><a href="/member/memberList/?pageNumber=${countIdx}"><c:out value="${countIdx}"/></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="pageList pageNumber"><a href="/member/memberList/?pageNumber=${status.count}"><c:out value="${status.count}"/></a></li>
+							<li class="pageList pageNumber"><a href="/member/memberList/?pageNumber=${countIdx}"><c:out value="${countIdx}"/></a></li>
 						</c:otherwise>
 					</c:choose>
-				</c:forEach>
+					<c:set var="countIdx" value="${countIdx + 1}"/> 
+				</c:forEach> 
 				<li class="pageList"><a class="next" href="#">Next</a></li>
-			</ul>	
+			</ul>
 		</div>
 		<div class="row">
 			<div class="col-2">
