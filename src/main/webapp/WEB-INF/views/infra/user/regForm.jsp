@@ -99,7 +99,7 @@
                     </div>
 					<div class="row mb-4">
 						<textarea name="comment" id="comment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;"></textarea>
-					</div>W
+					</div>
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick = "location.href='/login'">이전</button>
 						<button type="button" class="basebutton">리셋</button>

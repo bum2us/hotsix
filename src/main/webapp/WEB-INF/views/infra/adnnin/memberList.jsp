@@ -129,6 +129,9 @@
 		<div class="row justify-content-center"> 
 			<ul class="pagination">
 				<li class="pageList"><a class="prev" href="#">Previous</a></li>
+				<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
+				<bs:pagingList pageNo ="${vo.pageNumber}" pageTotal="7"></bs:pagingList> 
+				<%-- 
 				<c:choose>
 					<c:when test="${vo.pageNumber < 4}">
 						<c:set var="startIdx" value="1"/>
@@ -150,7 +153,8 @@
 						</c:otherwise>
 					</c:choose>
 					<c:set var="countIdx" value="${countIdx + 1}"/> 
-				</c:forEach> 
+				</c:forEach>
+				--%>
 				<li class="pageList"><a class="next" href="#">Next</a></li>
 			</ul>
 		</div>
@@ -160,7 +164,7 @@
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
 			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick=""><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick="location.href='/signup'"><i class="fa-solid fa-plus"></i></button>
 			</div>
 		</div>
     </div>

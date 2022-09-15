@@ -10,6 +10,7 @@
 	
 		SELECT
 			*
+			,(SELECT COUNT(*)/#{pageSize} FROM member) as pageTotal		
 		FROM member
 		WHERE
 			1=1

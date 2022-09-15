@@ -17,11 +17,10 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-	public String memberList (@ModelAttribute("vo") MemberVo vo, Model model,HttpSession httpSession) throws Exception {
-		
-		
+	public String memberList (@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
 		List<Member> list = service.selectList(vo);
+		
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";

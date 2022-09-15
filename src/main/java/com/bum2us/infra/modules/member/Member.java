@@ -17,6 +17,8 @@ public class Member {
 	private String phone1;
 	private String phone2;
 	
+	private Integer pageTotle;
+	
 	public String getPhone1() {
 		return phone1;
 	}
@@ -100,6 +102,14 @@ public class Member {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	
+	
+	public Integer getPageTotle() {
+		return pageTotle;
+	}
+	public void setPageTotle(Integer pageTotle) {
+		this.pageTotle = pageTotle;
 	}
 	
 	

@@ -23,8 +23,6 @@ public class MemberServiceImpl implements MemberService{
 			vo.setPageSize(10);
 		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
 		
-		vo.showPageAll();
-		
 		return dao.selectList(vo);
 	}
 
