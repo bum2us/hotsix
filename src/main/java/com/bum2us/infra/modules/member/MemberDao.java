@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bum2us.infra.modules.base.BaseVo;
+
 @Repository
 public class MemberDao {
 
@@ -25,6 +27,6 @@ public class MemberDao {
 
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	
-	
+	public Integer selectCount() { return sqlSession.selectOne(namespace + ".selectCount"); }
 	
 }

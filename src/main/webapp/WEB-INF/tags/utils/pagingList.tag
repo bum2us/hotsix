@@ -3,12 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="pageNo" type="java.lang.Integer" %>
 <%@ attribute name="pageTotal" type="java.lang.Integer" %>
+<%@ attribute name="pageSize" type="java.lang.Integer" %>
 
 <%
 
 int startIdx = 0;
 int endIdx = 0;
 int countIdx = 0;
+
+pageTotal = pageTotal/pageSize;
+pageTotal++;
 
 if(pageNo < 4)
 {
@@ -20,10 +24,10 @@ else if(pageNo >= 4)
 	startIdx = pageNo - 2;
 	endIdx = pageNo + 3;
 }
-
+ 
 if(endIdx > pageTotal)
 {
-	endIdx = pageTotal+1;
+	endIdx = pageTotal + 1;
 	startIdx = endIdx - 5;
 }
 

@@ -17,8 +17,9 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-	public String memberList (@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
 		
+		vo.setPageTotal(service.selectCount());
 		List<Member> list = service.selectList(vo);
 		
 		model.addAttribute("list", list);
@@ -41,12 +42,6 @@ public class MemberController {
 		return "infra/adnnin/memberList";
 	}
 	
-	@RequestMapping(value = "/signup")
-	public String register() throws Exception {
-		
-		return "infra/user/regForm";
-	}
-	
 	@RequestMapping(value = "/infoReg")
 	public String regResult(Model model,Member mb) throws Exception {
 				
@@ -56,11 +51,6 @@ public class MemberController {
 		return "infra/user/infoFormReg";
 	}
 	
-	@RequestMapping(value ="/")
-	public String login() throws Exception {
-		
-		return "infra/user/loginForm";
-	}
 	
 	@RequestMapping(value = "/main")
 	public String main(Model model,MemberVo vo,HttpSession httpSession) throws Exception {
@@ -92,48 +82,6 @@ public class MemberController {
 		model.addAttribute("item", mb);
 		
 		return "infra/user/mainForm";
-	}
-	
-	@RequestMapping(value = "/bookmark")
-	public String bookmark() throws Exception {
-		
-		return "infra/user/bookmarkForm";
-	}
-	
-	@RequestMapping(value = "/chat")
-	public String chat() throws Exception {
-		
-		return "infra/user/chatForm";
-	}
-	
-	@RequestMapping(value = "/upload")
-	public String upload() throws Exception {
-		
-		return "infra/user/uploadForm";
-	}
-	
-	@RequestMapping(value = "/profile")
-	public String profile() throws Exception {
-		
-		return "infra/user/profileForm";
-	}
-	
-	@RequestMapping(value = "/post")
-	public String postForm() throws Exception {
-		return "infra/user/postForm";
-	}
-	
-	@RequestMapping(value = "/administrator/login")
-	public String adnninLogin() throws Exception{
-		
-		return "infra/adnnin/adnninLoginForm";
-		
-	}
-	
-	@RequestMapping(value = "/administrator/main")
-	public String adnninMain(Model model, MemberVo vo) throws Exception{
-		
-		return "infra/adnnin/memberList";
 	}
 }
 

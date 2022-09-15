@@ -27,8 +27,6 @@ public class CodeServiceImpl implements CodeService{
 	public List<Code> searchCode(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		
-		vo.printAll();
-		
 		if(vo.getShDateOption() == null)
 			vo.setShDateOption(2);
 		
@@ -43,8 +41,6 @@ public class CodeServiceImpl implements CodeService{
 
 		if(vo.getShOption() == null)
 			vo.setShOption(3);
-		
-		vo.printAll();
 		
 		return dao.searchCode(vo);
 	}

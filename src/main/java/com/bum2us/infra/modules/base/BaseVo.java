@@ -7,10 +7,13 @@ public class BaseVo {
 	private Integer shDateOption;
 	private String shDateStart;
 	private String shDateEnd;
+	private Integer shUseNy;
+	
 	
 	private Integer pageNumber;
 	private Integer pageSize;
 	private Integer pageRange;
+	private Integer pageTotal;
 	
 	public String getShValue() {
 		return shValue;
@@ -42,6 +45,15 @@ public class BaseVo {
 	public void setShDateEnd(String shDateEnd) {
 		this.shDateEnd = shDateEnd;
 	}
+	public Integer getShUseNy() {
+		return shUseNy;
+	}
+	public void setShUseNy(Integer shUseNy) {
+		this.shUseNy = shUseNy;
+	}
+	
+	
+	
 	public Integer getPageNumber() {
 		return pageNumber;
 	}
@@ -60,6 +72,15 @@ public class BaseVo {
 	public void setPageRange(Integer pageRange) {
 		this.pageRange = pageRange;
 	}
+	public Integer getPageTotal() {
+		return pageTotal;
+	}
+	public void setPageTotal(Integer pageTotal) {
+		this.pageTotal = pageTotal;
+	}
 	
-	
+	public void setPageParams(BaseVo vo) {
+		
+		this.pageTotal = vo.pageTotal;
+	}
 }

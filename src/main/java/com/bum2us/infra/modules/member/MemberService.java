@@ -2,6 +2,8 @@ package com.bum2us.infra.modules.member;
 
 import java.util.List;
 
+import com.bum2us.infra.modules.base.BaseVo;
+
 public interface MemberService {
 	
 	public List<Member> selectList(MemberVo vo);
@@ -13,4 +15,6 @@ public interface MemberService {
 	public Member selectOne(MemberVo vo);
 	
 	public Member chkLogin(MemberVo vo);
+	
+	public Integer selectCount();
 }

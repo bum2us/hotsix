@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bum2us.infra.modules.base.BaseVo;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -74,6 +76,14 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.selectOne(vo);
 	}
+
+
+	@Override
+	public Integer selectCount() {
+		// TODO Auto-generated method stub
+		return dao.selectCount();
+	}
+	
 	
 	
 	

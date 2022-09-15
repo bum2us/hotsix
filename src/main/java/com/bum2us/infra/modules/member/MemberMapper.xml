@@ -10,12 +10,17 @@
 	
 		SELECT
 			*
-			,(SELECT COUNT(*)/#{pageSize} FROM member) as pageTotal		
 		FROM member
 		WHERE
 			1=1
 		LIMIT #{pageSize} OFFSET #{pageRange}  
 		
+	</select>
+	
+	<select id="selectCount" resultType ="Integer">
+		SELECT
+			COUNT(*) 
+		FROM member
 	</select>
 	
 	<select id="selectSrc" resultMap="resultObj">

@@ -14,26 +14,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <body>
-	<header>
-		<div class="logo">
-			<img src="../../images/mark_white.png" class="logoImage" alt="">
-			<span class="logoName">AL<span class="logoName2">BUM</span>'S</span>
-		</div>
-		<nav>
-			<ul class="nav_links">
-				<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
-				<li><a href="/code/CodeList">코드</a></li>
-				<li><a href="/member/memberList">멤버</a></li>
-			</ul>
-		</nav>
-		<div class="profile">
-			<div class="imgBox">
-				<img src="/resources/images/temp08.jpg" alt="">
-			</div>
-		</div>
-		<span class="administrator">${item.nickname}</span>
-		<button class="logoutBtn" type="button" onclick="location.href='../user/member/loginForm.html'"><i class="fa-solid fa-right-from-bracket"></i></button>
-	</header>
+	<%@include file="../common/adnnin/header.jsp" %>
 	<div class="container">
         <br><br>
 		<div class="row justify-content-center">
@@ -130,9 +111,9 @@
 			<ul class="pagination">
 				<li class="pageList"><a class="prev" href="#">Previous</a></li>
 				<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
-				<bs:pagingList pageNo ="${vo.pageNumber}" pageTotal="7"></bs:pagingList> 
+				<bs:pagingList pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingList> 
 				<%-- 
-				<c:choose>
+				<c:choose> 
 					<c:when test="${vo.pageNumber < 4}">
 						<c:set var="startIdx" value="1"/>
 						<c:set var="endIdx" value="5"/>  
@@ -168,17 +149,7 @@
 			</div>
 		</div>
     </div>
-	<footer class="footer-bottom">
-		<ul class="socials">
-			<li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
-			<li><a href="#"><i class="fa-brands fa-square-twitter"></i></a></li>
-			<li><a href="#"><i class="fa-brands fa-square-google-plus"></i></a></li>
-			<li><a href="#"><i class="fa-brands fa-square-youtube"></i></a></li>
-			<li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
-		</ul>
-		<p>copyright &copy;2022 ALBUM'S. designed by <span>bum2us</span></p>
-	</footer>
-
+    <%@include file="../common/adnnin/footer.jsp" %>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
