@@ -22,7 +22,7 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
-		<form action="/member/src">
+		<form id="mainForm">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-3">
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="row mb-4">
-						<div class="col-2">
+						<div class="col-3">
 							<select name="shOption" id="shOption" >
 								<option value="0"  disabled selected>검색 위치</option>
 								<option value="1">이름</option>
@@ -63,93 +63,74 @@
 							</select>
 						</div>
 						<div class="col">
-							<input type="text" name="shValue" placeholder="검색어" value=""> 
+							<input type="text" name="shValue" placeholder="검색어" value="${vo.shValue}"> 
 						</div>
 					</div>
 					<div class="row mb-3">
-						<button type="submit" class="basebutton">검색</button>
-						<button type="button" class="basebutton">리셋</button>
+						<button type="button" class="basebutton" onclick="runForm('src',0)">검색</button>
+						<button type="button" class="basebutton" onclick="location.href='/member/memberList'">리셋</button>
 					</div>
 				</div>
 			</div>
-		</form>
-		<div class="row my-4 justify-content-center">
-			<table>
-				<thead>
-					<tr>
-						<th><input class="form-check-input" type="checkbox"></th>
-						<th>#</th>
-						<th>이름</th>
-						<th>ID</th>
-						<th>닉네임</th>
-						<th>생년월일</th>
-						<th>email</th>
-						<th>휴대전화</th>
-						<th>등록일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var ="list" varStatus="status">
+		
+			<div class="row my-4 justify-content-center">
+				<table>
+					<thead>
 						<tr>
-							<td>
-								<input class="form-check-input" type="checkbox">
-							</td>
-							<td><c:out value="${list.seq}"/></td>
-							<td><c:out value="${list.name}"/></td>
-							<td><c:out value="${list.id}"/></td>
-							<td><c:out value="${list.nickname}"/></td>
-							<td><c:out value="${list.dob}"/></td>
-							<td><c:out value="${list.email}"/></td>
-							<td><c:out value="${list.phone}"/></td>
-							<td><c:out value="${list.createDate}"/></td>
-						</tr>	
-					</c:forEach>
-				</tbody>
-			</table> 
-		</div>
-		<div class="row justify-content-center"> 
-			<ul class="pagination">
-				<li class="pageList"><a class="prev" href="#">Previous</a></li>
-				<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
-				<bs:pagingList pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingList> 
-				<%-- 
-				<c:choose> 
-					<c:when test="${vo.pageNumber < 4}">
-						<c:set var="startIdx" value="1"/>
-						<c:set var="endIdx" value="5"/>  
-					</c:when>
-					<c:when test="${vo.pageNumber > 3 }">
-						<c:set var="startIdx" value="${vo.pageNumber-2}"/>
-						<c:set var="endIdx" value="${vo.pageNumber+2}"/>
-					</c:when> 
-				</c:choose>
-				<c:set var ="countIdx" value="${startIdx}"/>
-				<c:forEach begin="${startIdx}" end="${endIdx}" varStatus="status">
-					<c:choose>
-						<c:when test="${vo.pageNumber eq countIdx}"> 
-							<li class="pageList pageNumber active"><a href="/member/memberList/?pageNumber=${countIdx}"><c:out value="${countIdx}"/></a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="pageList pageNumber"><a href="/member/memberList/?pageNumber=${countIdx}"><c:out value="${countIdx}"/></a></li>
-						</c:otherwise>
-					</c:choose>
-					<c:set var="countIdx" value="${countIdx + 1}"/> 
-				</c:forEach>
-				--%>
-				<li class="pageList"><a class="next" href="#">Next</a></li>
-			</ul>
-		</div>
+							<th><input class="form-check-input" type="checkbox"></th>
+							<th>#</th>
+							<th>이름</th>
+							<th>ID</th>
+							<th>닉네임</th>
+							<th>생년월일</th>
+							<th>email</th>
+							<th>휴대전화</th>
+							<th>등록일</th> 
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var ="list" varStatus="status">
+							<tr onclick="runForm('form',${list.seq})">
+								<td>
+									<input class="form-check-input" type="checkbox">
+								</td>
+								<td><c:out value="${list.seq}"/></td>
+								<td><c:out value="${list.name}"/></td>
+								<td><c:out value="${list.id}"/></td>
+								<td><c:out value="${list.nickname}"/></td>
+								<td><c:out value="${list.dob}"/></td>
+								<td><c:out value="${list.email}"/></td>
+								<td><c:out value="${list.phone}"/></td>
+								<td><c:out value="${list.createDate}"/></td>
+							</tr>	
+						</c:forEach>
+					</tbody>
+				</table> 
+			</div>
+			
+			<%-- 페이징 기능 --%>
+			<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
+			<bs:pagingMember pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingMember>
+			
+			<%-- hidden input --%>
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">
+			<input type="hidden" id="formNumber" name="shSeq" value="${vo.shSeq}">
+			
+		</form>	 
 		<div class="row">
 			<div class="col-2">
 				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
 			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='/signup'"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick="runForm('add',0)"><i class="fa-solid fa-plus"></i></button>
 			</div>
 		</div>
     </div>
+    
+    <%-- footer --%>
     <%@include file="../common/adnnin/footer.jsp" %>
+    
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
@@ -174,6 +155,37 @@
 	    	dateFormat: "yy-mm-dd"
 	    });
 	  } );
+	  
+	  var form = $("#mainForm");
+	  
+	  runForm = function(key,no) {
+		  
+		  switch(key)
+		  {
+		  	case "src":
+		  	{
+		  		form.attr("action", "/member/memberList" ).submit();
+		  		break;	
+		  	};
+		  	case "form":
+		  	{
+		  		var seq = $("#formNumber");
+		  		seq.attr("value",no);
+		  		form.attr("action", "/member/memberForm" ).submit();
+		  		break;
+		  	};
+		  	case "page":
+	  		{
+		  		var pageno = $("#pageNumber");
+		  		pageno.attr("value",no);
+		  		form.attr("action", "/member/memberList").submit();
+		  		break;
+	  		};
+		  }
+		  
+		  
+	  }
+	  
 	</script>		
 </body>
 </html>

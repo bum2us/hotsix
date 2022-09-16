@@ -9,7 +9,6 @@ public class BaseVo {
 	private String shDateEnd;
 	private Integer shUseNy;
 	
-	
 	private Integer pageNumber;
 	private Integer pageSize;
 	private Integer pageRange;
@@ -52,7 +51,16 @@ public class BaseVo {
 		this.shUseNy = shUseNy;
 	}
 	
-	
+	public void ShowSh() 
+	{
+		System.out.println("---------------");
+		System.out.println(shValue);
+		System.out.println(shOption);
+		System.out.println(shDateOption);
+		System.out.println(shDateStart);
+		System.out.println(shDateEnd);
+		System.out.println(shUseNy);
+	}
 	
 	public Integer getPageNumber() {
 		return pageNumber;

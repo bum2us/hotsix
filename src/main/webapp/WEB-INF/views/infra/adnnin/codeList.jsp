@@ -112,17 +112,8 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row justify-content-center">
-			<ul class="pagination">
-				<li class="pageList"><a class="prev" href="#">Previous</a></li>
-				<li class="pageList pageNumber active"><a href="#">1</a></li>
-				<li class="pageList pageNumber"><a href="#">2</a></li>
-				<li class="pageList pageNumber"><a href="#">3</a></li>
-				<li class="pageList pageNumber"><a href="#">4</a></li>
-				<li class="pageList pageNumber"><a href="#">5</a></li>
-				<li class="pageList"><a class="next" href="#">Next</a></li>
-			</ul>	
-		</div>
+		<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
+		<bs:pagingCode pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingCode> 
 		<div class="row">
 			<div class="col-2">
 				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>

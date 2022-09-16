@@ -15,16 +15,20 @@ public class CodeController {
 	CodeServiceImpl service;
 	
 	@RequestMapping(value = "/code/CodeList")
-	public String codeList(Model model) throws Exception {
+	public String codeList(@ModelAttribute("vo")CodeVo vo, Model model) throws Exception {
 		
-		List<Code> list = service.selectList();
+		vo.setPageTotal(service.selectCount());
+		vo.setPageSize(5);
+		List<Code> list = service.selectList(vo);
 		model.addAttribute("list",list);
 		
 		return "infra/adnnin/codeList";
 	}
 	
 	@RequestMapping(value = "/codeForm")
-	public String codeForm(CodeVo vo ,Model model) throws Exception {
+	public String codeForm(@ModelAttribute("vo") CodeVo vo ,Model model) throws Exception {
+		
+		vo.printAll2();
 		
 		List<Code> list = service.selectListGroupName();
 		model.addAttribute("list", list);

@@ -21,25 +21,29 @@ public class MemberController {
 		
 		vo.setPageTotal(service.selectCount());
 		List<Member> list = service.selectList(vo);
-		
+
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";
 	}
 	
-	@RequestMapping(value = "/member/src")
-	public String src(Model model,MemberVo vo) throws Exception {
+	@RequestMapping(value ="member/memberForm")
+	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
-		System.out.println(vo.getShOption());
-		System.out.println(vo.getShValue());
-		System.out.println(vo.getShDateOption());
-		System.out.println(vo.getShDateStart());
-		System.out.println(vo.getShDateEnd());	
+		Member item = service.selectOne(vo);
+		model.addAttribute("item", item);
 		
-		List<Member>list = service.insertList(vo);
-		model.addAttribute("list", list);
+		System.out.println(item.getName());
 		
-		return "infra/adnnin/memberList";
+		return "infra/adnnin/memberForm";
+	}
+	
+	@RequestMapping(value ="member/formAction")
+	public String memberAction(@ModelAttribute("vo") Member vo) throws Exception{
+		
+		service.updateOne(vo);
+		
+		return "infra/adnnin/mamberList";
 	}
 	
 	@RequestMapping(value = "/infoReg")

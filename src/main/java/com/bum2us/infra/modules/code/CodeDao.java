@@ -17,7 +17,9 @@ public class CodeDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.code.CodeMapper";
 	
-	public List<Code> selectList() { return sqlSession.selectList(namespace + ".selectList",""); }
+	public int selectCount() { return sqlSession.selectOne(namespace + ".selecOneCount"); }
+	
+	public List<Code> selectList(CodeVo vo) { return sqlSession.selectList(namespace + ".selectList",vo); }
 	
 	public void insertCode(Code cd) { sqlSession.insert(namespace+".insertCode", cd); }
 

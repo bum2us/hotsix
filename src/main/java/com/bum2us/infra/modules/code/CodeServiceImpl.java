@@ -12,10 +12,27 @@ public class CodeServiceImpl implements CodeService{
 	CodeDao dao;
 	
 	@Override
-	public List<Code> selectList() throws Exception {
+	public List<Code> selectList(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectList();
+		
+		if(vo.getPageNumber() == null)
+			vo.setPageNumber(1);
+		if(vo.getPageSize() == null)
+			vo.setPageSize(5);
+		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
+		
+		return dao.selectList(vo);
 	}
+	
+	
+
+	@Override
+	public int selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCount();
+	}
+
+
 
 	@Override
 	public void insertCode(Code cd) throws Exception {

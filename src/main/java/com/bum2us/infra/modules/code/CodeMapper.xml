@@ -6,6 +6,12 @@
 
 	<resultMap id="resultMapObj" type= "com.bum2us.infra.modules.code.Code"></resultMap>
 	
+	<select id="selecOneCount" resultType="Integer">
+		SELECT
+			COUNT(*) as pageTotal
+		FROM cc
+	</select>
+	
 	<select id="selectList" resultMap ="resultMapObj">
 		
 		SELECT
@@ -14,6 +20,7 @@
 			,b.groupName
 		FROM cc a
 		JOIN ccg b ON a.groupSeq = b.seq
+		LIMIT #{pageSize} OFFSET #{pageRange}
 		
 	</select>
 	

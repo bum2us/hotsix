@@ -21,12 +21,12 @@ public class MemberDao {
 	
 	public List<Member> selectList(MemberVo vo) { return sqlSession.selectList(namespace + ".selectList", vo); }
 	
-	public List<Member> insertList(MemberVo vo) {return sqlSession.selectList(namespace + ".selectSrc", vo); }
-	
 	public void insertList(Member mb) { sqlSession.insert(namespace + ".insertList", mb); }
 
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	
 	public Integer selectCount() { return sqlSession.selectOne(namespace + ".selectCount"); }
+
+	public void updateOne(Member mb) { sqlSession.update(namespace + ".upadteOne", mb);	}
 	
 }

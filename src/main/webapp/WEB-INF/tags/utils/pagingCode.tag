@@ -30,19 +30,29 @@ if(endIdx > pageTotal)
 	endIdx = pageTotal + 1;
 	startIdx = endIdx - 5;
 }
+if(startIdx < 1)
+	startIdx = 1;
 
+%>
+<div class="row justify-content-center"> 
+	<ul class="pagination">
+		<li class="pageList"><a class="prev" href="#">Previous</a></li>
+<%
 for(countIdx = startIdx; countIdx < endIdx; countIdx ++)
 {
 	if(countIdx == pageNo){
 %>
-		<li class="pageList pageNumber active"><a href="/member/memberList/?pageNumber=<%=countIdx%>"><%=countIdx%></a></li>
+		<li class="pageList pageNumber active"><a href="javascript:runForm(<%=countIdx%>);"><%=countIdx%></a></li>
 <%
 	}
 	else{
 %>
-		<li class="pageList pageNumber"><a href="/member/memberList/?pageNumber=<%=countIdx%>"><%=countIdx%></a></li>
+		<li class="pageList pageNumber"><a href="javascript:runForm(<%=countIdx%>);"><%=countIdx%></a></li>
 <%
 	}
 }
 %>
+		<li class="pageList"><a class="next" href="#">Next</a></li>
+	</ul>
+</div>
 

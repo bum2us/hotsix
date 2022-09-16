@@ -6,6 +6,7 @@ public class MemberVo extends BaseVo{
 	
 	private String shId;
 	private String shPassword;
+	private Integer shSeq;
 
 	public String getShId() {
 		return shId;
@@ -19,5 +20,12 @@ public class MemberVo extends BaseVo{
 	public void setShPassword(String shPassword) {
 		this.shPassword = shPassword;
 	}
+	public Integer getShSeq() {
+		return shSeq;
+	}
+	public void setShSeq(Integer shSeq) {
+		this.shSeq = shSeq;
+	}
+	
 	
 }
