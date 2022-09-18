@@ -6,10 +6,34 @@
 
 	<resultMap id="resultMapObj" type= "com.bum2us.infra.modules.code.Code"></resultMap>
 	
+	<sql id="searchSql">
+		<choose>
+			<when test="shOption == 1"> AND groupSeq LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 2"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 3"> AND codeName LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 4"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
+		</choose>
+		<choose>
+			<when test="shUseNy == 0"></when>
+			<when test="shUseNy == 1"> AND useNy LIKE 0</when>
+			<when test="shUseNy == 2"> AND useNy LIKE 1</when>
+		</choose>
+		<choose>
+			<when test="shDateOption == 1"> AND editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shDateOption == 2"> AND createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		</choose>
+	</sql>
+	
+	<sql id="rangeSql">
+		LIMIT #{pageSize} OFFSET #{pageRange}  
+	</sql>
+	
 	<select id="selecOneCount" resultType="Integer">
 		SELECT
 			COUNT(*) as pageTotal
 		FROM cc
+		WHERE 1=1
+		<include  refid="searchSql"/>
 	</select>
 	
 	<select id="selectList" resultMap ="resultMapObj">
@@ -20,8 +44,10 @@
 			,b.groupName
 		FROM cc a
 		JOIN ccg b ON a.groupSeq = b.seq
-		LIMIT #{pageSize} OFFSET #{pageRange}
-		
+		WHERE 
+			1=1
+		<include  refid="searchSql"/>
+		<include refid="rangeSql"/>
 	</select>
 	
 	<resultMap id="searchResultObj" type="com.bum2us.infra.modules.code.Code"></resultMap>
@@ -36,21 +62,7 @@
 		JOIN ccg b ON a.groupSeq = b.seq
 		WHERE 
 			1=1
-		<choose>
-			<when test="shOption == 1"> AND groupSeq LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 2"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 3"> AND codeName LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 4"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
-		</choose>
-		<choose>
-			<when test="shUseNy == 0"></when>
-			<when test="shUseNy == 1"> AND a.useNy LIKE 0</when>
-			<when test="shUseNy == 2"> AND a.useNy LIKE 1</when>
-		</choose>
-		<choose>
-			<when test="shDateOption == 1"> AND a.editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shDateOption == 2"> AND a.createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-		</choose>
+		<include  refid="searchSql"/>
 		
 	</select>
 	

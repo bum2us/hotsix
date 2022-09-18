@@ -17,8 +17,8 @@ public class CodeController {
 	@RequestMapping(value = "/code/CodeList")
 	public String codeList(@ModelAttribute("vo")CodeVo vo, Model model) throws Exception {
 		
-		vo.setPageTotal(service.selectCount());
-		vo.setPageSize(5);
+		vo.setPageTotal(service.selectCount(vo));
+		vo.setPageSize(10);
 		List<Code> list = service.selectList(vo);
 		model.addAttribute("list",list);
 		
@@ -39,6 +39,8 @@ public class CodeController {
 	@RequestMapping(value = "/code/src")
 	public String codeSrc(Model model,@ModelAttribute("vo") CodeVo vo) throws Exception {
 		
+		vo.setPageTotal(service.selectCount(vo));
+		vo.setPageSize(10);
 		List<Code> list = service.searchCode(vo);
 		model.addAttribute("list", list);		
 		

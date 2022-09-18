@@ -24,7 +24,7 @@
 				<span class="page_title">코드 관리</span>
 			</div>
 		</div>
-		<form action="/code/src">
+		<form id="mainForm">
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-3">
@@ -32,16 +32,10 @@
 					</div>
 					<div class="row mb-4">
 						<div class="col-3">
-							<select name="shUseNy">
-								<bs:selector myKey="${vo.shUseNy}"></bs:selector>
-							</select>
+							<bs:selectorCode functionType="shUseNy" op="${vo.shUseNy}"></bs:selectorCode>
 						</div>
 						<div class="col-3">
-							<select name="shDateOption">
-								<option value="" disabled selected>검색구분</option>
-								<option value="1">수정일</option>
-								<option value="2">등록일</option>
-							</select>
+							<bs:selectorCode functionType="shDateOption" op="${vo.shDateOption}"></bs:selectorCode>
 						</div>
 						<div class="col-3">
 							<input name="shDateStart" id="startDate" type="text" placeholder="시작일">
@@ -52,16 +46,10 @@
 					</div>
 					<div class="row mb-4">
 						<div class="col-3">
-							<select name="shOption" >
-								<option value="0" disabled selected>검색위치</option>
-								<option value="1">그룹코드</option>
-								<option value="2">코드</option>
-								<option value="3">코드이름</option>
-								<option value="4">순서</option>
-							</select>
+							<bs:selectorCode functionType="shOption" op="${vo.shOption}"></bs:selectorCode>
 						</div>
 						<div class="col">
-							<input name="shValue" type="text" placeholder="검색어" value="<c:out value="${vo.shValue}"/>">
+							<input name="shValue" type="text" placeholder="검색어" value="${vo.shValue}">
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -70,59 +58,62 @@
 					</div>
 				</div>
 			</div>
-		</form>
-		<div class="row my-4 justify-content-center">
-			<table  id="tableData">
-				<thead>
-					<tr>
-						<th><input class="form-check-input" type="checkbox"></th>
-						<th>#</th>
-						<th>코드그룹 코드</th>
-						<th>코드그룹 이름</th>
-						<th>코드</th>
-						<th>코드이름</th>
-						<th>사용여부</th>
-						<th>순서</th>
-						<th>등록일</th>
-						<th>수정일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var="list" varStatus="status">
-						<tr onclick="editCode(this)">
-							<td onclick="event.stopPropagation()">
-								<input class="form-check-input" type="checkbox">
-							</td>
-							<td><c:out value="${list.seq }"/></td>
-							<td><c:out value="${list.groupSeq }"/></td>
-							<td><c:out value="${list.groupName }"/></td>
-							<td><c:out value="${list.codeKey }"/></td>
-							<td><c:out value="${list.codeName }"/></td>
-							<td>
-							<c:choose>
-								<c:when test="${list.useNy eq 0}">N</c:when>
-								<c:when test="${list.useNy eq 1}">Y</c:when>
-							</c:choose>
-							</td>
-							<td><c:out value="${list.codeKey}"/></td>
-							<td><c:out value="${list.createDate}"/></td>
-							<td><c:out value="${list.editDate}"/></td>
+		
+			<div class="row my-4 justify-content-center">
+				<table  id="tableData">
+					<thead>
+						<tr>
+							<th><input class="form-check-input" type="checkbox"></th>
+							<th>#</th>
+							<th>코드그룹 코드</th>
+							<th>코드그룹 이름</th>
+							<th>코드</th>
+							<th>코드이름</th>
+							<th>사용여부</th>
+							<th>순서</th>
+							<th>등록일</th>
+							<th>수정일</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
-		<bs:pagingCode pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingCode> 
-		<div class="row">
-			<div class="col-2">
-				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
-				<button type="button" class="buttons" onclick="delCode()"><i class="fa-solid fa-trash-can"></i></button>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="list" varStatus="status">
+							<tr onclick="runForm('form',${list.seq})">
+								<td onclick="event.stopPropagation()">
+									<input class="form-check-input" type="checkbox">
+								</td>
+								<td><c:out value="${list.seq }"/></td>
+								<td><c:out value="${list.groupSeq }"/></td>
+								<td><c:out value="${list.groupName }"/></td>
+								<td><c:out value="${list.codeKey }"/></td>
+								<td><c:out value="${list.codeName }"/></td>
+								<td>
+								<c:choose>
+									<c:when test="${list.useNy eq 0}">N</c:when>
+									<c:when test="${list.useNy eq 1}">Y</c:when>
+								</c:choose>
+								</td>
+								<td><c:out value="${list.codeKey}"/></td>
+								<td><c:out value="${list.createDate}"/></td>
+								<td><c:out value="${list.editDate}"/></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
-			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='/codeForm'"><i class="fa-solid fa-plus"></i></button>
+			<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
+			<bs:pagingCode pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingCode> 
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">
+			<input type="hidden" id="upCodeSeq" name="upCodeSeq" value="${vo.upCodeSeq}">
+			<div class="row">
+				<div class="col-2">
+					<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
+					<button type="button" class="buttons" onclick="delCode()"><i class="fa-solid fa-trash-can"></i></button>
+				</div>
+				<div class="col-1 offset-9 text-end">
+					<button type="button" class="buttons" onclick="location.href='/codeForm'"><i class="fa-solid fa-plus"></i></button>
+				</div>
 			</div>
-		</div>
+		</form>
     </div>
 	<%@include file="../common/adnnin/footer.jsp" %>
 
@@ -132,52 +123,52 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 	<script>
-	  $( function() {
-	    $( "#startDate" ).datepicker({
-	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-	    	yearRange: "1900:2023",
-	    	dateFormat: "yy-mm-dd"
-	    });
-	  } );
-	  $( function() {
-	    $( "#endDate" ).datepicker({
-	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-	    	yearRange: "1900:2023",
-	    	dateFormat: "yy-mm-dd"
-	    });
-	  } );
-	  
-	  function editCode(mytag){
-		  
-		  var tds = mytag.children;
-/* 		  
-		  alert(tds[1].textContent + " " +
-			  tds[2].textContent + " " +
-			  tds[3].textContent + " " +
-			  tds[4].textContent + " " +
-			  tds[5].textContent + " " +
-			  tds[6].textContent + " " +
-			  tds[7].textContent + " " +
-			  tds[8].textContent);    
-*/	  
-		  location.href="/codeForm/?shOption="+ tds[1].textContent
-				  +"&upCodeKey=" + tds[4].textContent
-				  +"&upCodeGroupName=" + tds[3].textContent
-				  +"&upCodeName=" + tds[5].textContent
-				  +"&upUseNy=" + tds[6].textContent; 
-	  }
-	  
-	  function delCode(){
-		  
-		  var tbody = $('#tableData');
-		  
-	  }
-	  
-	  
+		 $( function() {
+		   $( "#startDate" ).datepicker({
+		   	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+		   	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+		   	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+		   	yearRange: "1900:2023",
+		   	dateFormat: "yy-mm-dd"
+		   });
+		 } );
+		 $( function() {
+		   $( "#endDate" ).datepicker({
+		   	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+		   	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+		   	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+		   	yearRange: "1900:2023",
+		   	dateFormat: "yy-mm-dd"
+		   });
+		 } );
+		 
+		var form = $("#mainForm");
+		
+		runForm = function(key,no) {
+					 
+			switch(key)
+			{			 
+			case "src":
+				{
+					form.attr("action","/code/src").submit();
+					break;
+				}
+			case "page":
+				{
+					var pageno = $("#pageNumber");
+					pageno.attr("value",no);
+					form.attr("action","/code/CodeList").submit();
+					break;
+				}		
+			case "form":
+				{
+					var seq = $("#upCodeSeq");
+					seq.attr("value",no);
+					form.attr("action","/codeForm").submit();
+				}
+			}
+		}	
+		 
 	</script>		
 </body>
 </html>

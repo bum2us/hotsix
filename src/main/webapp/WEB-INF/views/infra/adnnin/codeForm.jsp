@@ -105,9 +105,15 @@
 							</c:choose>
 						</div>
 					</div>
-					<input type="hidden" id="seq" name="upCodeSeq" value="<c:out value='${vo.shOption}'/>" >
+					<input type="hidden" id="seq" name="upCodeSeq" value="${vo.upCodeSeq}" >
+					<input type="hidden" id="" name="shUseNy" value="${vo.shUseNy }">
+					<input type="hidden" id="" name="shDateOption" value="${vo.shDateOption }">
+					<input type="hidden" id="" name="shOption" value="${vo.shOption }">
+					<input type="hidden" id="" name="shValue" value="${vo.shValue }">
+					<input type="hidden" id="" name="" value="">
+					<input type="hidden" id="" name="" value="">
 					<div class="row mb-3 justify-content-end">
-						<button type="button" class="basebutton" onclick = "location.href='/code/CodeList'">이전</button>
+						<button type="button" class="basebutton" onclick="runForm('back',0)">이전</button>
 						<button type="button" class="basebutton">리셋</button>
 						<button type="button" class="basebutton" onclick="formSubmit()">
 							<c:choose>
@@ -131,6 +137,21 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
 
 <script type="text/javascript">
+	
+	var form = $("#mainForm");
+	
+	runForm = function(key,no){
+		
+		switch(key)
+		{
+			case "back" :
+			{
+				form.attr("action","/code/CodeList").submit();
+				break;
+			}
+		}
+		
+	}
 	
 	function formSubmit(btn) {
 		

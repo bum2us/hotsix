@@ -1,5 +1,4 @@
 <%@ tag language="java" pageEncoding="UTF-8" body-content="tagdependent"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="pageNo" type="java.lang.Integer" %>
 <%@ attribute name="pageTotal" type="java.lang.Integer" %>
@@ -42,12 +41,12 @@ for(countIdx = startIdx; countIdx < endIdx; countIdx ++)
 {
 	if(countIdx == pageNo){
 %>
-		<li class="pageList pageNumber active"><a href="javascript:runForm(<%=countIdx%>);"><%=countIdx%></a></li>
+		<li class="pageList pageNumber active"><a href="javascript:runForm('page',<%=countIdx%>);"><%=countIdx%></a></li>
 <%
 	}
 	else{
 %>
-		<li class="pageList pageNumber"><a href="javascript:runForm(<%=countIdx%>);"><%=countIdx%></a></li>
+		<li class="pageList pageNumber"><a href="javascript:runForm('page',<%=countIdx%>);"><%=countIdx%></a></li>
 <%
 	}
 }

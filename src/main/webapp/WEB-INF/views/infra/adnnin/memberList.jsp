@@ -166,21 +166,21 @@
 		  	{
 		  		form.attr("action", "/member/memberList" ).submit();
 		  		break;	
-		  	};
+		  	}
 		  	case "form":
 		  	{
 		  		var seq = $("#formNumber");
 		  		seq.attr("value",no);
 		  		form.attr("action", "/member/memberForm" ).submit();
 		  		break;
-		  	};
+		  	}
 		  	case "page":
 	  		{
 		  		var pageno = $("#pageNumber");
 		  		pageno.attr("value",no);
 		  		form.attr("action", "/member/memberList").submit();
 		  		break;
-	  		};
+	  		}
 		  }
 		  
 		  

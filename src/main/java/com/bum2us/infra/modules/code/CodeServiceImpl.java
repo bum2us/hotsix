@@ -27,9 +27,9 @@ public class CodeServiceImpl implements CodeService{
 	
 
 	@Override
-	public int selectCount() throws Exception {
+	public int selectCount(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectCount();
+		return dao.selectCount(vo);
 	}
 
 
