@@ -17,11 +17,15 @@ public class CodeDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.code.CodeMapper";
 	
-	public List<Code> selectList() { return sqlSession.selectList(namespace + ".selectList",""); }
+	public int selectCount() { return sqlSession.selectOne(namespace + ".selecOneCount"); }
+	
+	public List<Code> selectList(CodeVo vo) { return sqlSession.selectList(namespace + ".selectList",vo); }
 	
 	public void insertCode(Code cd) { sqlSession.insert(namespace+".insertCode", cd); }
 
 	public List<Code> searchCode(CodeVo vo) { return sqlSession.selectList(namespace + ".searchCode", vo);	}
 
 	public List<Code> selectListGroupName() { return sqlSession.selectList(namespace + ".groupName","");	}
+
+	public void updateCode(CodeVo vo) { sqlSession.update(namespace + ".updateCode", vo); }
 }

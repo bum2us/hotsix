@@ -11,15 +11,24 @@
 		SELECT
 			*
 		FROM member
-		
+		WHERE
+			1=1
+		<include refid="searchSql"/>
+		<include refid="rangeSql"/>
 	</select>
 	
-	<select id="selectSrc" resultMap="resultObj">
-		
+	<select id="selectCount" resultType ="Integer">
 		SELECT
-			*
+			COUNT(*) 
 		FROM member
-		WHERE
+	</select>
+	
+	<sql id="rangeSql">
+		LIMIT #{pageSize} OFFSET #{pageRange}  
+	</sql>
+	
+	<sql id="searchSql">
+		AND
 		<choose>
 			<when test= "shOption == 1"> name </when>
 			<when test= "shOption == 2"> id </when>
@@ -36,7 +45,7 @@
 		</choose>
 		BETWEEN #{shDateStart} AND #{shDateEnd}
 		
-	</select>
+	</sql>
 
 	<insert id = "insertList">
 		
@@ -72,8 +81,25 @@
 		SELECT
 			*
 		FROM member
-		WHERE id LIKE #{shId} AND password LIKE #{shPassword}
+		WHERE
+			1=1
+		AND #{shSeq} LIKE seq
+		<!-- WHERE id LIKE #{shId} AND password LIKE #{shPassword} -->
 		
 	</select>
+	
+	<update id="upadteOne">
+		
+		UPDATE
+			member
+		SET
+			name = #{name}
+			,id = #{id}
+			,comment = #{comment}
+		WHERE
+			1=1
+		AND
+			seq = #{seq}		
+	</update>
 	
 </mapper> 

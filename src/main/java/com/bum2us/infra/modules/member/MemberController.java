@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,33 +17,33 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-	public String memberList (Model model) throws Exception {
+	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
 		
-		List<Member> list = service.selectList();
+		vo.setPageTotal(service.selectCount());
+		List<Member> list = service.selectList(vo);
+
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";
 	}
 	
-	@RequestMapping(value = "/member/src")
-	public String src(Model model,MemberVo vo) throws Exception {
+	@RequestMapping(value ="member/memberForm")
+	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
-		System.out.println(vo.getShOption());
-		System.out.println(vo.getShValue());
-		System.out.println(vo.getShDateOption());
-		System.out.println(vo.getShDateStart());
-		System.out.println(vo.getShDateEnd());	
+		Member item = service.selectOne(vo);
+		model.addAttribute("item", item);
 		
-		List<Member>list = service.insertList(vo);
-		model.addAttribute("list", list);
+		System.out.println(item.getName());
 		
-		return "infra/adnnin/memberList";
+		return "infra/adnnin/memberForm";
 	}
 	
-	@RequestMapping(value = "/signup")
-	public String register() throws Exception {
+	@RequestMapping(value ="member/formAction")
+	public String memberAction(@ModelAttribute("vo") Member vo) throws Exception{
 		
-		return "infra/user/regForm";
+		service.updateOne(vo);
+		
+		return "infra/adnnin/mamberList";
 	}
 	
 	@RequestMapping(value = "/infoReg")
@@ -54,11 +55,6 @@ public class MemberController {
 		return "infra/user/infoFormReg";
 	}
 	
-	@RequestMapping(value ="/")
-	public String login() throws Exception {
-		
-		return "infra/user/loginForm";
-	}
 	
 	@RequestMapping(value = "/main")
 	public String main(Model model,MemberVo vo,HttpSession httpSession) throws Exception {
@@ -90,43 +86,6 @@ public class MemberController {
 		model.addAttribute("item", mb);
 		
 		return "infra/user/mainForm";
-	}
-	
-	@RequestMapping(value = "/bookmark")
-	public String bookmark() throws Exception {
-		
-		return "infra/user/bookmarkForm";
-	}
-	
-	@RequestMapping(value = "/chat")
-	public String chat() throws Exception {
-		
-		return "infra/user/chatForm";
-	}
-	
-	@RequestMapping(value = "/upload")
-	public String upload() throws Exception {
-		
-		return "infra/user/uploadForm";
-	}
-	
-	@RequestMapping(value = "/profile")
-	public String profile() throws Exception {
-		
-		return "infra/user/profileForm";
-	}
-	
-	@RequestMapping(value = "/administrator/login")
-	public String adnninLogin() throws Exception{
-		
-		return "infra/adnnin/adnninLoginForm";
-		
-	}
-	
-	@RequestMapping(value = "/administrator/main")
-	public String adnninMain(Model model, MemberVo vo) throws Exception{
-		
-		return "infra/adnnin/memberList";
 	}
 }
 

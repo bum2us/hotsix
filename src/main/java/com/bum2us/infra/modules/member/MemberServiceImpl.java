@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bum2us.infra.modules.base.BaseVo;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -14,18 +16,14 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public List<Member> selectList() {
-		// TODO Auto-generated method stub
-		return dao.selectList();
-	}
-
-
-	@Override
-	public List<Member> insertList(MemberVo vo) {
+	public List<Member> selectList(MemberVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		
 		if(vo.getShOption() == null)
 			vo.setShOption(1);
+		
+		if(vo.getShValue() == null)
+			vo.setShValue("");
 		
 		if(vo.getShDateOption() == null) {
 			vo.setShDateOption(2);
@@ -36,7 +34,7 @@ public class MemberServiceImpl implements MemberService{
 			vo.setShDateStart(vo.getShDateStart() + " 00:00:00");
 			vo.setShDateEnd(vo.getShDateEnd() + "23:59:59");
 		}
-		
+		 
 		System.out.println("---------------");
 		System.out.println(vo.getShOption());
 		System.out.println(vo.getShValue());
@@ -45,11 +43,19 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println(vo.getShDateEnd());	
 		
 		
-		return dao.insertList(vo);
+		if(vo.getPageNumber() == null)
+			vo.setPageNumber(1);
+		if(vo.getPageSize() == null)
+			vo.setPageSize(10);
+		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
+		
+		
+		
+		return dao.selectList(vo);
 	}
 	
 	@Override
-	public void insertList(Member mb) {
+	public void insertList(Member mb) throws Exception {
 				
 		// TODO Auto-generated method stub
 		dao.insertList(mb);
@@ -57,16 +63,30 @@ public class MemberServiceImpl implements MemberService{
 
 
 	@Override
-	public Member selectOne(MemberVo vo) {
+	public Member selectOne(MemberVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectOne(vo);
 	}
 
 	@Override
-	public Member chkLogin(MemberVo vo) {
+	public Member chkLogin(MemberVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectOne(vo);
 	}
+
+
+	@Override
+	public Integer selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCount();
+	}
+
+	@Override
+	public void updateOne(Member mb) throws Exception {
+		// TODO Auto-generated method stub
+		dao.updateOne(mb);
+	}
+
 	
 	
 	

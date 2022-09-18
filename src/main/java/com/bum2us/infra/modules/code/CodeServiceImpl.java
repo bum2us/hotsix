@@ -12,10 +12,27 @@ public class CodeServiceImpl implements CodeService{
 	CodeDao dao;
 	
 	@Override
-	public List<Code> selectList() throws Exception {
+	public List<Code> selectList(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectList();
+		
+		if(vo.getPageNumber() == null)
+			vo.setPageNumber(1);
+		if(vo.getPageSize() == null)
+			vo.setPageSize(5);
+		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
+		
+		return dao.selectList(vo);
 	}
+	
+	
+
+	@Override
+	public int selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCount();
+	}
+
+
 
 	@Override
 	public void insertCode(Code cd) throws Exception {
@@ -26,8 +43,6 @@ public class CodeServiceImpl implements CodeService{
 	@Override
 	public List<Code> searchCode(CodeVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		
-		vo.printAll();
 		
 		if(vo.getShDateOption() == null)
 			vo.setShDateOption(2);
@@ -44,8 +59,6 @@ public class CodeServiceImpl implements CodeService{
 		if(vo.getShOption() == null)
 			vo.setShOption(3);
 		
-		vo.printAll();
-		
 		return dao.searchCode(vo);
 	}
 
@@ -53,7 +66,18 @@ public class CodeServiceImpl implements CodeService{
 	public List<Code> selectListGroupName() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectListGroupName();
-	}	
+	}
+
+	@Override
+	public void updateCode(CodeVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		vo.printAll2();
+		
+		dao.updateCode(vo); 
+	}
+
+	
 	
 	
 }

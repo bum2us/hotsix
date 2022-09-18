@@ -1,9 +1,12 @@
 package com.bum2us.infra.modules.member;
 
-public class MemberVo {
+import com.bum2us.infra.modules.base.BaseVo;
+
+public class MemberVo extends BaseVo{
 	
 	private String shId;
 	private String shPassword;
+	private Integer shSeq;
 
 	public String getShId() {
 		return shId;
@@ -17,43 +20,11 @@ public class MemberVo {
 	public void setShPassword(String shPassword) {
 		this.shPassword = shPassword;
 	}
-	
-	private String shValue;
-	private Integer shOption;
-	private Integer shDateOption;
-	private String shDateStart;
-	private String shDateEnd;
-	
-	
-	public String getShValue() {
-		return shValue;
+	public Integer getShSeq() {
+		return shSeq;
 	}
-	public void setShValue(String shValue) {
-		this.shValue = shValue;
-	}
-	public Integer getShOption() {
-		return shOption;
-	}
-	public void setShOption(Integer shOption) {
-		this.shOption = shOption;
-	}
-	public Integer getShDateOption() {
-		return shDateOption;
-	}
-	public void setShDateOption(Integer shDateOption) {
-		this.shDateOption = shDateOption;
-	}
-	public String getShDateStart() {
-		return shDateStart;
-	}
-	public void setShDateStart(String shDateStart) {
-		this.shDateStart = shDateStart;
-	}
-	public String getShDateEnd() {
-		return shDateEnd;
-	}
-	public void setShDateEnd(String shDateEnd) {
-		this.shDateEnd = shDateEnd;
+	public void setShSeq(Integer shSeq) {
+		this.shSeq = shSeq;
 	}
 	
 	

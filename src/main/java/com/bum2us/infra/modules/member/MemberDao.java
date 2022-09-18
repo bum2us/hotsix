@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bum2us.infra.modules.base.BaseVo;
+
 @Repository
 public class MemberDao {
 
@@ -17,14 +19,14 @@ public class MemberDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.member.MemberMapper";
 	
-	public List<Member> selectList() { return sqlSession.selectList(namespace + ".selectList", ""); }
-	
-	public List<Member> insertList(MemberVo vo) {return sqlSession.selectList(namespace + ".selectSrc", vo); }
+	public List<Member> selectList(MemberVo vo) { return sqlSession.selectList(namespace + ".selectList", vo); }
 	
 	public void insertList(Member mb) { sqlSession.insert(namespace + ".insertList", mb); }
 
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	
-	
+	public Integer selectCount() { return sqlSession.selectOne(namespace + ".selectCount"); }
+
+	public void updateOne(Member mb) { sqlSession.update(namespace + ".upadteOne", mb);	}
 	
 }
