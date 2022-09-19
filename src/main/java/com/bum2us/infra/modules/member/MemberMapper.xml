@@ -88,6 +88,15 @@
 		
 	</select>
 	
+	<select id="chkLogin" resultMap="resultObj">
+			SELECT
+			*
+		FROM member
+		WHERE
+			1=1
+		AND #{id} LIKE id
+	</select>
+	
 	<update id="upadteOne">
 		
 		UPDATE

@@ -69,9 +69,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member chkLogin(MemberVo vo) throws Exception {
+	public Member chkLogin(Member mb) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.selectOne(vo);
+		return dao.selectOne(mb);
 	}
 
 

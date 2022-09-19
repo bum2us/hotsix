@@ -45,7 +45,7 @@
 						<div class="row mb-4">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="text" required="required" name="shId">
+									<input type="text" required="required" name="id">
 									<span>USER ID</span>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 						<div class="row mb-3">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="password" required="required" name="shPassword">
+									<input type="password" required="required" name="password">
 									<span>PASSWORD</span>
 								</div>
 							</div>
@@ -93,25 +93,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		function submitform(){
+		
+	function submitform(){
 			
-			if($('input[name=shId]').val() == null || $('input[name=shId]').val().length < 1)
-			{
-				alert("아이디를 입력하세요");
-				$('input[name=shId]').focus();			
-				return false;
-			}
-			
-			if($('input[name=shPassword]').val() == null || $('input[name=shPassword]').val().length < 1)
-			{
-				alert("비밀번호를 입력하세요");
-				$('input[name=shPassword]').focus();
-				return false;
-			}
-			
-			$('#loginform').submit();
-
+		if($('input[name=id]').val() == null || $('input[name=id]').val().length < 1)
+		{
+			alert("아이디를 입력하세요");
+			$('input[name=id]').focus();			
+			return false;
 		}
+		
+		if($('input[name=password]').val() == null || $('input[name=password]').val().length < 1)
+		{
+			alert("비밀번호를 입력하세요");
+			$('input[name=password]').focus();
+			return false;
+		}
+		
+		$('#loginform').submit();
+
+	}
 		
 		
 	</script>

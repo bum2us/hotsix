@@ -57,14 +57,14 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/main")
-	public String main(Model model,MemberVo vo,HttpSession httpSession) throws Exception {
+	public String main(Model model,Member mb,HttpSession httpSession) throws Exception {
 		
 		if(httpSession.getAttribute("sessSql") != null)
 			return "infra/user/mainForm";
 		
-		Member mb = service.chkLogin(vo);
+		Member item = service.chkLogin(mb);
 		
-		if(mb == null) 
+		if(item == null) 
 		{	
 			model.addAttribute("item", 0);
 			return "infra/user/loginForm";
@@ -72,18 +72,18 @@ public class MemberController {
 		
 		if(httpSession.getAttribute("sessSql") == null) 
 		{
-			httpSession.setAttribute("sessSql", mb.getSeq());
-			httpSession.setAttribute("sessId", mb.getId());
-			httpSession.setAttribute("sessPassword", mb.getPassword());
-			httpSession.setAttribute("sessNickname", mb.getNickname());
-			httpSession.setAttribute("sessEmail", mb.getEmail());
-			httpSession.setAttribute("sessPhone", mb.getPhone());
-			httpSession.setAttribute("sessGender", mb.getGender());
-			httpSession.setAttribute("sessDob", mb.getDob());
-			httpSession.setAttribute("sessComment", mb.getComment());
+			httpSession.setAttribute("sessSql", item.getSeq());
+			httpSession.setAttribute("sessId", item.getId());
+			httpSession.setAttribute("sessPassword", item.getPassword());
+			httpSession.setAttribute("sessNickname", item.getNickname());
+			httpSession.setAttribute("sessEmail", item.getEmail());
+			httpSession.setAttribute("sessPhone", item.getPhone());
+			httpSession.setAttribute("sessGender", item.getGender());
+			httpSession.setAttribute("sessDob", item.getDob());
+			httpSession.setAttribute("sessComment", item.getComment());
 		}
 		
-		model.addAttribute("item", mb);
+		model.addAttribute("item", item);
 		
 		return "infra/user/mainForm";
 	}

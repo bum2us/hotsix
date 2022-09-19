@@ -12,7 +12,7 @@ public interface MemberService {
 	
 	public Member selectOne(MemberVo vo) throws Exception;
 	
-	public Member chkLogin(MemberVo vo) throws Exception;
+	public Member chkLogin(Member mb) throws Exception;
 	
 	public Integer selectCount() throws Exception;
 	

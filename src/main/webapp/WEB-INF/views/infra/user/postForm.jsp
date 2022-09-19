@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -15,13 +16,14 @@
 	<style>
 		div	{
 			/* border: solid 1px orange; */
-		}
+		} 
 		
 	</style>
 </head>
 <body>
-	<%@include file="../common/user/header.jsp" %>
-	<div class="post_content">
+	<%@include file="../common/user/header.jsp" %> 
+	--%>
+	<div class="modal_overlay" onclick="javascript:closePost()" style="display:hidden;">
 		<br><br>
 		<div class="row post_frame">
 			<div class="post_leftSide">
@@ -207,6 +209,7 @@
 			</div>
 		</div>
 	</div>
+	<%-- 
 	<%@include file="../common/user/footer.jsp" %>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -217,3 +220,4 @@
 	</script>	
 </body>
 </html>
+ --%>

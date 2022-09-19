@@ -19,10 +19,11 @@
 	</style>
 </head>
 <body style="background: #000">
+	<%@include file="./postForm.jsp" %>
 	<%@include file="../common/user/header.jsp" %>
 	<div class="grid-wrapper">
 		<div>
-			<a href="/postForm"><img src="/resources/images/image_01.jpg" alt=""></a>
+			<a href="javascript:openPost()"><img src="/resources/images/image_01.jpg" alt=""></a>
 		</div>
 		<div>
 			<a href=""><img src="/resources/images/image_02.jpg" alt=""></a>
@@ -100,7 +101,24 @@
 	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	<script>
-
+		
+	window.onload = function(){
+		
+		$(".modal_overlay").hide();
+		
+	};
+	
+	openPost = function() {
+		
+		$(".modal_overlay").show();
+		
+	}
+	
+	closePost = function() { 
+		
+		$(".modal_overlay").hide();
+	}
+	
 	</script>	
 </body>
 </html>
