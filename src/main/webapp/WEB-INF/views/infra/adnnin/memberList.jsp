@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+<jsp:useBean id="CodeServiceImpl" class="com.bum2us.infra.modules.code.CodeServiceImpl"/>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -22,6 +24,7 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
+		<c:set var = "listCodeGender" value = "${CodeServiceImpl.selectListCached('2')}"/>
 		<form id="mainForm">
 			<div class="row mt-4 searchForm">
 				<div class="col">
@@ -60,6 +63,7 @@
 								<option value="3">닉네임</option>
 								<option value="4">email</option>
 								<option value="5">휴대전화</option>
+								<option value="6">성별</option>
 							</select>
 						</div>
 						<div class="col">
@@ -85,6 +89,7 @@
 							<th>생년월일</th>
 							<th>email</th>
 							<th>휴대전화</th>
+							<th>성별</th>
 							<th>등록일</th> 
 						</tr>
 					</thead>
@@ -92,7 +97,7 @@
 						<c:forEach items="${list}" var ="list" varStatus="status">
 							<tr onclick="runForm('form',${list.seq})">
 								<td>
-									<input class="form-check-input" type="checkbox">
+									<input onclick="event.stopPropagation()" class="form-check-input" type="checkbox">
 								</td>
 								<td><c:out value="${list.seq}"/></td>
 								<td><c:out value="${list.name}"/></td>
@@ -101,6 +106,11 @@
 								<td><c:out value="${list.dob}"/></td>
 								<td><c:out value="${list.email}"/></td>
 								<td><c:out value="${list.phone}"/></td>
+								<td>
+									<c:forEach items="${listCodeGender}" var="listGender" varStatus="statusGender">
+										<c:if test="${list.gender eq listGender.codeKey}"><c:out value="${listGender.codeName }"/></c:if>
+									</c:forEach> 
+								</td>
 								<td><c:out value="${list.createDate}"/></td>
 							</tr>	
 						</c:forEach>

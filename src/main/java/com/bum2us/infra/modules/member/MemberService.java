@@ -17,4 +17,5 @@ public interface MemberService {
 	public Integer selectCount() throws Exception;
 	
 	public void updateOne(Member mb) throws Exception; 
+
 }

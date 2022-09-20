@@ -27,6 +27,7 @@
 				<span class="page_title">사진 업로드</span>
 			</div>
 		</div>
+		<!-- 
 		<div class="row my-4">
 			<div class="col-2">
 				<h6>제목</h6>
@@ -35,6 +36,7 @@
 				<input id="title" type="text" class="title">
 			</div>
 		</div>
+		 -->
 		<div class="row my-4">
 			<div class="col-2">
 				<h6>태그</h6>

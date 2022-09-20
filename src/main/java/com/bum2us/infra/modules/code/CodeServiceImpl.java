@@ -1,6 +1,9 @@
 package com.bum2us.infra.modules.code;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,14 @@ public class CodeServiceImpl implements CodeService{
 	}
 	
 	
+
+	@Override
+	public Code selectOne(CodeVo vo) {
+		// TODO Auto-generated method stub
+		return dao.selectOne(vo);
+	}
+
+
 
 	@Override
 	public int selectCount(CodeVo vo) throws Exception {
@@ -69,15 +80,32 @@ public class CodeServiceImpl implements CodeService{
 	}
 
 	@Override
-	public void updateCode(CodeVo vo) throws Exception {
+	public void updateCode(Code cd) throws Exception {
 		// TODO Auto-generated method stub
-		
-		vo.printAll2();
-		
-		dao.updateCode(vo); 
+				
+		dao.updateCode(cd); 
 	}
 
 	
+	@PostConstruct
+	public void selecListCachedCodeList() throws Exception {
+		
+		List<Code> codeListFromDb = dao.selecListCachedCodeList();
+		Code.cacheCodeList.clear(); 
+		Code.cacheCodeList.addAll(codeListFromDb);
+		System.out.println("cacheCodeList: " + Code.cacheCodeList.size() + " chached !");
+	}
 	
+	public static List<Code> selectListCached(String code) throws Exception {
+		List<Code> rt = new ArrayList<Code>();
+		for(Code codeRow : Code.cacheCodeList) {
+			if (codeRow.getGroupSeq().equals(code)) {
+				rt.add(codeRow);
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
 	
 }

@@ -10,10 +10,15 @@ public interface CodeService {
 	
 	public void insertCode(Code cd) throws Exception;
 	
-	public void updateCode(CodeVo vo) throws Exception;
+	public void updateCode(Code cd) throws Exception;
+	
+	public Code selectOne(CodeVo vo) throws Exception;
 	
 	public List<Code> searchCode(CodeVo vo) throws Exception;
 	
 	public List<Code> selectListGroupName() throws Exception;
+	
+	public void selecListCachedCodeList() throws Exception;
+
 }
  

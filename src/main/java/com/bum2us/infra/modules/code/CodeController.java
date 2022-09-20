@@ -28,10 +28,15 @@ public class CodeController {
 	@RequestMapping(value = "/codeForm")
 	public String codeForm(@ModelAttribute("vo") CodeVo vo ,Model model) throws Exception {
 		
-		vo.printAll2();
-		
 		List<Code> list = service.selectListGroupName();
 		model.addAttribute("list", list);
+		
+		if(vo.getUpCodeSeq() != null) 
+		{		
+			Code item = service.selectOne(vo);
+			model.addAttribute("item", item);
+			item.printAll();
+		}
 		
 		return "infra/adnnin/codeForm";
 	}
@@ -56,9 +61,9 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value="/codeForm/upd")
-	public String codeUpdate(Model model,CodeVo vo) throws Exception {
+	public String codeUpdate(Model model,Code cd) throws Exception {
 		 
-		service.updateCode(vo); 
+		service.updateCode(cd); 
 		
 		return "redirect:/code/CodeList";
 	}

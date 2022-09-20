@@ -26,7 +26,7 @@
 			<div class="col text-center">
 				<span class="page_title">
 					<c:choose>
-						<c:when test="${vo.shOption eq null}">
+						<c:when test="${vo.upCodeSeq eq null}">
 							코드 추가
 						</c:when>
 						<c:otherwise>
@@ -42,7 +42,7 @@
 					<div class="row my-4">
 						<div class="col-6">
 							<c:choose>
-								<c:when test="${vo.shOption eq null}">
+								<c:when test="${vo.upCodeSeq eq null}">
 									<select name="groupSeq">
 										<option value="" disabled selected>코드그룹이름</option>
 										<c:forEach items="${list}" var ="list" varStatus="status">
@@ -51,15 +51,15 @@
 									</select>
 								</c:when>
 								<c:otherwise>
-									<select name="upCodeGroupName">
-										<option value="<c:out value="${vo.upCodeGroupName}"/>" selected><c:out value="${vo.upCodeGroupName}"/></option>									
+									<select name="codeGroupName">
+										<option value="${item.groupName}" selected>${item.groupName}</option>									
 									</select>
 								</c:otherwise>
 							</c:choose>								
 						</div>
-						<div class="col-6">
+						<div class="col-6"> 
 							<c:choose>
-								<c:when test="${vo.shOption eq null}">
+								<c:when test="${vo.upCodeSeq eq null}">
 									<select name="useNy">
 										<option value="" disabled selected>사용여부</option>
 										<option value="0">N</option>
@@ -67,13 +67,13 @@
 									</select>
 								</c:when>
 								<c:otherwise>
-									<select name="upUseNy">
+									<select name="useNy">
 										<c:choose>
-											<c:when test="${vo.upUseNy eq 'N'}">
+											<c:when test="${item.useNy eq 0}">
 												<option value="0" selected>N</option>
 												<option value="1">Y</option>
 											</c:when>
-											<c:when test="${vo.upUseNy eq 'Y'}">
+											<c:when test="${item.useNy eq 1}">
 												<option value="0">N</option>
 												<option value="1" selected>Y</option>
 											</c:when>
@@ -86,21 +86,21 @@
 					<div class="row mb-4">
 						<div class="col-6">
 							<c:choose>
-								<c:when test="${vo.shOption eq null}">
+								<c:when test="${vo.upCodeSeq eq null}">
 									<input type="text" placeholder="코드" name="codeKey">
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드" name="upCodeKey" value="<c:out value="${vo.upCodeKey}"/>">
+									<input type="text" placeholder="코드" name="codeKey" value="${item.codeKey}">
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col-6">
+						<div class="col-6"> 
 							<c:choose>
-								<c:when test="${vo.shOption eq null}">
+								<c:when test="${vo.upCodeSeq eq null}">
 									<input type="text" placeholder="코드이름" name="codeName">	
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드이름" name="upCodeName" value="<c:out value="${vo.upCodeName}"/>">
+									<input type="text" placeholder="코드이름" name="codeName" value="${item.codeName}">
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -117,7 +117,7 @@
 						<button type="button" class="basebutton">리셋</button>
 						<button type="button" class="basebutton" onclick="formSubmit()">
 							<c:choose>
-								<c:when test="${vo.shOption eq null}">추가</c:when>
+								<c:when test="${vo.upCodeSeq eq null}">추가</c:when>
 								<c:otherwise>
 									수정
 								</c:otherwise>
@@ -125,7 +125,7 @@
 						</button>
 					</div>
 				</div>
-			</div>
+			</div> 
 		</form>
     </div>
 	<%@include file="../common/adnnin/footer.jsp" %>

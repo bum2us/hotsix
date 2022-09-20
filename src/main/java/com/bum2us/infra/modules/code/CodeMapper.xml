@@ -6,6 +6,17 @@
 
 	<resultMap id="resultMapObj" type= "com.bum2us.infra.modules.code.Code"></resultMap>
 	
+		<select id="selectCache" resultMap = "resultMapObj">
+		SELECT
+			groupSeq
+			,codeName
+			,codeKey
+		FROM cc 
+		WHERE 1 = 1	
+		AND useNy = 1
+	</select>
+	
+	
 	<sql id="searchSql">
 		<choose>
 			<when test="shOption == 1"> AND groupSeq LIKE CONCAT ('%',#{shValue},'%')</when>
@@ -66,9 +77,7 @@
 		
 	</select>
 	
-	<resultMap id="groupListResultObj" type="com.bum2us.infra.modules.code.Code"></resultMap>
-	
-	<select id="groupName" resultMap = "groupListResultObj">
+	<select id="groupName" resultMap = "resultMapObj">
 		
 		SELECT
 			groupName
@@ -111,24 +120,36 @@
 		UPDATE
 			cc
 		SET
-			codeName = #{upCodeName}
-			,useNy = #{upUseNy}
-			,codeKey = #{upCodeKey}
+			codeName = #{codeName}
+			,useNy = #{useNy}
+			,codeKey = #{codeKey}
 			,groupSeq = (
 				SELECT
 					seq
 				FROM
 					ccg
 				WHERE
-					groupName = #{upCodeGroupName}
+					groupName = #{groupName}
 			)
 		WHERE
 			1=1
 		AND
-			seq = #{upCodeSeq}
-			
-		
+			seq = #{seq}
 	
 	</update>
+	
+	<select id="selectOne" resultMap = "resultMapObj">
+		
+		SELECT
+			*
+			,b.seq as groupSeq
+			,b.groupName
+		FROM cc a
+		JOIN ccg b ON a.groupSeq = b.seq
+		WHERE 
+			1=1
+		AND a.seq = #{upCodeSeq}
+		
+	</select>
 	
 </mapper>

@@ -2,10 +2,10 @@ package com.bum2us.infra.modules.member;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.bum2us.infra.modules.base.BaseVo;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -86,8 +86,5 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		dao.updateOne(mb);
 	}
-
-	
-	
 	
 }

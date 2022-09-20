@@ -27,5 +27,9 @@ public class CodeDao {
 
 	public List<Code> selectListGroupName() { return sqlSession.selectList(namespace + ".groupName","");	}
 
-	public void updateCode(CodeVo vo) { sqlSession.update(namespace + ".updateCode", vo); }
+	public void updateCode(Code cd) { sqlSession.update(namespace + ".updateCode", cd); }
+
+	public Code selectOne(CodeVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
+	
+	public List<Code> selecListCachedCodeList() { return sqlSession.selectList(namespace +".selectCache"); }
 }

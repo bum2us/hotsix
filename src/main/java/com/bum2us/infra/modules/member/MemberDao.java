@@ -30,5 +30,4 @@ public class MemberDao {
 	public void updateOne(Member mb) { sqlSession.update(namespace + ".upadteOne", mb);	}
 
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne",vo); }
-	
 }

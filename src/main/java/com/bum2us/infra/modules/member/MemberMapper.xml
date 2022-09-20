@@ -5,7 +5,7 @@
 <mapper namespace = "com.bum2us.infra.modules.member.MemberMapper">
 
 	<resultMap id = "resultObj" type="com.bum2us.infra.modules.member.Member"></resultMap>
-	
+
 	<select id="selectList" resultMap = "resultObj">
 	
 		SELECT

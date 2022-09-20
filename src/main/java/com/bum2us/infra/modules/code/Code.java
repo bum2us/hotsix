@@ -1,5 +1,8 @@
 package com.bum2us.infra.modules.code;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Code {
 	
 	private String seq;
@@ -10,6 +13,21 @@ public class Code {
 	private Integer useNy;
 	private String createDate;
 	private String editDate;
+
+	public static List<Code> cacheCodeList = new ArrayList<Code>();
+	
+	public void printAll() {
+		System.out.println("-------------------");
+		System.out.println("seq :"+seq);
+		System.out.println("groupName :"+groupName);
+		System.out.println("groupSeq :"+groupSeq);
+		System.out.println("codeKey :"+codeKey);
+		System.out.println("codeName :"+codeName);
+		System.out.println("useNy :"+useNy);
+		System.out.println("createDate :"+createDate);
+		System.out.println("editDate :"+editDate);
+	}
+	
 	
 	public String getSeq() {
 		return seq;
@@ -59,5 +77,7 @@ public class Code {
 	public void setEditDate(String editDate) {
 		this.editDate = editDate;
 	}
+	
+
 	
 }
