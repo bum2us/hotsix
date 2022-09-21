@@ -41,10 +41,10 @@
 				<div class="col">
 					<div class="row my-4">
 						<div class="col-6">
-							<input type="text" placeholder="이름" name="name" value="${item.name}">
+							<input type="text" placeholder="아이디" name="id" value="${item.id}">
 						</div>
 						<div class="col-6">
-							<input type="text" placeholder="아이디" name="id" value="${item.id}">
+							<input type="text" name="nickname" placeholder="닉네임" value="${item.nickname}">
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -56,7 +56,10 @@
 						</div>
 					</div>
 					<div class="row mb-4">
-						<div class="col-1">
+						<div class="col-4">
+							<input type="text" placeholder="이름" name="name" value="${item.name}">
+						</div>
+						<div class="col-1 text-end">
 							<span style="font-size:9pt; text-align:right; font-weight: 600;">생년월일</span>
                         </div>
                         <div class="col-4">
@@ -69,9 +72,6 @@
 								<option value="2" >여</option>
 								<option value="3" >기타</option>
 							</select>
-						</div>
-						<div class="col-4">
-							<input type="text" name="nickname" placeholder="닉네임" value="${item.nickname}">
 						</div>
 					</div>
                     <div class="row mb-4">
@@ -106,6 +106,39 @@
                             <input type="text" name="phone2" placeholder="XXXX" style="text-align:center">
                         </div>
                     </div>
+                    <div class="row mb-4">
+                   		<div class="col-2">
+                   			<input type="text" id="zipCode" name="zipCode" placeholder="우편번호" readonly>
+                   		</div>
+                   		<div class="col-2 text-left">
+                   			<button type="button" class="basebutton" onclick="searchAdd()">우편번호 찾기</button>
+                   		</div>
+                   	</div>
+                   	<div class="row mb-4">
+                   		<div class="col">
+                   			<input type="text" id="address" name="address" placeholder="주소" readonly>
+                   		</div>
+                   	</div>
+                   	<div class="row mb-4">
+                   		<div class="col-6">
+                   			<input type="text" id="address_detail" name="address_detail" placeholder="상세주소">
+                   		</div>
+                   		<div class="col-6">
+                   			<input type="text" id="address_info" name="address_info" placeholder="참고사항">
+                   		</div>
+                   	</div>	
+                   	<div class="row mb-4">
+                   		<div class="col-2">
+                   			<input type="text" id="Lat" name="Lat" placeholder="위도" readonly>
+                   		</div>
+                   		<div class="col-2">
+                   			<input type="text" id="Lng" name="Lng" placeholder="경도" readonly>
+                   		</div>
+                   		<div class="col-2 text-left">
+                   			<button type="button" class="basebutton" onclick="getGeoFromAddress()">좌표 추출</button>
+                   		</div>
+                   	</div>
+                   	<div class="row mb-4" id="mapDiv"></div>
 					<div class="row mb-4">
 						<textarea name="comment" id="comment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;">${item.comment}</textarea>
 					</div>
@@ -135,21 +168,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45d424ec6ca5bb1db01d05b13aef2081&libraries=services,clusterer,drawing"></script> 
 <script>
-$( function() {
-    $( "#dob" ).datepicker({
-    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	yearRange: "1900:2023",
-    	dateFormat: "yy-mm-dd"
-    });
-  } );
+	$( function() {
+	    $( "#dob" ).datepicker({
+	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
+	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	yearRange: "1900:2023",
+	    	dateFormat: "yy-mm-dd"
+	    });
+	} );
   
-  var form = $("#mainForm");
+ 	var form = $("#mainForm");
   
-  runForm = function(key) {
-	  
+ 	runForm = function(key) {
+		  
 	  switch(key)
 	  {
 	  	case "return":
@@ -161,6 +196,75 @@ $( function() {
 	  }
 	
   }
+  searchAdd = function() {
+		
+		new daum.Postcode({
+		    oncomplete: function(data) {
+		    	
+		    	var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var extraRoadAddr = ''; // 참고 항목 변수
+	
+	            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                extraRoadAddr += data.bname;
+	            }
+	            // 건물명이 있고, 공동주택일 경우 추가한다.
+	            if(data.buildingName !== '' && data.apartment === 'Y'){
+	               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	            if(extraRoadAddr !== ''){
+	                extraRoadAddr = ' (' + extraRoadAddr + ')';
+	            }
+	
+	            $('#zipCode').attr("value",data.zonecode);
+	            $('#address').attr("value",data.roadAddress); 
+	         
+		    }
+		}).open();
+	
+	}
+  
+  	getGeoFromAddress = function(){
+  
+  		var address = $('#address').val();
+  		
+  		var geocoder = new kakao.maps.services.Geocoder(); 
+
+  		geocoder.addressSearch(address, function(result, status) {
+  		    if (status === kakao.maps.services.Status.OK) {
+  		    	console.log(result[0]); 
+  		     	$('#Lat').attr("value",result[0].x);
+  		  	 	$('#Lng').attr("value",result[0].y);
+  		    }
+  		});
+  	} 
+/*   
+ // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+  	var mapTypeControl = new kakao.maps.MapTypeControl();
+
+  	// 지도 타입 컨트롤을 지도에 표시합니다
+  	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+  	function getInfo() {
+  	    // 지도의 현재 중심좌표를 얻어옵니다 
+  	    var center = map.getCenter(); 
+  	    
+  	    var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
+  	    message += '경도 ' + center.getLng() + ' 이고 <br>';
+  	    message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
+  	    message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
+  	    message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
+  	    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
+  	    
+  	    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
+  	    // ex) console.log(message);
+  	    console.log(message);
+  	}
+		 */
+		
+  
 </script>
 </body>
 </html>

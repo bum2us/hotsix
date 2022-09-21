@@ -97,7 +97,7 @@
 						<c:forEach items="${list}" var ="list" varStatus="status">
 							<tr onclick="runForm('form',${list.seq})">
 								<td>
-									<input onclick="event.stopPropagation()" class="form-check-input" type="checkbox">
+									<input onclick="event.stopPropagation()" name="listCheckbox" class="form-check-input" type="checkbox">
 								</td>
 								<td><c:out value="${list.seq}"/></td>
 								<td><c:out value="${list.name}"/></td>
@@ -129,7 +129,7 @@
 		</form>	 
 		<div class="row">
 			<div class="col-2">
-				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
+				<button type="button" class="buttons" onclick="delitem()"><i class="fa-solid fa-xmark"></i></button>
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
 			<div class="col-1 offset-9 text-end">
@@ -194,6 +194,22 @@
 		  }
 		  
 		  
+	  }
+	  
+	  delitem = function() {
+		  
+		  var txt = "";
+		  var checkbox = $("input[name=listCheckbox]:checked");
+		  
+		  checkbox.each(function(i) {
+			   
+			  var tr = checkbox.parent().parent().eq(i);
+			  var td = tr.children();
+			  
+			  txt += td.eq(2).text() + "  ";
+			  
+		  });
+		  alert(txt);
 	  }
 	  
 	</script>		
