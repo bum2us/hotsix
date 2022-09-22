@@ -1,6 +1,8 @@
 package com.bum2us.infra.modules.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
@@ -30,15 +34,19 @@ public class MemberController {
 	@RequestMapping(value ="member/memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 		
-		Member item = service.selectOne(vo);
-		model.addAttribute("item", item);
-		
-		System.out.println(item.getName());
+		if(vo.getShSeq() != null) {
+			
+			Member item = service.selectOne(vo);
+			model.addAttribute("item", item);
+			
+			System.out.println(item.getName());
+			
+		}
 		
 		return "infra/adnnin/memberForm";
 	}
 	
-	@RequestMapping(value ="member/formAction")
+	@RequestMapping(value ="/member/formAction")
 	public String memberAction(@ModelAttribute("vo") Member vo) throws Exception{
 		
 		service.updateOne(vo);
@@ -46,13 +54,32 @@ public class MemberController {
 		return "infra/adnnin/mamberList";
 	}
 	
-	@RequestMapping(value = "/infoReg")
-	public String regResult(Model model,Member mb) throws Exception {
+	@ResponseBody
+	@RequestMapping(value="member/chkId")
+	public Map<String,Object> memberChkId(Member vo) throws Exception{
+		
+		
+		System.out.println("검색ID : "+ vo.getId());
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		result.put("chkCount", service.chkId(vo.getId()));
+		
+		System.out.println("실행결과 count : " + result.get("chkCount"));
+		
+		return result; 
+	}
+	
+	@RequestMapping(value = "/member/memberAdd")
+	public String regResult(@ModelAttribute("vo") MemberVo vo, Model model,Member mb) throws Exception {
 				
 		service.insertList(mb);
-		model.addAttribute("meminfo", mb);
+		model.addAttribute("item", mb);
 		
-		return "infra/user/infoFormReg";
+		
+		//일반 회원 가입에서는 아래 폼으로 이동시키도록
+		//return "infra/user/infoFormReg";
+		
+		return "infra/adnnin/memberForm";
 	}
 	
 	

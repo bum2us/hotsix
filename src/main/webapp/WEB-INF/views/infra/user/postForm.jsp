@@ -23,7 +23,7 @@
 <body>
 	<%@include file="../common/user/header.jsp" %> 
 	--%>
-	<div class="modal_overlay" onclick="javascript:closePost()" style="display:hidden;">
+	<div class="modal_overlay" onclick="javascript:closePost()" style="display:none;">
 		<br><br>
 		<div class="row post_frame" onclick="event.stopPropagation()">
 			<div class="post_leftSide">

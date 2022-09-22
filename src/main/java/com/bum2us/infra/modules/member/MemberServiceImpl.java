@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bum2us.infra.modules.code.CodeServiceImpl;
+
 @Service
 public class MemberServiceImpl implements MemberService{
 
@@ -25,6 +27,10 @@ public class MemberServiceImpl implements MemberService{
 		if(vo.getShValue() == null)
 			vo.setShValue("");
 		
+		if(vo.getShOption() == 6) {
+			vo.setShValue(CodeServiceImpl.selectOneCached(vo.getShValue()));
+		}
+		
 		if(vo.getShDateOption() == null) {
 			vo.setShDateOption(2);
 			vo.setShDateStart("1700-01-01 00:00:00");
@@ -32,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
 		}		
 		else if(vo.getShDateOption() == 2) {
 			vo.setShDateStart(vo.getShDateStart() + " 00:00:00");
-			vo.setShDateEnd(vo.getShDateEnd() + "23:59:59");
+			vo.setShDateEnd(vo.getShDateEnd() + " 23:59:59");
 		}
 		 
 		System.out.println("---------------");
@@ -64,7 +70,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public Member selectOne(MemberVo vo) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		return dao.selectOne(vo);
 	}
 
@@ -85,6 +91,11 @@ public class MemberServiceImpl implements MemberService{
 	public void updateOne(Member mb) throws Exception {
 		// TODO Auto-generated method stub
 		dao.updateOne(mb);
+	}
+
+	public int chkId(String id) throws Exception{
+		// TODO Auto-generated method stub
+		return dao.selectCount(id);
 	}
 	
 }

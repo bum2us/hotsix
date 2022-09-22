@@ -19,6 +19,9 @@ public class Member {
 	private String nickname;
 	private String phone1;
 	private String phone2;
+	private Integer zipCode;
+	private String address;
+	private String addressDetail;
 	
 	private Integer pageTotle;
 	
@@ -105,6 +108,24 @@ public class Member {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}	
+	public Integer getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 	
 	

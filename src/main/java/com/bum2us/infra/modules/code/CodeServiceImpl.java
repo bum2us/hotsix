@@ -108,4 +108,16 @@ public class CodeServiceImpl implements CodeService{
 		return rt;
 	}
 	
+	public static String selectOneCached(String name) throws Exception {
+		String rt="";
+		for(Code codeRow : Code.cacheCodeList) {
+			if (codeRow.getCodeName().equals(name)) {
+				rt = codeRow.getCodeKey();
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
+	
 }

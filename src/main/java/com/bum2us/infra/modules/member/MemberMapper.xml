@@ -35,6 +35,7 @@
 			<when test= "shOption == 3"> nickname </when>
 			<when test= "shOption == 4"> email </when>
 			<when test= "shOption == 5"> phone </when>
+			<when test= "shOption == 6"> gender </when>
 		</choose>
 		LIKE CONCAT ('%',#{shValue},'%')
 		AND 
@@ -47,6 +48,18 @@
 		
 	</sql>
 
+	<select id="selectOneCount" resultType="Integer">
+		
+		SELECT
+			COUNT(*)
+		FROM
+			member
+		WHERE
+			1=1
+		AND id LIKE #{id};
+	
+	</select>
+	
 	<insert id = "insertList">
 		
 		INSERT INTO member(
@@ -60,6 +73,9 @@
 		,comment
 		,nickname
 		,dob
+		,zipCode
+		,address
+		,addressDetail
 		)VALUES(
 		
 		#{name}
@@ -72,6 +88,9 @@
 		,#{comment}
 		,#{nickname}
 		,#{dob}
+		,#{zipCode}
+		,#{address}
+		,#{addressDetail}
 		)
 		
 	</insert>
@@ -83,7 +102,7 @@
 		FROM member
 		WHERE
 			1=1
-		AND #{shSeq} LIKE seq
+		AND #{shSeq} LIKE seq	
 		<!-- WHERE id LIKE #{shId} AND password LIKE #{shPassword} -->
 		
 	</select>

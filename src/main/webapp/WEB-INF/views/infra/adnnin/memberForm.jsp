@@ -40,8 +40,13 @@
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row my-4">
-						<div class="col-6">
-							<input type="text" placeholder="아이디" name="id" value="${item.id}">
+						<div class="col-4">
+							<input type="text" placeholder="아이디" id = "idbox" name="id" value="${item.id}">
+						</div> 
+						<div class="col-2 text-left gx-0">
+							<span class="chk_sucess" id="id_check_sucess">사용가능</span>
+							<span class="chk_fail" id="id_check_fail">사용불가</span> 
+							<button type="button" class="basebutton" onclick ="chkId()">중복체크</button>
 						</div>
 						<div class="col-6">
 							<input type="text" name="nickname" placeholder="닉네임" value="${item.nickname}">
@@ -115,18 +120,14 @@
                    		</div>
                    	</div>
                    	<div class="row mb-4">
-                   		<div class="col">
+                   		<div class="col-6">
                    			<input type="text" id="address" name="address" placeholder="주소" readonly>
                    		</div>
+                   		<div class="col-6">
+                   			<input type="text" id="addressDetail" name="addressDetail" placeholder="상세주소">
+                   		</div>
                    	</div>
-                   	<div class="row mb-4">
-                   		<div class="col-6">
-                   			<input type="text" id="address_detail" name="address_detail" placeholder="상세주소">
-                   		</div>
-                   		<div class="col-6">
-                   			<input type="text" id="address_info" name="address_info" placeholder="참고사항">
-                   		</div>
-                   	</div>	
+                   	<!-- 
                    	<div class="row mb-4">
                    		<div class="col-2">
                    			<input type="text" id="Lat" name="Lat" placeholder="위도" readonly>
@@ -138,6 +139,7 @@
                    			<button type="button" class="basebutton" onclick="getGeoFromAddress()">좌표 추출</button>
                    		</div>
                    	</div>
+                   	 -->
                    	<div class="row mb-4" id="mapDiv"></div>
 					<div class="row mb-4">
 						<textarea name="comment" id="comment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;">${item.comment}</textarea>
@@ -145,7 +147,7 @@
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick ="runForm('return');">이전</button>
 						<button type="button" class="basebutton">리셋</button>
-						<button type="button" class="basebutton">가입</button>
+						<button type="button" class="basebutton" onclick ="runForm('add');">가입</button>
 					</div>
 				</div>
 			</div>
@@ -192,6 +194,10 @@
 	  	  	form.attr("action", "/member/memberList" ).submit();
 	  		break;
   		}
+	  	case "add":
+  		{
+			form.attr("action","/member/memberAdd").submit(); 		
+  		}
 	  
 	  }
 	
@@ -220,7 +226,19 @@
 	
 	            $('#zipCode').attr("value",data.zonecode);
 	            $('#address').attr("value",data.roadAddress); 
-	         
+	      		
+	      		/*
+	      		var geocoder = new kakao.maps.services.Geocoder(); 
+
+	      		geocoder.addressSearch(data.roadAddress, function(result, status) {
+	      		    if (status === kakao.maps.services.Status.OK) {
+	      		    	console.log(result[0]); 
+	      		     	$('#Lat').attr("value",result[0].x);
+	      		  	 	$('#Lng').attr("value",result[0].y);
+	      		    }
+	    		   
+	      		}); 
+	      		*/
 		    }
 		}).open();
 	
@@ -238,32 +256,45 @@
   		     	$('#Lat').attr("value",result[0].x);
   		  	 	$('#Lng').attr("value",result[0].y);
   		    }
+		   
   		});
   	} 
-/*   
- // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-  	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-  	// 지도 타입 컨트롤을 지도에 표시합니다
-  	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-  	function getInfo() {
-  	    // 지도의 현재 중심좌표를 얻어옵니다 
-  	    var center = map.getCenter(); 
-  	    
-  	    var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
-  	    message += '경도 ' + center.getLng() + ' 이고 <br>';
-  	    message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
-  	    message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
-  	    message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng() + ' 이고 <br>';
-  	    message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng() + ' 입니다';
-  	    
-  	    // 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-  	    // ex) console.log(message);
-  	    console.log(message);
+ 
+  	chkId = function() {
+  		
+  		var chkId = $('#idbox');
+  		
+  		if(chkId == null) return false;
+  		
+  		$('#id_check_sucess').hide();
+  		$('#id_check_fail').hide();
+  		
+  		$.ajax({
+  			 
+  			url:"/member/chkId",
+  			type:"POST", 
+  			data: {
+  				id: chkId.val()
+  				},
+  			async: true,
+  			dataType: 'json',  
+  			success:function(result){
+  				if(result.chkCount < 1)
+				{
+  					$('#id_check_sucess').show();
+				}
+  				else
+  				{ 
+  					$('#id_check_fail').show();
+  				}  				 
+  			},
+  			error:function(){
+  				alert("err");
+  			}
+  			
+  		});
+  		
   	}
-		 */
-		
   
 </script>
 </body>

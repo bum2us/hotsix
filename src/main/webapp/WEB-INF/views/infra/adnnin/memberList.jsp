@@ -191,6 +191,11 @@
 		  		form.attr("action", "/member/memberList").submit();
 		  		break;
 	  		}
+		  	case "add":
+	  		{
+		  		form.attr("action","/member/memberForm").submit();
+		  		break;
+	  		}
 		  }
 		  
 		  
