@@ -54,12 +54,12 @@ public class BaseVo {
 	public void ShowSh() 
 	{
 		System.out.println("---------------");
-		System.out.println(shValue);
-		System.out.println(shOption);
-		System.out.println(shDateOption);
-		System.out.println(shDateStart);
-		System.out.println(shDateEnd);
-		System.out.println(shUseNy);
+		System.out.println("shValue :"+shValue);
+		System.out.println("shOption :"+shOption);
+		System.out.println("shDateOption :"+shDateOption);
+		System.out.println("shDateStart :"+shDateStart);
+		System.out.println("shDateEnd :"+shDateEnd);
+		System.out.println("shUseNy :"+shUseNy);
 	}
 	
 	public Integer getPageNumber() {

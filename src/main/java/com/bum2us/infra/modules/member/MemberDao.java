@@ -25,7 +25,7 @@ public class MemberDao {
 
 	public Member selectOne(Member mb) { return sqlSession.selectOne(namespace + ".chkLogin", mb); }
 	
-	public Integer selectCount() { return sqlSession.selectOne(namespace + ".selectCount"); }
+	public Integer selectCount(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectCount",vo); }
 	
 	public Integer selectCount(String id) { return sqlSession.selectOne(namespace + ".selectOneCount", id); }
 

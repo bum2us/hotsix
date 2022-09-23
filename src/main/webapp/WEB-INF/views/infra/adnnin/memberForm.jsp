@@ -41,7 +41,7 @@
 				<div class="col">
 					<div class="row my-4">
 						<div class="col-4">
-							<input type="text" placeholder="아이디" id = "idbox" name="id" value="${item.id}">
+							<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="id" value="${item.id}">
 						</div> 
 						<div class="col-2 text-left gx-0">
 							<span class="chk_sucess" id="id_check_sucess">사용가능</span>
@@ -262,35 +262,36 @@
  
   	chkId = function() {
   		
-  		var chkId = $('#idbox');
+  		var chkId = $('#idbox').val();
   		
   		if(chkId == null) return false;
   		
-  		$('#id_check_sucess').hide();
-  		$('#id_check_fail').hide();
-  		
-  		$.ajax({
-  			 
+  		$.ajax({	
   			url:"/member/chkId",
   			type:"POST", 
   			data: {
-  				id: chkId.val()
+  				id: chkId
   				},
   			async: true,
   			dataType: 'json',  
   			success:function(result){
-  				if(result.chkCount < 1)
+  				if(result.chkCount = 0)
 				{
+  			  		$('#id_check_fail').hide();
   					$('#id_check_sucess').show();
 				}
   				else
   				{ 
+  			  		$('#id_check_sucess').hide();
   					$('#id_check_fail').show();
   				}  				 
   			},
   			error:function(){
   				alert("err");
   			}
+  			
+  			//성공시 = success → complete → done → always
+  			//실패시 = error → complete → fail → always
   			
   		});
   		

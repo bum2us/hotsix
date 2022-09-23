@@ -17,10 +17,13 @@
 		<include refid="rangeSql"/>
 	</select>
 	
-	<select id="selectCount" resultType ="Integer">
+	<select id="selectCount" resultType ="Integer" >
 		SELECT
-			COUNT(*) 
+			COUNT(*)
 		FROM member
+		WHERE 1 = 1
+		<include refid="searchSql"/>
+		<include refid="rangeSql"/>
 	</select>
 	
 	<sql id="rangeSql">

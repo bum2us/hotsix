@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bum2us.infra.modules.code.CodeServiceImpl;
+
 @Controller
 public class MemberController {
 
@@ -23,7 +25,13 @@ public class MemberController {
 	@RequestMapping(value = "/member/memberList")
 	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
 		
-		vo.setPageTotal(service.selectCount());
+		vo.ShowSh();			
+		if(vo.getShValue() != null) {
+			vo.setShValue(CodeServiceImpl.selectOneCachedCode2Name(vo.getShValue()));
+		}
+		vo.ShowSh();			
+	
+		vo.setPageTotal(service.selectCount(vo));
 		List<Member> list = service.selectList(vo);
 
 		model.addAttribute("list", list);
@@ -58,10 +66,10 @@ public class MemberController {
 	@RequestMapping(value="member/chkId")
 	public Map<String,Object> memberChkId(Member vo) throws Exception{
 		
+		Map<String,Object> result = new HashMap<String,Object>();
 		
 		System.out.println("검색ID : "+ vo.getId());
 		
-		Map<String,Object> result = new HashMap<String,Object>();
 		result.put("chkCount", service.chkId(vo.getId()));
 		
 		System.out.println("실행결과 count : " + result.get("chkCount"));
