@@ -21,8 +21,6 @@ public class MemberServiceImpl implements MemberService{
 	public List<Member> selectList(MemberVo vo) throws Exception {
 		// TODO Auto-generated method stub
 		
-		setVoDate(vo);
-		
 		return dao.selectList(vo);
 	}
 	
@@ -50,7 +48,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Integer selectCount(MemberVo vo) throws Exception {
 		// TODO Auto-generated method stub
-		setVoDate(vo);
 		
 		return dao.selectCount(vo);
 	}
@@ -66,41 +63,4 @@ public class MemberServiceImpl implements MemberService{
 		return dao.selectCount(id);
 	}
 	
-	public void setVoDate(MemberVo vo) throws Exception {
-		
-		if(vo.getShOption() == null)
-			vo.setShOption(1);
-		
-		if(vo.getShValue() == null)
-			vo.setShValue("");
-		
-		if(vo.getShOption() == 6) {
-			vo.setShValue(CodeServiceImpl.selectOneCachedName2Code(vo.getShValue()));
-		}
-		
-		if(vo.getShDateOption() == null) {
-			vo.setShDateOption(2);
-			vo.setShDateStart("1700-01-01 00:00:00");
-			vo.setShDateEnd("2023-01-01 00:00:00");
-		}		
-		else if(vo.getShDateOption() == 2) {
-			vo.setShDateStart(vo.getShDateStart() + " 00:00:00");
-			vo.setShDateEnd(vo.getShDateEnd() + " 23:59:59");
-		}
-		 
-		System.out.println("---------------");
-		System.out.println(vo.getShOption());
-		System.out.println(vo.getShValue());
-		System.out.println(vo.getShDateOption());
-		System.out.println(vo.getShDateStart());
-		System.out.println(vo.getShDateEnd());	
-		
-		
-		if(vo.getPageNumber() == null)
-			vo.setPageNumber(1);
-		if(vo.getPageSize() == null)
-			vo.setPageSize(10);
-		vo.setPageRange((vo.getPageNumber()-1) * vo.getPageSize());
-		
-	}
 }

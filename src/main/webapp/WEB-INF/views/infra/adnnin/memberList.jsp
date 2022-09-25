@@ -33,10 +33,11 @@
 					</div>
 					<div class="row mb-4">
 						<div class="col-3">
-							<select id="">
-								<option value="" disabled selected>사용여부</option>
-								<option value="1">N</option>
-								<option value="2">Y</option>
+							<select id="shGender">
+								<option value="" disabled selected>성별</option>
+								<c:forEach items="${listCodeGender}" var="listGender" varStatus="statusGender">
+										<option value="${statusGender.count}" <c:if test="${listGender.codeKey eq vo.shGender}">selected</c:if>><c:out value="${listGender.codeName }"/></option>
+								</c:forEach> 
 							</select>
 						</div>
 						<div class="col-3">
@@ -63,7 +64,6 @@
 								<option value="3">닉네임</option>
 								<option value="4">email</option>
 								<option value="5">휴대전화</option>
-								<option value="6">성별</option>
 							</select>
 						</div>
 						<div class="col">

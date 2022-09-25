@@ -24,12 +24,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/memberList")
 	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
-		
-		vo.ShowSh();			
-		if(vo.getShValue() != null) {
-			vo.setShValue(CodeServiceImpl.selectOneCachedCode2Name(vo.getShValue()));
-		}
-		vo.ShowSh();			
+			
+		vo.setVoData();		
 	
 		vo.setPageTotal(service.selectCount(vo));
 		List<Member> list = service.selectList(vo);

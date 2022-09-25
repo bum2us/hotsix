@@ -122,10 +122,10 @@ public class CodeServiceImpl implements CodeService{
 
 
 
-	public static String selectOneCachedCode2Name(String shValue) throws Exception  {
+	public static String selectOneCachedCode2Name(String code) throws Exception  {
 		String rt="";
 		for(Code codeRow : Code.cacheCodeList) {
-			if (codeRow.getClass().equals(shValue)) {
+			if (codeRow.getCodeKey().equals(code)) {
 				rt = codeRow.getCodeName();
 			} else {
 				// by pass

@@ -1,5 +1,7 @@
 package com.bum2us.infra.modules.base;
 
+import com.bum2us.infra.modules.code.CodeServiceImpl;
+
 public class BaseVo {
 	
 	private String shValue;
@@ -86,9 +88,41 @@ public class BaseVo {
 	public void setPageTotal(Integer pageTotal) {
 		this.pageTotal = pageTotal;
 	}
-	
-	public void setPageParams(BaseVo vo) {
-		
+	public void setPageParams(BaseVo vo) {	
 		this.pageTotal = vo.pageTotal;
 	}
+	
+    public void setVoData() throws Exception {
+    	
+    	if(shOption == null)
+    		shOption = 1;
+		
+		if(this.shValue == null)
+			this.shValue = "";	
+		
+		if(this.shDateOption == null) {
+			this.shDateOption = 2;
+			this.shDateStart = "1700-01-01 00:00:00";
+			this.shDateEnd = "2023-01-01 00:00:00";
+		}		
+		else if( this.shDateOption == 2) {
+			this.shDateStart = this.shDateStart + " 00:00:00";
+			 this.shDateEnd =  this.shDateEnd + " 23:59:59";
+		}
+		 
+		System.out.println("---------------");
+		System.out.println("shOption : " + this.shOption);
+		System.out.println("shValue : " + this.shValue);
+		System.out.println("shDateOption : " + this.shDateOption);
+		System.out.println("shDateStart : " + this.shDateStart);
+		System.out.println("shDateEnd : " + this.shDateEnd);	
+		
+		
+		if(this.pageNumber == null)
+			this.pageNumber = 1;
+		if(this.pageSize == null)
+			this.pageSize = 10;
+		this.pageRange = (this.pageNumber - 1) * this.pageSize;
+    	
+    }
 }

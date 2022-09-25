@@ -47,6 +47,12 @@
 			<when test="shDateOption == 2"> createDate </when>
 			<when test="shDateOption == 3"> dob </when>
 		</choose>
+		AND
+		<choose>
+			<when test="shGender == 1"> gender LIKE 남 </when>
+			<when test="shGender == 2"> gender LIKE 여 </when>
+			<when test="shGender == 3"> gender LIKE 기타 </when>
+		</choose>
 		BETWEEN #{shDateStart} AND #{shDateEnd}
 		
 	</sql>
