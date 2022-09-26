@@ -25,7 +25,7 @@
 				<span class="page_title">멤버 관리</span>
 			</div>
 		</div>
-		<c:set var = "listCodeGender" value = "${CodeServiceImpl.selectListCached('2')}"/>
+		<c:set var = "listCodeGender" value = "${CodeServiceImpl.selectListCachedCode('2')}"/>
 		<form id="mainForm">
 			<div class="row mt-4 searchForm" id="searchForm">
 				<div class="col">
@@ -79,24 +79,24 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var ="list" varStatus="status">
-							<tr onclick="runForm('form',${list.seq})">
+							<tr onclick="runForm('form',${list.mmSeq})">
 								<td>
 									<input onclick="event.stopPropagation()" name="listCheckbox" class="form-check-input" type="checkbox">
 								</td>
-								<td style="display: none"><c:out value="${list.seq }"/></td>
+								<td style="display: none"><c:out value="${list.mmSeq }"/></td>
 								<td><c:out value="${status.count}"/></td>
-								<td><c:out value="${list.name}"/></td>
-								<td><c:out value="${list.id}"/></td>
-								<td><c:out value="${list.nickname}"/></td>
-								<td><c:out value="${list.dob}"/></td>
-								<td><c:out value="${list.email}"/></td>
-								<td><c:out value="${list.phone}"/></td>
+								<td><c:out value="${list.mmName}"/></td>
+								<td><c:out value="${list.mmId}"/></td>
+								<td><c:out value="${list.mmNickname}"/></td>
+								<td><c:out value="${list.mmDob}"/></td>
+								<td><c:out value="${list.mmEmail}"/></td>
+								<td><c:out value="${list.mmPhone}"/></td>
 								<td>
 									<c:forEach items="${listCodeGender}" var="listGender" varStatus="statusGender">
-										<c:if test="${list.gender eq listGender.codeKey}"><c:out value="${listGender.codeName }"/></c:if>
+										<c:if test="${list.mmGender eq listGender.ccKey}"><c:out value="${listGender.ccName }"/></c:if>
 									</c:forEach> 
 								</td>
-								<td><c:out value="${list.createDate}"/></td>
+								<td><c:out value="${list.mmCreateDate}"/></td>
 							</tr>	
 						</c:forEach>
 					</tbody>
@@ -140,7 +140,7 @@
 	    	yearRange: "1900:2023",
 	    	dateFormat: "yy-mm-dd"
 	    });
-	  } );
+	  } ); 
 	  $( function() {
 	    $( "#endDate" ).datepicker({
 	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.

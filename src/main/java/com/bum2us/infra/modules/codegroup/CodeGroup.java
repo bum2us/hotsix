@@ -1,82 +1,75 @@
 package com.bum2us.infra.modules.codegroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CodeGroup {
 	
-	private Integer seq;
-	private String groupName;
+	private String ccgSeq;
+	private String ccgName;
 	private Integer codeCount;
-	private Integer groupUseNy;
-	private String createDate;
-	private String editDate;
+	private Integer ccgUseNy;
+	private String ccgCreateDate;
+	private String ccgEditDate;
 	
-	
-	
-	
-	public String getCreateDate() {
-		return createDate;
+	public static List<CodeGroup> cacheCodeGroupList = new ArrayList<CodeGroup>();
+
+	public String getCcgSeq() {
+		return ccgSeq;
 	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+
+	public void setCcgSeq(String ccgSeq) {
+		this.ccgSeq = ccgSeq;
 	}
-	public String getEditDate() {
-		return editDate;
+
+	public String getCcgName() {
+		return ccgName;
 	}
-	public void setEditDate(String editDate) {
-		this.editDate = editDate;
+
+	public void setCcgName(String ccgName) {
+		this.ccgName = ccgName;
 	}
-	public Integer getGroupUseNy() {
-		return groupUseNy;
-	}
-	public void setGroupUseNy(Integer groupUseNy) {
-		this.groupUseNy = groupUseNy;
-	}
-	public Integer getSeq() {
-		return seq;
-	}
-	public void setSeq(Integer seq) {
-		this.seq = seq;
-	}
-	public String getGroupName() {
-		return groupName;
-	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
+
 	public Integer getCodeCount() {
 		return codeCount;
 	}
+
 	public void setCodeCount(Integer codeCount) {
 		this.codeCount = codeCount;
 	}
 
+	public Integer getCcgUseNy() {
+		return ccgUseNy;
+	}
+
+	public void setCcgUseNy(Integer ccgUseNy) {
+		this.ccgUseNy = ccgUseNy;
+	}
+
+	public String getCcgCreateDate() {
+		return ccgCreateDate;
+	}
+
+	public void setCcgCreateDate(String ccgCreateDate) {
+		this.ccgCreateDate = ccgCreateDate;
+	}
+
+	public String getCcgEditDate() {
+		return ccgEditDate;
+	}
+
+	public void setCcgEditDate(String ccgEditDate) {
+		this.ccgEditDate = ccgEditDate;
+	}
+
+	public static List<CodeGroup> getCacheCodeGroupList() {
+		return cacheCodeGroupList;
+	}
+
+	public static void setCacheCodeGroupList(List<CodeGroup> cacheCodeGroupList) {
+		CodeGroup.cacheCodeGroupList = cacheCodeGroupList;
+	}
 	
-	
-//	private String cgSeq;
-//	private String cgSeqAnother;
-//	private String cgName;
-//	private String cgNameEn;
-//	private Integer cgUseNy;
-//	private Integer cgOrder;
-//	private String cgReferenceV1;
-//	private String cgReferenceV2;
-//	private String cgReferenceV3;
-//	private Integer cgReferenceI1;
-//	private Integer cgReferenceI2;
-//	private Integer cgReferenceI3;
-//	private String cgDesc;
-//	private Integer cgDelNy;
-//	private String regIp;
-//	private String regSeq;
-//	private String regId;
-//	private Integer regDeviceCd;
-//	private Date regDateTime;
-//	private Date regDateTimeSvr;
-//	private String modIp;
-//	private String modSeq;
-//	private String modId;
-//	private Integer modDeviceCd;
-//	private Date modDateTime;
-//	private Date modDateTimeSvr;
 	
 	
 }

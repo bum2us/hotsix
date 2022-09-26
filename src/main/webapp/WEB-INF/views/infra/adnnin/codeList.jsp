@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
+<jsp:useBean id="CodeGroupServiceImpl" class="com.bum2us.infra.modules.codegroup.CodeGroupServiceImpl"/>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -38,10 +39,10 @@
 							<bs:selectorCode functionType="shDateOption" op="${vo.shDateOption}"></bs:selectorCode>
 						</div>
 						<div class="col-3">
-							<input name="shDateStart" id="startDate" type="text" value="${vo.shDateStart }" placeholder="시작일">
+							<input name="shDateStart" id="shDateStart" type="text" value="${vo.shDateStart }" placeholder="시작일">
 						</div>
 						<div class="col-3">
-							<input name="shDateEnd" id="endDate" type="text" value="${vo.shDateEnd }" placeholder="종료일">
+							<input name="shDateEnd" id="shDateEnd" type="text" value="${vo.shDateEnd }" placeholder="종료일">
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -77,24 +78,26 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="list" varStatus="status">
-							<tr onclick="runForm('form',${list.seq})">
+							<tr onclick="runForm('form',${list.ccSeq})">
 								<td onclick="event.stopPropagation()">
 									<input class="form-check-input" type="checkbox">
 								</td>
-								<td><c:out value="${list.seq }"/></td>
+								<td style="display: none"><c:out value="${list.ccSeq}"/></td>
+								<td><c:out value="${status.count }"/></td>
 								<td><c:out value="${list.groupSeq }"/></td>
-								<td><c:out value="${list.groupName }"/></td>
-								<td><c:out value="${list.codeKey }"/></td>
-								<td><c:out value="${list.codeName }"/></td>
+								<td><c:out value="${CodeGroupServiceImpl.selectOneCachedCodeGroup2Name(list.groupSeq) }" /></td>
+								<%-- <td><c:out value="${list.groupName }"/></td> --%>
+								<td><c:out value="${list.ccKey }"/></td>
+								<td><c:out value="${list.ccName }"/></td>
 								<td>
 								<c:choose>
-									<c:when test="${list.useNy eq 0}">N</c:when>
-									<c:when test="${list.useNy eq 1}">Y</c:when>
+									<c:when test="${list.ccUseNy eq 0}">N</c:when>
+									<c:when test="${list.ccUseNy eq 1}">Y</c:when>
 								</c:choose>
 								</td>
-								<td><c:out value="${list.codeKey}"/></td>
-								<td><c:out value="${list.createDate}"/></td>
-								<td><c:out value="${list.editDate}"/></td>
+								<td><c:out value="${list.ccKey}"/></td>
+								<td><c:out value="${list.ccCreateDate}"/></td>
+								<td><c:out value="${list.ccEditDate}"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -103,14 +106,14 @@
 			<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
 			<bs:pagingCode pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingCode> 
 			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">
-			<input type="hidden" id="upCodeSeq" name="upCodeSeq" value="${vo.upCodeSeq}">
+			<input type="hidden" id="upCcSeq" name="upCcSeq" value="">
 			<div class="row">
 				<div class="col-2">
 					<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
 					<button type="button" class="buttons" onclick="delCode()"><i class="fa-solid fa-trash-can"></i></button>
 				</div>
 				<div class="col-1 offset-9 text-end">
-					<button type="button" class="buttons" onclick="location.href='/codeForm'"><i class="fa-solid fa-plus"></i></button>
+					<button type="button" class="buttons" onclick="runForm('form',null)"><i class="fa-solid fa-plus"></i></button>
 				</div>
 			</div>
 		</form>
@@ -162,8 +165,12 @@
 				}		
 			case "form":
 				{
-					var seq = $("#upCodeSeq");
+					var seq = $("#upCcSeq");
 					seq.attr("value",no);
+					form.attr("action","/codeForm").submit();
+				}
+			case "add":
+				{
 					form.attr("action","/codeForm").submit();
 				}
 			}

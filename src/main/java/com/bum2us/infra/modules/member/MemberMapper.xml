@@ -30,27 +30,27 @@
 	</sql>
 	
 	<sql id="searchSql">
-		AND delNy LIKE 0  
+		AND mmdelNy LIKE 0  
 		AND
 		<choose>
-			<when test= "shOption == null"> name </when>
-			<when test= "shOption == 1"> name </when>
-			<when test= "shOption == 2"> id </when>
-			<when test= "shOption == 3"> nickname </when>
-			<when test= "shOption == 4"> email </when>
-			<when test= "shOption == 5"> phone </when>
-			<when test= "shOption == 6"> gender </when>
+			<when test= "shOption == null"> mmName </when>
+			<when test= "shOption == 1"> mmName </when>
+			<when test= "shOption == 2"> mmId </when>
+			<when test= "shOption == 3"> mmNickname </when>
+			<when test= "shOption == 4"> mmEmail </when>
+			<when test= "shOption == 5"> mmPhone </when>
+			<when test= "shOption == 6"> mmGender </when>
 		</choose>
 		<choose>
 			<when test=" shValue == null">LIKE CONCAT ('%','','%')</when>
 			<when test=" shValue != null">LIKE CONCAT ('%',#{shValue},'%')</when> 
 		</choose> 
-			<if test="shGender != null">AND gender LIKE #{shGender}</if> 
+			<if test="shGender != null">AND mmGender LIKE #{shGender}</if> 
 		<choose>
-			<when test="shDateOption == null">AND  createDate </when>
+			<when test="shDateOption == null">AND  mmCreateDate </when>
 			<when test="shDateOption == 1">  </when>
-			<when test="shDateOption == 2">AND  createDate </when>
-			<when test="shDateOption == 3">AND  dob </when>
+			<when test="shDateOption == 2">AND  mmCreateDate </when>
+			<when test="shDateOption == 3">AND  mmDob </when>
 		</choose>
 		<choose>
 			<when test = 'shDateStart == null or shDateStart ==""'> BETWEEN CONCAT('1700-01-01', ' 00:00:00') AND CONCAT('2300-01-01',' 00:00:00') </when>
@@ -67,41 +67,41 @@
 			member
 		WHERE
 			1=1
-		AND id LIKE #{id};
+		AND mmId LIKE #{mmId};
 	
 	</select>
 	
 	<insert id = "insertList">
 		
 		INSERT INTO member(
-		name
-		,id
-		,password
-		,gender
-		,email
-		,telecom
-		,phone
-		,comment
-		,nickname
-		,dob
-		,zipCode
-		,address
-		,addressDetail
+		mmName
+		,mmId
+		,mmPassword
+		,mmGender
+		,mmEmail
+		,mmTelecom
+		,mmPhone
+		,mmComment
+		,mmNickname
+		,mmDob
+		,mmZipCode
+		,mmAddress
+		,mmAddressDetail
 		)VALUES(
 		
-		#{name}
-		,#{id}
-		,#{password}
-		,#{gender}
-		,#{email}
-		,#{telecom}
-		,CONCAT ('010',#{phone1},#{phone2})
-		,#{comment}
-		,#{nickname}
-		,#{dob}
-		,#{zipCode}
-		,#{address}
-		,#{addressDetail}
+		#{mmName}
+		,#{mmId}
+		,#{mmPassword}
+		,#{mmGender}
+		,#{mmEmail}
+		,#{mmTelecom}
+		,CONCAT ('010',#{mmPhone1},#{mmPhone2})
+		,#{mmComment}
+		,#{mmNickname}
+		,#{mmDob}
+		,#{mmZipCode}
+		,#{mmAddress}
+		,#{mmAddressDetail}
 		)
 		
 	</insert>
@@ -113,7 +113,7 @@
 		FROM member
 		WHERE
 			1=1
-		AND #{shSeq} LIKE seq	
+		AND #{shSeq} LIKE mmSeq	
 		<!-- WHERE id LIKE #{shId} AND password LIKE #{shPassword} -->
 		
 	</select>
@@ -124,7 +124,7 @@
 		FROM member
 		WHERE
 			1=1
-		AND #{id} LIKE id
+		AND #{mmId} LIKE mmId
 	</select>
 	
 	<update id="upadteOne">
@@ -132,18 +132,18 @@
 		UPDATE
 			member
 		SET
-			name = #{name}
-			,id = #{id}
-			,comment = #{comment}
-			,nickname = #{nickname}
-			,phone = CONCAT('010',#{phone1},#{phone2})
-			,zipCode = #{zipCode}
-			,address = #{address}
-			,addressDetail = #{addressDetail} 
+			mmName = #{mmName}
+			,mmId = #{mmId}
+			,mmComment = #{mmComment}
+			,mmNickname = #{mmNickname}
+			,mmPhone = CONCAT('010',#{mmPhone1},#{mmPhone2})
+			,mmZipCode = #{mmZipCode}
+			,mmAddress = #{mmAddress}
+			,mmAddressDetail = #{mmAddressDetail} 
 		WHERE
 			1=1
 		AND
-			seq = #{seq}		
+			mmSeq = #{mmSeq}		
 	</update>
 	
 	<update id ="uelete">
@@ -151,9 +151,9 @@
 		UPDATE
 			member
 		SET
-			delNy = 1
+			mmDelNy = 1 
 		WHERE
-			seq = #{shSeq}
+			mmSeq = #{shSeq}
 	</update>
 	
 </mapper> 

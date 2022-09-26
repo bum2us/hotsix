@@ -26,5 +26,7 @@ public class CodeGroupDao {
 
 	public List<CodeGroup> srcList(CodeGroupVo vo) { return sqlSession.selectList(namespace + ".srcList", vo); 	}
 
+	public List<CodeGroup> selectListCachedCodeGroupList() { return sqlSession.selectList(namespace + ".selectListCachedCodeGroupList");	}
+
 	
 }

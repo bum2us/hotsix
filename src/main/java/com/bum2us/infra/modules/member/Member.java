@@ -5,127 +5,137 @@ import java.util.List;
 
 public class Member {
 	
-	private Integer seq;
-	private String name;
-	private String password;
-	private String dob;
-	private Integer gender;
-	private Integer telecom;
-	private String phone;
-	private String email;
-	private String id;
-	private String createDate;
-	private String comment;
-	private String nickname;
-	private String phone1;
-	private String phone2;
-	private Integer zipCode;
-	private String address;
-	private String addressDetail;
+	private Integer mmSeq;
+	private String mmName;
+	private String mmPassword;
+	private String mmDob;
+	private Integer mmGender;
+	private Integer mmTelecom;
+	private String mmPhone;
+	private String mmEmail;
+	private String mmId;
+	private String mmCreateDate;
+	private String mmEditDate;
+	private String mmComment;
+	private String mmNickname;
+	private String mmPhone1;
+	private String mmPhone2;
+	private Integer mmZipCode;
+	private String mmAddress;
+	private String mmAddressDetail;
+
 	
 	private Integer pageTotle;
 	
-	public String getPhone1() {
-		return phone1;
+	
+	
+	public Integer getMmSeq() {
+		return mmSeq;
 	}
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
+	public void setMmSeq(Integer mmSeq) {
+		this.mmSeq = mmSeq;
 	}
-	public String getPhone2() {
-		return phone2;
+	public String getMmName() {
+		return mmName;
 	}
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
+	public void setMmName(String mmName) {
+		this.mmName = mmName;
 	}
-	public Integer getSeq() {
-		return seq;
+	public String getMmPassword() {
+		return mmPassword;
 	}
-	public void setSeq(Integer seq) {
-		this.seq = seq;
+	public void setMmPassword(String mmPassword) {
+		this.mmPassword = mmPassword;
 	}
-	public String getName() {
-		return name;
+	public String getMmDob() {
+		return mmDob;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMmDob(String mmDob) {
+		this.mmDob = mmDob;
 	}
-	public String getPassword() {
-		return password;
+	public Integer getMmGender() {
+		return mmGender;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMmGender(Integer mmGender) {
+		this.mmGender = mmGender;
 	}
-	public String getDob() {
-		return dob;
+	public Integer getMmTelecom() {
+		return mmTelecom;
 	}
-	public void setDob(String dob) {
-		this.dob = dob;
+	public void setMmTelecom(Integer mmTelecom) {
+		this.mmTelecom = mmTelecom;
 	}
-	public Integer getGender() {
-		return gender;
+	public String getMmPhone() {
+		return mmPhone;
 	}
-	public void setGender(Integer gender) {
-		this.gender = gender;
+	public void setMmPhone(String mmPhone) {
+		this.mmPhone = mmPhone;
 	}
-	public Integer getTelecom() {
-		return telecom;
+	public String getMmEmail() {
+		return mmEmail;
 	}
-	public void setTelecom(Integer telecom) {
-		this.telecom = telecom;
+	public void setMmEmail(String mmEmail) {
+		this.mmEmail = mmEmail;
 	}
-	public String getPhone() {
-		return phone;
+	public String getMmId() {
+		return mmId;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMmId(String mmId) {
+		this.mmId = mmId;
 	}
-	public String getEmail() {
-		return email;
+	public String getMmCreateDate() {
+		return mmCreateDate;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMmCreateDate(String mmCreateDate) {
+		this.mmCreateDate = mmCreateDate;
 	}
-	public String getId() {
-		return id;
+	public String getMmEditDate() {
+		return mmEditDate;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMmEditDate(String mmEditDate) {
+		this.mmEditDate = mmEditDate;
 	}
-	public String getCreateDate() {
-		return createDate;
+	public String getMmComment() {
+		return mmComment;
 	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+	public void setMmComment(String mmComment) {
+		this.mmComment = mmComment;
 	}
-	public String getComment() {
-		return comment;
+	public String getMmNickname() {
+		return mmNickname;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setMmNickname(String mmNickname) {
+		this.mmNickname = mmNickname;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getMmPhone1() {
+		return mmPhone1;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}	
-	public Integer getZipCode() {
-		return zipCode;
+	public void setMmPhone1(String mmPhone1) {
+		this.mmPhone1 = mmPhone1;
 	}
-	public void setZipCode(Integer zipCode) {
-		this.zipCode = zipCode;
+	public String getMmPhone2() {
+		return mmPhone2;
 	}
-	public String getAddress() {
-		return address;
+	public void setMmPhone2(String mmPhone2) {
+		this.mmPhone2 = mmPhone2;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public Integer getMmZipCode() {
+		return mmZipCode;
 	}
-	public String getAddressDetail() {
-		return addressDetail;
+	public void setMmZipCode(Integer mmZipCode) {
+		this.mmZipCode = mmZipCode;
 	}
-	public void setAddressDetail(String addressDetail) {
-		this.addressDetail = addressDetail;
+	public String getMmAddress() {
+		return mmAddress;
+	}
+	public void setMmAddress(String mmAddress) {
+		this.mmAddress = mmAddress;
+	}
+	public String getMmAddressDetail() {
+		return mmAddressDetail;
+	}
+	public void setMmAddressDetail(String mmAddressDetail) {
+		this.mmAddressDetail = mmAddressDetail;
 	}
 	
 	

@@ -26,7 +26,7 @@
 			<div class="col text-center">
 				<span class="page_title">
 				<c:choose>
-					<c:when test = "${item.seq eq null}">
+					<c:when test = "${item.mmSeq eq null}">
 						회원 추가
 					</c:when>
 					<c:otherwise>
@@ -41,7 +41,7 @@
 				<div class="col">
 					<div class="row my-4">
 						<div class="col-4">
-							<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="id" value="${item.id}">
+							<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="mmId" value="${item.mmId}">
 						</div> 
 						<div class="col-2 text-left gx-0">
 							<span class="chk_sucess" id="id_check_sucess">사용가능</span>
@@ -49,12 +49,12 @@
 							<button type="button" class="basebutton" onclick ="chkId()">중복체크</button>
 						</div>
 						<div class="col-6">
-							<input type="text" name="nickname" placeholder="닉네임" value="${item.nickname}">
+							<input type="text" name="mmNickname" placeholder="닉네임" value="${item.mmNickname}">
 						</div>
 					</div>
 					<div class="row mb-4">
 						<div class="col-6">
-							<input type="password" placeholder="비밀번호" name="password">
+							<input type="password" placeholder="비밀번호" name="mmPassword">
 						</div>
 						<div class="col-6">
 							<input type="password" placeholder="비밀번호 확인">
@@ -62,26 +62,26 @@
 					</div>
 					<div class="row mb-4">
 						<div class="col-4">
-							<input type="text" placeholder="이름" name="name" value="${item.name}">
+							<input type="text" placeholder="이름" name="mmName" value="${item.mmName}">
 						</div>
 						<div class="col-1 text-end">
 							<span style="font-size:9pt; text-align:right; font-weight: 600;">생년월일</span>
                         </div>
                         <div class="col-4">
-							<input id="dob" type="text" name="dob" value="${item.dob}">
+							<input id="dob" type="text" name="dob" value="${item.mmDob}">
                         </div>
 						<div class="col-3">
-							<select name="gender" id="gender" >
+							<select name="mmGender" id="gender" >
 								<option value="0" disabled selected>성별</option>
-								<option value="1" <c:if test="${item.gender eq 1}">selected</c:if>>남</option>
-								<option value="2" <c:if test="${item.gender eq 2}">selected</c:if>>여</option>
-								<option value="3" <c:if test="${item.gender eq 3}">selected</c:if>>기타</option>
+								<option value="1" <c:if test="${item.mmGender eq 1}">selected</c:if>>남</option>
+								<option value="2" <c:if test="${item.mmGender eq 2}">selected</c:if>>여</option>
+								<option value="3" <c:if test="${item.mmGender eq 3}">selected</c:if>>기타</option>
 							</select>
 						</div>
 					</div>
                     <div class="row mb-4">
 						<div class="col-5">
-							<input type="text" id="email" name="email" placeholder="이메일" value="${item.email}"> 
+							<input type="text" id="mmEmail" name="mmEmail" placeholder="이메일" value="${item.mmEmail}"> 
 						</div>
 						<!-- 
                         <div class="col-2">
@@ -95,27 +95,27 @@
 						</div>
 						 -->
                         <div class="col-2">
-                            <select name="telecom" >
+                            <select name="mmTelecom" >
 								<option value="0" disabled selected>통신사</option>
-								<option value="1" <c:if test="${item.telecom eq 1}">selected</c:if>>SKT</option>
-								<option value="2" <c:if test="${item.telecom eq 2}">selected</c:if>>KT</option>
-								<option value="3" <c:if test="${item.telecom eq 3}">selected</c:if>>LG</option>
-                                <option value="4" <c:if test="${item.telecom eq 4}">selected</c:if>>알뜰폰</option>
+								<option value="1" <c:if test="${item.mmTelecom eq 1}">selected</c:if>>SKT</option>
+								<option value="2" <c:if test="${item.mmTelecom eq 2}">selected</c:if>>KT</option>
+								<option value="3" <c:if test="${item.mmTelecom eq 3}">selected</c:if>>LG</option>
+                                <option value="4" <c:if test="${item.mmTelecom eq 4}">selected</c:if>>알뜰폰</option>
 							</select>
                         </div>
                         <div class="col-1">
                             <input type="text" value="010" style="text-align:center">
                         </div>
                         <div class="col-2">
-                            <input type="text" name="phone1" placeholder="XXXX" value="${item.phone.substring(3,7)}" style="text-align:center">
+                            <input type="text" name="mmPhone1" placeholder="XXXX" value="${item.mmPhone.substring(3,7)}" style="text-align:center">
                         </div>
                         <div class="col-2">
-                            <input type="text" name="phone2" placeholder="XXXX" value="${item.phone.substring(7,11)}" style="text-align:center">
+                            <input type="text" name="mmPhone2" placeholder="XXXX" value="${item.mmPhone.substring(7,11)}" style="text-align:center">
                         </div>
                     </div>
                     <div class="row mb-4">
                    		<div class="col-2">
-                   			<input type="text" id="zipCode" name="zipCode" placeholder="우편번호" value="${item.zipCode}" readonly>
+                   			<input type="text" id="mmZipCode" name="mmZipCode" placeholder="우편번호" value="${item.mmZipCode}" readonly>
                    		</div>
                    		<div class="col-2 text-left">
                    			<button type="button" class="basebutton" onclick="searchAdd()">우편번호 찾기</button>
@@ -123,10 +123,10 @@
                    	</div>
                    	<div class="row mb-4">
                    		<div class="col-6">
-                   			<input type="text" id="address" name="address" placeholder="주소" value="${item.address}" readonly>
+                   			<input type="text" id="mmAddress" name="mmAddress" placeholder="주소" value="${item.mmAddress}" readonly>
                    		</div>
                    		<div class="col-6">
-                   			<input type="text" id="addressDetail" name="addressDetail" placeholder="상세주소" value="${item.addressDetail}">
+                   			<input type="text" id="mmAddressDetail" name="mmAddressDetail" placeholder="상세주소" value="${item.mmAddressDetail}">
                    		</div>
                    	</div>
                    	<!-- 
@@ -144,13 +144,13 @@
                    	 -->
                    	<div class="row mb-4" id="mapDiv"></div>
 					<div class="row mb-4">
-						<textarea name="comment" id="comment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;">${item.comment}</textarea>
+						<textarea name="mmComment" id="mmComment" cols="10" rows="7" placeholder="자기소개" style="padding: 10px; font-size: 10pt;">${item.mmComment}</textarea>
 					</div>
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick ="runForm('return');">이전</button>
-						<button type="button" class="basebutton" <c:if test="${item.seq ne null}">hidden</c:if>>리셋</button>
+						<button type="button" class="basebutton" <c:if test="${item.mmSeq ne null}">hidden</c:if>>리셋</button>
 						<c:choose>
-							<c:when test="${item.seq eq null}">
+							<c:when test="${item.mmSeq eq null}">
 								<button type="button" class="basebutton" onclick ="runForm('add');">가입</button>
 							</c:when>
 							<c:otherwise>
@@ -168,9 +168,9 @@
 			<input type="hidden" name="shDateEnd" value="${vo.shDateEnd}">
 			<input type="hidden" name="shGender" value="${vo.shGender}"> 
 			<input type="hidden" name="pageNumber" value="${vo.pageNumber}">
-			<input type="hidden" name="pageNumber" value="${vo.pageSize}">
-			<input type="hidden" name="pageNumber" value="${vo.pageTotal}">
-   			<input type ="hidden" name="seq" value ="${item.seq}">
+			<input type="hidden" name="pageSize" value="${vo.pageSize}">
+			<input type="hidden" name="pageTotal" value="${vo.pageTotal}">
+   			<input type ="hidden" name="mmSeq" value ="${item.mmSeq}">
 		</form>
     </div> 
     
@@ -221,8 +221,8 @@
  	
  	function emailChange(){
  		
- 		var email = $("#email");
- 		var emaildomain = $("#emaildomain"); //emaildomain[0].selectedIndex
+ 		var email = $("#mmEmail");
+ 		var emaildomain = $("#mmEmaildomain"); //emaildomain[0].selectedIndex
  		var txt =  emaildomain[0].options[1].text;
  		
  		if(email.val().includes('@')){
@@ -256,8 +256,8 @@
 	                extraRoadAddr = ' (' + extraRoadAddr + ')';
 	            }
 	
-	            $('#zipCode').attr("value",data.zonecode);
-	            $('#address').attr("value",data.roadAddress); 
+	            $('#mmZipCode').attr("value",data.zonecode);
+	            $('#mmAddress').attr("value",data.roadAddress); 
 	      		
 	      		/*
 	      		var geocoder = new kakao.maps.services.Geocoder(); 
@@ -278,7 +278,7 @@
   
   	getGeoFromAddress = function(){
   
-  		var address = $('#address').val();
+  		var address = $('#mmAddress').val();
   		
   		var geocoder = new kakao.maps.services.Geocoder(); 
 
@@ -302,7 +302,7 @@
   			url:"/member/chkId",
   			type:"POST", 
   			data: {
-  				id: chkId
+  				mmId: chkId
   				},
   			async: true,
   			dataType: 'json',  

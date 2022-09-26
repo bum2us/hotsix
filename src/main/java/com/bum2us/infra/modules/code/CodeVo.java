@@ -4,14 +4,14 @@ import com.bum2us.infra.modules.base.BaseVo;
 
 public class CodeVo extends BaseVo{
 	
-	private Integer upCodeSeq;
+	private Integer upCcSeq;
 
-
-	public Integer getUpCodeSeq() {
-		return upCodeSeq;
+	public Integer getUpCcSeq() {
+		return upCcSeq;
 	}
-	public void setUpCodeSeq(Integer upCodeSeq) {
-		this.upCodeSeq = upCodeSeq;
+
+	public void setUpCcSeq(Integer upCcSeq) {
+		this.upCcSeq = upCcSeq;
 	}
 
 }

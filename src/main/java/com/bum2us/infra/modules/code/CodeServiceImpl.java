@@ -90,13 +90,13 @@ public class CodeServiceImpl implements CodeService{
 	@PostConstruct
 	public void selecListCachedCodeList() throws Exception {
 		
-		List<Code> codeListFromDb = dao.selecListCachedCodeList();
+		List<Code> codeListFromDb = dao.selectListCachedCodeList();
 		Code.cacheCodeList.clear(); 
 		Code.cacheCodeList.addAll(codeListFromDb);
-		System.out.println("cacheCodeList: " + Code.cacheCodeList.size() + " chached !");
+		System.out.println("cacheCodeList: " + Code.cacheCodeList.size() + " cached !");
 	}
 	
-	public static List<Code> selectListCached(String code) throws Exception {
+	public static List<Code> selectListCachedCode(String code) throws Exception {
 		List<Code> rt = new ArrayList<Code>();
 		for(Code codeRow : Code.cacheCodeList) {
 			if (codeRow.getGroupSeq().equals(code)) {
@@ -111,8 +111,8 @@ public class CodeServiceImpl implements CodeService{
 	public static String selectOneCachedName2Code(String name) throws Exception {
 		String rt="";
 		for(Code codeRow : Code.cacheCodeList) {
-			if (codeRow.getCodeName().equals(name)) {
-				rt = codeRow.getCodeKey();
+			if (codeRow.getCcName().equals(name)) {
+				rt = codeRow.getCcKey();
 			} else {
 				// by pass
 			}
@@ -121,12 +121,11 @@ public class CodeServiceImpl implements CodeService{
 	}
 
 
-
 	public static String selectOneCachedCode2Name(String code) throws Exception  {
 		String rt="";
 		for(Code codeRow : Code.cacheCodeList) {
-			if (codeRow.getCodeKey().equals(code)) {
-				rt = codeRow.getCodeName();
+			if (codeRow.getCcKey().equals(code)) {
+				rt = codeRow.getCcName();
 			} else {
 				// by pass
 			}

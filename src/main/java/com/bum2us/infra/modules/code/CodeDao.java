@@ -31,5 +31,5 @@ public class CodeDao {
 
 	public Code selectOne(CodeVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
 	
-	public List<Code> selecListCachedCodeList() { return sqlSession.selectList(namespace +".selectCache"); }
+	public List<Code> selectListCachedCodeList() { return sqlSession.selectList(namespace +".selectListCachedCodeList"); }
 }

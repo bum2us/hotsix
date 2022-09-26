@@ -26,7 +26,7 @@
 			<div class="col text-center">
 				<span class="page_title">
 					<c:choose>
-						<c:when test="${vo.upCodeSeq eq null}">
+						<c:when test="${vo.upCcSeq eq null}">
 							코드 추가
 						</c:when>
 						<c:otherwise>
@@ -42,38 +42,38 @@
 					<div class="row my-4">
 						<div class="col-6">
 							<c:choose>
-								<c:when test="${vo.upCodeSeq eq null}">
+								<c:when test="${vo.upCcSeq eq null}">
 									<select name="groupSeq">
 										<option value="" disabled selected>코드그룹이름</option>
 										<c:forEach items="${list}" var ="list" varStatus="status">
-											<option value="<c:out value="${status.count}"/>"><c:out value="${list.groupName}"></c:out></option>									
+											<option value="<c:out value="${status.count}"/>"><c:out value="${list.ccgName}"></c:out></option>									
 										</c:forEach>	
 									</select>
 								</c:when>
 								<c:otherwise>
-									<select name="codeGroupName">
-										<option value="${item.groupName}" selected>${item.groupName}</option>									
+									<select name="ccgName">
+										<option value="${item.ccgName}" selected>${item.ccgName}</option>									
 									</select>
 								</c:otherwise>
 							</c:choose>								
 						</div>
 						<div class="col-6"> 
 							<c:choose>
-								<c:when test="${vo.upCodeSeq eq null}">
-									<select name="useNy">
+								<c:when test="${vo.upCcSeq eq null}">
+									<select name="ccUseNy">
 										<option value="" disabled selected>사용여부</option>
 										<option value="0">N</option>
 										<option value="1">Y</option>
 									</select>
 								</c:when>
 								<c:otherwise>
-									<select name="useNy">
+									<select name="ccUseNy">
 										<c:choose>
-											<c:when test="${item.useNy eq 0}">
+											<c:when test="${item.ccUseNy eq 0}">
 												<option value="0" selected>N</option>
 												<option value="1">Y</option>
 											</c:when>
-											<c:when test="${item.useNy eq 1}">
+											<c:when test="${item.ccUseNy eq 1}">
 												<option value="0">N</option>
 												<option value="1" selected>Y</option>
 											</c:when>
@@ -86,38 +86,39 @@
 					<div class="row mb-4">
 						<div class="col-6">
 							<c:choose>
-								<c:when test="${vo.upCodeSeq eq null}">
-									<input type="text" placeholder="코드" name="codeKey">
+								<c:when test="${vo.upCcSeq eq null}">
+									<input type="text" placeholder="코드" name="ccKey">
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드" name="codeKey" value="${item.codeKey}">
+									<input type="text" placeholder="코드" name="ccKey" value="${item.ccKey}">
 								</c:otherwise>
 							</c:choose>
 						</div>
 						<div class="col-6"> 
 							<c:choose>
-								<c:when test="${vo.upCodeSeq eq null}">
-									<input type="text" placeholder="코드이름" name="codeName">	
+								<c:when test="${vo.upCcSeq eq null}">
+									<input type="text" placeholder="코드이름" name="ccName">	
 								</c:when>
 								<c:otherwise>
-									<input type="text" placeholder="코드이름" name="codeName" value="${item.codeName}">
+									<input type="text" placeholder="코드이름" name="ccName" value="${item.ccName}">
 								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
-					<input type="hidden" id="seq" name="upCodeSeq" value="${vo.upCodeSeq}" >
+					<input type="hidden" id="ccSeq" name="ccSeq" value="${vo.upCcSeq}" >
 					<input type="hidden" id="" name="shUseNy" value="${vo.shUseNy }">
 					<input type="hidden" id="" name="shDateOption" value="${vo.shDateOption }">
 					<input type="hidden" id="" name="shOption" value="${vo.shOption }">
 					<input type="hidden" id="" name="shValue" value="${vo.shValue }">
-					<input type="hidden" id="" name="" value="">
-					<input type="hidden" id="" name="" value="">
+					<input type="hidden" name="pageNumber" value="${vo.pageNumber}">
+					<input type="hidden" name="pageSize" value="${vo.pageSize}">
+					<input type="hidden" name="pageTotal" value="${vo.pageTotal}">
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick="runForm('back',0)">이전</button>
 						<button type="button" class="basebutton">리셋</button>
 						<button type="button" class="basebutton" onclick="formSubmit()">
 							<c:choose>
-								<c:when test="${vo.upCodeSeq eq null}">추가</c:when>
+								<c:when test="${vo.upCcSeq eq null}">추가</c:when>
 								<c:otherwise>
 									수정
 								</c:otherwise>
@@ -155,7 +156,7 @@
 	
 	function formSubmit(btn) {
 		
-		var seq = $('#seq').val();
+		var seq = $('#ccSeq').val();
 		var form = $('#mainForm');
 		
 		if(seq =="0" || seq ==""){

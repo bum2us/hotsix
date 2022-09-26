@@ -43,5 +43,37 @@ public class CodeGroupServiceImpl implements CodeGroupService{
 		return dao.srcList(vo);
 	}
 
+	@PostConstruct
+	public void selecListCashedCodeGroupList() throws Exception {
+		// TODO Auto-generated method stub
+		
+		List<CodeGroup> codeGroupListFromDb = dao.selectListCachedCodeGroupList();
+		CodeGroup.cacheCodeGroupList.clear();
+		CodeGroup.cacheCodeGroupList.addAll(codeGroupListFromDb);
+		System.out.println("cacheCodeGroupList: " + CodeGroup.cacheCodeGroupList.size() + " cached !");
+	}
 
+	public static List<CodeGroup> selectListCachedCodeGroup(String code) throws Exception {
+		
+		List<CodeGroup> rt = new ArrayList<CodeGroup>();
+		
+		for (CodeGroup codeGroupRow : CodeGroup.cacheCodeGroupList) {
+			if(codeGroupRow.getCcgSeq().equals(code))
+				rt.add(codeGroupRow);
+		}	
+		
+		return rt;
+	}
+	
+	public static String selectOneCachedCodeGroup2Name(String code) throws Exception {
+		String rt = "";
+		
+		for (CodeGroup codeGroupRow : CodeGroup.cacheCodeGroupList) {
+			if(codeGroupRow.getCcgSeq().equals(code))
+				rt = codeGroupRow.getCcgName();
+		}
+		
+		
+		return rt;
+	}
 }

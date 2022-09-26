@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CodeController {
@@ -17,8 +18,8 @@ public class CodeController {
 	@RequestMapping(value = "/code/CodeList")
 	public String codeList(@ModelAttribute("vo")CodeVo vo, Model model) throws Exception {
 		
+		vo.setVoData();	
 		vo.setPageTotal(service.selectCount(vo));
-		vo.setPageSize(10);
 		
 		List<Code> list = service.selectList(vo);
 		model.addAttribute("list",list);
@@ -32,7 +33,7 @@ public class CodeController {
 		List<Code> list = service.selectListGroupName();
 		model.addAttribute("list", list);
 		
-		if(vo.getUpCodeSeq() != null) 
+		if(vo.getUpCcSeq() != null && vo.getUpCcSeq() != 0) 
 		{		
 			Code item = service.selectOne(vo);
 			model.addAttribute("item", item);
@@ -45,8 +46,9 @@ public class CodeController {
 	@RequestMapping(value = "/code/src")
 	public String codeSrc(Model model,@ModelAttribute("vo") CodeVo vo) throws Exception {
 		
+		vo.setVoData();	
 		vo.setPageTotal(service.selectCount(vo));
-		vo.setPageSize(10);
+		
 		List<Code> list = service.searchCode(vo);
 		model.addAttribute("list", list);		
 		
@@ -54,18 +56,37 @@ public class CodeController {
 	}
 	
 	@RequestMapping(value="/codeForm/add")
-	public String codeAdd(Code cd) throws Exception {
+	public String codeAdd(Code cd,@ModelAttribute("vo")CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
+		
+		vo.setVoData();	
+		vo.setPageTotal(service.selectCount(vo));
+		
+		System.out.println("getPageNumber : " + vo.getPageNumber());
+		System.out.println("getPageRange : " + vo.getPageRange());
+		System.out.println("getPageSize : " + vo.getPageSize());
+		System.out.println("getPageTotal : " + vo.getPageTotal());
+		
 		
 		service.insertCode(cd);
 		
-		return "infra/adnnin/codeList";
+		redirectAttributes.addFlashAttribute("vo", vo);
+		
+		return "redirect:/code/CodeList";
 	}
 	
 	@RequestMapping(value="/codeForm/upd")
-	public String codeUpdate(Model model,Code cd) throws Exception {
-		 
+	public String codeUpdate(Model model,Code cd,@ModelAttribute("vo")CodeVo vo) throws Exception {
+		
+		vo.setVoData();	
+		vo.setPageTotal(service.selectCount(vo));
+		
+		System.out.println("getPageNumber : " + vo.getPageNumber());
+		System.out.println("getPageRange : " + vo.getPageRange());
+		System.out.println("getPageSize : " + vo.getPageSize());
+		System.out.println("getPageTotal : " + vo.getPageTotal());
+		
 		service.updateCode(cd); 
 		
-		return "redirect:/code/CodeList";
+		return "infra/adnnin/codeList";
 	}
 }

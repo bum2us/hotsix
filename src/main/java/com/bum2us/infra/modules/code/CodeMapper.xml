@@ -6,32 +6,32 @@
 
 	<resultMap id="resultMapObj" type= "com.bum2us.infra.modules.code.Code"></resultMap>
 	
-		<select id="selectCache" resultMap = "resultMapObj">
+		<select id="selectListCachedCodeList" resultMap = "resultMapObj">
 		SELECT
 			groupSeq
-			,codeName
-			,codeKey
+			,ccName
+			,ccKey
 		FROM cc 
 		WHERE 1 = 1	
-		AND useNy = 1
+		AND ccUseNy = 1 
 	</select>
 	
 	
 	<sql id="searchSql">
 		<choose>
 			<when test="shOption == 1"> AND groupSeq LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 2"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 3"> AND codeName LIKE CONCAT ('%',#{shValue},'%')</when>
-			<when test="shOption == 4"> AND codeKey LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 2"> AND ccKey LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 3"> AND ccName LIKE CONCAT ('%',#{shValue},'%')</when>
+			<when test="shOption == 4"> AND ccKey LIKE CONCAT ('%',#{shValue},'%')</when>
 		</choose>
 		<choose>
 			<when test="shUseNy == 0"></when>
-			<when test="shUseNy == 1"> AND useNy LIKE 0</when>
-			<when test="shUseNy == 2"> AND useNy LIKE 1</when>
+			<when test="shUseNy == 1"> AND ccUseNy LIKE 0</when>
+			<when test="shUseNy == 2"> AND ccUseNy LIKE 1</when>
 		</choose>
-		<choose>
-			<when test="shDateOption == 1"> AND editDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shDateOption == 2"> AND createDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		<choose> 
+			<when test="shDateOption == 1"> AND ccEditDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shDateOption == 2"> AND ccCreateDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
 		</choose>
 	</sql>
 	
@@ -51,10 +51,9 @@
 		
 		SELECT
 			*
-			,b.seq as groupSeq
-			,b.groupName
+			,b.ccgSeq as groupSeq
 		FROM cc a
-		JOIN ccg b ON a.groupSeq = b.seq
+		JOIN ccg b ON a.groupSeq = b.ccgSeq
 		WHERE 
 			1=1
 		<include  refid="searchSql"/>
@@ -67,10 +66,10 @@
 		
 		SELECT
 			*
-			,b.seq as groupSeq
-			,b.groupName
+			,b.ccgSeq as groupSeq
+			,b.ccgName
 		FROM cc a
-		JOIN ccg b ON a.groupSeq = b.seq
+		JOIN ccg b ON a.groupSeq = b.ccgSeq
 		WHERE 
 			1=1
 		<include  refid="searchSql"/>
@@ -80,7 +79,7 @@
 	<select id="groupName" resultMap = "resultMapObj">
 		
 		SELECT
-			groupName
+			ccgName
 		FROM ccg 
 		
 	</select>
@@ -90,51 +89,41 @@
 		INSERT INTO cc
 		(
 			groupSeq
-			,codeName
-			,codeKey
-			,useNy
+			,ccName
+			,ccKey
+			,ccUseNy
 		)VALUES
 		(
 			#{groupSeq}
-			,#{codeName}
-			,#{codeKey}
-			,#{useNy}
+			,#{ccName}
+			,#{ccKey}
+			,#{ccUseNy}
 		)
 		
 		
 	</insert>
 	
-	<delete id="deleteCode">
-		
-		DELETE 
-		FROM 
-			cc 
-		WHERE
-			1=1
-			AND codeName LIKE '우주인'
-		
-	</delete>
-
+	
 	<update id="updateCode">
 		
 		UPDATE
 			cc
 		SET
-			codeName = #{codeName}
-			,useNy = #{useNy}
-			,codeKey = #{codeKey}
+			ccName = #{ccName}
+			,ccUseNy = #{ccUseNy}
+			,ccKey = #{ccKey}
 			,groupSeq = (
 				SELECT
-					seq
+					ccgSeq
 				FROM
 					ccg
 				WHERE
-					groupName = #{groupName}
+					ccgName = #{ccgName}
 			)
 		WHERE
 			1=1
 		AND
-			seq = #{seq}
+			ccSeq = #{ccSeq}
 	
 	</update>
 	
@@ -142,13 +131,13 @@
 		
 		SELECT
 			*
-			,b.seq as groupSeq
-			,b.groupName
+			,b.ccgSeq as groupSeq
+			,b.ccgName
 		FROM cc a
-		JOIN ccg b ON a.groupSeq = b.seq
+		JOIN ccg b ON a.groupSeq = b.ccgSeq
 		WHERE 
 			1=1
-		AND a.seq = #{upCodeSeq}
+		AND a.ccSeq = #{upCcSeq}
 		
 	</select>
 	

@@ -44,7 +44,7 @@ public class MemberController {
 			Member item = service.selectOne(vo);
 			model.addAttribute("item", item);
 			
-			System.out.println(item.getName());
+			System.out.println(item.getMmName());
 			
 		}
 		
@@ -73,9 +73,9 @@ public class MemberController {
 		
 		Map<String,Object> result = new HashMap<String,Object>();
 		
-		System.out.println("검색ID : "+ vo.getId());
+		System.out.println("검색ID : "+ vo.getMmId());
 		
-		result.put("chkCount", service.chkId(vo.getId()));
+		result.put("chkCount", service.chkId(vo.getMmId()));
 		
 		System.out.println("실행결과 count : " + result.get("chkCount"));
 		
@@ -128,15 +128,17 @@ public class MemberController {
 		
 		if(httpSession.getAttribute("sessSql") == null) 
 		{
-			httpSession.setAttribute("sessSql", item.getSeq());
-			httpSession.setAttribute("sessId", item.getId());
-			httpSession.setAttribute("sessPassword", item.getPassword());
-			httpSession.setAttribute("sessNickname", item.getNickname());
-			httpSession.setAttribute("sessEmail", item.getEmail());
-			httpSession.setAttribute("sessPhone", item.getPhone());
-			httpSession.setAttribute("sessGender", item.getGender());
-			httpSession.setAttribute("sessDob", item.getDob());
-			httpSession.setAttribute("sessComment", item.getComment());
+			/*
+			 * httpSession.setAttribute("sessSql", item.getSeq());
+			 * httpSession.setAttribute("sessId", item.getId());
+			 * httpSession.setAttribute("sessPassword", item.getPassword());
+			 * httpSession.setAttribute("sessNickname", item.getNickname());
+			 * httpSession.setAttribute("sessEmail", item.getEmail());
+			 * httpSession.setAttribute("sessPhone", item.getPhone());
+			 * httpSession.setAttribute("sessGender", item.getGender());
+			 * httpSession.setAttribute("sessDob", item.getDob());
+			 * httpSession.setAttribute("sessComment", item.getComment());
+			 */
 		}
 		
 		model.addAttribute("item", item);

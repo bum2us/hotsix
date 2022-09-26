@@ -5,78 +5,102 @@ import java.util.List;
 
 public class Code {
 	
-	private String seq;
-	private String groupName;
+	private String ccSeq;
+	private String ccgName;
 	private String groupSeq;
-	private String codeKey;
-	private String codeName;
-	private Integer useNy;
-	private String createDate;
-	private String editDate;
+	private String ccKey;
+	private String ccName;
+	private Integer ccUseNy;
+	private String ccCreateDate;
+	private String ccEditDate;
 
 	public static List<Code> cacheCodeList = new ArrayList<Code>();
 	
 	public void printAll() {
 		System.out.println("-------------------");
-		System.out.println("seq :"+seq);
-		System.out.println("groupName :"+groupName);
+		System.out.println("seq :"+ccSeq);
+		System.out.println("groupName :"+ccgName);
 		System.out.println("groupSeq :"+groupSeq);
-		System.out.println("codeKey :"+codeKey);
-		System.out.println("codeName :"+codeName);
-		System.out.println("useNy :"+useNy);
-		System.out.println("createDate :"+createDate);
-		System.out.println("editDate :"+editDate);
+		System.out.println("codeKey :"+ccKey);
+		System.out.println("codeName :"+ccName);
+		System.out.println("useNy :"+ccUseNy);
+		System.out.println("createDate :"+ccCreateDate);
+		System.out.println("editDate :"+ccEditDate);
 	}
-	
-	
-	public String getSeq() {
-		return seq;
+
+	public String getCcSeq() {
+		return ccSeq;
 	}
-	public void setSeq(String seq) {
-		this.seq = seq;
+
+	public void setCcSeq(String ccSeq) {
+		this.ccSeq = ccSeq;
 	}
-	public String getGroupName() {
-		return groupName;
+
+	public String getCcgName() {
+		return ccgName;
 	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+
+	public void setCcgName(String ccgName) {
+		this.ccgName = ccgName;
 	}
+
 	public String getGroupSeq() {
 		return groupSeq;
 	}
+
 	public void setGroupSeq(String groupSeq) {
 		this.groupSeq = groupSeq;
 	}
-	public String getCodeKey() {
-		return codeKey;
+
+	public String getCcKey() {
+		return ccKey;
 	}
-	public void setCodeKey(String codeKey) {
-		this.codeKey = codeKey;
+
+	public void setCcKey(String ccKey) {
+		this.ccKey = ccKey;
 	}
-	public String getCodeName() {
-		return codeName;
+
+	public String getCcName() {
+		return ccName;
 	}
-	public void setCodeName(String codeName) {
-		this.codeName = codeName;
+
+	public void setCcName(String ccName) {
+		this.ccName = ccName;
 	}
-	public Integer getUseNy() {
-		return useNy;
+
+	public Integer getCcUseNy() {
+		return ccUseNy;
 	}
-	public void setUseNy(Integer useNy) {
-		this.useNy = useNy;
+
+	public void setCcUseNy(Integer ccUseNy) {
+		this.ccUseNy = ccUseNy;
 	}
-	public String getCreateDate() {
-		return createDate;
+
+	public String getCcCreateDate() {
+		return ccCreateDate;
 	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
+
+	public void setCcCreateDate(String ccCreateDate) {
+		this.ccCreateDate = ccCreateDate;
 	}
-	public String getEditDate() {
-		return editDate;
+
+	public String getCcEditDate() {
+		return ccEditDate;
 	}
-	public void setEditDate(String editDate) {
-		this.editDate = editDate;
+
+	public void setCcEditDate(String ccEditDate) {
+		this.ccEditDate = ccEditDate;
 	}
+
+	public static List<Code> getCacheCodeList() {
+		return cacheCodeList;
+	}
+
+	public static void setCacheCodeList(List<Code> cacheCodeList) {
+		Code.cacheCodeList = cacheCodeList;
+	}
+	
+	
 	
 
 	
