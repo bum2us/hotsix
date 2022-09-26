@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
 <jsp:useBean id="CodeServiceImpl" class="com.bum2us.infra.modules.code.CodeServiceImpl"/>
 
 <!DOCTYPE html>
@@ -26,45 +27,28 @@
 		</div>
 		<c:set var = "listCodeGender" value = "${CodeServiceImpl.selectListCached('2')}"/>
 		<form id="mainForm">
-			<div class="row mt-4 searchForm">
+			<div class="row mt-4 searchForm" id="searchForm">
 				<div class="col">
 					<div class="row my-3">
 						<h6>검색조건</h6>
 					</div>
 					<div class="row mb-4">
 						<div class="col-3">
-							<select id="shGender">
-								<option value="" disabled selected>성별</option>
-								<c:forEach items="${listCodeGender}" var="listGender" varStatus="statusGender">
-										<option value="${statusGender.count}" <c:if test="${listGender.codeKey eq vo.shGender}">selected</c:if>><c:out value="${listGender.codeName }"/></option>
-								</c:forEach> 
-							</select>
+							<bs:selectorMember functionType="shGender" op="${vo.shGender}"></bs:selectorMember>
 						</div>
 						<div class="col-3">
-							<select name = "shDateOption" >
-								<option value="0" disabled selected>검색구분</option>
-								<option value="1">수정일</option>
-								<option value="2">등록일</option>
-								<option value="3">생년월일</option>
-							</select>
+							<bs:selectorMember functionType="shDateOption" op="${vo.shDateOption}"></bs:selectorMember>
 						</div>
 						<div class="col-3">
-							<input id="startDate" type="text" name="shDateStart" placeholder="시작일" value="" style="backcolor: black;">
+							<input id="startDate" type="text" name="shDateStart" placeholder="시작일" value="${vo.shDateStart}" style="backcolor: black;">
 						</div>
 						<div class="col-3">
-							<input id="endDate" type="text" name="shDateEnd" placeholder="종료일" value="" style="backcolor: black;">
+							<input id="endDate" type="text" name="shDateEnd" placeholder="종료일" value="${vo.shDateEnd}" style="backcolor: black;">
 						</div>
 					</div>
 					<div class="row mb-4">
 						<div class="col-3">
-							<select name="shOption" id="shOption" >
-								<option value="0"  disabled selected>검색 위치</option>
-								<option value="1">이름</option>
-								<option value="2">ID</option>
-								<option value="3">닉네임</option>
-								<option value="4">email</option>
-								<option value="5">휴대전화</option>
-							</select>
+							<bs:selectorMember functionType="shOption" op="${vo.shOption}"></bs:selectorMember>
 						</div>
 						<div class="col">
 							<input type="text" name="shValue" placeholder="검색어" value="${vo.shValue}"> 
@@ -99,7 +83,8 @@
 								<td>
 									<input onclick="event.stopPropagation()" name="listCheckbox" class="form-check-input" type="checkbox">
 								</td>
-								<td><c:out value="${list.seq}"/></td>
+								<td style="display: none"><c:out value="${list.seq }"/></td>
+								<td><c:out value="${status.count}"/></td>
 								<td><c:out value="${list.name}"/></td>
 								<td><c:out value="${list.id}"/></td>
 								<td><c:out value="${list.nickname}"/></td>
@@ -129,7 +114,7 @@
 		</form>	 
 		<div class="row">
 			<div class="col-2">
-				<button type="button" class="buttons" onclick="delitem()"><i class="fa-solid fa-xmark"></i></button>
+				<button type="button" class="buttons" onclick="uelitem()"><i class="fa-solid fa-xmark"></i></button>
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
 			<div class="col-1 offset-9 text-end">
@@ -201,20 +186,28 @@
 		  
 	  }
 	  
-	  delitem = function() {
+	  uelitem = function() {
 		  
 		  var txt = "";
 		  var checkbox = $("input[name=listCheckbox]:checked");
 		  
 		  checkbox.each(function(i) {
-			   
+			  
+			  var addtag ="";
+			  
 			  var tr = checkbox.parent().parent().eq(i);
 			  var td = tr.children();
 			  
-			  txt += td.eq(2).text() + "  ";
+			  txt += td.eq(1).text() + "  ";
+			  
+			  addtag = '<input type="hidden" name="seqVoList['+i+'].shSeq" value="'+ td.eq(1).text() +'">' 
+			  
+			  $("#searchForm").after(addtag);
 			  
 		  });
-		  alert(txt);
+		  //alert(txt);
+		  
+		  form.attr("action", "/member/memberUelete" ).submit();
 	  }
 	  
 	</script>		

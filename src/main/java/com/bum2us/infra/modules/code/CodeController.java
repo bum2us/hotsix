@@ -19,6 +19,7 @@ public class CodeController {
 		
 		vo.setPageTotal(service.selectCount(vo));
 		vo.setPageSize(10);
+		
 		List<Code> list = service.selectList(vo);
 		model.addAttribute("list",list);
 		

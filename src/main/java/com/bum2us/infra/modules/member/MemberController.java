@@ -28,6 +28,7 @@ public class MemberController {
 		vo.setVoData();		
 	
 		vo.setPageTotal(service.selectCount(vo));
+		
 		List<Member> list = service.selectList(vo);
 
 		model.addAttribute("list", list);
@@ -51,11 +52,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value ="/member/formAction")
-	public String memberAction(@ModelAttribute("vo") Member vo) throws Exception{
+	public String memberAction(@ModelAttribute("vo")MemberVo vo, Member item, Model model) throws Exception{
 		
-		service.updateOne(vo);
+		service.updateOne(item);
 		
-		return "infra/adnnin/mamberList";
+		vo.setVoData();		
+		
+		vo.setPageTotal(service.selectCount(vo));
+		
+		List<Member> list = service.selectList(vo);
+
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/memberList";
 	}
 	
 	@ResponseBody
@@ -84,6 +93,22 @@ public class MemberController {
 		//return "infra/user/infoFormReg";
 		
 		return "infra/adnnin/memberForm";
+	}
+	
+	@RequestMapping(value ="/member/memberUelete")
+	public String memberUelete(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+		
+		service.uelete(vo);
+		
+		vo.setVoData();		
+		
+		vo.setPageTotal(service.selectCount(vo));
+		
+		List<Member> list = service.selectList(vo);
+
+		model.addAttribute("list", list);
+		
+		return "infra/adnnin/memberList";
 	}
 	
 	

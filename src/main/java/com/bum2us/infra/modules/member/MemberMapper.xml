@@ -23,16 +23,17 @@
 		FROM member
 		WHERE 1 = 1
 		<include refid="searchSql"/>
-		<include refid="rangeSql"/>
 	</select>
 	
-	<sql id="rangeSql">
+	<sql id="rangeSql"> 
 		LIMIT #{pageSize} OFFSET #{pageRange}  
 	</sql>
 	
 	<sql id="searchSql">
+		AND delNy LIKE 0  
 		AND
 		<choose>
+			<when test= "shOption == null"> name </when>
 			<when test= "shOption == 1"> name </when>
 			<when test= "shOption == 2"> id </when>
 			<when test= "shOption == 3"> nickname </when>
@@ -40,22 +41,23 @@
 			<when test= "shOption == 5"> phone </when>
 			<when test= "shOption == 6"> gender </when>
 		</choose>
-		LIKE CONCAT ('%',#{shValue},'%')
-		AND 
 		<choose>
+			<when test=" shValue == null">LIKE CONCAT ('%','','%')</when>
+			<when test=" shValue != null">LIKE CONCAT ('%',#{shValue},'%')</when> 
+		</choose> 
+			<if test="shGender != null">AND gender LIKE #{shGender}</if> 
+		<choose>
+			<when test="shDateOption == null">AND  createDate </when>
 			<when test="shDateOption == 1">  </when>
-			<when test="shDateOption == 2"> createDate </when>
-			<when test="shDateOption == 3"> dob </when>
+			<when test="shDateOption == 2">AND  createDate </when>
+			<when test="shDateOption == 3">AND  dob </when>
 		</choose>
-		AND
 		<choose>
-			<when test="shGender == 1"> gender LIKE 남 </when>
-			<when test="shGender == 2"> gender LIKE 여 </when>
-			<when test="shGender == 3"> gender LIKE 기타 </when>
-		</choose>
-		BETWEEN #{shDateStart} AND #{shDateEnd}
+			<when test = 'shDateStart == null or shDateStart ==""'> BETWEEN CONCAT('1700-01-01', ' 00:00:00') AND CONCAT('2300-01-01',' 00:00:00') </when>
+			<when test = "shDateStart != null and shDateEnd != null">BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+		</choose>  
 		
-	</sql>
+	</sql> 
 
 	<select id="selectOneCount" resultType="Integer">
 		
@@ -133,10 +135,25 @@
 			name = #{name}
 			,id = #{id}
 			,comment = #{comment}
+			,nickname = #{nickname}
+			,phone = CONCAT('010',#{phone1},#{phone2})
+			,zipCode = #{zipCode}
+			,address = #{address}
+			,addressDetail = #{addressDetail} 
 		WHERE
 			1=1
 		AND
 			seq = #{seq}		
+	</update>
+	
+	<update id ="uelete">
+		
+		UPDATE
+			member
+		SET
+			delNy = 1
+		WHERE
+			seq = #{shSeq}
 	</update>
 	
 </mapper> 

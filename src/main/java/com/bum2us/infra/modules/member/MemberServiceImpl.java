@@ -1,5 +1,6 @@
 package com.bum2us.infra.modules.member;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -62,5 +63,18 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return dao.selectCount(id);
 	}
+
+	@Override
+	public void uelete(MemberVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		for (MemberVo item : vo.getSeqVoList()) {
+			
+			dao.uelete(item);
+		}
+		
+		
+	}
+	
 	
 }

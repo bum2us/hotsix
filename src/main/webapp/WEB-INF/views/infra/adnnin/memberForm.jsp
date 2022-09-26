@@ -26,7 +26,7 @@
 			<div class="col text-center">
 				<span class="page_title">
 				<c:choose>
-					<c:when test = "${item.seq eq 0}">
+					<c:when test = "${item.seq eq null}">
 						회원 추가
 					</c:when>
 					<c:otherwise>
@@ -73,18 +73,19 @@
 						<div class="col-3">
 							<select name="gender" id="gender" >
 								<option value="0" disabled selected>성별</option>
-								<option value="1" >남</option>
-								<option value="2" >여</option>
-								<option value="3" >기타</option>
+								<option value="1" <c:if test="${item.gender eq 1}">selected</c:if>>남</option>
+								<option value="2" <c:if test="${item.gender eq 2}">selected</c:if>>여</option>
+								<option value="3" <c:if test="${item.gender eq 3}">selected</c:if>>기타</option>
 							</select>
 						</div>
 					</div>
                     <div class="row mb-4">
-						<div class="col-3">
-							<input type="text" name="email" placeholder="이메일" value="${item.email}"> 
+						<div class="col-5">
+							<input type="text" id="email" name="email" placeholder="이메일" value="${item.email}"> 
 						</div>
+						<!-- 
                         <div class="col-2">
-							<select>
+							<select id="emaildomain" onchange = "emailChange()">
 								<option value="0" disabled selected>메일선택</option>
 								<option value="1" >naver.com</option>
 								<option value="2" >kakao.com</option>
@@ -92,28 +93,29 @@
                                 <option value="4" >직접입력</option>
 							</select>
 						</div>
+						 -->
                         <div class="col-2">
                             <select name="telecom" >
 								<option value="0" disabled selected>통신사</option>
-								<option value="1" >SKT</option>
-								<option value="2" >KT</option>
-								<option value="3" >LG</option>
-                                <option value="4" >알뜰폰</option>
+								<option value="1" <c:if test="${item.telecom eq 1}">selected</c:if>>SKT</option>
+								<option value="2" <c:if test="${item.telecom eq 2}">selected</c:if>>KT</option>
+								<option value="3" <c:if test="${item.telecom eq 3}">selected</c:if>>LG</option>
+                                <option value="4" <c:if test="${item.telecom eq 4}">selected</c:if>>알뜰폰</option>
 							</select>
                         </div>
                         <div class="col-1">
                             <input type="text" value="010" style="text-align:center">
                         </div>
                         <div class="col-2">
-                            <input type="text" name="phone1" placeholder="XXXX" style="text-align:center">
+                            <input type="text" name="phone1" placeholder="XXXX" value="${item.phone.substring(3,7)}" style="text-align:center">
                         </div>
                         <div class="col-2">
-                            <input type="text" name="phone2" placeholder="XXXX" style="text-align:center">
+                            <input type="text" name="phone2" placeholder="XXXX" value="${item.phone.substring(7,11)}" style="text-align:center">
                         </div>
                     </div>
                     <div class="row mb-4">
                    		<div class="col-2">
-                   			<input type="text" id="zipCode" name="zipCode" placeholder="우편번호" readonly>
+                   			<input type="text" id="zipCode" name="zipCode" placeholder="우편번호" value="${item.zipCode}" readonly>
                    		</div>
                    		<div class="col-2 text-left">
                    			<button type="button" class="basebutton" onclick="searchAdd()">우편번호 찾기</button>
@@ -121,10 +123,10 @@
                    	</div>
                    	<div class="row mb-4">
                    		<div class="col-6">
-                   			<input type="text" id="address" name="address" placeholder="주소" readonly>
+                   			<input type="text" id="address" name="address" placeholder="주소" value="${item.address}" readonly>
                    		</div>
                    		<div class="col-6">
-                   			<input type="text" id="addressDetail" name="addressDetail" placeholder="상세주소">
+                   			<input type="text" id="addressDetail" name="addressDetail" placeholder="상세주소" value="${item.addressDetail}">
                    		</div>
                    	</div>
                    	<!-- 
@@ -146,8 +148,16 @@
 					</div>
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick ="runForm('return');">이전</button>
-						<button type="button" class="basebutton">리셋</button>
-						<button type="button" class="basebutton" onclick ="runForm('add');">가입</button>
+						<button type="button" class="basebutton" <c:if test="${item.seq ne null}">hidden</c:if>>리셋</button>
+						<c:choose>
+							<c:when test="${item.seq eq null}">
+								<button type="button" class="basebutton" onclick ="runForm('add');">가입</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="basebutton" onclick ="runForm('edit');">수정</button>
+							</c:otherwise>
+						</c:choose>
+						
 					</div>
 				</div>
 			</div>
@@ -156,12 +166,14 @@
 			<input type="hidden" name="shDateOption" value="${vo.shDateOption}">
 			<input type="hidden" name="shDateStart" value="${vo.shDateStart}">
 			<input type="hidden" name="shDateEnd" value="${vo.shDateEnd}">
-			<input type="hidden" name="shUseNy" value="${vo.shUseNy}">
+			<input type="hidden" name="shGender" value="${vo.shGender}"> 
 			<input type="hidden" name="pageNumber" value="${vo.pageNumber}">
+			<input type="hidden" name="pageNumber" value="${vo.pageSize}">
+			<input type="hidden" name="pageNumber" value="${vo.pageTotal}">
+   			<input type ="hidden" name="seq" value ="${item.seq}">
 		</form>
     </div> 
     
-    <input type ="hidden" name="seq" value ="${vo.shSeq}">
     
 	<%@include file="../common/user/footer.jsp" %>
 	
@@ -198,10 +210,30 @@
   		{
 			form.attr("action","/member/memberAdd").submit(); 		
   		}
+	  	case "edit":
+  		{
+	  		form.attr("action","/member/formAction").submit();
+  		}
 	  
 	  }
 	
   }
+ 	
+ 	function emailChange(){
+ 		
+ 		var email = $("#email");
+ 		var emaildomain = $("#emaildomain"); //emaildomain[0].selectedIndex
+ 		var txt =  emaildomain[0].options[1].text;
+ 		
+ 		if(email.val().includes('@')){
+ 			
+ 		}
+ 		else{
+ 			email.attr('value',email.val()+'@'+ txt);
+ 		}
+ 		
+ 	}
+ 	
   searchAdd = function() {
 		
 		new daum.Postcode({

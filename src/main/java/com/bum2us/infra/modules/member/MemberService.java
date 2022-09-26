@@ -19,4 +19,6 @@ public interface MemberService {
 	public void updateOne(Member mb) throws Exception; 
 
 	public int chkId(String id) throws Exception;
+	
+	public void uelete(MemberVo vo) throws Exception;
 }

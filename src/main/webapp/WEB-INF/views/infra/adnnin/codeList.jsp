@@ -38,10 +38,10 @@
 							<bs:selectorCode functionType="shDateOption" op="${vo.shDateOption}"></bs:selectorCode>
 						</div>
 						<div class="col-3">
-							<input name="shDateStart" id="startDate" type="text" placeholder="시작일">
+							<input name="shDateStart" id="startDate" type="text" value="${vo.shDateStart }" placeholder="시작일">
 						</div>
 						<div class="col-3">
-							<input name="shDateEnd" id="endDate" type="text" placeholder="종료일">
+							<input name="shDateEnd" id="endDate" type="text" value="${vo.shDateEnd }" placeholder="종료일">
 						</div>
 					</div>
 					<div class="row mb-4">

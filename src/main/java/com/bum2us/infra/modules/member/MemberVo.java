@@ -1,5 +1,8 @@
 package com.bum2us.infra.modules.member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bum2us.infra.modules.base.BaseVo;
 
 public class MemberVo extends BaseVo{
@@ -9,6 +12,8 @@ public class MemberVo extends BaseVo{
 	private Integer shSeq;
 	private Integer shGender;
 
+	private List<MemberVo> seqVoList = new ArrayList<MemberVo>();
+	
 	public String getShId() {
 		return shId;
 	}
@@ -32,6 +37,12 @@ public class MemberVo extends BaseVo{
 	}
 	public void setShGender(Integer shGender) {
 		this.shGender = shGender;
+	}
+	public List<MemberVo> getSeqVoList() {
+		return seqVoList;
+	}
+	public void setSeqVoList(List<MemberVo> seqVoList) {
+		this.seqVoList = seqVoList;
 	}
 	
 	
