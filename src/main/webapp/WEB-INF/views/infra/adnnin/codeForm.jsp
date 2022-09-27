@@ -110,6 +110,8 @@
 					<input type="hidden" id="" name="shDateOption" value="${vo.shDateOption }">
 					<input type="hidden" id="" name="shOption" value="${vo.shOption }">
 					<input type="hidden" id="" name="shValue" value="${vo.shValue }">
+					<input type="hidden" id="" name="shDateStart" value="${vo.shDateStart }">
+					<input type="hidden" id="" name="shDateEnd" value="${vo.shDateEnd }">
 					<input type="hidden" name="pageNumber" value="${vo.pageNumber}">
 					<input type="hidden" name="pageSize" value="${vo.pageSize}">
 					<input type="hidden" name="pageTotal" value="${vo.pageTotal}">

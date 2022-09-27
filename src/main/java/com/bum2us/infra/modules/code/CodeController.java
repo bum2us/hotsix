@@ -18,7 +18,6 @@ public class CodeController {
 	@RequestMapping(value = "/code/CodeList")
 	public String codeList(@ModelAttribute("vo")CodeVo vo, Model model) throws Exception {
 		
-		vo.setVoData();	
 		vo.setPageTotal(service.selectCount(vo));
 		
 		List<Code> list = service.selectList(vo);
@@ -43,29 +42,10 @@ public class CodeController {
 		return "infra/adnnin/codeForm";
 	}
 	
-	@RequestMapping(value = "/code/src")
-	public String codeSrc(Model model,@ModelAttribute("vo") CodeVo vo) throws Exception {
-		
-		vo.setVoData();	
-		vo.setPageTotal(service.selectCount(vo));
-		
-		List<Code> list = service.searchCode(vo);
-		model.addAttribute("list", list);		
-		
-		return "infra/adnnin/codeList";
-	}
-	
 	@RequestMapping(value="/codeForm/add")
 	public String codeAdd(Code cd,@ModelAttribute("vo")CodeVo vo, RedirectAttributes redirectAttributes) throws Exception {
 		
-		vo.setVoData();	
 		vo.setPageTotal(service.selectCount(vo));
-		
-		System.out.println("getPageNumber : " + vo.getPageNumber());
-		System.out.println("getPageRange : " + vo.getPageRange());
-		System.out.println("getPageSize : " + vo.getPageSize());
-		System.out.println("getPageTotal : " + vo.getPageTotal());
-		
 		
 		service.insertCode(cd);
 		
@@ -76,14 +56,8 @@ public class CodeController {
 	
 	@RequestMapping(value="/codeForm/upd")
 	public String codeUpdate(Model model,Code cd,@ModelAttribute("vo")CodeVo vo) throws Exception {
-		
-		vo.setVoData();	
+			
 		vo.setPageTotal(service.selectCount(vo));
-		
-		System.out.println("getPageNumber : " + vo.getPageNumber());
-		System.out.println("getPageRange : " + vo.getPageRange());
-		System.out.println("getPageSize : " + vo.getPageSize());
-		System.out.println("getPageTotal : " + vo.getPageTotal());
 		
 		service.updateCode(cd); 
 		

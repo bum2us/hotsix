@@ -39,10 +39,10 @@
 							<bs:selectorCode functionType="shDateOption" op="${vo.shDateOption}"></bs:selectorCode>
 						</div>
 						<div class="col-3">
-							<input name="shDateStart" id="shDateStart" type="text" value="${vo.shDateStart }" placeholder="시작일">
+							<input name="shDateStart" id="startDate" type="text" value="${vo.shDateStart }" placeholder="시작일">
 						</div>
 						<div class="col-3">
-							<input name="shDateEnd" id="shDateEnd" type="text" value="${vo.shDateEnd }" placeholder="종료일">
+							<input name="shDateEnd" id="endDate" type="text" value="${vo.shDateEnd }" placeholder="종료일">
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<button type="submit" class="basebutton">검색</button>
+						<button type="button" class="basebutton" onclick="runForm('src',0);">검색</button>
 						<button type="button" class="basebutton" onclick="location.href='http://localhost:8080/code/CodeList'">리셋</button>
 					</div>
 				</div>
@@ -104,7 +104,7 @@
 				</table>
 			</div>
 			<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
-			<bs:pagingCode pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingCode> 
+			<bs:paging pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:paging> 
 			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">
 			<input type="hidden" id="upCcSeq" name="upCcSeq" value="">
 			<div class="row">
@@ -153,7 +153,7 @@
 			{			 
 			case "src":
 				{
-					form.attr("action","/code/src").submit();
+					form.attr("action","/code/CodeList").submit();
 					break;
 				}
 			case "page":

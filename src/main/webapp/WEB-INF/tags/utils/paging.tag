@@ -1,4 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8" body-content="tagdependent"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="pageNo" type="java.lang.Integer" %>
 <%@ attribute name="pageTotal" type="java.lang.Integer" %>
@@ -9,6 +10,15 @@
 int startIdx = 0;
 int endIdx = 0;
 int countIdx = 0;
+
+if(pageNo == null)
+	pageNo = 1;
+
+if(pageSize == null)
+	pageSize = 10;
+
+if(pageTotal == null)
+	pageTotal = 30;
 
 pageTotal = pageTotal/pageSize;
 pageTotal++;

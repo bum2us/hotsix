@@ -105,7 +105,7 @@
 			
 			<%-- 페이징 기능 --%>
 			<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
-			<bs:pagingMember pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:pagingMember>
+			<bs:paging pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:paging>
 			
 			<%-- hidden input --%>
 			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">

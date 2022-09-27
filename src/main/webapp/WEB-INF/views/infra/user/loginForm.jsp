@@ -45,7 +45,7 @@
 						<div class="row mb-4">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="text" required="required" name="id">
+									<input type="text" required="required" id="mmId" name="id">
 									<span>USER ID</span>
 								</div>
 							</div>
@@ -53,14 +53,14 @@
 						<div class="row mb-3">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="password" required="required" name="password">
+									<input type="password" required="required" id="mmPassword" name="password">
 									<span>PASSWORD</span>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-4 p-0"> 
-								<a style="--clr:#FF9F29; color:gray;" onclick="submitform()">
+								<a style="--clr:#FF9F29; color:gray;" href="javascript:submitform()">
 									<span></span><span></span><span></span><span></span>Login
 								</a>
 							</div>
@@ -75,43 +75,57 @@
 								</a>
 							</div>
 						</div>
-						<c:choose>
-							<c:when test ="${item eq 0}"> 
-								<div class="row text-center mt-3">
-									<span style="font-size:8pt; color:red;">잘못된 아이디/비밀번호 입니다. 다시 시도하세요.</span>
-								</div>
-							</c:when>
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
+						<div class="row text-center mt-3">
+							<span id="errmsg" style="font-size:8pt; color:red; display: none;">잘못된 아이디/비밀번호 입니다. 다시 시도하세요.</span>
+						</div>
 					</div>
 				</div>
 			</form>	
 		</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		
-	function submitform(){
+    submitform = function(){		
+		
+		if($('#mmId').val() == null || $('#mmId').val().length < 1)
+		{ 
+			swal("안돼 돌아가", "아이디를 입력하세요", "error");
+			$('#mmId').focus();			
+			return false;
+		}
+		
+		if($('#mmPassword').val() == null || $('#mmPassword').val().length < 1)
+		{
+			swal("안돼 돌아가", "비밀번호를 입력하세요", "error");
+			$('#mmPassword').focus();
+			return false;
+		}
+		
+		$.ajax({
 			
-		if($('input[name=id]').val() == null || $('input[name=id]').val().length < 1)
-		{
-			alert("아이디를 입력하세요");
-			$('input[name=id]').focus();			
-			return false;
-		}
-		
-		if($('input[name=password]').val() == null || $('input[name=password]').val().length < 1)
-		{
-			alert("비밀번호를 입력하세요");
-			$('input[name=password]').focus();
-			return false;
-		}
-		
-		$('#loginform').submit();
-
+			url:"/member/login",
+			type:"POST",
+			data: {
+				mmId : $('#mmId').val(),
+				mmPassword : $('#mmPassword').val()
+			},
+			dataType: "json",
+			success:function(result){
+				if(result.rt == "success" ){ 
+					location.href="/main";
+				}else{
+					$("#errmsg").show();
+				}
+			},
+			error:function(){
+				alert("error..!!");
+			}
+			
+		});
 	}
 		
 		

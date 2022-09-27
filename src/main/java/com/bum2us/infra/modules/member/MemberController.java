@@ -24,8 +24,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/memberList")
 	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
-			
-		vo.setVoData();		
 	
 		vo.setPageTotal(service.selectCount(vo));
 		
@@ -55,8 +53,6 @@ public class MemberController {
 	public String memberAction(@ModelAttribute("vo")MemberVo vo, Member item, Model model) throws Exception{
 		
 		service.updateOne(item);
-		
-		vo.setVoData();		
 		
 		vo.setPageTotal(service.selectCount(vo));
 		
@@ -100,8 +96,6 @@ public class MemberController {
 		
 		service.uelete(vo);
 		
-		vo.setVoData();		
-		
 		vo.setPageTotal(service.selectCount(vo));
 		
 		List<Member> list = service.selectList(vo);
@@ -113,37 +107,30 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/main")
-	public String main(Model model,Member mb,HttpSession httpSession) throws Exception {
+	public String main(Model model) throws Exception {
 		
-		if(httpSession.getAttribute("sessSql") != null)
-			return "infra/user/mainForm";
+		return "infra/user/mainForm";
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/member/login")
+	public Map<String,Object> loginChk(Member mb,HttpSession httpSession) throws Exception{
+		
+		Map<String,Object> result = new HashMap<String,Object>();
 		
 		Member item = service.chkLogin(mb);
 		
-		if(item == null) 
-		{	
-			model.addAttribute("item", 0);
-			return "infra/user/loginForm";
+		if(item == null)
+			result.put("rt", "error");
+		else {
+			result.put("rt","success");
+
+			httpSession.setAttribute("sessSeq", item.getMmSeq());
+			httpSession.setAttribute("sessId", item.getMmId());
+			httpSession.setAttribute("sessNickName", item.getMmNickname());
 		}
 		
-		if(httpSession.getAttribute("sessSql") == null) 
-		{
-			/*
-			 * httpSession.setAttribute("sessSql", item.getSeq());
-			 * httpSession.setAttribute("sessId", item.getId());
-			 * httpSession.setAttribute("sessPassword", item.getPassword());
-			 * httpSession.setAttribute("sessNickname", item.getNickname());
-			 * httpSession.setAttribute("sessEmail", item.getEmail());
-			 * httpSession.setAttribute("sessPhone", item.getPhone());
-			 * httpSession.setAttribute("sessGender", item.getGender());
-			 * httpSession.setAttribute("sessDob", item.getDob());
-			 * httpSession.setAttribute("sessComment", item.getComment());
-			 */
-		}
-		
-		model.addAttribute("item", item);
-		
-		return "infra/user/mainForm";
+		return result;
 	}
 }
 

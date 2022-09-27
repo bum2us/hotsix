@@ -17,8 +17,8 @@ public class CodeGroupServiceImpl implements CodeGroupService{
 	CodeGroupDao dao;
 	
 	@Override
-	public List<CodeGroup> selectList() throws Exception {
-		return dao.selectList();
+	public List<CodeGroup> selectList(CodeGroupVo vo) throws Exception {
+		return dao.selectList(vo);
 	}
 
 	@Override
@@ -76,4 +76,31 @@ public class CodeGroupServiceImpl implements CodeGroupService{
 		
 		return rt;
 	}
+
+	@Override
+	public Integer selectListCount(CodeGroupVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		
+		
+		return dao.selectListCount(vo);
+	}
+
+	@Override
+	public CodeGroup selectOne(CodeGroupVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectOne(vo);
+	}
+
+	@Override
+	public void updateGroup(CodeGroup cg) throws Exception {
+		// TODO Auto-generated method stub
+		
+		dao.updateGroup(cg);
+	}
+
+
+	
+	
+	
 }

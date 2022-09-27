@@ -86,6 +86,14 @@ public class BaseVo {
 	}
 	public void setPageTotal(Integer pageTotal) {
 		this.pageTotal = pageTotal;
+		
+		if(this.pageNumber == null)
+			this.pageNumber = 1;
+		if(this.pageSize == null)
+			this.pageSize = 10;
+		this.pageRange = (this.pageNumber - 1) * this.pageSize;
+		
+		showPage();
 	}
 	public void setPageParams(BaseVo vo) {	
 		this.pageTotal = vo.pageTotal;
@@ -99,19 +107,4 @@ public class BaseVo {
 		System.out.println("pageRange-"+pageRange);
 		System.out.println("pageTotal-"+pageTotal);
 	}
-	
-	public void setVoData() throws Exception {
-    		 
-		if(this.shDateOption != null && this.shDateOption == 2) {
-			this.shDateStart = this.shDateStart + " 00:00:00";
-			this.shDateEnd =  this.shDateEnd + " 23:59:59";
-		}
-		
-		if(this.pageNumber == null)
-			this.pageNumber = 1;
-		if(this.pageSize == null)
-			this.pageSize = 10;
-		this.pageRange = (this.pageNumber - 1) * this.pageSize;
-    	
-    }
 }

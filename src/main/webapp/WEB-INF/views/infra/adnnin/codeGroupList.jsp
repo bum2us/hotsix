@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="bs" tagdir="/WEB-INF/tags/utils" %>
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -18,6 +19,7 @@
 	
 	<%@include file="../common/adnnin/header.jsp" %>
 	<div class="container">
+		<form id="mainForm" method="POST">
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
@@ -25,7 +27,6 @@
 			</div>
 		</div>
 		<div class="row mt-4 searchForm">
-			<form action="/codegroup/Src">
 				<div class="col">
 					<div class="row my-3">
 						<h6>검색조건</h6>
@@ -65,74 +66,69 @@
 						</div>
 					</div>
 					<div class="row mb-3">
-						<button type="submit" class="basebutton">검색</button>
-						<button type="button" class="basebutton">리셋</button>
+						<button type="button" class="basebutton" onclick="runForm('src',0)">검색</button>
+						<button type="button" class="basebutton" onclick="location.href='/codegroup/codeGroupList'">리셋</button>
 					</div>
 				</div>
-			</form>
-		</div>
-		
-		<div class="row my-4 justify-content-center">
-			<table>
-				<thead>
-					<tr>
-						<th><input class="form-check-input" type="checkbox"></th>
-						<th>#</th>
-						<th>코드그룹 코드</th>
-						<th>코드그룹 이름(한글)</th>
-						<th>사용여부</th>
-						<th>코드갯수</th>
-						<th>등록일</th>
-						<th>수정일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:choose>
-						<c:when test="${fn:length(list) eq 0}">
-							<tr>
-								<td colspan="8" style="text-align: center;">No data...!<td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${list}" var="list" varStatus="status">
+			</div>
+			
+			<div class="row my-4 justify-content-center">
+				<table>
+					<thead>
+						<tr>
+							<th><input class="form-check-input" type="checkbox"></th>
+							<th>#</th>
+							<th>코드그룹 코드</th>
+							<th>코드그룹 이름(한글)</th>
+							<th>사용여부</th>
+							<th>코드갯수</th>
+							<th>등록일</th>
+							<th>수정일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${fn:length(list) eq 0}">
 								<tr>
-									<td>
-										<input class="form-check-input" type="checkbox">
-									</td>
-									<td><c:out value="${list.seq }"/></td>
-									<td><c:out value="${list.seq }"/></td>
-									<td><c:out value="${list.groupName }"/></td>
-									<td><c:out value="${list.groupUseNy} "/></td>
-									<td><c:out value="${list.codeCount}"/></td>
-									<td><c:out value="${list.createDate}" /></td>
-									<td><c:out value="${list.editDate }"></c:out></td>
-								</tr>	
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-		</div>
-		<div class="row justify-content-center">
-			<ul class="pagination">
-				<li class="pageList"><a class="prev" href="#">Previous</a></li>
-				<li class="pageList pageNumber active"><a href="#">1</a></li>
-				<li class="pageList pageNumber"><a href="#">2</a></li>
-				<li class="pageList pageNumber"><a href="#">3</a></li>
-				<li class="pageList pageNumber"><a href="#">4</a></li>
-				<li class="pageList pageNumber"><a href="#">5</a></li>
-				<li class="pageList"><a class="next" href="#">Next</a></li>
-			</ul>	
-		</div>
-		<div class="row">
-			<div class="col-2">
-				<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
-				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
+									<td colspan="8" style="text-align: center;">No data...!<td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="list" varStatus="status">
+									<tr onclick="runForm('form',${list.ccgSeq})"> 
+										<td onclick="event.stopPropagation()">
+											<input class="form-check-input" type="checkbox">
+										</td>
+										<td><c:out value="${status.count }"/></td>
+										<td><c:out value="${list.ccgSeq }"/></td>
+										<td><c:out value="${list.ccgName }"/></td>
+										<td>
+										<c:if test="${list.ccgUseNy eq 0}">N</c:if>
+										<c:if test="${list.ccgUseNy eq 1}">Y</c:if>
+										</td>
+										<td><c:out value="${list.codeCount}"/></td>
+										<td><c:out value="${list.ccgCreateDate}" /></td>
+										<td><c:out value="${list.ccgEditDate }"></c:out></td>
+									</tr>	
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
 			</div>
-			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="location.href='/codegroup/codeGroupForm'"><i class="fa-solid fa-plus"></i></button>
+			<bs:paging pageNo ="${vo.pageNumber}" pageTotal="${vo.pageTotal}" pageSize="${vo.pageSize}"></bs:paging> 
+			<div class="row">
+				<div class="col-2">
+					<button type="button" class="buttons"><i class="fa-solid fa-xmark"></i></button>
+					<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button>
+				</div>
+				<div class="col-1 offset-9 text-end">
+					<button type="button" class="buttons" onclick="runForm('add',0)"><i class="fa-solid fa-plus"></i></button>
+				</div>
 			</div>
-		</div>
+			<input type="hidden" id="upCcgSeq" name="upCcgSeq" value="${vo.upCcgSeq }">
+			<input type="hidden" id="pageNumber" name="pageNumber" value="${vo.pageNumber}">
+		</form>
     </div>
 	<%@include file="../common/adnnin/footer.jsp" %>
 
@@ -160,6 +156,43 @@
 	    	dateFormat: "yy-mm-dd"
 	    });
 	  } );
+	  
+	  
+	  runForm = function(key,no) {
+		  
+		  var form = $("#mainForm");
+		  
+		  switch(key)
+		  {
+		  	case "src":
+		    {
+		  		form.attr("action","/codegroup/codeGroupList").submit();
+		  		break;
+		    }
+		  	case "add":
+		  	{
+		  		var seq = $("#upCcgSeq");
+				seq.attr("value",null);
+		  		form.attr("action","/codegroup/codeGroupForm").submit();
+		  		break;
+	  		}
+		  	case "form":
+			{
+				var seq = $("#upCcgSeq");
+				seq.attr("value",no);
+				form.attr("action","/codegroup/codeGroupForm").submit();
+				break;
+			}
+		  	case "page":
+			{
+				var pageno = $("#pageNumber");
+				pageno.attr("value",no);
+				form.attr("action","/codegroup/codeGroupList").submit();
+				break;
+			}		
+		  
+		  }
+	  }
 	</script>		
 </body>
 </html>

@@ -8,6 +8,15 @@
 
     <resultMap id="resultMapObj" type="com.bum2us.infra.modules.codegroup.CodeGroup"></resultMap>
 	
+	<select id="selectListCount" resultType="Integer">
+		SELECT
+			COUNT(*)
+		FROM
+			ccg
+		WHERE 1=1	
+		<include  refid="searchSql"/>
+	</select>
+	
 	<select id="selectList" resultMap="resultMapObj">
 		<!-- 
 		SELECT
@@ -32,11 +41,13 @@
 		 	WHERE groupSeq = a.ccgSeq 
 		 	) AS codeCount
 		 FROM ccg a
-		 
+		 WHERE 1=1
+		 <include  refid="searchSql"/>
+		 <include refid="rangeSql"/>
 	</select>
 	
 	<select id="srcList" resultMap = "resultMapObj">
-		
+		 
 		SELECT
 			*
 			,(
@@ -51,20 +62,41 @@
 		
 	</select>
 	
+	<sql id="rangeSql">
+		LIMIT #{pageSize} OFFSET #{pageRange}  
+	</sql>
+	
 	<sql id="searchSql">
 		<choose>
+			<when test="shOption == null"></when>
 			<when test="shOption == 1"> AND ccgSeq LIKE CONCAT ('%',#{shValue},'%')</when>
 			<when test="shOption == 2"> AND ccgName LIKE CONCAT ('%',#{shValue},'%')</when>
 		</choose>
 		<choose>
-			<when test="shUseNy == 0"> AND ccgUseNy LIKE 0</when>
-			<when test="shUseNy == 1"> AND ccgUseNy LIKE 1</when> 
+			<when test="shUseNy == null"></when>
+			<when test="shUseNy == 1"> AND ccgUseNy LIKE 0</when>
+			<when test="shUseNy == 2"> AND ccgUseNy LIKE 1</when> 
 		</choose>
 		<choose>
-			<when test="shDateOption == 1">AND ccgEditDate BETWEEN #{shDateStart} AND  #{shDateEnd} </when>
-			<when test="shDateOption == 2">AND ccgCreateDate BETWEEN #{shDateStart} AND  #{shDateEnd} </when>
+			<when test="shDateOption == null">AND  ccgCreateDate </when>
+			<when test="shDateOption == 1">AND  ccgEditDate  </when>
+			<when test="shDateOption == 2">AND  ccgCreateDate </when>
 		</choose>
+		<choose>
+			<when test = 'shDateStart == null or shDateStart ==""'> BETWEEN CONCAT('1700-01-01', ' 00:00:00') AND CONCAT('2300-01-01',' 00:00:00') </when>
+			<when test = "shDateStart != null and shDateEnd != null">BETWEEN CONCAT(#{shDateStart},' 00:00:00') AND CONCAT(#{shDateEnd},' 23:59:59') </when> 
+		</choose>   
 	</sql>
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		
+		SELECT
+			*
+		FROM ccg
+		WHERE 1=1
+		AND ccgSeq LIKE #{upCcgSeq}
+	
+	</select>
 	
 	<insert id="insertGroupCode">
 		
@@ -89,5 +121,16 @@
 		WHERE 1 = 1	
 		AND ccgUseNy = 1
 	</select>
+	
+	<update id="updateGroup">
+		
+		UPDATE ccg
+		SET 
+		ccgName = #{ccgName}
+		,ccgUseNy = #{ccgUseNy}
+		WHERE
+			ccgSeq = #{ccgSeq}
+	
+	</update>
 
 </mapper>	

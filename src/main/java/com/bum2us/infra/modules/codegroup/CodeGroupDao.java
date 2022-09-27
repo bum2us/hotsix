@@ -20,7 +20,7 @@ public class CodeGroupDao {
 	
 	private static String namespace = "com.bum2us.infra.modules.codegroup.CodeGroupMapper";
 	
-	public List<CodeGroup> selectList(){ return sqlSession.selectList(namespace + ".selectList", ""); }
+	public List<CodeGroup> selectList(CodeGroupVo vo){ return sqlSession.selectList(namespace + ".selectList", vo); }
 	
 	public void insertGroup(CodeGroup cg) { sqlSession.insert(namespace + ".insertGroupCode", cg); }
 
@@ -28,5 +28,10 @@ public class CodeGroupDao {
 
 	public List<CodeGroup> selectListCachedCodeGroupList() { return sqlSession.selectList(namespace + ".selectListCachedCodeGroupList");	}
 
+	public Integer selectListCount(CodeGroupVo vo) { return sqlSession.selectOne(namespace + ".selectListCount" , vo); }
+
+	public CodeGroup selectOne(CodeGroupVo vo) { return sqlSession.selectOne(namespace + ".selectOne", vo); }
+
+	public void updateGroup(CodeGroup cg) { sqlSession.update(namespace + ".updateGroup", cg); }
 	
 }

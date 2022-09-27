@@ -54,7 +54,7 @@
 		</choose>
 		<choose>
 			<when test = 'shDateStart == null or shDateStart ==""'> BETWEEN CONCAT('1700-01-01', ' 00:00:00') AND CONCAT('2300-01-01',' 00:00:00') </when>
-			<when test = "shDateStart != null and shDateEnd != null">BETWEEN #{shDateStart} AND #{shDateEnd}</when> 
+			<when test = "shDateStart != null and shDateEnd != null">BETWEEN CONCAT(#{shDateStart},' 00:00:00') AND CONCAT(#{shDateEnd},' 23:59:59')</when> 
 		</choose>  
 		
 	</sql> 
@@ -118,13 +118,15 @@
 		
 	</select>
 	
+	
 	<select id="chkLogin" resultMap="resultObj">
-			SELECT
+		SELECT
 			*
 		FROM member
 		WHERE
 			1=1
 		AND #{mmId} LIKE mmId
+		AND #{mmPassword} LIKE mmPassword
 	</select>
 	
 	<update id="upadteOne">
@@ -134,6 +136,7 @@
 		SET
 			mmName = #{mmName}
 			,mmId = #{mmId}
+			,mmPassword = #{mmPassword}
 			,mmComment = #{mmComment}
 			,mmNickname = #{mmNickname}
 			,mmPhone = CONCAT('010',#{mmPhone1},#{mmPhone2})

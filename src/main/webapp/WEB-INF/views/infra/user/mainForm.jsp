@@ -102,6 +102,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	<script>
 	
+	window.onload = function(){
+	
+		alert("환영합니다 " + ${sessId} + " 님")
+		
+	}
+	
+	
 	openPost = function() {
 		
 		$(".modal_overlay").show();

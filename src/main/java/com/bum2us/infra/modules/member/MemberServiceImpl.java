@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bum2us.infra.modules.code.CodeServiceImpl;
+import com.bum2us.infra.modules.utils.UtilSecurity;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -27,8 +28,10 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public void insertList(Member mb) throws Exception {
-				
 		// TODO Auto-generated method stub
+		
+		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));		
+		
 		dao.insertList(mb);
 	}
 
@@ -42,6 +45,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member chkLogin(Member mb) throws Exception {
 		// TODO Auto-generated method stub
+		
+		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
+		
 		return dao.selectOne(mb);
 	}
 
@@ -56,6 +62,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateOne(Member mb) throws Exception {
 		// TODO Auto-generated method stub
+		
+		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
+		
 		dao.updateOne(mb);
 	}
 

@@ -25,14 +25,19 @@
 			<when test="shOption == 4"> AND ccKey LIKE CONCAT ('%',#{shValue},'%')</when>
 		</choose>
 		<choose>
-			<when test="shUseNy == 0"></when>
+			<when test="shUseNy == null"></when>
 			<when test="shUseNy == 1"> AND ccUseNy LIKE 0</when>
 			<when test="shUseNy == 2"> AND ccUseNy LIKE 1</when>
 		</choose>
-		<choose> 
-			<when test="shDateOption == 1"> AND ccEditDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
-			<when test="shDateOption == 2"> AND ccCreateDate BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+		<choose>
+			<when test="shDateOption == null">AND  ccCreateDate </when>
+			<when test="shDateOption == 1">AND  ccEditDate  </when>
+			<when test="shDateOption == 2">AND  ccCreateDate </when>
 		</choose>
+		<choose>
+			<when test = 'shDateStart == null or shDateStart ==""'> BETWEEN CONCAT('1700-01-01', ' 00:00:00') AND CONCAT('2300-01-01',' 00:00:00') </when>
+			<when test = "shDateStart != null and shDateEnd != null">BETWEEN CONCAT(#{shDateStart},' 00:00:00') AND CONCAT(#{shDateEnd},' 23:59:59') </when> 
+		</choose>   
 	</sql>
 	
 	<sql id="rangeSql">

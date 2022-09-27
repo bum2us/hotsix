@@ -307,7 +307,7 @@
   			async: true,
   			dataType: 'json',  
   			success:function(result){
-  				if(result.chkCount = 0)
+  				if(result.chkCount == 0)
 				{
   			  		$('#id_check_fail').hide();
   					$('#id_check_sucess').show();
