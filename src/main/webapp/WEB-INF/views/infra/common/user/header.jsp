@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+
 <header>
 	<div class="logo">
 		<img src="/resources/images/mark_white.png" class="logoImage" alt="">
@@ -15,6 +17,7 @@
 			<li><a href="/upload"><i class="fa-solid fa-square-plus"></i></a></li>
 			<li><a href="/bookmark"><i class="fa-solid fa-heart"></i></a></li>
 			<li><a href="/profile"><i class="fa-solid fa-user"></i></a></li>
+			<li><c:out value="${sessNickName}"/></li>
 			<li><a href="/"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 		</ul>
 	</nav>

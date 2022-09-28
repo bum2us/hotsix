@@ -16,11 +16,11 @@
     div {
         /* border: solid 1px orange; */
     }
-</style>
+</style> 
 
 </head>
 <body>
-    <form action="/administrator/main">
+    <form id="mainForm" method="POST">
 
         <div class="container">
             <div class="row mt-5 justify-content-center">
@@ -31,14 +31,14 @@
             <div class="row justify-content-center">
                 <div style="width: 300px;">
                     <div class="row mb-1">
-                        <input type="text" name="shId" placeholder="관리자 아이디">
+                        <input type="text" name="mmId" id="mmId" placeholder="관리자 아이디">
                     </div>
                     <div class="row">
-                        <input type="text" name="shPassword" placeholder="비밀번호">
+                        <input type="password" name="mmPassword" id="mmPassword" placeholder="비밀번호">
                     </div>
                 </div>
                 <div class="text-center mt-1">
-                    <button class="basebutton" type="submit" style="height: 100%; background: #fff; border-radius: 5px; width: 300px;">로그인</button>
+                    <button class="basebutton" type="button" onclick="login()" style="height: 100%; background: #fff; border-radius: 5px; width: 300px;">로그인</button>
                 </div>
             </div>
 
@@ -48,6 +48,41 @@
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script type="text/javascript">
+
+	login = function() {
+		
+		var form = $("#mainForm");
+		var id = $("#mmId");
+		var pw = $("#mmPassword");
+		
+		$.ajax({
+			url: "/administrator/login",
+			type: "POST",
+			data: {
+				mmId : id.val(),
+				mmPassword : pw.val()
+			},
+			dataType: "json",
+			success:function(result){
+				if(result.rt == "success"){
+					location.href="/administrator/main";
+				}else{
+					alert('없는 계정입니다.');
+				}
+			},
+			error:function(){
+				alert('error');
+			}			
+		});
+		
+	}
+
+</script>
+
 </body>
 </html>

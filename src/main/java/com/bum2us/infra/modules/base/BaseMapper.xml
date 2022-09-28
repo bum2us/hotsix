@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.bum2us.infra.modules.base.BaseMapper">
+
+	<resultMap  id="resultMember" type="com.bum2us.infra.modules.member.Member"></resultMap>
+
+
+	<select id="Login" resultMap="resultMember">
+		
+		SELECT
+			*
+		FROM member
+		WHERE 1=1
+		AND mmAdminNy = 1
+		AND mmId = #{mmId}
+		AND mmPassword = #{mmPassword}
+	
+	</select>
+
+</mapper>

@@ -6,9 +6,11 @@
 	</div>
 	<nav>
 		<ul class="nav_links">
+			<li><a href="">메인</a></li>
 			<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
 			<li><a href="/code/CodeList">코드</a></li>
 			<li><a href="/member/memberList">멤버</a></li>
+			<li><a href="/postList">게시물</a></li>
 		</ul>
 	</nav>
 	<div class="profile">
@@ -16,6 +18,6 @@
 			<img src="/resources/images/temp08.jpg" alt="">
 		</div>
 	</div>
-	<span class="administrator">${item.nickname}</span>
-	<button class="logoutBtn" type="button" onclick="location.href='/administrator/login'"><i class="fa-solid fa-right-from-bracket"></i></button>
-</header>
+	<span class="administrator">${sessName}</span>
+	<button class="logoutBtn" type="button" onclick="location.href='/administrator/logout'"><i class="fa-solid fa-right-from-bracket"></i></button>
+</header>  

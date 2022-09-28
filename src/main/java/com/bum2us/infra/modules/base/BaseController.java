@@ -1,17 +1,23 @@
 package com.bum2us.infra.modules.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bum2us.infra.modules.member.MemberServiceImpl;
+import com.bum2us.infra.modules.member.Member;
 
 @Controller
 public class BaseController {
 	
 	@Autowired
-	MemberServiceImpl service;
+	BaseServiceImpl service;
 	
 
 	@RequestMapping(value ="/")
@@ -55,16 +61,43 @@ public class BaseController {
 		return "infra/user/postForm";
 	}
 	
-	@RequestMapping(value = "/administrator/login")
-	public String adnninLogin() throws Exception{
+	@RequestMapping(value = "/administrator/logout")
+	public String adnninLogout(HttpSession httpSession) throws Exception{
 		
-		return "infra/adnnin/adnninLoginForm";
+		httpSession.invalidate();
 		
+		return "infra/adnnin/adnninLoginForm";	
 	}
 	
-	@RequestMapping(value = "/administrator/main")
-	public String adnninMain(Model model) throws Exception{
+	@RequestMapping(value = "/administrator")
+	public String adnnin() throws Exception{
+		return "infra/adnnin/adnninLoginForm";	
+	}
+	
+	@RequestMapping(value="/administrator/main")
+	public String adnninMain() throws Exception{
 		
-		return "infra/adnnin/memberList";
+		return "infra/adnnin/memberList"; 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/administrator/login")
+	public Map<String,Object> adnninLogin(HttpSession httpSession ,Member mb,Model model) throws Exception{
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		Member item = service.Login(mb);
+		
+		System.out.println(item.getMmId());
+		
+		if(item != null) {
+			
+			map.put("rt", "success");
+			
+			httpSession.setAttribute("sessSeq", item.getMmSeq());
+			httpSession.setAttribute("sessName", item.getMmName());
+		}
+		
+		return map;
 	}
 }
