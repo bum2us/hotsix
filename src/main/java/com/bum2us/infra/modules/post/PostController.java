@@ -26,4 +26,13 @@ public class PostController {
 		return "infra/adnnin/postList";
 	}
 	
+	
+	@RequestMapping(value ="postUpload")
+	public String postUpload(Model model,Post dto) throws Exception
+	{
+		
+		service.insert(dto);
+		
+		return "infra/user/uploadForm";
+	}
 }

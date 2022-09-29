@@ -1,6 +1,7 @@
 package com.bum2us.infra.modules.base;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bum2us.infra.modules.member.Member;
+import com.bum2us.infra.modules.post.Post;
+import com.bum2us.infra.modules.post.PostServiceImpl;
+import com.bum2us.infra.modules.post.PostVo;
 
 @Controller
 public class BaseController {
@@ -19,6 +23,8 @@ public class BaseController {
 	@Autowired
 	BaseServiceImpl service;
 	
+	@Autowired
+	PostServiceImpl servicePost;
 
 	@RequestMapping(value ="/")
 	public String login() throws Exception {
@@ -51,7 +57,18 @@ public class BaseController {
 	}
 	
 	@RequestMapping(value = "/profile")
-	public String profile() throws Exception {
+	public String profile(Model model,PostVo vo,HttpSession httpSession) throws Exception {
+		
+		System.out.println("sessSeq : " + httpSession.getAttribute("sessSeq"));
+		
+		vo.setShOption((Integer)httpSession.getAttribute("sessSeq"));
+		
+		System.out.println(vo.getShOption());
+		
+		List<Post> list = servicePost.selectListForProfile(vo);
+		
+		
+		model.addAttribute("list", list);
 		
 		return "infra/user/profileForm";
 	}
@@ -77,7 +94,7 @@ public class BaseController {
 	@RequestMapping(value="/administrator/main")
 	public String adnninMain() throws Exception{
 		
-		return "infra/adnnin/memberList"; 
+		return "infra/adnnin/adnninMainForm"; 
 	}
 	
 	@ResponseBody

@@ -9,7 +9,7 @@
 	<select id= "selectList" resultMap="resultObj">
 	
 		SELECT
-			*,
+			po.*,
 			mb.mmNickname,
 			bd.bdName
 		FROM post po
@@ -20,6 +20,18 @@
 		WHERE 1=1
 	</select>
  
+ 	<select id="selectListForProfile" resultMap="resultObj">
+ 	
+ 		SELECT
+ 			po.*,
+ 			up.*
+		FROM post po
+ 		JOIN upload up
+ 		ON po.postSeq = up.upPostSeq
+ 		WHERE po.postWriter = #{shOption}
+ 		
+ 	</select>
+ 
 	<select id="selectCount" resultType="Integer">
 	 
 		SELECT
@@ -29,5 +41,60 @@
 		AND postDelNy = 0
 	
 	</select>
+
+	<select id="selectLastSeq" resultType="Integer">
+	
+		SELECT
+			postSeq
+		FROM post
+		ORDER BY postSeq DESC
+	          LIMIT 1
+		
+	</select>
+
+	<insert id="insert">
+	
+		INSERT INTO post
+		(
+			postWriter
+			,postBoard
+			,postContent
+		)
+		VALUES
+		(
+			#{postWriter}
+			,#{postBoard}
+			,#{postContent} 
+		)
+	</insert>
+	
+	<insert id="insertUpload">
+	
+		INSERT INTO upload
+		(
+			upDefaultNy
+			,upSort
+			,upExt
+			,upOriginalName
+			,upUuidName
+			,upSize
+			,upType
+			,upPath
+			,upPostSeq
+		)
+		VALUES
+		(
+			#{upDefaultNy}
+			,#{upSort}
+			,#{upExt}
+			,#{upOriginalName}
+			,#{upUuidName}
+			,#{upSize}
+			,#{upType}
+			,#{upPath}
+			,#{postSeq} 
+		)
+		
+	</insert>
 
 </mapper>

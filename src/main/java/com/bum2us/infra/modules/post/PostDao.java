@@ -18,10 +18,21 @@ public class PostDao {
 	
 	private String namespace = "com.bum2us.infra.modules.post.PostMapper";
 	
-	
 	public List<Post> selectList(PostVo vo) { return sqlSession.selectList(namespace + ".selectList", vo); }
 
 
 	public Integer selectCount(PostVo vo) { return sqlSession.selectOne(namespace + ".selectCount", vo); }
+
+
+	public void insert(Post dto) { sqlSession.insert(namespace + ".insert", dto); }
+
+
+	public void insertUpload(Post dto) { sqlSession.insert(namespace + ".insertUpload", dto);}
+
+
+	public Integer selectLastSeq() { return sqlSession.selectOne(namespace + ".selectLastSeq");}
+
+
+	public List<Post> selectListForProfile(PostVo vo) { return sqlSession.selectList(namespace + ".selectListForProfile", vo); }
 	
 }

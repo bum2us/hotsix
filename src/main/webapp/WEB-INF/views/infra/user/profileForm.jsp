@@ -23,12 +23,12 @@
     <div class="container">
         <div class="row" style="justify-content: center;">
             <div class="col-4 offset-2 porfileImgbox">
-                <img class="profileImg" src="/resources/images/jwook/bori_04.jpg" alt="">
+                <img class="profileImg" src="/resources/images/profile/empty.png" alt="">
             </div>
-            <div class="col-6 offset-1 pt-4">
+            <div class="col-6 offset-1 pt-4"> 
                 <div class="row mb-3 ">
                     <div class="col-8">
-                        <span class="profileUserName"><c:out value="${ sessNickname }"/></span>
+                        <span class="profileUserName"><c:out value="${ sessNickName }"/></span>
                     </div>
                     <div class="col offset-1 pt-2">
                         <button class="basebutton" style="font-weight:700;">프로필 편집</button>
@@ -46,25 +46,12 @@
         </div>
         <hr>
         <div class="profile-grid-wrapper">
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_01.jpg" alt=""></a>
-            </div>
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_02.jpg" alt=""></a>
-            </div>
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_03.jpg" alt=""></a>
-            </div>
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_04.jpg" alt=""></a>
-            </div>
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_05.jpg" alt=""></a>
-            </div>
-            <div>
-                <a href="./postForm.html"><img src="/resources/images/jwook/bori_06.jpg" alt=""></a>
-            </div>
-        </div>
+        	<c:forEach items="${list }" var="list" varStatus="status">
+	            <div>
+	                <a href=""><img src="${list.upPath}${list.upUuidName}" alt=""></a>
+	            </div>        		
+        	</c:forEach>
+        </div> 
     </div>
     <%@include file="../common/user/footer.jsp" %>
 	

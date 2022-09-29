@@ -128,6 +128,7 @@ public class MemberController {
 			httpSession.setAttribute("sessSeq", item.getMmSeq());
 			httpSession.setAttribute("sessId", item.getMmId());
 			httpSession.setAttribute("sessNickName", item.getMmNickname());
+			httpSession.setAttribute("sessComment", item.getMmComment());
 		}
 		
 		return result;

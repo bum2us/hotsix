@@ -105,9 +105,6 @@
 				<button type="button" class="buttons" onclick="uelitem()"><i class="fa-solid fa-xmark"></i></button>
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
-			<div class="col-1 offset-9 text-end">
-				<button type="button" class="buttons" onclick="runForm('add',0)"><i class="fa-solid fa-plus"></i></button>
-			</div>
 		</div>
     </div>
     
