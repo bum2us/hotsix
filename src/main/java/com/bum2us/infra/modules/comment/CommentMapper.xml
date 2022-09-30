@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.rog//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace = "com.bum2us.infra.modules.comment.CommentMapper">
+
+	<resultMap id="resultObj" type="com.bum2us.infra.modules.comment.Comment"></resultMap>
+
+	<insert id="insert">
+		
+		INSERT INTO comment
+		(
+			cmWriter
+			,cmPostId
+			,cmContent
+		)
+		VALUES
+		(
+			#{cmWriter}
+			#{cmPostId}
+			#{cmContent}
+		)
+	
+	</insert>
+	
+	<select id="selectList" resultMap="resultObj">
+	
+		SELECT
+			cm.*
+			mm.mmNickname
+		FROM
+			comment cm
+		JOIN post post
+		ON cm.cmPostId = post.postSeq
+		JOIN member mm
+		ON mm.mmSeq = cm.cmWriter 
+		WHERE 1=1
+	</select>
+
+</mapper>

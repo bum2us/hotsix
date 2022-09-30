@@ -18,6 +18,7 @@
 		JOIN board bd
 		ON po.postBoard = bd.bdSeq
 		WHERE 1=1
+		<include refid="rangeSql"/>
 	</select>
  
  	<select id="selectListForProfile" resultMap="resultObj">
@@ -32,6 +33,34 @@
  		
  	</select>
  
+	<select id="selectListForMain" resultMap = "resultObj"  parameterType="Integer">
+	
+		SELECT
+			po.*,
+ 			up.*
+		FROM post po
+ 		JOIN upload up
+ 		ON po.postSeq = up.upPostSeq
+ 		ORDER BY po.postLike DESC
+ 		LIMIT #{i}
+	
+	</select>
+	
+	<select id="selectOne" resultMap = "resultObj"  parameterType="Integer">
+	
+		SELECT
+			po.*,
+ 			up.*,
+ 			mm.mmNickname
+		FROM post po
+ 		JOIN upload up
+ 		ON po.postSeq = up.upPostSeq
+ 		JOIN member mm
+ 		ON po.postWriter = mm.mmSeq
+ 		WHERE #{i} = po.postSeq
+	
+	</select>
+	
 	<select id="selectCount" resultType="Integer">
 	 
 		SELECT
@@ -51,6 +80,7 @@
 	          LIMIT 1
 		
 	</select>
+
 
 	<insert id="insert">
 	
@@ -96,5 +126,9 @@
 		)
 		
 	</insert>
-
+	
+	<sql id="rangeSql"> 
+		LIMIT #{pageSize} OFFSET #{pageRange}  
+	</sql>
+	
 </mapper>

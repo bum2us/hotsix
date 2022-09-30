@@ -35,9 +35,9 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <p class="profileUserInfo">게시물<span class="profileInfoDetail">95</span></p>
-                    <p class="profileUserInfo">팔로워<span class="profileInfoDetail">100</span></p>
-                    <p class="profileUserInfo">팔로우<span class="profileInfoDetail">49</span></p>
+                    <p class="profileUserInfo">게시물<span class="profileInfoDetail"><c:out value="${fn:length(list) }"/></span></p>
+                    <p class="profileUserInfo">팔로워<span class="profileInfoDetail">-</span></p>
+                    <p class="profileUserInfo">팔로우<span class="profileInfoDetail">-</span></p>
                 </div>
                 <div class="row mb-2 ">
                     <p class="profileUserComment"><c:out value="${ sessComment }"/></p>

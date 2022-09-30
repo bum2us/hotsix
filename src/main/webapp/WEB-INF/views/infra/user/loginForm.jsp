@@ -65,7 +65,7 @@
 								</a>
 							</div>
 							<div class="col-4 p-0">
-								<a href="/signup" style="--clr:#FF9F29">
+								<a href="/member/memberForm" style="--clr:#FF9F29">
 									<span></span><span></span><span></span><span></span>SignUp
 								</a>
 							</div>

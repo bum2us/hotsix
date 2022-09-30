@@ -88,7 +88,8 @@ public class MemberController {
 		//일반 회원 가입에서는 아래 폼으로 이동시키도록
 		//return "infra/user/infoFormReg";
 		
-		return "infra/adnnin/memberForm";
+		//return "infra/adnnin/memberForm";
+		return "infra/user/infoFormReg";
 	}
 	
 	@RequestMapping(value ="/member/memberUelete")
@@ -103,13 +104,6 @@ public class MemberController {
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";
-	}
-	
-	
-	@RequestMapping(value = "/main")
-	public String main(Model model) throws Exception {
-		
-		return "infra/user/mainForm";
 	}
 
 	@ResponseBody

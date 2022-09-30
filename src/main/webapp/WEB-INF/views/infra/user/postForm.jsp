@@ -27,15 +27,15 @@
 		<br><br>
 		<div class="row post_frame" onclick="event.stopPropagation()">
 			<div class="post_leftSide">
-				<img src="/resources/images/image_01.jpg" alt="">
+				<img id="postImg" src="" alt="">
 			</div>
 			<div class="post_rightSide">
 				<div class="header">
 					<div class="userImg">
-						<img src="/resources/images/temp02.jpg" class="post_cover" alt="">
+						<img src="/resources/images/profile/empty.png" class="post_cover" alt="">
 					</div>
-					<div>
-						youja_o
+					<div id="postWriter">
+						
 					</div>
 				</div>
 				<div class="comment_List">
@@ -43,14 +43,13 @@
 						<li>
 							<div class="row commentBlock">
 								<div class="col-3 comment_header">
-									<img src="/resources/images/temp02.jpg" alt="">
+									<img src="/resources/images/profile/empty.png" alt="">
 								</div>
 								<div class="col comment_body">
 									<div class="comment_content">
 										<span>
-											<span class="comment_userName">youja_o</span>
-											바람이 불어온다~
-											<br>다들 좋은 사람들과 좋은 시간 보내시기 바랍니다.
+											<span class="comment_userName" id="postContentWriter"></span>
+											<span id="postContent"></span>
 										</span>
 									</div>
 								</div>
@@ -202,13 +201,43 @@
 				<div class="comment_input">
 					<form action="">
 						<i class="fa-regular fa-face-smile"></i>
-						<textarea name="" placeholder="댓글 달기.."></textarea>
-						<i class="fa-regular fa-message"></i>
+						<textarea id="cmContent" name="cmContent" placeholder="댓글 달기.."></textarea>
+						<i class="fa-regular fa-message" onclick="datgle()"></i>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script >
+	
+		datgle = function() {
+			
+			var content = $("#cmContent").val();
+			
+			if(content == null || content.length < 1)
+				return false;
+			
+			$.ajax({
+				url : "/insertComment",
+				dataType : "json",
+				type: "POST",
+				data: {
+					
+				},
+				success:function(result){
+					
+					
+					
+					
+				},
+				error:function(){
+					alert("error...");
+				}
+				
+			});
+		}
+	
+	</script>
 	<%-- 
 	<%@include file="../common/user/footer.jsp" %>
 

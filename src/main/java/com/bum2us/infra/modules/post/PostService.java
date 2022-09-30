@@ -12,4 +12,8 @@ public interface PostService {
 	public Integer selectCount(PostVo vo) throws Exception;
 	
 	public void insert(Post dto) throws Exception;
+	
+	public List<Post> selectListForMain(int i)throws Exception;
+	
+	public Post selectOne(int i)throws Exception;
 }

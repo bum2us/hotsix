@@ -27,9 +27,21 @@ public class BaseController {
 	PostServiceImpl servicePost;
 
 	@RequestMapping(value ="/")
-	public String login() throws Exception {
+	public String login(HttpSession httpSession) throws Exception {
+		
+		httpSession.invalidate();
 		
 		return "infra/user/loginForm";
+	}
+	
+	@RequestMapping(value = "/main")
+	public String main(Model model) throws Exception {
+		
+		List<Post> list = servicePost.selectListForMain(25);
+		
+		model.addAttribute("list", list);
+		
+		return "infra/user/mainForm";
 	}
 	
 	@RequestMapping(value = "/signup")

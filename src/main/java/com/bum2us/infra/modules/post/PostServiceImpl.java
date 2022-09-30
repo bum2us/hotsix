@@ -68,9 +68,23 @@ public class PostServiceImpl implements PostService{
 			
 		}
 	}
+
+
+	@Override
+	public List<Post> selectListForMain(int i) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListForMain(i);
+	}
+
+
+	@Override
+	public Post selectOne(int i) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectOne(i);
+	}
+
+
 	
-
-
 	
 	
 }

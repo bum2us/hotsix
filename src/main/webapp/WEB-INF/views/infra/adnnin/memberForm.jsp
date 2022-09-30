@@ -46,7 +46,7 @@
 						<div class="col-2 text-left gx-0">
 							<span class="chk_sucess" id="id_check_sucess">사용가능</span>
 							<span class="chk_fail" id="id_check_fail">사용불가</span> 
-							<button type="button" class="basebutton" onclick ="chkId()">중복체크</button>
+							<!-- <button type="button" class="basebutton" onclick ="chkId()">중복체크</button> -->
 						</div>
 						<div class="col-6">
 							<input type="text" name="mmNickname" placeholder="닉네임" value="${item.mmNickname}">
@@ -54,10 +54,14 @@
 					</div>
 					<div class="row mb-4">
 						<div class="col-6">
-							<input type="password" placeholder="비밀번호" name="mmPassword">
+							<input type="password" id="passwordBox" placeholder="비밀번호" name="mmPassword">
 						</div>
-						<div class="col-6">
-							<input type="password" placeholder="비밀번호 확인">
+						<div class="col-5">
+							<input type="password" id="passwordBoxRe"  onfocusout="chkPw()" placeholder="비밀번호 확인">
+						</div>
+						<div class="col-1">
+							<span class="chk_sucess" id="pw_check_sucess">일치합니다</span>
+							<span class="chk_fail" id="pw_check_fail">확인하세요</span> 
 						</div>
 					</div>
 					<div class="row mb-4">
@@ -68,7 +72,7 @@
 							<span style="font-size:9pt; text-align:right; font-weight: 600;">생년월일</span>
                         </div>
                         <div class="col-4">
-							<input id="dob" type="text" name="dob" value="${item.mmDob}">
+							<input id="mmDob" type="text" name="mmDob" value="${item.mmDob}">
                         </div>
 						<div class="col-3">
 							<select name="mmGender" id="gender" >
@@ -148,7 +152,7 @@
 					</div>
 					<div class="row mb-3 justify-content-end">
 						<button type="button" class="basebutton" onclick ="runForm('return');">이전</button>
-						<button type="button" class="basebutton" <c:if test="${item.mmSeq ne null}">hidden</c:if>>리셋</button>
+						<button type="button" class="basebutton" <c:if test="${item.mmSeq ne null}">hidden</c:if> onclick="location.href='/member/memberForm'">리셋</button>
 						<c:choose>
 							<c:when test="${item.mmSeq eq null}">
 								<button type="button" class="basebutton" onclick ="runForm('add');">가입</button>
@@ -186,7 +190,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45d424ec6ca5bb1db01d05b13aef2081&libraries=services,clusterer,drawing"></script> 
 <script>
 	$( function() {
-	    $( "#dob" ).datepicker({
+	    $( "#mmDob" ).datepicker({
 	    	changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
 	    	changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
 	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
@@ -203,16 +207,19 @@
 	  {
 	  	case "return":
  		{
-	  	  	form.attr("action", "/member/memberList" ).submit();
+	  	  	form.attr("action", "/" ).submit();
+	  	    //form.attr("action", "/member/memberList" ).submit();
 	  		break;
   		}
 	  	case "add":
   		{
-			form.attr("action","/member/memberAdd").submit(); 		
+			form.attr("action","/member/memberAdd").submit(); 
+			break;
   		}
 	  	case "edit":
   		{
 	  		form.attr("action","/member/formAction").submit();
+	  		break;
   		}
 	  
 	  }
@@ -296,7 +303,7 @@
   		
   		var chkId = $('#idbox').val();
   		
-  		if(chkId == null) return false;
+  		if(chkId == null || chkId.length < 1) return false;
   		
   		$.ajax({	
   			url:"/member/chkId",
@@ -326,6 +333,27 @@
   			//실패시 = error → complete → fail → always
   			
   		});
+  		
+  	}
+  	
+	chkPw = function() {
+  		
+  		var chkPw = $('#passwordBox').val();
+  		var chkPwR = $('#passwordBoxRe').val();
+  		
+  		if(chkPw == null || chkPw.length < 1) return false;
+  		if(chkPwR == null || chkPwR.length < 1) return false;
+  		
+  		if(chkPw == chkPwR)
+		{
+		  		$('#pw_check_fail').hide();
+				$('#pw_check_sucess').show();
+		}
+		else
+		{ 
+	  		$('#pw_check_sucess').hide();
+			$('#pw_check_fail').show();
+		}  				 
   		
   	}
   
