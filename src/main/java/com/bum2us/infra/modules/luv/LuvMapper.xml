@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bum2us.infra.modules.luv.LuvMapper">
+
+	<resultMap id="resultObj" type="com.bum2us.infra.modules.luv.Luv"></resultMap>
+
+	
+	<insert id="insert">
+		
+		INSERT INTO luv
+		(
+			luvWriter
+			,luvPostId
+		)
+		VALUES
+		(
+			#{luvWriter}
+			,#{luvPostId}
+		)
+		
+	</insert>
+	
+	<select id="selectList" resultMap = "resultObj">
+	
+		SELECT
+			*
+		FROM luv 
+		WHERE 1=1
+		AND luvPostId = #{luvPostId}
+	
+	</select>
+
+	<select id="selectCount" resultType="Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM luv 
+		WHERE 1=1
+		AND luvPostId = #{luvPostId}
+	
+	</select>
+
+</mapper>

@@ -53,7 +53,7 @@
 						<div class="row mb-3">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="password" required="required" id="mmPassword" name="password">
+									<input type="password" required="required" id="mmPassword" name="password" onkeyup="enterKey()">
 									<span>PASSWORD</span>
 								</div>
 							</div>
@@ -88,6 +88,14 @@
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
+	
+	enterKey = function() {
+		
+		var keycode = event.keyCode;
+		
+		if(keycode == 13) //Enter
+			submitform();
+	}
 		
     submitform = function(){		
 		

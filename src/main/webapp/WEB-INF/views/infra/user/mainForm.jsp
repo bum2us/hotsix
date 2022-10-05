@@ -131,6 +131,25 @@
 					$("#postWriter").html(result.nickname);
 					$("#postContentWriter").html(result.nickname);
 					$("#postContent").html(result.content);
+					$("#cmPostId").attr("value",postSeq);
+					$("#cmContent").val('');
+					
+					var comment = "";
+					for (var i = 0; i < result.list.length; i++) {
+						
+						comment += '<ul><li><div class="row commentBlock"><div class="col-3 comment_header"><img src=';
+						comment += '"/resources/images/profile/empty.png">';
+						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName">';
+						comment += result.list[i].mmNickname+ '   </span>';
+						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
+						comment += result.list[i].cmCreateDate + '</span><button type="button">';
+						comment += '좋아요 5개</button><button type="button">';
+						comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';
+						
+					}
+
+					$("#post_likeCount").html(result.luvCount);
+					$("#comment_List").html(comment);
 				}
 				else{
 					alert("게시글이 존재하지 않습니다.")

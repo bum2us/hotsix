@@ -46,7 +46,7 @@
 									<select name="groupSeq">
 										<option value="" disabled selected>코드그룹이름</option>
 										<c:forEach items="${list}" var ="list" varStatus="status">
-											<option value="<c:out value="${status.count}"/>"><c:out value="${list.ccgName}"></c:out></option>									
+											<option value="${status.count}"><c:out value="${list.ccgName}"></c:out></option>									
 										</c:forEach>	
 									</select>
 								</c:when>

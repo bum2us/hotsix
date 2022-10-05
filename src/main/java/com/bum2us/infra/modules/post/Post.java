@@ -12,7 +12,6 @@ public class Post {
 	private String  postContent;
 	private Integer postDelNy;
 	
-	
 	private String mmNickname;
 	private String bdName;
 	
