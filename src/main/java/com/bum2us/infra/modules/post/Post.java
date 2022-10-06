@@ -1,8 +1,8 @@
 package com.bum2us.infra.modules.post;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.bum2us.infra.modules.base.Base;
 
-public class Post {
+public class Post extends Base{
 	
 	private Integer postSeq;
 	private Integer postWriter;
@@ -16,18 +16,7 @@ public class Post {
 	private String mmNickname;
 	private String bdName;
 	
-	private String  upPath;
-	private String  upOriginalName;
-	private String  upUuidName;
-	private String  upExt;
-	private String  upSize;
-	private Integer upSeq;
-	private Integer upDefaultNy;
-	private Integer upSort;
-	private Integer upDelNy;
-	private Integer upType;
 	
-	private MultipartFile[] postImage;
 	
 	public Integer getPostSeq() {
 		return postSeq;
@@ -73,9 +62,6 @@ public class Post {
 	}
 	
 	
-	
-	
-	
 	public Integer getLoginUserSeq() {
 		return loginUserSeq;
 	}
@@ -94,83 +80,6 @@ public class Post {
 	public void setBdName(String bdName) {
 		this.bdName = bdName;
 	}
-	
-	
-	
-	
-	
-	
-	public MultipartFile[] getPostImage() {
-		return postImage;
-	}
-	public void setPostImage(MultipartFile[] postImage) {
-		this.postImage = postImage;
-	}
-	public String getUpPath() {
-		return upPath;
-	}
-	public void setUpPath(String upPath) {
-		this.upPath = upPath;
-	}
-	public String getUpOriginalName() {
-		return upOriginalName;
-	}
-	public void setUpOriginalName(String upOriginalName) {
-		this.upOriginalName = upOriginalName;
-	}
-	public String getUpUuidName() {
-		return upUuidName;
-	}
-	public void setUpUuidName(String upUuidName) {
-		this.upUuidName = upUuidName;
-	}
-	public String getUpExt() {
-		return upExt;
-	}
-	public void setUpExt(String upExt) {
-		this.upExt = upExt;
-	}
-	public String getUpSize() {
-		return upSize;
-	}
-	public void setUpSize(String upSize) {
-		this.upSize = upSize;
-	}
-	public Integer getUpSeq() {
-		return upSeq;
-	}
-	public void setUpSeq(Integer upSeq) {
-		this.upSeq = upSeq;
-	}
-	public Integer getUpDefaultNy() {
-		return upDefaultNy;
-	}
-	public void setUpDefaultNy(Integer upDefaultNy) {
-		this.upDefaultNy = upDefaultNy;
-	}
-	public Integer getUpSort() {
-		return upSort;
-	}
-	public void setUpSort(Integer upSort) {
-		this.upSort = upSort;
-	}
-	public Integer getUpDelNy() {
-		return upDelNy;
-	}
-	public void setUpDelNy(Integer upDelNy) {
-		this.upDelNy = upDelNy;
-	}
-	public Integer getUpType() {
-		return upType;
-	}
-	public void setUpType(Integer upType) {
-		this.upType = upType;
-	}
-
-	
-	
-	
-	
 	
 	
 }

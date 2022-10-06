@@ -159,4 +159,43 @@
 			mmSeq = #{shSeq}
 	</update>
 	
+	<select id="selectLastSeq" resultType="Integer">
+	
+		SELECT
+			mmSeq
+		FROM member
+		ORDER BY mmSeq DESC
+	          LIMIT 1
+		
+	</select>
+	
+	<insert id="insertUpload">
+	
+		INSERT INTO uploadMemberProfile
+		(
+			upmDefaultNy
+			,upmSort
+			,upmExt
+			,upmOriginalName
+			,upmUuidName
+			,upmSize
+			,upmType
+			,upmPath
+			,upmMemberSeq
+		)
+		VALUES
+		(
+			#{upDefaultNy}
+			,#{upSort}
+			,#{upExt}
+			,#{upOriginalName}
+			,#{upUuidName}
+			,#{upSize}
+			,#{upType}
+			,#{upPath}
+			,#{mmSeq} 
+		)
+		
+	</insert>
+	
 </mapper> 

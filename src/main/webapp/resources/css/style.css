@@ -75,6 +75,34 @@ tr:hover {
 	background: #d9d9d9;
 }
 
+/* 업로드 버튼 UI */
+
+.upload-Btn {
+	position: relative;
+	background: #FFF;
+    color: #000;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    overflow:hidden;
+    width: 100px;
+    height: 30px;
+    font-size: 10pt; 
+}
+
+.upload-Btn:hover {
+	background: #000;
+    color: #FFF;
+} 
+
+.upload-Btn input[type="file"]{
+	cursor: pointer;
+	position: absolute;
+	left : 0;
+	top : 0;
+	transform: scale(3);
+	opacity: 0;
+}
+
 /* 메인화면 */
 .grid-wrapper div{
     display: flex;

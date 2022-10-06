@@ -32,4 +32,8 @@ public class MemberDao {
 	public Member selectOne(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectOne",vo); }
 	
 	public void uelete(MemberVo vo) { sqlSession.update(namespace + ".uelete" , vo); }
+
+	public int selectLastSeq() { return sqlSession.selectOne(namespace + ".selectLastSeq"); }
+
+	public void insertUpload(Member mb) {sqlSession.insert(namespace + ".insertUpload", mb); }
 }

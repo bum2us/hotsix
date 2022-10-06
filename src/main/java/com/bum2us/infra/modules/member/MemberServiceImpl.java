@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bum2us.infra.common.utils.UtilSecurity;
+import com.bum2us.infra.common.utils.UtilUpload;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -29,6 +31,28 @@ public class MemberServiceImpl implements MemberService{
 		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));		
 		
 		dao.insertList(mb);
+		
+		int memberSeq = dao.selectLastSeq();
+				
+				int j = 0;
+				for(MultipartFile myFile : mb.getPostImage()) {
+					
+					if(!myFile.isEmpty()) {
+						
+						String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+						UtilUpload.uploadProfile(myFile, pathModule, mb);
+						
+						mb.setUpType(2);
+						mb.setUpDefaultNy(j == 0 ? 1 : 0);
+						mb.setUpSort(j+1);
+						mb.setMmSeq(memberSeq);
+						
+						dao.insertUpload(mb);
+						j++;
+					}
+					
+				}
+		
 	}
 
 

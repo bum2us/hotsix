@@ -77,7 +77,8 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member/memberAdd")
 	public String regResult(@ModelAttribute("vo") MemberVo vo, Model model,Member mb) throws Exception {
-				
+		
+		
 		service.insertList(mb);
 		model.addAttribute("item", mb);
 		

@@ -55,7 +55,7 @@ public class PostServiceImpl implements PostService{
 			if(!myFile.isEmpty()) {
 				
 				String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-				UtilUpload.upload(myFile, pathModule, dto);
+				UtilUpload.uploadPost(myFile, pathModule, dto);
 				
 				dto.setUpType(2);
 				dto.setUpDefaultNy(j == 0 ? 1 : 0);

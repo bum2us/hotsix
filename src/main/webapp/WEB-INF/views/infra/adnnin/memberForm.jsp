@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container-md" style="width: 500px">
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
@@ -39,42 +39,43 @@
 		<form id="mainForm">
 			<div class="row mt-4 searchForm">
 				<div class="col">
+					<div class="row mt-3 justify-content-center"> 
+						<img id="profileImg" style="width:300px; height:300px; border-radius: 50%;" alt="" src="/resources/images/profile/empty.png">
+					</div> 
+					<div class="row my-3 justify-content-center">
+						<button type="button" class="upload-Btn">파일 첨부 
+							<input id="postImage" name="postImage" type="file" multiple="multiple" onChange="upload('postImage');" > 
+						</button>
+					</div>
 					<div class="row my-4">
-						<div class="col-4">
+						<div class="col">
 							<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="mmId" value="${item.mmId}">
-						</div> 
-						<div class="col-2 text-left gx-0">
-							<span class="chk_sucess" id="id_check_sucess">사용가능</span>
-							<span class="chk_fail" id="id_check_fail">사용불가</span> 
-							<!-- <button type="button" class="basebutton" onclick ="chkId()">중복체크</button> -->
 						</div>
-						<div class="col-6">
+					<span style="margin-top:5px" class="chk_sucess" id="id_check_sucess">사용가능한 아이디 입니다.</span>
+					<span style="margin-top:5px" class="chk_fail" id="id_check_fail">이미 존재하는 아이디입니다.</span>   
+					</div> 
+					<div class="row my-4">
+						<div class="col">
 							<input type="text" name="mmNickname" placeholder="닉네임" value="${item.mmNickname}">
 						</div>
 					</div>
 					<div class="row mb-4">
-						<div class="col-6">
+						<div class="col">
 							<input type="password" id="passwordBox" placeholder="비밀번호" name="mmPassword">
 						</div>
-						<div class="col-5">
-							<input type="password" id="passwordBoxRe"  onfocusout="chkPw()" placeholder="비밀번호 확인">
+					</div>
+					<div class="row my-4">
+						<div class="col">
+							<input type="password" id="passwordBoxRe" onfocusout="chkPw()" placeholder="비밀번호 확인">  
 						</div>
-						<div class="col-1">
-							<span class="chk_sucess" id="pw_check_sucess">일치합니다</span>
-							<span class="chk_fail" id="pw_check_fail">확인하세요</span> 
-						</div>
+						<span  style="margin-top:5px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
+						<span  style="margin-top:5px" class="chk_fail" id="pw_check_fail">비밀번호가 일치하지 않습니다 다시 확인하세요.</span> 				
 					</div>
 					<div class="row mb-4">
-						<div class="col-4">
+						<div class="col-8">
 							<input type="text" placeholder="이름" name="mmName" value="${item.mmName}">
 						</div>
-						<div class="col-1 text-end">
-							<span style="font-size:9pt; text-align:right; font-weight: 600;">생년월일</span>
-                        </div>
-                        <div class="col-4">
-							<input id="mmDob" type="text" name="mmDob" value="${item.mmDob}">
-                        </div>
-						<div class="col-3">
+						<div class="col-4">
 							<select name="mmGender" id="gender" >
 								<option value="0" disabled selected>성별</option>
 								<option value="1" <c:if test="${item.mmGender eq 1}">selected</c:if>>남</option>
@@ -83,22 +84,18 @@
 							</select>
 						</div>
 					</div>
-                    <div class="row mb-4">
-						<div class="col-5">
+					<div class="row my-4">
+                        <div class="col">
+							<input id="mmDob" type="text" name="mmDob" value="${item.mmDob}" placeholder="생년월일">
+                        </div>
+					</div>
+					<div class="row my-4">
+						<div class="col">
 							<input type="text" id="mmEmail" name="mmEmail" placeholder="이메일" value="${item.mmEmail}"> 
 						</div>
-						<!-- 
-                        <div class="col-2">
-							<select id="emaildomain" onchange = "emailChange()">
-								<option value="0" disabled selected>메일선택</option>
-								<option value="1" >naver.com</option>
-								<option value="2" >kakao.com</option>
-								<option value="3" >gmail.com</option>
-                                <option value="4" >직접입력</option>
-							</select>
-						</div>
-						 -->
-                        <div class="col-2">
+					</div>
+                    <div class="row mb-4">
+                        <div class="col-4">
                             <select name="mmTelecom" >
 								<option value="0" disabled selected>통신사</option>
 								<option value="1" <c:if test="${item.mmTelecom eq 1}">selected</c:if>>SKT</option>
@@ -107,29 +104,31 @@
                                 <option value="4" <c:if test="${item.mmTelecom eq 4}">selected</c:if>>알뜰폰</option>
 							</select>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <input type="text" value="010" style="text-align:center">
                         </div>
-                        <div class="col-2">
+                        <div class="col-3">
                             <input type="text" name="mmPhone1" placeholder="XXXX" value="${item.mmPhone.substring(3,7)}" style="text-align:center">
                         </div>
-                        <div class="col-2">
+                        <div class="col-3">
                             <input type="text" name="mmPhone2" placeholder="XXXX" value="${item.mmPhone.substring(7,11)}" style="text-align:center">
                         </div>
-                    </div>
+                    </div> 
                     <div class="row mb-4">
-                   		<div class="col-2">
+                   		<div class="col-8">
                    			<input type="text" id="mmZipCode" name="mmZipCode" placeholder="우편번호" value="${item.mmZipCode}" readonly>
                    		</div>
-                   		<div class="col-2 text-left">
+                   		<div class="col-4"> 
                    			<button type="button" class="basebutton" onclick="searchAdd()">우편번호 찾기</button>
                    		</div>
                    	</div>
                    	<div class="row mb-4">
-                   		<div class="col-6">
+                   		<div class="col"> 
                    			<input type="text" id="mmAddress" name="mmAddress" placeholder="주소" value="${item.mmAddress}" readonly>
                    		</div>
-                   		<div class="col-6">
+                   	</div>
+                   	<div class="row my-4">
+                   		<div class="col">
                    			<input type="text" id="mmAddressDetail" name="mmAddressDetail" placeholder="상세주소" value="${item.mmAddressDetail}">
                    		</div>
                    	</div>
@@ -356,6 +355,20 @@
 		}  				 
   		
   	}
+	
+	upload = function(objName) {
+		
+		var obj = $("#" + objName +"")[0].files;	
+		
+		if(obj == null) return false;
+		
+		var fileReader = new FileReader();
+		fileReader.readAsDataURL($("#" + objName +"")[0].files[0]);
+		
+		fileReader.onload = function () {
+			 $("#profileImg").attr("src", fileReader.result);
+		 }	
+	}
   
 </script>
 </body>

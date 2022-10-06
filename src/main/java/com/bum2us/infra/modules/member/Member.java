@@ -1,6 +1,9 @@
 package com.bum2us.infra.modules.member;
 
-public class Member {
+
+import com.bum2us.infra.modules.base.Base;
+
+public class Member extends Base {
 	
 	private Integer mmSeq;
 	private String mmName;
@@ -23,8 +26,6 @@ public class Member {
 
 	
 	private Integer pageTotle;
-	
-	
 	
 	public Integer getMmSeq() {
 		return mmSeq;
@@ -142,6 +143,7 @@ public class Member {
 	public void setPageTotle(Integer pageTotle) {
 		this.pageTotle = pageTotle;
 	}
+
 	
 	
 	
