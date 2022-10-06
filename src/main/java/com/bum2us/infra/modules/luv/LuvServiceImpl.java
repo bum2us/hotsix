@@ -29,6 +29,12 @@ public class LuvServiceImpl implements LuvService{
 		return dao.selectCount(dto);
 	}
 
-	
+	@Override
+	public void delete(Luv dto) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete(dto);
+	}
+
+
 	
 }

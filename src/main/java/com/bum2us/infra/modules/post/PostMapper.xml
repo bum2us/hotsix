@@ -81,6 +81,17 @@
 		
 	</select>
 
+	<select id="selectCheckLoginUserLuved" resultType="Integer">
+		
+		SELECT
+			COUNT(*)
+		FROM post post
+		JOIN luv luv 
+		ON post.postSeq = luv.luvPostId
+        WHERE luv.luvWriter = #{loginUserSeq}
+        AND post.postSeq = #{postSeq}
+		
+	</select>
 
 	<insert id="insert">
 	

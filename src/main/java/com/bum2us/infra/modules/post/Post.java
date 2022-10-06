@@ -12,6 +12,7 @@ public class Post {
 	private String  postContent;
 	private Integer postDelNy;
 	
+	private Integer loginUserSeq;
 	private String mmNickname;
 	private String bdName;
 	
@@ -70,6 +71,17 @@ public class Post {
 	public void setPostDelNy(Integer postDelNy) {
 		this.postDelNy = postDelNy;
 	}
+	
+	
+	
+	
+	
+	public Integer getLoginUserSeq() {
+		return loginUserSeq;
+	}
+	public void setLoginUserSeq(Integer loginUserSeq) {
+		this.loginUserSeq = loginUserSeq;
+	}
 	public String getMmNickname() {
 		return mmNickname;
 	}
@@ -82,6 +94,12 @@ public class Post {
 	public void setBdName(String bdName) {
 		this.bdName = bdName;
 	}
+	
+	
+	
+	
+	
+	
 	public MultipartFile[] getPostImage() {
 		return postImage;
 	}

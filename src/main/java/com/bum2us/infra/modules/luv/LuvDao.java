@@ -22,6 +22,9 @@ public class LuvDao {
 	public List<Luv> selectList(Luv dto) { return sqlSession.selectList(namespace + ".selectList", dto); }
 
 	public int selectCount(Luv dto) { return sqlSession.selectOne(namespace + ".selectCount", dto); }
-	
+
+	public int selectChkLuvCount(int i) { return sqlSession.selectOne(namespace + ".selectChkLuvCount", i); }
+
+	public void delete(Luv dto) { sqlSession.delete(namespace + ".delete", dto); }	
 	
 }

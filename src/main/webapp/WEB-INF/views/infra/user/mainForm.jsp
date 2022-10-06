@@ -118,6 +118,9 @@
 	
 	openPost = function(postSeq) {
 		
+
+		var luv = $("#luv");
+		
 		$.ajax({
 			url: "/getPost",
 			type: "POST",
@@ -147,9 +150,20 @@
 						comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';
 						
 					}
+					
+					if(result.luved === "true"){
+						luv.removeClass("fa-regular fa-heart");
+						luv.addClass("fa-solid fa-heart");
+						luv.css('color','red');
+					}else {
+						luv.removeClass("fa-solid fa-heart");
+						luv.addClass("fa-regular fa-heart");
+						luv.css('color','black');
+					}
 
 					$("#post_likeCount").html(result.luvCount);
 					$("#comment_List").html(comment);
+					$(".modal_overlay").show();
 				}
 				else{
 					alert("게시글이 존재하지 않습니다.")
@@ -163,7 +177,7 @@
 		});
 		
 		
-		$(".modal_overlay").show();
+		
 		
 	}
 	

@@ -1,8 +1,5 @@
 package com.bum2us.infra.modules.member;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Member {
 	
 	private Integer mmSeq;

@@ -9,5 +9,7 @@ public interface LuvService {
 	public List<Luv> selectList(Luv dto) throws Exception;
 	
 	public int selectCount(Luv dto) throws Exception;
+	
+	public void delete(Luv dto) throws Exception;
 
 }

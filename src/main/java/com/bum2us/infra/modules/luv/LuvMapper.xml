@@ -22,6 +22,15 @@
 		
 	</insert>
 	
+	<delete id="delete">
+	
+		DELETE 
+		FROM luv 
+		WHERE luvWriter = #{luvWriter} 
+		AND luvPostId = #{luvPostId}
+	
+	</delete>
+	
 	<select id="selectList" resultMap = "resultObj">
 	
 		SELECT

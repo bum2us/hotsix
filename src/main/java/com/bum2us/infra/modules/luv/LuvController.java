@@ -25,6 +25,21 @@ public class LuvController {
 		
 		List<Luv> list = service.selectList(dto);
 		
+		map.put("list", list);		
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteLuv")
+	public Map<String,Object> deleteLuv(Luv dto) throws Exception{
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		service.delete(dto);
+		
+		List<Luv> list = service.selectList(dto);
+		
 		map.put("list", list);
 		
 		return map;

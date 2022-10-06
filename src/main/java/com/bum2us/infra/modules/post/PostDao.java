@@ -39,6 +39,9 @@ public class PostDao {
 	public List<Post> selectListForMain(int i) { return sqlSession.selectList(namespace + ".selectListForMain",i); }
 
 
-	public Post selectOne(int i) { return sqlSession.selectOne(namespace + ".selectOne", i); } 
+	public Post selectOne(int i) { return sqlSession.selectOne(namespace + ".selectOne", i); }
+
+
+	public int selectCheckLoginUserLuved(Post dto) { return sqlSession.selectOne(namespace + ".selectCheckLoginUserLuved", dto); } 
 	
 }

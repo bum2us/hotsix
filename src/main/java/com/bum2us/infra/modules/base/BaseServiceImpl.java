@@ -3,8 +3,8 @@ package com.bum2us.infra.modules.base;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bum2us.infra.modules.member.Member;
 import com.bum2us.infra.common.utils.UtilSecurity;
+import com.bum2us.infra.modules.member.Member;
 
 @Service
 public class BaseServiceImpl implements BaseService{

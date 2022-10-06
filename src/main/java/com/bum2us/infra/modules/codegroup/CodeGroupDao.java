@@ -1,6 +1,5 @@
 package com.bum2us.infra.modules.codegroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,8 +7,6 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-
-import com.bum2us.infra.modules.code.Code;
 
 @Repository
 public class CodeGroupDao {

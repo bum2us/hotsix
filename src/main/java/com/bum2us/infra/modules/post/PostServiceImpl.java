@@ -84,6 +84,12 @@ public class PostServiceImpl implements PostService{
 	}
 
 
+	public int selectCheckLoginUserLuved(Post dto) {
+		// TODO Auto-generated method stub
+		return dao.selectCheckLoginUserLuved(dto);
+	}
+
+
 	
 	
 	

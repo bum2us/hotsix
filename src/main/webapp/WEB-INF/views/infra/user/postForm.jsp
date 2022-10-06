@@ -94,7 +94,7 @@
 							</div>
 						</div>
 						<div class="col-4 post_function">
-							<i class="fa-regular fa-heart" onclick="johayo()"></i>
+							<i id="luv" style="color: black;" class="fa-regular fa-heart" onclick="johayo()"></i>
 							<i class="fa-regular fa-comment-dots"></i>
 							<i class="fa-regular fa-paper-plane"></i>
 						</div>
@@ -108,12 +108,24 @@
 			</div>
 		</form>
 	</div>
-	<script >
+	
+	<script>
+
 		johayo = function() {
+			
+			var ajaxUrl = "";
+			var status = $("#luv").css('color');
+			
+			if(status == "rgb(255, 0, 0)") { //삭제
+				ajaxUrl ="/deleteLuv";
+			}
+			else{  //추가
+				ajaxUrl ="/insertLuv";
+			}
 			
 			$.ajax({
 				
-				url : "/insertLuv",
+				url : ajaxUrl,
 				type : "POST",
 				data : {
 					luvWriter : ${sessSeq},
@@ -122,7 +134,17 @@
 				datatype : "json",
 				success:function(result){
 					if(result.list != null){
+						$("#post_likeCount").html(result.list.length);	
 						
+						if(status == "rgb(255, 0, 0)"){
+							$("#luv").removeClass("fa-solid fa-heart");
+							$("#luv").addClass("fa-regular fa-heart");
+							$("#luv").css('color','black');							
+						}else {
+							$("#luv").removeClass("fa-regular fa-heart");
+							$("#luv").addClass("fa-solid fa-heart");
+							$("#luv").css('color','red');
+						}
 					}
 				},
 				error:function(){
@@ -131,6 +153,10 @@
 			});
 			
 		};
+	
+	</script>
+	
+	<script >
 	
 		datgle = function() {
 			
@@ -161,11 +187,12 @@
 							comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
 							comment += result.list[i].cmCreateDate + '</span><button type="button">';
 							comment += '좋아요 5개</button><button type="button">';
-							comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';
-							
+							comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';	
 						}
+						
 						$("#comment_List").html(comment);
 						$("#cmContent").val('');
+						
 						
 					}else{
 						alert("실패");	

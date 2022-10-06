@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,23 +54,33 @@ public class PostController {
 	
 	@ResponseBody
 	@RequestMapping(value="getPost")
-	public Map<String,Object> getPost(Model model,Post dto) throws Exception{
+	public Map<String,Object> getPost(HttpSession httpSession,Model model,Post dto) throws Exception{
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		Post item = service.selectOne(dto.getPostSeq());
 		
-		Luv lv = new Luv();
-		lv.setLuvPostId(dto.getPostSeq());
-		int luvCount = serviceLuv.selectCount(lv);
-		System.out.println(luvCount);
 		
 		if(item != null) 
 		{
+			dto.setLoginUserSeq((int)httpSession.getAttribute("sessSeq"));
+			int i = service.selectCheckLoginUserLuved(dto);
+			
+			if(i != 0)
+				map.put("luved", "true");
+			else
+				map.put("luved", "false");
+			
 			map.put("rt", "success");
 			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
 			map.put("nickname", item.getMmNickname());
 			map.put("content", item.getPostContent());
+		
+			Luv lv = new Luv();
+			lv.setLuvPostId(dto.getPostSeq());
+			int luvCount = serviceLuv.selectCount(lv);
+
+			map.put("luvCount", luvCount);
 			
 			Comment cm = new Comment();
 			cm.setCmPostId(dto.getPostSeq());
@@ -76,7 +88,6 @@ public class PostController {
 			List<Comment> list =  serviceComment.selectList(cm);
 			map.put("list", list);
 			
-			map.put("luvCount", luvCount);
 		}
 		else 
 		{

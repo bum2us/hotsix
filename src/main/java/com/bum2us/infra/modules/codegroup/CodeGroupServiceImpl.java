@@ -8,8 +8,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bum2us.infra.modules.code.Code;
-
 @Service
 public class CodeGroupServiceImpl implements CodeGroupService{
 	
