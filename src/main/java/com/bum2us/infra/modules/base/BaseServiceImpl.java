@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.bum2us.infra.common.utils.UtilSecurity;
 import com.bum2us.infra.modules.member.Member;
+import com.bum2us.infra.modules.post.PostVo;
 
 @Service
 public class BaseServiceImpl implements BaseService{
@@ -20,6 +21,21 @@ public class BaseServiceImpl implements BaseService{
 		
 		return dao.Login(mb);
 	}
+
+	@Override
+	public Member selectOneMember(PostVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectOneMember(vo);
+	}
+
+	@Override
+	public Member selectProfileImg(PostVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectProfileImg(vo);
+	}
+
+	
+
 	
 	
 }

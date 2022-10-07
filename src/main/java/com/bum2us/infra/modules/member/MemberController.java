@@ -32,7 +32,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value ="member/memberForm")
-	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
+	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model,HttpSession httpSession) throws Exception {
 		
 		if(vo.getShSeq() != null) {
 			
@@ -40,6 +40,13 @@ public class MemberController {
 			model.addAttribute("item", item);
 			
 			System.out.println(item.getMmName());
+			
+		}
+		else if(httpSession.getAttribute("sessSeq") != null) {
+			
+			vo.setShSeq((int)httpSession.getAttribute("sessSeq"));
+			Member item = service.selectOne(vo);
+			model.addAttribute("item", item);
 			
 		}
 		
@@ -75,9 +82,8 @@ public class MemberController {
 		return result; 
 	}
 	
-	@RequestMapping(value = "/member/memberAdd")
-	public String regResult(@ModelAttribute("vo") MemberVo vo, Model model,Member mb) throws Exception {
-		
+	@RequestMapping(value = "/member/memberIns")
+	public String memberIns(@ModelAttribute("vo") MemberVo vo, Model model,Member mb) throws Exception {
 		
 		service.insertList(mb);
 		model.addAttribute("item", mb);

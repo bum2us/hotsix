@@ -36,15 +36,18 @@
 				</span>
 			</div>
 		</div>
-		<form id="mainForm">
+		<form id="mainForm"  enctype="multipart/form-data" method = "POST" > 
 			<div class="row mt-4 searchForm">
 				<div class="col">
 					<div class="row mt-3 justify-content-center"> 
-						<img id="profileImg" style="width:300px; height:300px; border-radius: 50%;" alt="" src="/resources/images/profile/empty.png">
+						<img id="profileImg" style="width:300px; height:300px; border-radius: 50%;" alt="" src="
+						<c:if test="${item.seq eq null}">/resources/images/profile/empty.png</c:if>
+						<c:if test="${item.seq ne null}">${item.upPath}${item.upUuidName}</c:if>
+						">
 					</div> 
 					<div class="row my-3 justify-content-center">
 						<button type="button" class="upload-Btn">파일 첨부 
-							<input id="postImage" name="postImage" type="file" multiple="multiple" onChange="upload('postImage');" > 
+							<input type="file" id="postImageid" name="postImage"  multiple="multiple" onChange="upload('postImageid');" > 
 						</button>
 					</div>
 					<div class="row my-4">
@@ -212,7 +215,7 @@
   		}
 	  	case "add":
   		{
-			form.attr("action","/member/memberAdd").submit(); 
+			form.attr("action","/member/memberIns").submit(); 
 			break;
   		}
 	  	case "edit":
@@ -223,7 +226,7 @@
 	  
 	  }
 	
-  }
+  };
  	
  	function emailChange(){
  		
@@ -238,7 +241,7 @@
  			email.attr('value',email.val()+'@'+ txt);
  		}
  		
- 	}
+ 	};
  	
   searchAdd = function() {
 		
@@ -280,7 +283,7 @@
 		    }
 		}).open();
 	
-	}
+	};
   
   	getGeoFromAddress = function(){
   
@@ -296,7 +299,7 @@
   		    }
 		   
   		});
-  	} 
+  	} ;
  
   	chkId = function() {
   		
@@ -333,7 +336,7 @@
   			
   		});
   		
-  	}
+  	};
   	
 	chkPw = function() {
   		
@@ -354,7 +357,7 @@
 			$('#pw_check_fail').show();
 		}  				 
   		
-  	}
+  	};
 	
 	upload = function(objName) {
 		
@@ -368,7 +371,7 @@
 		fileReader.onload = function () {
 			 $("#profileImg").attr("src", fileReader.result);
 		 }	
-	}
+	};
   
 </script>
 </body>

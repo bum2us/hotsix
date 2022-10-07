@@ -77,8 +77,11 @@ public class BaseController {
 		
 		System.out.println(vo.getShOption());
 		
-		List<Post> list = servicePost.selectListForProfile(vo);
+		Member item = service.selectProfileImg(vo);
 		
+		model.addAttribute("item", item);
+		
+		List<Post> list = servicePost.selectListForProfile(vo);
 		
 		model.addAttribute("list", list);
 		

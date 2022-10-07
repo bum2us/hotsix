@@ -6,7 +6,6 @@
 
 	<resultMap  id="resultMember" type="com.bum2us.infra.modules.member.Member"></resultMap>
 
-
 	<select id="Login" resultMap="resultMember">
 		
 		SELECT
@@ -19,4 +18,32 @@
 	
 	</select>
 
+	<select id="selectOneMember" resultMap = "resultMember">
+		
+		SELECT
+			*
+		FROM member
+		WHERE 1=1
+		AND mmSeq = #{shOption}
+	
+	</select>
+	
+	<select id="selectProfileImg" resultMap ="resultMember">
+		
+		SELECT
+			upmSeq as upSeq
+			,upmDefaultNy as upDefaultNy
+			,upmSort as upSort
+			,upmExt as upExt
+			,upmOriginalName as upOriginalName
+			,upmUuidName as upUuidName
+			,upmDelNy as upDelNy
+			,upmSize as upSize
+			,upmType as upType
+			,upmPath as upPath
+		FROM uploadMemberProfile
+		WHERE upmMemberSeq = #{shOption}
+		
+	</select>
+	
 </mapper>

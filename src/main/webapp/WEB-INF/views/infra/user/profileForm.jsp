@@ -21,37 +21,44 @@
 <body>
 	<%@include file="../common/user/header.jsp" %>
     <div class="container">
-        <div class="row" style="justify-content: center;">
-            <div class="col-4 offset-2 porfileImgbox">
-                <img class="profileImg" src="/resources/images/profile/empty.png" alt="">
-            </div>
-            <div class="col-6 offset-1 pt-4"> 
-                <div class="row mb-3 ">
-                    <div class="col-8">
-                        <span class="profileUserName"><c:out value="${ sessNickName }"/></span>
-                    </div>
-                    <div class="col offset-1 pt-2">
-                        <button class="basebutton" style="font-weight:700;">프로필 편집</button>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <p class="profileUserInfo">게시물<span class="profileInfoDetail"><c:out value="${fn:length(list) }"/></span></p>
-                    <p class="profileUserInfo">팔로워<span class="profileInfoDetail">-</span></p>
-                    <p class="profileUserInfo">팔로우<span class="profileInfoDetail">-</span></p>
-                </div>
-                <div class="row mb-2 ">
-                    <p class="profileUserComment"><c:out value="${ sessComment }"/></p>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="profile-grid-wrapper">
-        	<c:forEach items="${list }" var="list" varStatus="status">
-	            <div>
-	                <a href=""><img src="${list.upPath}${list.upUuidName}" alt=""></a>
-	            </div>        		
-        	</c:forEach>
-        </div> 
+    	<form method="POST" id="mainForm">
+	        <div class="row" style="justify-content: center;">
+	            <div class="col-4 offset-2 porfileImgbox">
+	                <img class="profileImg" src="
+	                <c:choose>
+	                	<c:when test ="${item.upSeq ne null}">${item.upPath}${item.upUuidName}</c:when>
+	                	<c:otherwise>/resources/images/profile/empty.png</c:otherwise>
+	               	</c:choose>
+	                " alt="">
+	            </div>
+	            <div class="col-6 offset-1 pt-4"> 
+	                <div class="row mb-3 ">
+	                    <div class="col-8">
+	                        <span class="profileUserName"><c:out value="${ sessNickName }"/></span>
+	                    </div>
+	                    <div class="col offset-1 pt-2">
+	                        <button type="button" class="basebutton" style="font-weight:700;" onclick="runForm()">프로필 편집</button>
+	                    </div>
+	                </div>
+	                <div class="row mb-2">
+	                    <p class="profileUserInfo">게시물<span class="profileInfoDetail"><c:out value="${fn:length(list) }"/></span></p>
+	                    <p class="profileUserInfo">팔로워<span class="profileInfoDetail">-</span></p>
+	                    <p class="profileUserInfo">팔로우<span class="profileInfoDetail">-</span></p>
+	                </div>
+	                <div class="row mb-2 ">
+	                    <p class="profileUserComment"><c:out value="${ sessComment }"/></p>
+	                </div>
+	            </div>
+	        </div>
+	        <hr>
+	        <div class="profile-grid-wrapper">
+	        	<c:forEach items="${list }" var="list" varStatus="status">
+		            <div>
+		                <a href=""><img src="${list.upPath}${list.upUuidName}" alt=""></a>
+		            </div>        		
+	        	</c:forEach>
+	        </div>
+        </form> 
     </div>
     <%@include file="../common/user/footer.jsp" %>
 	
@@ -59,7 +66,24 @@
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
 <script>
-    
+	
+	var form = $("#mainForm");
+
+	runForm = function(key) {
+		
+		switch(key){
+			
+			default:
+				{
+					form.attr("action","/member/memberForm").submit();
+					break;
+				}
+		
+		}
+		
+		
+	}
+	
 </script>
 </body>
 </html>
