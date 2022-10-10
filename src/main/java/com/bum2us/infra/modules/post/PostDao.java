@@ -42,6 +42,9 @@ public class PostDao {
 	public Post selectOne(int i) { return sqlSession.selectOne(namespace + ".selectOne", i); }
 
 
-	public int selectCheckLoginUserLuved(Post dto) { return sqlSession.selectOne(namespace + ".selectCheckLoginUserLuved", dto); } 
+	public int selectCheckLoginUserLuved(Post dto) { return sqlSession.selectOne(namespace + ".selectCheckLoginUserLuved", dto); }
+
+
+	public Post selectPostImg(Post dto) { return sqlSession.selectOne(namespace + ".selectPostImg", dto); } 
 	
 }

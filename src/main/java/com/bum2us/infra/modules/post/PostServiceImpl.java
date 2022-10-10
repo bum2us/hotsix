@@ -47,13 +47,13 @@ public class PostServiceImpl implements PostService{
 			
 		dao.insert(dto);
 		
-		int postSeq = dao.selectLastSeq();
+		int postSeq = dao.selectLastSeq(); //64
 		
 		int j = 0;
 		for(MultipartFile myFile : dto.getPostImage()) {
 			
 			if(!myFile.isEmpty()) {
-				
+				// postServiceImpl
 				String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
 				UtilUpload.uploadPost(myFile, pathModule, dto);
 				
@@ -90,6 +90,14 @@ public class PostServiceImpl implements PostService{
 	}
 
 
+	@Override
+	public Post selectPostImg(Post dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectPostImg(dto);
+	}
+
+
+	
 	
 	
 	

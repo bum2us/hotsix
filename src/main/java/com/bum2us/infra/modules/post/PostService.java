@@ -16,4 +16,6 @@ public interface PostService {
 	public List<Post> selectListForMain(int i)throws Exception;
 	
 	public Post selectOne(int i)throws Exception;
+	
+	public Post selectPostImg(Post dto)throws Exception;
 }

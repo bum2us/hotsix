@@ -46,6 +46,7 @@ public class PostController {
 	@RequestMapping(value ="postUpload")
 	public String postUpload(Model model,Post dto) throws Exception
 	{
+		System.out.println(dto.getPostImage());
 		
 		service.insert(dto);
 		
@@ -98,4 +99,17 @@ public class PostController {
 		
 		return map;
 	}
+	
+	
+	@RequestMapping(value="imgLoad")
+	public String imgLoad(Post dto,Model model) throws Exception {
+		
+		dto.setPostSeq(23);
+		Post item = service.selectPostImg(dto);
+		
+		model.addAttribute("item", item);
+		
+		return "infra/user/test";
+	}
+	
 }

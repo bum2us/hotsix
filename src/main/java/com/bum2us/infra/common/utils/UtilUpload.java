@@ -17,13 +17,14 @@ public class UtilUpload {
 		String uuidFileName = uuid + "." + ext;
 		String pathModule = className;
 		String nowString = UtilDateTime.nowString();
-		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
+		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10);
+		// 1994/04/20/보리.png
 		String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
 		String pathForView = "/resources/uploaded/" + pathModule + "/" + pathDate + "/";
 		
-		createPath(path);
+		createPath(path); //위에서 정의한 경로를 생성해주는 메소드
 		  
-		multipartFile.transferTo(new File(path + uuidFileName));
+		multipartFile.transferTo(new File(path + uuidFileName)); //실제로 이미지 물리파일이 저장되는 코드(메소드)
 		
 		dto.setUpPath(pathForView);
 		dto.setUpOriginalName(fileName);

@@ -142,4 +142,13 @@
 		LIMIT #{pageSize} OFFSET #{pageRange}  
 	</sql>
 	
+	<select id="selectPostImg" resultMap="resultObj">
+		
+		SELECT
+			*	
+		FROM upload 
+		WHERE upPostSeq = #{postSeq}
+		
+	</select>
+	
 </mapper>
