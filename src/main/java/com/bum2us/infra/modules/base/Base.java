@@ -24,7 +24,7 @@ public class Base {
 	public void setUpPath(String upPath) {
 		this.upPath = upPath;
 	}
-
+	
 	public String getUpOriginalName() {
 		return upOriginalName;
 	}

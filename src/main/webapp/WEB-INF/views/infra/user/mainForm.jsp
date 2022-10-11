@@ -116,6 +116,44 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 	<script type="text/javascript">
 	
+	sizeAlgorithm = function() {
+		
+		var img_width = $("#postImg")[0].width;
+		var img_height = $("#postImg")[0].height;
+		
+		var gap_width = 0;
+		var gap_height = 0;
+		
+		var frame_width = 910;
+		var frame_height = 700;
+		var sizePercent = 0;
+		
+		if(img_width > frame_width){
+			gap_width = img_width - frame_width;
+		}
+		if(img_height > frame_height){
+			gap_height = img_height - frame_height
+		}
+		
+		if(gap_width == 0 && gap_height == 0){
+			return false;
+		}		
+		else if(gap_width > gap_height){
+			sizePercent = -(frame_width - img_width) / img_width;
+			img_width = frame_width;
+			img_height = img_height * sizePercent;
+		}
+		else{
+			sizePercent = -(frame_height - img_height) / img_height;
+			img_height = frame_height;
+			img_width = img_width * sizePercent;	
+		}
+		
+		$("#postImg").attr("width",img_width);
+		$("#postImg").attr("heigth",img_height);
+		
+	};
+	
 	openPost = function(postSeq) {
 		
 
@@ -136,6 +174,7 @@
 					$("#postContent").html(result.content);
 					$("#cmPostId").attr("value",postSeq);
 					$("#cmContent").val('');
+					
 					
 					if(result.img != null){
 						$("#postWriterImg").attr("src",result.img);
@@ -190,13 +229,13 @@
 		
 		
 		
-	}
+	};
 	
 	closePost = function() { 
 		
 		$(".modal_overlay").hide();
-	}
-	
+	};
+		
 	</script>	
 </body>
 </html>
