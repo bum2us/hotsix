@@ -198,4 +198,18 @@
 		
 	</insert>
 	
+	<select id="checkProfileImg" resultType="Integer"  parameterType="Integer">
+		SELECT
+			COUNT(*)
+		FROM uploadMemberProfile
+		WHERE upmMemberSeq = #{i}
+	</select>
+	
+	<update id="deleteProfileImg"  parameterType="Integer">
+		UPDATE uploadMemberProfile 
+		SET upmDelNy = 1
+		WHERE upmMemberSeq = #{i}
+		AND upmDelNy = 0
+	</update>
+	
 </mapper> 

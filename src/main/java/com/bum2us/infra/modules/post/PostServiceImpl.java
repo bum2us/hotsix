@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bum2us.infra.common.utils.UtilUpload;
+import com.bum2us.infra.modules.member.Member;
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -83,7 +84,7 @@ public class PostServiceImpl implements PostService{
 		return dao.selectOne(i);
 	}
 
-
+	@Override
 	public int selectCheckLoginUserLuved(Post dto) {
 		// TODO Auto-generated method stub
 		return dao.selectCheckLoginUserLuved(dto);
@@ -95,6 +96,14 @@ public class PostServiceImpl implements PostService{
 		// TODO Auto-generated method stub
 		return dao.selectPostImg(dto);
 	}
+
+
+	@Override
+	public Member selectPostWriteImg(Integer postSeq) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectPostWriteImg(postSeq);
+	}
+
 
 
 	

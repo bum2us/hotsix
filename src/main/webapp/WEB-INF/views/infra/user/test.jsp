@@ -18,7 +18,5 @@
 	<div>
 		<img name="" alt="" src="${item.upPath }${item.upUuidName}" style="width: 300px; height: 300px;">
 	</div>
-	
-
 </body>
 </html>

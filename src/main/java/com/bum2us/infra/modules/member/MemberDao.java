@@ -36,4 +36,8 @@ public class MemberDao {
 	public int selectLastSeq() { return sqlSession.selectOne(namespace + ".selectLastSeq"); }
 
 	public void insertUpload(Member mb) {sqlSession.insert(namespace + ".insertUpload", mb); }
+
+	public int checkProfileImg(Integer i) { return sqlSession.selectOne(namespace + ".checkProfileImg", i); }
+
+	public void deleteProfileImg(Integer i) { sqlSession.update(namespace + ".deleteProfileImg", i); }
 }

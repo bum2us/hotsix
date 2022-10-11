@@ -15,7 +15,6 @@ public class Base {
 	private Integer upDelNy;
 	private Integer upType;
 	
-	
 	private MultipartFile[] postImage;
 
 	public String getUpPath() {

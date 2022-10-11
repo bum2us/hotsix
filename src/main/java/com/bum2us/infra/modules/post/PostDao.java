@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bum2us.infra.modules.member.Member;
+
 @Repository
 public class PostDao {
 	
@@ -45,6 +47,9 @@ public class PostDao {
 	public int selectCheckLoginUserLuved(Post dto) { return sqlSession.selectOne(namespace + ".selectCheckLoginUserLuved", dto); }
 
 
-	public Post selectPostImg(Post dto) { return sqlSession.selectOne(namespace + ".selectPostImg", dto); } 
+	public Post selectPostImg(Post dto) { return sqlSession.selectOne(namespace + ".selectPostImg", dto); }
+
+
+	public Member selectPostWriteImg(Integer postSeq) { return sqlSession.selectOne(namespace+".selectPostWriteImg", postSeq); } 
 	
 }

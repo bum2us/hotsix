@@ -28,13 +28,18 @@
 		SELECT
 			cm.*
 			,mm.mmNickname
+			,upm.upmUuidName
+			,upm.upmPath
 		FROM
 			comment cm
 		JOIN post post
 		ON cm.cmPostId = post.postSeq
 		JOIN member mm
 		ON mm.mmSeq = cm.cmWriter 
-		WHERE 1=1
+		LEFT JOIN uploadMemberProfile upm
+		ON  cm.cmWriter = upm.upmMemberSeq
+		AND upm.upmDelNy = 0
+		WHERE 1=1 
 		AND cmPostId = #{cmPostId}
 		ORDER BY cmCreateDate DESC
 	</select>

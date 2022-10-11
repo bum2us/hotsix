@@ -40,9 +40,10 @@
 			,upmDelNy as upDelNy
 			,upmSize as upSize
 			,upmType as upType
-			,upmPath as upPath
+			,upmPath as upPath 
 		FROM uploadMemberProfile
 		WHERE upmMemberSeq = #{shOption}
+		AND upmDelNy = 0
 		
 	</select>
 	

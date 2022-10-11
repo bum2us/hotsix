@@ -38,11 +38,11 @@
 		</div>
 		<form id="mainForm"  enctype="multipart/form-data" method = "POST" > 
 			<div class="row mt-4 searchForm">
-				<div class="col">
+				<div class="col"> 
 					<div class="row mt-3 justify-content-center"> 
 						<img id="profileImg" style="width:300px; height:300px; border-radius: 50%;" alt="" src="
-						<c:if test="${item.seq eq null}">/resources/images/profile/empty.png</c:if>
-						<c:if test="${item.seq ne null}">${item.upPath}${item.upUuidName}</c:if>
+						<c:if test="${item.upPath eq null}">/resources/images/profile/empty.png</c:if>
+						<c:if test="${item.upPath ne null}">${item.upPath}${item.upUuidName}</c:if>
 						">
 					</div> 
 					<div class="row my-3 justify-content-center">

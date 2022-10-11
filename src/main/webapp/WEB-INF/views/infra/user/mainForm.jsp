@@ -137,11 +137,22 @@
 					$("#cmPostId").attr("value",postSeq);
 					$("#cmContent").val('');
 					
+					if(result.img != null){
+						$("#postWriterImg").attr("src",result.img);
+					}
+					
 					var comment = "";
 					for (var i = 0; i < result.list.length; i++) {
 						
+						var imgsrcTxt = "";
+						 
+						if(result.list[i].upmPath != null)
+							imgsrcTxt = result.list[i].upmPath + result.list[i].upmUuidName;
+						else
+							imgsrcTxt = "/resources/images/profile/empty.png";
+						
 						comment += '<ul><li><div class="row commentBlock"><div class="col-3 comment_header"><img src=';
-						comment += '"/resources/images/profile/empty.png">';
+						comment += '"'+imgsrcTxt+'">';
 						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';

@@ -34,7 +34,7 @@
 				<div class="post_rightSide">
 					<div class="header">
 						<div class="userImg">
-							<img src="/resources/images/profile/empty.png" class="post_cover" alt="">
+							<img id="postWriterImg" src="/resources/images/profile/empty.png" class="post_cover" alt="">
 						</div>
 						<div id="postWriter">
 							

@@ -27,9 +27,13 @@ public class BaseController {
 	PostServiceImpl servicePost;
 
 	@RequestMapping(value ="/")
-	public String login(HttpSession httpSession) throws Exception {
+	public String main() throws Exception {
 		
-		httpSession.invalidate();
+		return "infra/common/main";
+	}
+	
+	@RequestMapping(value ="/signin")
+	public String login() throws Exception {
 		
 		return "infra/user/loginForm";
 	}

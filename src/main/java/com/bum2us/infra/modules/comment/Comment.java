@@ -8,7 +8,10 @@ public class Comment {
 	private String cmContent;
 	private String cmCreateDate;
 	private String cmEditDate;
+	
 	private String mmNickname;
+	private String upmUuidName;
+	private String upmPath;
 	
 	
 	public Integer getCmSeq() {
@@ -52,6 +55,18 @@ public class Comment {
 	}
 	public void setMmNickname(String mmNickname) {
 		this.mmNickname = mmNickname;
+	}
+	public String getUpmUuidName() {
+		return upmUuidName;
+	}
+	public void setUpmUuidName(String upmUuidName) {
+		this.upmUuidName = upmUuidName;
+	}
+	public String getUpmPath() {
+		return upmPath;
+	}
+	public void setUpmPath(String upmPath) {
+		this.upmPath = upmPath;
 	}
 	
 	

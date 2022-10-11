@@ -5,6 +5,8 @@
 <mapper namespace = "com.bum2us.infra.modules.post.PostMapper">
 
 	<resultMap id = "resultObj" type = "com.bum2us.infra.modules.post.Post"></resultMap>
+	
+	<resultMap id = "resultObjMember" type = "com.bum2us.infra.modules.member.Member"></resultMap>
 
 	<select id= "selectList" resultMap="resultObj">
 	
@@ -36,12 +38,16 @@
 	<select id="selectListForMain" resultMap = "resultObj"  parameterType="Integer">
 	
 		SELECT
+            COUNT(*) as luvCount,
 			po.*,
  			up.*
 		FROM post po
  		JOIN upload up
  		ON po.postSeq = up.upPostSeq
- 		ORDER BY po.postLike DESC
+ 		JOIN luv luv
+ 		ON luv.luvPostId = po.postSeq
+ 		GROUP BY luv.luvPostId
+        ORDER BY luvCount DESC
  		LIMIT #{i}
 	
 	</select>
@@ -52,6 +58,7 @@
 			po.*,
  			up.*,
  			mm.mmNickname
+ 			,mm.mmSeq
 		FROM post po
  		JOIN upload up
  		ON po.postSeq = up.upPostSeq
@@ -77,7 +84,7 @@
 			postSeq
 		FROM post
 		ORDER BY postSeq DESC
-	          LIMIT 1
+        LIMIT 1
 		
 	</select>
 
@@ -149,6 +156,15 @@
 		FROM upload 
 		WHERE upPostSeq = #{postSeq}
 		
+	</select>
+	
+	<select id="selectPostWriteImg" resultMap="resultObjMember"  parameterType="Integer">
+		SELECT
+			upmPath as upPath
+		    ,upmUuidName as upUuidName
+		FROM uploadMemberProfile
+		WHERE upmMemberSeq = #{i}
+		AND upmDelNy = 0
 	</select>
 	
 </mapper>

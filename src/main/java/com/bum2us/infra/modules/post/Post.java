@@ -13,6 +13,7 @@ public class Post extends Base{
 	private Integer postDelNy;
 	
 	private Integer loginUserSeq;
+	private Integer mmSeq;
 	private String mmNickname;
 	private String bdName;
 	
@@ -67,6 +68,12 @@ public class Post extends Base{
 	}
 	public void setLoginUserSeq(Integer loginUserSeq) {
 		this.loginUserSeq = loginUserSeq;
+	}
+	public Integer getMmSeq() {
+		return mmSeq;
+	}
+	public void setMmSeq(Integer mmSeq) {
+		this.mmSeq = mmSeq;
 	}
 	public String getMmNickname() {
 		return mmNickname;

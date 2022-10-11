@@ -17,6 +17,7 @@ import com.bum2us.infra.modules.comment.Comment;
 import com.bum2us.infra.modules.comment.CommentServiceImpl;
 import com.bum2us.infra.modules.luv.Luv;
 import com.bum2us.infra.modules.luv.LuvServiceImpl;
+import com.bum2us.infra.modules.member.Member;
 
 @Controller
 public class PostController {
@@ -61,7 +62,8 @@ public class PostController {
 		
 		Post item = service.selectOne(dto.getPostSeq());
 		
-		
+		Member postWriterImg = service.selectPostWriteImg(item.getMmSeq());	
+		System.out.println(postWriterImg);
 		if(item != null) 
 		{
 			dto.setLoginUserSeq((int)httpSession.getAttribute("sessSeq"));
@@ -76,6 +78,11 @@ public class PostController {
 			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
 			map.put("nickname", item.getMmNickname());
 			map.put("content", item.getPostContent());
+			
+			if(postWriterImg != null) {
+				map.put("img", postWriterImg.getUpPath()+postWriterImg.getUpUuidName());
+			}
+			
 		
 			Luv lv = new Luv();
 			lv.setLuvPostId(dto.getPostSeq());

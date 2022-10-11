@@ -18,7 +18,7 @@
 			<li><a href="/bookmark"><i class="fa-solid fa-heart"></i></a></li>
 			<li><a href="/profile"><i class="fa-solid fa-user"></i></a></li>
 			<li><c:out value="${sessNickName}"/></li>
-			<li><a href="/"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+			<li><a href="/signin"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 		</ul>
 	</nav>
 </header>

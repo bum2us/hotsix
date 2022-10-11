@@ -54,17 +54,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value ="/member/formAction")
-	public String memberAction(@ModelAttribute("vo")MemberVo vo, Member item, Model model) throws Exception{
+	public String memberAction(HttpSession httpSession, Member item, Model model) throws Exception{
 		
 		service.updateOne(item);
 		
-		vo.setPageTotal(service.selectCount(vo));
+		httpSession.setAttribute("sessSeq", item.getMmSeq());
+		httpSession.setAttribute("sessId", item.getMmId());
+		httpSession.setAttribute("sessNickName", item.getMmNickname());
+		httpSession.setAttribute("sessComment", item.getMmComment());
 		
-		List<Member> list = service.selectList(vo);
-
-		model.addAttribute("list", list);
 		
-		return "infra/adnnin/memberList";
+		return "redirect:/profile";
 	}
 	
 	@ResponseBody

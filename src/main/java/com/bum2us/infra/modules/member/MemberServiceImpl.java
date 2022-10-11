@@ -34,24 +34,24 @@ public class MemberServiceImpl implements MemberService{
 		
 		int memberSeq = dao.selectLastSeq();
 				
-				int j = 0;
-				for(MultipartFile myFile : mb.getPostImage()) {
-					
-					if(!myFile.isEmpty()) {
-						
-						String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-						UtilUpload.uploadProfile(myFile, pathModule, mb);
-						
-						mb.setUpType(2);
-						mb.setUpDefaultNy(j == 0 ? 1 : 0);
-						mb.setUpSort(j+1);
-						mb.setMmSeq(memberSeq);
-						
-						dao.insertUpload(mb);
-						j++;
-					}
-					
-				}
+		int j = 0;
+		for(MultipartFile myFile : mb.getPostImage()) {
+			
+			if(!myFile.isEmpty()) {
+				
+				String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+				UtilUpload.uploadProfile(myFile, pathModule, mb);
+				
+				mb.setUpType(2);
+				mb.setUpDefaultNy(j == 0 ? 1 : 0);
+				mb.setUpSort(j+1);
+				mb.setMmSeq(memberSeq);
+				
+				dao.insertUpload(mb);
+				j++;
+			}
+			
+		}
 		
 	}
 
@@ -86,6 +86,32 @@ public class MemberServiceImpl implements MemberService{
 		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
 		
 		dao.updateOne(mb);
+		
+		int isImgNy = dao.checkProfileImg(mb.getMmSeq());
+		
+		if(isImgNy == 1) { //이미 프로필 이미지가 있으면 기존 이미지의 DelNy = 1 로 변경해 준다.
+			dao.deleteProfileImg(mb.getMmSeq());
+		}
+		
+		int j = 0;
+		for(MultipartFile myFile : mb.getPostImage()) {
+			
+			if(!myFile.isEmpty()) {
+				
+				String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
+				UtilUpload.uploadProfile(myFile, pathModule, mb);
+				
+				mb.setUpType(2);
+				mb.setUpDefaultNy(j == 0 ? 1 : 0);
+				mb.setUpSort(j+1);
+				mb.setMmSeq(mb.getMmSeq());
+				
+				dao.insertUpload(mb);
+				j++;
+			}
+			
+		}
+		
 	}
 
 	public int chkId(String id) throws Exception{
