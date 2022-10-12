@@ -37,7 +37,7 @@ public class MemberDao {
 
 	public void insertUpload(Member mb) {sqlSession.insert(namespace + ".insertUpload", mb); }
 
-	public int checkProfileImg(Integer i) { return sqlSession.selectOne(namespace + ".checkProfileImg", i); }
+	public Member selectProfileImg(int i) { return sqlSession.selectOne(namespace + ".selectProfileImg", i); }
 
 	public void deleteProfileImg(Integer i) { sqlSession.update(namespace + ".deleteProfileImg", i); }
 }

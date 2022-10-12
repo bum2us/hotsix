@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bum2us.infra.common.constants.Constants;
 import com.bum2us.infra.common.utils.UtilSecurity;
 import com.bum2us.infra.common.utils.UtilUpload;
 
@@ -87,9 +88,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		dao.updateOne(mb);
 		
-		int isImgNy = dao.checkProfileImg(mb.getMmSeq());
+		Member isImgNy = dao.selectProfileImg(mb.getMmSeq());
 		
-		if(isImgNy == 1) { //이미 프로필 이미지가 있으면 기존 이미지의 DelNy = 1 로 변경해 준다.
+		if(isImgNy.getUpDelNy() == 1) { //이미 프로필 이미지가 있으면 기존 이미지의 DelNy = 1 로 변경해 준다.
 			dao.deleteProfileImg(mb.getMmSeq());
 		}
 		

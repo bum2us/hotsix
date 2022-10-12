@@ -34,6 +34,7 @@ public class MemberController {
 	@RequestMapping(value ="member/memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model,HttpSession httpSession) throws Exception {
 		
+		/*
 		if(vo.getShSeq() != null) {
 			
 			Member item = service.selectOne(vo);
@@ -42,15 +43,18 @@ public class MemberController {
 			System.out.println(item.getMmName());
 			
 		}
-		else if(httpSession.getAttribute("sessSeq") != null) {
+		*/
+		
+		if(httpSession.getAttribute("sessSeq") != null) {
 			
 			vo.setShSeq((int)httpSession.getAttribute("sessSeq"));
 			Member item = service.selectOne(vo);
+			
 			model.addAttribute("item", item);
 			
 		}
 		
-		return "infra/adnnin/memberForm";
+		return "infra/user/profileModForm";
 	}
 	
 	@RequestMapping(value ="/member/formAction")

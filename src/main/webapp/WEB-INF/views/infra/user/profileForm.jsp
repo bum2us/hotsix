@@ -46,7 +46,7 @@
 	                    <p class="profileUserInfo">팔로우<span class="profileInfoDetail">-</span></p>
 	                </div>
 	                <div class="row mb-2 ">
-	                    <p class="profileUserComment"><c:out value="${ sessComment }"/></p>
+	                    <p class="profileUserComment"><c:out value="${ sessComment }" escapeXml="false"/></p>
 	                </div>
 	            </div>
 	        </div>

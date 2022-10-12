@@ -33,7 +33,9 @@ public class BaseController {
 	}
 	
 	@RequestMapping(value ="/signin")
-	public String login() throws Exception {
+	public String login(HttpSession httpSession) throws Exception {
+		
+		httpSession.invalidate();
 		
 		return "infra/user/loginForm";
 	}

@@ -109,11 +109,14 @@
 	<select id="selectOne" resultMap="resultObj">
 		
 		SELECT
-			*
-		FROM member
-		WHERE
-			1=1
-		AND #{shSeq} LIKE mmSeq	
+			mm.*
+			,upm.upmPath as upPath
+			,upm.upmUuidName as upUuidName
+		FROM member mm
+		LEFT JOIN uploadMemberProfile upm 
+		ON mm.mmSeq = upm.upmMemberSeq
+		WHERE 1=1
+		AND #{shSeq} LIKE mm.mmSeq	
 		<!-- WHERE id LIKE #{shId} AND password LIKE #{shPassword} -->
 		
 	</select>
@@ -198,9 +201,10 @@
 		
 	</insert>
 	
-	<select id="checkProfileImg" resultType="Integer"  parameterType="Integer">
+	<select id="checkProfileImg" resultMap="resultObj"  parameterType="Integer">
 		SELECT
-			COUNT(*)
+			upmUuidName as upUuidName
+			,upmDelNy as upDelNy
 		FROM uploadMemberProfile
 		WHERE upmMemberSeq = #{i}
 	</select>
