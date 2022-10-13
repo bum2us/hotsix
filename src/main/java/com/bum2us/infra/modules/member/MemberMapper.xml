@@ -115,7 +115,8 @@
 		FROM member mm
 		LEFT JOIN uploadMemberProfile upm 
 		ON mm.mmSeq = upm.upmMemberSeq
-		WHERE 1=1
+		AND upm.upmDelNy = 0 
+		WHERE 1=1 
 		AND #{shSeq} LIKE mm.mmSeq	
 		<!-- WHERE id LIKE #{shId} AND password LIKE #{shPassword} -->
 		
@@ -201,19 +202,19 @@
 		
 	</insert>
 	
-	<select id="checkProfileImg" resultMap="resultObj"  parameterType="Integer">
-		SELECT
-			upmUuidName as upUuidName
-			,upmDelNy as upDelNy
-		FROM uploadMemberProfile
-		WHERE upmMemberSeq = #{i}
-	</select>
-	
 	<update id="deleteProfileImg"  parameterType="Integer">
 		UPDATE uploadMemberProfile 
 		SET upmDelNy = 1
-		WHERE upmMemberSeq = #{i}
+		WHERE upmSeq = #{i} 
 		AND upmDelNy = 0
 	</update>
+	
+	<select id="selectProfileImg" resultType="Integer"  parameterType="Integer">
+		SELECT
+			upmSeq
+		FROM uploadMemberProfile
+		WHERE upmMemberSeq = #{i}	
+		AND upmDelNy = 0
+	</select>
 	
 </mapper> 

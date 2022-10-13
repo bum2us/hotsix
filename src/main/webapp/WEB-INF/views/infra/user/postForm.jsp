@@ -95,12 +95,16 @@
 						</div>
 						<div class="col-4 post_function">
 							<i id="luv" style="color: black;" class="fa-regular fa-heart" onclick="johayo()"></i>
-							<i class="fa-regular fa-comment-dots"></i>
+							<i class="fa-regular fa-comment-dots" onclick="datglefocus()"></i>
 							<i class="fa-regular fa-paper-plane"></i>
 						</div>
 					</div>
 					<div class="comment_input">
-						<i class="fa-regular fa-face-smile"></i>
+						<!-- <i class="fa-regular fa-face-smile"></i> -->
+						<div data-emojiarea data-type="image" data-global-picker="false">
+						  <i class="emoji emoji-smile emoji-button">&#x1f604;</i>
+						  <textarea>&#x1f604;</textarea>
+						</div>		
 						<textarea id="cmContent" placeholder="댓글 달기.."></textarea>
 						<i class="fa-regular fa-message" onclick="datgle()"></i>
 					</div>
@@ -108,8 +112,14 @@
 			</div>
 		</form>
 	</div>
+	<script src="jquery.emojiarea.js"></script>
 	
 	<script>
+	
+		datglefocus = function() {
+			
+			$("#cmContent").focus();
+		}
 
 		johayo = function() {
 			

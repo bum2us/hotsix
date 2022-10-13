@@ -88,10 +88,11 @@ public class MemberServiceImpl implements MemberService{
 		
 		dao.updateOne(mb);
 		
-		Member isImgNy = dao.selectProfileImg(mb.getMmSeq());
+		int imgSeq = 0;
+		imgSeq = dao.selectProfileImg(mb.getMmSeq());
 		
-		if(isImgNy.getUpDelNy() == 1) { //이미 프로필 이미지가 있으면 기존 이미지의 DelNy = 1 로 변경해 준다.
-			dao.deleteProfileImg(mb.getMmSeq());
+		if(imgSeq != 0) { //이미 프로필 이미지가 있으면 기존 이미지의 DelNy = 1 로 변경해 준다.
+			dao.deleteProfileImg(imgSeq);
 		}
 		
 		int j = 0;
