@@ -223,9 +223,50 @@
         </div>
     </div>
     <%@include file="../common/user/footer.jsp" %>
-	
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- 파이어베이스 -->
+<script type="module">
+	
+	import { initializeApp } from "firebase/app";
+	
+	import { realtimeDB , ref , set } from 'firebase/database';
+
+	
+	//TODO: Replace the following with your app's Firebase project configuration
+	const firebaseConfig = {
+	//... 
+		apiKey: "AIzaSyAh4ZqSz-4YnlpJBgeQ6pR8kOQrAUNBVo8",
+	    authDomain: "seoul-75699.firebaseapp.com",
+	    databaseURL: "https://seoul-75699-default-rtdb.asia-southeast1.firebasedatabase.app",
+	    projectId: "seoul-75699",
+	    storageBucket: "seoul-75699.appspot.com",
+	    messagingSenderId: "384240893529",
+	    appId: "1:384240893529:web:7b9e484e6ba167afed7b48"
+	};
+	
+	const app = initializeApp(firebaseConfig);
+	
+	writeData = function(userId,name,email,imageUrl) {
+		
+		const db = realtimeDB();
+		const reference = ref(db,'users/' + userId);
+		
+		set(reference, {
+			username: user,
+			email: email,
+			profile_pricture: imageUrl
+		});
+		
+	}
+	
+	writeData("bum2us","신범수","bumtv@naver.com","myimageurl");
+
+</script>
+
+		
 </body>
 </html>
