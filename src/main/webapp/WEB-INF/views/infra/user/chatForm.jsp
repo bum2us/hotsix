@@ -218,8 +218,8 @@
 			<div class="chatBox_input">
 				<i class="fa-regular fa-face-smile"></i>
 				<i class="fa-solid fa-paperclip"></i>
-				<input type="text" placeholder="메세지를 입력하세요">
-				<i class="fa-regular fa-paper-plane" onclick="push()"></i>
+				<input id="Message" type="text" placeholder="메세지를 입력하세요">
+				<i class="fa-regular fa-paper-plane" id="insertBtn"></i>
 			</div>
         </div>
     </div>
@@ -228,12 +228,64 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<script type="module" src="/resources/firebase/index.js"></script>     
+<!-- <script type="module" src="/resources/firebase/index.js"></script> -->     
+
+<script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+	
+	// Your web app's Firebase configuration
+	const firebaseConfig = {
+		apiKey: "AIzaSyAh4ZqSz-4YnlpJBgeQ6pR8kOQrAUNBVo8",
+		authDomain: "seoul-75699.firebaseapp.com",
+		databaseURL: "https://seoul-75699-default-rtdb.asia-southeast1.firebasedatabase.app",
+		projectId: "seoul-75699",
+		storageBucket: "seoul-75699.appspot.com",
+		messagingSenderId: "384240893529",
+		appId: "1:384240893529:web:5c9c1112e99d717ded7b48"
+	};
+	
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+
+	import { getDatabase, ref, set, child, update, remove }
+	from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
+	
+	const db = getDatabase();
+
+	var message = $("#Message").val();
+
+	function InsertData(){
+		
+		set(ref(db,'students/01'),{
+		
+			name: '신범수',
+			Masseage: message
+		})
+
+		.then(()=> {
+			alert("data stored success..!");
+		})
+		.catch((error)=> {
+			alert("unsuccess..! " + error); 
+		})
+	}
+
+
+	var insBtn = document.getElementById("insertBtn");
+
+	insBtn.addEventListener('click',InsertData);
+
+</script>
+
 <script type="text/javascript">
  
 	push = function() {
 		
-		writeUserData('bum2us','신범수','bumtv@naver.com','image.png');
+		//writeUserData('bum2us','신범수','bumtv@naver.com','image.png');
+		
 	};
 	
 </script>
