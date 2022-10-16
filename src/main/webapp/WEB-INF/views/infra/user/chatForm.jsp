@@ -216,7 +216,7 @@
 			</div>
 			<!-- 채팅 입력 -->
 			<div class="chatBox_input">
-				<i class="fa-regular fa-face-smile"></i>
+				<i class="fa-regular fa-face-smile" id="selectBtn"></i>
 				<i class="fa-solid fa-paperclip"></i>
 				<input id="Message" type="text" placeholder="메세지를 입력하세요">
 				<i class="fa-regular fa-paper-plane" id="insertBtn"></i>
@@ -250,7 +250,7 @@
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	import { getDatabase, ref, set, child, update, remove }
+	import { getDatabase, ref, get, set, child, update, remove }
 	from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 	
 	const db = getDatabase();
@@ -273,6 +273,20 @@
 		})
 	}
 
+	function SelectData(){
+		const dbref = ref(db);
+		
+		get(child(dbref,'students/01')).then((snapshot) => {
+			if(snapshot.exists()){
+				alert('이름 : ' + snapshot.val().name);
+			}		
+		});
+
+	}
+
+	var selBtn = document.getElementById("selectBtn");
+
+	selBtn.addEventListener('click',SelectData);
 
 	var insBtn = document.getElementById("insertBtn");
 
