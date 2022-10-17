@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bum2us.infra.modules.comment.Comment;
 import com.bum2us.infra.modules.comment.CommentServiceImpl;
+import com.bum2us.infra.modules.follow.FollowServiceImpl;
 import com.bum2us.infra.modules.luv.Luv;
 import com.bum2us.infra.modules.luv.LuvServiceImpl;
 import com.bum2us.infra.modules.member.Member;
@@ -31,6 +32,9 @@ public class PostController {
 	
 	@Autowired
 	LuvServiceImpl serviceLuv;
+	
+	@Autowired
+	FollowServiceImpl serviceFollow;
 	
 	@RequestMapping(value="postList")
 	public String postList(Model model,@ModelAttribute("vo")PostVo vo) throws Exception{
@@ -66,7 +70,9 @@ public class PostController {
 		System.out.println(postWriterImg);
 		if(item != null) 
 		{
-			dto.setLoginUserSeq((int)httpSession.getAttribute("sessSeq"));
+			int loginUserSeq = (int)httpSession.getAttribute("sessSeq");
+			
+			dto.setLoginUserSeq(loginUserSeq);
 			int i = service.selectCheckLoginUserLuved(dto);
 			
 			if(i != 0)
@@ -78,23 +84,34 @@ public class PostController {
 			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
 			map.put("nickname", item.getMmNickname());
 			map.put("content", item.getPostContent());
+			map.put("writer", item.getPostWriter());
 			
 			if(postWriterImg != null) {
 				map.put("img", postWriterImg.getUpPath()+postWriterImg.getUpUuidName());
 			}
 			
-		
+			//좋아요 체크
 			Luv lv = new Luv();
 			lv.setLuvPostId(dto.getPostSeq());
 			int luvCount = serviceLuv.selectCount(lv);
 
 			map.put("luvCount", luvCount);
 			
+			//댓글 정보 select
 			Comment cm = new Comment();
 			cm.setCmPostId(dto.getPostSeq());
 			
 			List<Comment> list =  serviceComment.selectList(cm);
 			map.put("list", list);
+			
+			//게시자 팔로우 체크
+			int count = serviceFollow.selectCountFollowed(item.getPostWriter(),loginUserSeq);
+			
+			if(count == 1) {
+				map.put("followed", "true");
+			}else {
+				map.put("followed", "false");
+			}
 			
 		}
 		else 

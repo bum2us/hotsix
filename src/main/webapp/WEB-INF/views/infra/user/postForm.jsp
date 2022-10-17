@@ -27,6 +27,7 @@
 		<br><br>
 		<form id="mainForm">
 			<input id="cmPostId" name="cmPostId" type="hidden">
+			<input id="fwFollow" name="fwFollow" type="hidden">
 			<div class="row post_frame" onclick="event.stopPropagation()">
 				<div class="post_leftSide">
 					<img id="postImg" src="" alt="">
@@ -36,8 +37,11 @@
 						<div class="userImg">
 							<img id="postWriterImg" src="/resources/images/profile/empty.png" class="post_cover" alt="">
 						</div>
-						<div id="postWriter">
+						<div class="postWriter" id="postWriter">
 							
+						</div>
+						<div class="follower" id="followerBtn" style="cursor:pointer;" onclick="following()"> 
+							팔로우
 						</div>
 					</div>
 					<div class="comment_List" id="comment_List">
@@ -164,6 +168,32 @@
 			
 		};
 	
+	</script>
+	
+	<script type="text/javascript">
+
+		following = function(){
+			
+			$.ajax({
+			
+				url: '/activeFollow'
+				,type: 'POST'
+				,data: {
+					fwFollow : $("#fwFollow").val()
+					,fwFollower : ${sessSeq}
+				}
+				,dataType: 'json'
+				,success:function(){
+					$("#followerBtn").css('display','none');
+				},
+				error:function(){
+					alert("follow error...!");
+				}
+			});
+			
+			
+		};
+		
 	</script>
 	
 	<script >

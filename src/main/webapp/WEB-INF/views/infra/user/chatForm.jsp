@@ -21,6 +21,7 @@
 <body class="chatbody">
     <%@include file="../common/user/header.jsp" %>
         
+    <input type="hidden" id="seq" name="seq" value="${sessSeq}">
     <div class="container chatContainer">
         <div class="leftSide">
             <div class="userHeader">
@@ -218,7 +219,7 @@
 			<div class="chatBox_input">
 				<i class="fa-regular fa-face-smile" id="selectBtn"></i>
 				<i class="fa-solid fa-paperclip"></i>
-				<input id="Message" type="text" placeholder="메세지를 입력하세요">
+				<input id="chatMessage" type="text" placeholder="메세지를 입력하세요">
 				<i class="fa-regular fa-paper-plane" id="insertBtn"></i>
 			</div>
         </div>
@@ -229,6 +230,27 @@
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <!-- <script type="module" src="/resources/firebase/index.js"></script> -->     
+
+<script type="text/javascript">
+	
+	getnow = function() {
+		
+		var timestamp = new Date().getTime();
+		
+		var date = new Date(timestamp); //타임스탬프를 인자로 받아 Date 객체 생성
+		
+		var year = date.getFullYear().toString().slice(-2); //년도 뒤에 두자리
+		var month = ("0" + (date.getMonth() + 1)).slice(-2); //월 2자리 (01, 02 ... 12)
+		var day = ("0" + date.getDate()).slice(-2); //일 2자리 (01, 02 ... 31)
+		var hour = ("0" + date.getHours()).slice(-2); //시 2자리 (00, 01 ... 23)
+		var minute = ("0" + date.getMinutes()).slice(-2); //분 2자리 (00, 01 ... 59)
+		var second = ("0" + date.getSeconds()).slice(-2); //초 2자리 (00, 01 ... 59)
+		
+		return year+month+day+hour+minute+second;
+	};
+	
+
+</script>
 
 <script type="module">
 	// Import the functions you need from the SDKs you need
@@ -255,18 +277,19 @@
 	
 	const db = getDatabase();
 
-	var message = $("#Message").val();
+	var seq = $("#seq").val();
 
 	function InsertData(){
+
+	var message = $("#chatMessage").val();
 		
-		set(ref(db,'students/01'),{
-		
-			name: '신범수',
+		set(ref(db,'chat/'+seq+'/'+getnow() ),{
 			Masseage: message
 		})
 
 		.then(()=> {
-			alert("data stored success..!");
+			//alert("data stored success..!");
+			
 		})
 		.catch((error)=> {
 			alert("unsuccess..! " + error); 
@@ -276,9 +299,9 @@
 	function SelectData(){
 		const dbref = ref(db);
 		
-		get(child(dbref,'students/01')).then((snapshot) => {
+		get(child(dbref,'students/'+seq)).then((snapshot) => {
 			if(snapshot.exists()){
-				alert('이름 : ' + snapshot.val().name);
+				alert('이름 : ' + snapshot.val().name + '메세지 : ' + snapshot.val().messagse);
 			}		
 		});
 

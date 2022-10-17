@@ -24,4 +24,5 @@ public interface PostService {
 	public Post selectPostImg(Post dto)throws Exception;
 	
 	public Member selectPostWriteImg(Integer postSeq)throws Exception;
+	
 }

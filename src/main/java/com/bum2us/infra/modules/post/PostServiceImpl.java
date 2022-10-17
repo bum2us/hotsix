@@ -102,11 +102,7 @@ public class PostServiceImpl implements PostService{
 	public Member selectPostWriteImg(Integer postSeq) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectPostWriteImg(postSeq);
-	}
-
-
-
-	
+	}	
 	
 	
 	

@@ -50,6 +50,9 @@ public class PostDao {
 	public Post selectPostImg(Post dto) { return sqlSession.selectOne(namespace + ".selectPostImg", dto); }
 
 
-	public Member selectPostWriteImg(Integer postSeq) { return sqlSession.selectOne(namespace+".selectPostWriteImg", postSeq); } 
+	public Member selectPostWriteImg(Integer postSeq) { return sqlSession.selectOne(namespace+".selectPostWriteImg", postSeq); }
+
+
+	
 	
 }

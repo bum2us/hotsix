@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bum2us.infra.modules.follow.FollowMapper">
+	
+	<resultMap id="resultObj" type="com.bum2us.infra.modules.follow.Follow"></resultMap>
+
+	
+	<insert id="insert">
+	
+		INSERT INTO follow
+		(
+			fwFollower
+			,fwFollow
+		)
+		VALUES
+		(
+			#{fwFollower}
+			,#{fwFollow}
+		)
+	
+	</insert>
+
+	<select id="selectCountFollowed" resultType="Integer">
+		
+		SELECT
+			COUNT(*)
+		FROM follow
+		WHERE fwFollower = #{fwFollower}
+		AND fwFollow = #{fwFollow}
+		
+	</select>
+
+</mapper>

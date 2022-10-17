@@ -158,6 +158,7 @@
 		
 
 		var luv = $("#luv");
+		var follower = $("#followerBtn");
 		
 		$.ajax({
 			url: "/getPost",
@@ -200,6 +201,9 @@
 						comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';
 						
 					}
+					if(result.followed ==="true"){
+						follower.css('display','none');
+					}
 					
 					if(result.luved === "true"){
 						luv.removeClass("fa-regular fa-heart");
@@ -210,7 +214,8 @@
 						luv.addClass("fa-regular fa-heart");
 						luv.css('color','black');
 					}
-
+					
+					$("#fwFollow").val(result.writer);
 					$("#post_likeCount").html(result.luvCount);
 					$("#comment_List").html(comment);
 					$(".modal_overlay").show();

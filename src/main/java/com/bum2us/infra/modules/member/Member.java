@@ -3,7 +3,7 @@ package com.bum2us.infra.modules.member;
 
 import com.bum2us.infra.modules.base.Base;
 
-public class Member extends Base {
+public class Member extends Base{
 	
 	private Integer mmSeq;
 	private String mmName;
