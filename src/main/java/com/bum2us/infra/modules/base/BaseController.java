@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bum2us.infra.modules.follow.FollowServiceImpl;
 import com.bum2us.infra.modules.member.Member;
 import com.bum2us.infra.modules.post.Post;
 import com.bum2us.infra.modules.post.PostServiceImpl;
@@ -25,7 +26,10 @@ public class BaseController {
 	
 	@Autowired
 	PostServiceImpl servicePost;
-
+	
+	@Autowired
+	FollowServiceImpl serviceFollow;
+	
 	@RequestMapping(value ="/")
 	public String main() throws Exception {
 		
@@ -77,9 +81,9 @@ public class BaseController {
 	@RequestMapping(value = "/profile")
 	public String profile(Model model,PostVo vo,HttpSession httpSession) throws Exception {
 		
-		System.out.println("sessSeq : " + httpSession.getAttribute("sessSeq"));
 		
-		vo.setShOption((Integer)httpSession.getAttribute("sessSeq"));
+		if(vo.getShOption() == null)
+			vo.setShOption((Integer)httpSession.getAttribute("sessSeq"));
 		
 		System.out.println(vo.getShOption());
 		
@@ -90,6 +94,14 @@ public class BaseController {
 		List<Post> list = servicePost.selectListForProfile(vo);
 		
 		model.addAttribute("list", list);
+		
+		int followCount = serviceFollow.selectCountFollowed(vo.getShOption());
+		
+		model.addAttribute("follower",followCount);
+		
+		int followingCount = serviceFollow.selectCountFollowing(vo.getShOption());
+		
+		model.addAttribute("following",followingCount);
 		
 		return "infra/user/profileForm";
 	}

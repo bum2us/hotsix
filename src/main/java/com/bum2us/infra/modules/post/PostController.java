@@ -66,10 +66,16 @@ public class PostController {
 		
 		Post item = service.selectOne(dto.getPostSeq());
 		
-		Member postWriterImg = service.selectPostWriteImg(item.getMmSeq());	
-		System.out.println(postWriterImg);
+		
 		if(item != null) 
 		{
+			
+			Member postWriterImg = service.selectPostWriteImg(item.getMmSeq());
+
+			if(postWriterImg != null) {
+				map.put("img", postWriterImg.getUpPath()+postWriterImg.getUpUuidName());
+			}
+			
 			int loginUserSeq = (int)httpSession.getAttribute("sessSeq");
 			
 			dto.setLoginUserSeq(loginUserSeq);
@@ -79,16 +85,6 @@ public class PostController {
 				map.put("luved", "true");
 			else
 				map.put("luved", "false");
-			
-			map.put("rt", "success");
-			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
-			map.put("nickname", item.getMmNickname());
-			map.put("content", item.getPostContent());
-			map.put("writer", item.getPostWriter());
-			
-			if(postWriterImg != null) {
-				map.put("img", postWriterImg.getUpPath()+postWriterImg.getUpUuidName());
-			}
 			
 			//좋아요 체크
 			Luv lv = new Luv();
@@ -105,7 +101,7 @@ public class PostController {
 			map.put("list", list);
 			
 			//게시자 팔로우 체크
-			int count = serviceFollow.selectCountFollowed(item.getPostWriter(),loginUserSeq);
+			int count = serviceFollow.selectChkFollow(item.getPostWriter(),loginUserSeq);
 			
 			if(count == 1) {
 				map.put("followed", "true");
@@ -113,6 +109,11 @@ public class PostController {
 				map.put("followed", "false");
 			}
 			
+			map.put("rt", "success");
+			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
+			map.put("nickname", item.getMmNickname());
+			map.put("content", item.getPostContent());
+			map.put("writer", item.getPostWriter());
 		}
 		else 
 		{

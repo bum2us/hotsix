@@ -31,6 +31,7 @@
 	<select id="selectProfileImg" resultMap ="resultMember">
 		
 		SELECT
+			
 			upmSeq as upSeq
 			,upmDefaultNy as upDefaultNy
 			,upmSort as upSort
@@ -41,7 +42,11 @@
 			,upmSize as upSize
 			,upmType as upType
 			,upmPath as upPath 
+			,mm.mmNickname
+			,mm.mmComment 
 		FROM uploadMemberProfile
+		JOIN member mm
+		ON mm.mmSeq = #{shOption}
 		WHERE upmMemberSeq = #{shOption}
 		AND upmDelNy = 0
 		

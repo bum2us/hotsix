@@ -31,10 +31,17 @@
 	
 	<interceptors>
 		<interceptor>
-				<mapping path="/**/"/>                       <!-- 전체에 해당 코드를 매핑시키겠다 -->
-				<exclude-mapping path="/member/Login"/>     <!-- 매핑에서 제외시킬 것을 추가한다 -->
+	 			<!-- 전체에 해당 코드를 매핑시키겠다 -->
+				<mapping path="/**/"/>                      
+				<!-- 매핑에서 제외시킬 것을 추가한다 -->    
 				<exclude-mapping path="/"/>
-				<exclude-mapping path="/administrator"/> 
+				<exclude-mapping path="/resources*"/>
+				<exclude-mapping path="/signin"/>
+				<exclude-mapping path="/signup"/>
+				<exclude-mapping path="/member/chkId"/>
+				<exclude-mapping path="/member/login"/>
+				<exclude-mapping path="/member/memberIns"/>
+				<exclude-mapping path="/administrator"/>
 				<exclude-mapping path="/administrator/login"/> 
 				<beans:bean id = "checkLoginInterception" class="com.bum2us.infra.common.interception.checkLoginInterception"/>
 				<!-- HandlerInterceptorAdapter를 상속받은 클래스파일 실제 동작할 작업이 작성된 파일-->

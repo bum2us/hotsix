@@ -5,6 +5,7 @@
 <mapper namespace="com.bum2us.infra.modules.follow.FollowMapper">
 	
 	<resultMap id="resultObj" type="com.bum2us.infra.modules.follow.Follow"></resultMap>
+	<resultMap id="resultObjMember" type="com.bum2us.infra.modules.member.Member"></resultMap>
 
 	
 	<insert id="insert">
@@ -22,13 +23,65 @@
 	
 	</insert>
 
-	<select id="selectCountFollowed" resultType="Integer">
+	<select id="selectChkFollow" resultType="Integer">
 		
 		SELECT
 			COUNT(*)
 		FROM follow
 		WHERE fwFollower = #{fwFollower}
 		AND fwFollow = #{fwFollow}
+		
+	</select>
+	
+	<select id="selectCountFollowed" resultType="Integer" parameterType="Integer">
+		SELECT COUNT(*)
+		FROM follow
+		WHERE fwFollow = #{target}
+	</select>
+	
+	<select id="selectCountFollowing" resultType="Integer" parameterType="Integer">
+		SELECT COUNT(*)
+		FROM follow
+		WHERE fwFollower = #{target}
+	</select>
+	
+	<select id="selectListFollower" resultMap="resultObjMember">
+		
+		SELECT
+			fw.fwFollower
+		    ,fw.fwFollow
+			,mm.mmSeq
+		    ,mm.mmNickname
+		   	,upm.upmUuidName as upUuidName
+		    ,upm.upmPath as upPath
+		FROM follow fw
+		JOIN member mm
+		ON fw.fwFollower = mm.mmSeq 
+		LEFT JOIN uploadMemberProfile upm
+		ON mm.mmSeq = upm.upmMemberSeq
+		AND upm.upmDefaultNy = 1
+		WHERE fw.fwFollow = #{fwFollow}
+		
+	</select>
+
+	<select id="selectListFollow" resultMap="resultObjMember">
+	
+		
+		SELECT
+			fw.fwFollower
+		    ,fw.fwFollow
+			,mm.mmSeq 
+		    ,mm.mmNickname
+		   	,upm.upmUuidName as upUuidName
+		    ,upm.upmPath as upPath
+		FROM follow fw
+		JOIN member mm
+		ON fw.fwFollow = mm.mmSeq 
+		LEFT JOIN uploadMemberProfile upm
+		ON mm.mmSeq = upm.upmMemberSeq
+		AND upm.upmDefaultNy = 1
+		WHERE fw.fwFollower = #{fwFollower}
+		
 		
 	</select>
 

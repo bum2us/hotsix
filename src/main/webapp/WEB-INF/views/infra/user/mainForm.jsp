@@ -179,6 +179,8 @@
 					
 					if(result.img != null){
 						$("#postWriterImg").attr("src",result.img);
+					}else{
+						$("#postWriterImg").attr("src","/resources/images/profile/empty.png");
 					}
 					
 					var comment = "";
@@ -203,6 +205,9 @@
 					}
 					if(result.followed ==="true"){
 						follower.css('display','none');
+					}
+					else{
+						follower.css('display','');
 					}
 					
 					if(result.luved === "true"){

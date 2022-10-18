@@ -1,7 +1,11 @@
 package com.bum2us.infra.modules.follow;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.bum2us.infra.modules.member.Member;
 
 @Service
 public class FollowServiceImpl implements FollowService{
@@ -18,16 +22,53 @@ public class FollowServiceImpl implements FollowService{
 	
 	
 	@Override
-	public int selectCountFollowed(int writer, int reader) throws Exception {
+	public int selectChkFollow(int writer, int reader) throws Exception {
 		// TODO Auto-generated method stub
 		
 		Follow dto = new Follow();
 		dto.setFwFollow(writer);
 		dto.setFwFollower(reader);
 		
-		return dao.selectCountFollowed(dto);
+		return dao.selectChkFollow(dto);
 	}
 
+
+
+	@Override
+	public int selectCountFollowed(Integer target) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCountFollowed(target);
+	}
+
+
+
+	@Override
+	public int selectCountFollowing(Integer target) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCountFollowing(target);
+	}
+
+
+
+	@Override
+	public List<Member> selectListFollower(Follow dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListFollower(dto);
+	}
+
+
+
+	@Override
+	public List<Member> selectListFollow(Follow dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListFollow(dto);
+	}
+
+
+
+
+
+	
 	
 	
 }
