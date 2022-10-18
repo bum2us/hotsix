@@ -81,13 +81,22 @@ public class BaseController {
 	@RequestMapping(value = "/profile")
 	public String profile(Model model,PostVo vo,HttpSession httpSession) throws Exception {
 		
+		System.out.println("프로필 페이지 : " +vo.getShOption() +" / " + httpSession.getAttribute("sessSeq") );
 		
 		if(vo.getShOption() == null)
 			vo.setShOption((Integer)httpSession.getAttribute("sessSeq"));
+		else {
+			int count = serviceFollow.selectChkFollow(vo.getShOption(),(Integer)httpSession.getAttribute("sessSeq"));
+			
+			if(count == 1)
+				model.addAttribute("IsFollow", 1);
+		}
 		
 		System.out.println(vo.getShOption());
 		
 		Member item = service.selectProfileImg(vo);
+		
+		System.out.println(item.getMmSeq()); 
 		
 		model.addAttribute("item", item);
 		

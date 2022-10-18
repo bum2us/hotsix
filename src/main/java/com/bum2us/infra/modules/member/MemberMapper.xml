@@ -215,6 +215,7 @@
 		FROM uploadMemberProfile
 		WHERE upmMemberSeq = #{i}	
 		AND upmDelNy = 0
+		AND upmDefaultNy = 1 
 	</select>
 	
 </mapper> 

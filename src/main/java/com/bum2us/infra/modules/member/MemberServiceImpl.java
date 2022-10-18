@@ -88,6 +88,8 @@ public class MemberServiceImpl implements MemberService{
 		
 		dao.updateOne(mb);
 		
+		
+		
 		int imgSeq = 0;
 		imgSeq = dao.selectProfileImg(mb.getMmSeq());
 		

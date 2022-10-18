@@ -24,7 +24,7 @@
     	<form method="POST" id="mainForm">
     		<input type="hidden" id="shOption" name="shOption" value="
     		<c:if test="${item.mmSeq eq null}">${sessSeq}</c:if>
-    		<c:if test="${item.mmSeq ne null}">${item.shOption}</c:if>
+    		<c:if test="${item.mmSeq ne null}">${item.mmSeq}</c:if>
     		"/>
 	        <div class="row my-5" style="justify-content: center;">
 	            <div class="col-4 offset-2 porfileImgbox">
@@ -40,11 +40,14 @@
 	                    <div class="col" style="display: flex; align-items: center;">
 	                        <span class="profileUserName"><c:out value="${ item.mmNickname }"/></span>
 	                        <c:choose>
-	                        	<c:when test="${item.upSeq eq sessSeq}">
-	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm()">프로필 편집</button>	                        	
+	                        	<c:when test="${item.mmSeq eq sessSeq}"> 
+	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm(0)">프로필 편집</button>	                        	
+	                        	</c:when>
+	                        	<c:when test="${IsFollow ne null }"> 
+	  								<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우 취소</button>                      	
 	                        	</c:when>
 	                        	<c:otherwise>
-	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="">팔로우</button>	                        	
+	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우</button>	                        	
 	                        	</c:otherwise>
 	                        </c:choose>
 	                    </div> 
@@ -96,15 +99,28 @@
 	runForm = function(key) {
 		
 		switch(key){
-			
-			default:
+		
+			case 0:
 				{
 					form.attr("action","/member/memberForm").submit();
 					break;
 				}
 		
+			default:
+				{
+					$("#shOption").val(key);
+					form.attr("action","/profile").submit();
+					break;
+				}
+		
 		}
 		
+		
+	};
+	
+	follow = function(my){
+		
+		alert(my.textContent);
 		
 	};
 	
@@ -135,7 +151,7 @@
 						txt += '<div class="col-2">'
 						txt += '<img src="'+imgSrc+'" alt="" width="100%" height="100%" style="border-radius:50%;">'
 						txt += '</div>'
-						txt += '<div class="col-6 text-start">'+result.list[i].mmNickname+'</div>'
+						txt += '<div class="col-6 text-start" style="cursor:pointer;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
 						txt += '<div class="col-3 text-end">팔로우</div>'
 						txt += '</div>'
 						
@@ -182,7 +198,7 @@
 						txt += '<div class="col-2">'
 						txt += '<img src="'+imgSrc+'" alt=""  style="border-radius:50%;">'
 						txt += '</div>'
-						txt += '<div class="col-6 text-start" style="cursor:pointer;">'+result.list[i].mmNickname+'</div>'
+						txt += '<div class="col-6 text-start" style="cursor:pointer;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
 						txt += '<div class="col-3 text-end" style="cursor:pointer;">팔로우</div>'
 						txt += '</div>'
 						

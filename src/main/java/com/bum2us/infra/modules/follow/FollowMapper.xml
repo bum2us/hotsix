@@ -60,6 +60,7 @@
 		LEFT JOIN uploadMemberProfile upm
 		ON mm.mmSeq = upm.upmMemberSeq
 		AND upm.upmDefaultNy = 1
+		AND upm.upmDelNy=0
 		WHERE fw.fwFollow = #{fwFollow}
 		
 	</select>
@@ -80,9 +81,10 @@
 		LEFT JOIN uploadMemberProfile upm
 		ON mm.mmSeq = upm.upmMemberSeq
 		AND upm.upmDefaultNy = 1
+		AND upm.upmDelNy=0
 		WHERE fw.fwFollower = #{fwFollower}
-		
-		
+		 
+	 
 	</select>
 
 </mapper>

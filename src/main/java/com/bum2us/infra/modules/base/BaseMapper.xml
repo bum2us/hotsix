@@ -32,7 +32,10 @@
 		
 		SELECT
 			
-			upmSeq as upSeq
+			mm.mmNickname
+			,mm.mmComment 
+			,mm.mmSeq 
+			,upmSeq as upSeq
 			,upmDefaultNy as upDefaultNy
 			,upmSort as upSort
 			,upmExt as upExt
@@ -40,16 +43,15 @@
 			,upmUuidName as upUuidName
 			,upmDelNy as upDelNy
 			,upmSize as upSize
-			,upmType as upType
+			,upmType as upType 
 			,upmPath as upPath 
-			,mm.mmNickname
-			,mm.mmComment 
-		FROM uploadMemberProfile
-		JOIN member mm
-		ON mm.mmSeq = #{shOption}
-		WHERE upmMemberSeq = #{shOption}
-		AND upmDelNy = 0
-		
+		FROM member mm  
+		LEFT JOIN uploadMemberProfile upm
+		ON upm.upmMemberSeq = mm.mmSeq
+		AND upm.upmDelNy = 0
+        AND upm.upmDefaultNy = 1
+		WHERE mm.mmSeq = #{shOption}
+		  
 	</select>
 	
 </mapper>
