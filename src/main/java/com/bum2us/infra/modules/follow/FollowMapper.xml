@@ -21,7 +21,15 @@
 			,#{fwFollow}
 		)
 	
-	</insert>
+	</insert> 
+	
+	<delete id="delete">
+	
+		DELETE FROM follow
+		WHERE fwFollow = #{fwFollow}
+		AND fwFollower = #{fwFollower} 
+	
+	</delete>
 
 	<select id="selectChkFollow" resultType="Integer">
 		

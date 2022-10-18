@@ -22,6 +22,14 @@ public class FollowServiceImpl implements FollowService{
 	
 	
 	@Override
+	public void delete(Follow dto) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete(dto);
+	}
+
+
+
+	@Override
 	public int selectChkFollow(int writer, int reader) throws Exception {
 		// TODO Auto-generated method stub
 		

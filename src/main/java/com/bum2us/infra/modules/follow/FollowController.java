@@ -22,12 +22,22 @@ public class FollowController {
 	public Map<String,Object> activeFollow (Follow dto) throws Exception{
 		
 		Map<String , Object> result = new HashMap<String, Object>();
-
 		
 		service.insert(dto);
 		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteFollow")
+	public Map<String,Object> deleteFollow (Follow dto) throws Exception{
+		
+		Map<String , Object> result = new HashMap<String, Object>();
+		
+		service.delete(dto);
 		
 		return result;
+		
 	}
 	
 	@ResponseBody

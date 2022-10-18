@@ -22,6 +22,8 @@ public class FollowDao {
 
 	public void insert(Follow dto) { sqlSession.insert(namespace + ".insert", dto); }
 	
+	public void delete(Follow dto) { sqlSession.delete(namespace+ ".delete", dto); }
+	
 	public int selectChkFollow(Follow dto) { return sqlSession.selectOne(namespace+".selectChkFollow", dto); }
 
 	public int selectCountFollowed(Integer target) { return sqlSession.selectOne(namespace + ".selectCountFollowed", target); }
@@ -31,5 +33,6 @@ public class FollowDao {
 	public List<Member> selectListFollower(Follow dto) { return sqlSession.selectList(namespace + ".selectListFollower", dto); }
 	
 	public List<Member> selectListFollow(Follow dto) { return sqlSession.selectList(namespace + ".selectListFollow", dto); }
+
 	
 }

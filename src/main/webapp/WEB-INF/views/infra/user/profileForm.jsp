@@ -120,7 +120,58 @@
 	
 	follow = function(my){
 		
-		alert(my.textContent);
+		switch(my.textContent){
+			
+			case '팔로우':
+				{
+					
+					$.ajax({
+						
+						url: '/activeFollow'
+						,type: 'POST'
+						,datatype: 'json'
+						,data: {
+							fwFollow : $('#shOption').val()
+							,fwFollower : ${sessSeq}
+						},
+						success:function(){
+							
+						},
+						error:function(){
+							alert("ajax error...!");
+						}
+						
+					});
+				
+					my.textContent = '팔로우 취소';
+					break;
+				}
+			case '팔로우 취소':
+				{
+					
+					$.ajax({
+						
+						url: '/deleteFollow'
+						,type: 'POST'
+						,datatype: 'json'
+						,data: {
+							fwFollow : $('#shOption').val()
+							,fwFollower : ${sessSeq}
+						},
+						success:function(){
+							
+						},
+						error:function(){
+							alert("ajax error...!");
+						}
+						
+					});
+				
+					my.textContent = '팔로우';
+					break;
+				}
+		
+		}
 		
 	};
 	

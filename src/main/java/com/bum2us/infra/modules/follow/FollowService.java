@@ -7,6 +7,7 @@ import com.bum2us.infra.modules.member.Member;
 public interface FollowService {
 	
 	public void insert(Follow dto) throws Exception;
+	public void delete(Follow dto) throws Exception; 
 	
 
 	public int selectChkFollow(int writer,int reader)throws Exception;
