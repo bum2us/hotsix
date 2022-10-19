@@ -23,7 +23,11 @@ public class FollowController {
 		
 		Map<String , Object> result = new HashMap<String, Object>();
 		
-		service.insert(dto);
+		service.insert(dto); 
+		
+		int count = service.selectCountFollowed(dto.getFwFollow());
+		
+		result.put("followCount", count);
 		
 		return result;
 	}
@@ -35,6 +39,10 @@ public class FollowController {
 		Map<String , Object> result = new HashMap<String, Object>();
 		
 		service.delete(dto);
+		
+		int count = service.selectCountFollowed(dto.getFwFollow());
+		
+		result.put("followCount", count);
 		
 		return result;
 		

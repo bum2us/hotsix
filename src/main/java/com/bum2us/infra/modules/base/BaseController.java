@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bum2us.infra.modules.follow.FollowServiceImpl;
 import com.bum2us.infra.modules.member.Member;
+import com.bum2us.infra.modules.member.MemberServiceImpl;
 import com.bum2us.infra.modules.post.Post;
 import com.bum2us.infra.modules.post.PostServiceImpl;
 import com.bum2us.infra.modules.post.PostVo;
@@ -23,6 +25,9 @@ public class BaseController {
 	
 	@Autowired
 	BaseServiceImpl service;
+	
+	@Autowired
+	MemberServiceImpl serviceMember;
 	
 	@Autowired
 	PostServiceImpl servicePost;
@@ -58,6 +63,24 @@ public class BaseController {
 	public String register() throws Exception {
 		
 		return "infra/user/regForm";
+	}
+	
+	@RequestMapping(value = "/search")
+	public String search(Model model,@ModelAttribute("vo")Base base) throws Exception {
+		
+		List<Member> memberNickNameList = service.selectListForSearchNickName(base.getShValue());
+		
+		model.addAttribute("memberNickNameList", memberNickNameList);
+		
+		List<Member> memberNameList = service.selectListForSearchName(base.getShValue());
+		
+		model.addAttribute("memberNameList", memberNameList);
+		
+		List<Post> postList = service.selectListForSearchPost(base.getShValue());
+		
+		model.addAttribute("postList", postList);
+		
+		return "infra/user/searchForm";
 	}
 	
 	@RequestMapping(value = "/bookmark")

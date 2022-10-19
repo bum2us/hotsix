@@ -6,8 +6,8 @@
 		<img src="/resources/images/mark_white.png" class="logoImage" alt="">
 		<span class="logoName">AL<span class="logoName2">BUM</span>'S</span>
 	</div>
-	<form class="d-flex nav_src">
-		<input class="form-control" type="search" placeholder="검색">
+	<form class="d-flex nav_src" method="POST" action="/search">
+		<input class="form-control" name="shValue" value="${vo.shValue }" type="search" placeholder="검색">
 		<button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 	</form>
 	<nav>

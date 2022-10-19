@@ -4,6 +4,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Base {
 	
+	private String shValue;
+	
+	public String getShValue() {
+		return shValue;
+	}
+
+	public void setShValue(String shValue) {
+		this.shValue = shValue;
+	}
+
 	private String  upPath;
 	private String  upOriginalName;
 	private String  upUuidName;

@@ -1,10 +1,13 @@
 package com.bum2us.infra.modules.base;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bum2us.infra.common.utils.UtilSecurity;
 import com.bum2us.infra.modules.member.Member;
+import com.bum2us.infra.modules.post.Post;
 import com.bum2us.infra.modules.post.PostVo;
 
 @Service
@@ -34,8 +37,24 @@ public class BaseServiceImpl implements BaseService{
 		return dao.selectProfileImg(vo);
 	}
 
-	
+	@Override
+	public List<Member> selectListForSearchNickName(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListForSearchNickName(keyword);
+	}
 
+	@Override
+	public List<Member> selectListForSearchName(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListForSearchName(keyword);
+	}
+
+	@Override
+	public List<Post> selectListForSearchPost(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListForSearchPost(keyword);
+	}
+	
 	
 	
 }

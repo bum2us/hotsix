@@ -67,7 +67,7 @@ public class PostController {
 		Post item = service.selectOne(dto.getPostSeq());
 		
 		
-		if(item != null) 
+		if(item != null)
 		{
 			
 			Member postWriterImg = service.selectPostWriteImg(item.getMmSeq());
@@ -101,19 +101,25 @@ public class PostController {
 			map.put("list", list);
 			
 			//게시자 팔로우 체크
-			int count = serviceFollow.selectChkFollow(item.getPostWriter(),loginUserSeq);
-			
-			if(count == 1) {
+			if(item.getPostWriter() != loginUserSeq) {
+				int count = serviceFollow.selectChkFollow(item.getPostWriter(),loginUserSeq);
+				
+				if(count == 1) {
+					map.put("followed", "true");
+				}else {
+					map.put("followed", "false");
+				}
+			}else
 				map.put("followed", "true");
-			}else {
-				map.put("followed", "false");
-			}
 			
+
 			map.put("rt", "success");
 			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
 			map.put("nickname", item.getMmNickname());
 			map.put("content", item.getPostContent());
 			map.put("writer", item.getPostWriter());
+			map.put("date", item.getPostEditDate());
+			
 		}
 		else 
 		{

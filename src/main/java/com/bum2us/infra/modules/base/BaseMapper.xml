@@ -5,6 +5,7 @@
 <mapper namespace = "com.bum2us.infra.modules.base.BaseMapper">
 
 	<resultMap  id="resultMember" type="com.bum2us.infra.modules.member.Member"></resultMap>
+	<resultMap  id="resultPost" type="com.bum2us.infra.modules.post.Post"></resultMap>
 
 	<select id="Login" resultMap="resultMember">
 		
@@ -52,6 +53,60 @@
         AND upm.upmDefaultNy = 1
 		WHERE mm.mmSeq = #{shOption}
 		  
+	</select>
+	
+	<select id="selectListForSearchNickName" resultMap="resultMember" parameterType="String">
+		SELECT
+			mm.mmSeq
+		    ,mm.mmName
+		    ,mm.mmNickname
+		    ,mm.mmComment
+		    ,upm.upmUuidName as upUuidName
+		    ,upm.upmPath as upPath
+		FROM member mm
+		LEFT JOIN uploadMemberProfile upm
+		ON mm.mmSeq = upm.upmMemberSeq
+		AND upm.upmDefaultNy = 1
+		AND upm.upmDelNy = 0
+		WHERE 1=1
+		AND mmDelNy = 0
+		AND mmNickname LIKE CONCAT('%',#{keyword},'%')
+	</select>
+	
+	<select id="selectListForSearchName" resultMap="resultMember" parameterType="String">
+		SELECT
+			mm.mmSeq
+		    ,mm.mmName
+		    ,mm.mmNickname
+		    ,mm.mmComment
+		    ,upm.upmUuidName as upUuidName
+		    ,upm.upmPath as upPath
+		FROM member mm
+		LEFT JOIN uploadMemberProfile upm
+		ON mm.mmSeq = upm.upmMemberSeq
+		AND upm.upmDefaultNy = 1
+		AND upm.upmDelNy = 0
+		WHERE 1=1
+		AND mmDelNy = 0
+		AND mmName LIKE CONCAT('%',#{keyword},'%')
+	</select> 
+	
+	<select id="selectListForSearchPost" resultMap="resultPost" parameterType="String">
+		SELECT
+			po.postSeq
+		    ,po.postContent
+		    ,up.upUuidName
+		    ,up.upPath
+		    ,mm.mmNickname
+		    ,mm.mmName
+		FROM post po
+		JOIN upload up
+		ON po.postSeq = up.upPostSeq
+		JOIN member mm
+		ON po.postWriter = mm.mmSeq
+		WHERE 1=1
+		AND po.postDelNy = 0
+		AND po.postContent LIKE CONCAT('%',#{keyword},'%')
 	</select>
 	
 </mapper>

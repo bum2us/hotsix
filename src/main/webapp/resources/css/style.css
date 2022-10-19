@@ -75,6 +75,11 @@
   transition: all 0.3s;
 }
 
+.search-area {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+}
+
 .basebutton {
     background: #FFF;
     color: #000;
@@ -997,12 +1002,14 @@ footer{
     height: 100%;
     display: flex;
     overflow: hidden;
+    text-align:center;
+    justify-content:center;
 }
 
 .post_leftSide img{
-    position: relative;
-    width: 100%;
-    margin: auto;
+    max-width: 100%;
+  	height: auto;
+  	display: block;
 }
 
 .post_rightSide {

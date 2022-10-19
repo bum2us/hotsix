@@ -19,8 +19,10 @@
     </style>
 </head>
 <body>
+	<%@include file="./postForm.jsp" %>
 	<%@include file="../common/user/header.jsp" %>
-    <div class="container">
+	
+    <div class="container" style="min-height: 700px;"> 
     	<form method="POST" id="mainForm">
     		<input type="hidden" id="shOption" name="shOption" value="
     		<c:if test="${item.mmSeq eq null}">${sessSeq}</c:if>
@@ -54,8 +56,8 @@
 	                </div>
 	                <div class="row mb-2">
 	                    <p class="profileUserInfo">게시물<span class="profileInfoDetail"><c:out value="${fn:length(list) }"/></span></p>
-	                    <p class="profileUserInfo" onclick="showFollower()">팔로워<span class="profileInfoDetail"><c:out value="${follower}"/></span></p>
-	                    <p class="profileUserInfo" onclick="showFollow()">팔로우<span class="profileInfoDetail"><c:out value="${following }"/></span></p>
+	                    <p class="profileUserInfo" onclick="showFollower()">팔로워<span class="profileInfoDetail" id="countFollower" ><c:out value="${follower}"/></span></p>
+	                    <p class="profileUserInfo" onclick="showFollow()">팔로우<span class="profileInfoDetail" id="countFollow" ><c:out value="${following }"/></span></p>
 	                </div>
 	                <div class="row mt-5">
 	                    <p class="profileUserComment"><c:out value="${ item.mmComment }" escapeXml="false"/></p>
@@ -63,14 +65,14 @@
 	            </div>
 	        </div>
 	        <hr>
-	        <div class="profile-grid-wrapper">
+	        <div class="grid-wrapper">
 	        	<c:forEach items="${list}" var="list" varStatus="status">
 		            <div>
-		                <a href=""><img src="${list.upPath}${list.upUuidName}" alt=""></a>
+		                <a href="javascript:openPost(${list.postSeq })"><img src="${list.upPath}${list.upUuidName}" alt=""></a>
 		            </div>        		
 	        	</c:forEach>
 	        </div>
-
+ 
 		<!--  모달 창 -->
 		  <div class="modal"  id="modal-notice">
 		        <div class="modal-content">
@@ -89,9 +91,12 @@
     </div>
     <%@include file="../common/user/footer.jsp" %>
 	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 <script>
 	
 	var form = $("#mainForm");
@@ -134,8 +139,8 @@
 							fwFollow : $('#shOption').val()
 							,fwFollower : ${sessSeq}
 						},
-						success:function(){
-							
+						success:function(result){ 
+							$("#countFollower").html(result.followCount); 
 						},
 						error:function(){
 							alert("ajax error...!");
@@ -158,8 +163,8 @@
 							fwFollow : $('#shOption').val()
 							,fwFollower : ${sessSeq}
 						},
-						success:function(){
-							
+						success:function(result){ 
+							$("#countFollower").html(result.followCount); 
 						},
 						error:function(){
 							alert("ajax error...!");
