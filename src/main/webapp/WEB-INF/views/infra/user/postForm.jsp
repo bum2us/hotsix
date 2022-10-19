@@ -7,6 +7,7 @@
 	<br><br>
 		<input id="cmPostId" name="cmPostId" type="hidden">
 		<input id="fwFollow" name="fwFollow" type="hidden">
+		<input id="shOption" name="shOption" type="hidden">
 		<div class="row post_frame" onclick="event.stopPropagation()">
 			<div class="post_leftSide">
 				<img id="postImg" src="" alt="">
@@ -101,12 +102,16 @@
 <script src="jquery.emojiarea.js"></script>
 
 <script type="text/javascript">
+	
+	
 
-	datglefocus = function() {
+	goProfile = function(key) {
 		
-		$("#cmContent").focus();
+		$("#shOption").val(key);
+		$("#postForm").attr("action","/profile").submit();
+		
 	};
-
+	
 	johayo = function() {
 		
 		var ajaxUrl = "";
@@ -172,10 +177,12 @@
 		
 		
 	};
-	
-</script>
 
-<script >
+	datglefocus = function() {
+		
+		$("#cmContent").focus();
+	};
+	
 
 	datgle = function() {
 		
@@ -206,13 +213,13 @@
 						
 						comment += '<ul><li><div class="row commentBlock"><div class="col-3 comment_header"><img src=';
 						comment += imgSrc+'>';
-						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName">';
+						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName" onclick="goProfile('+ result.list[i].cmWriter +')">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
-						comment += result.list[i].cmCreateDate + '</span><button type="button">';
+						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv"'+result.list[i].cmSeq+'>';
 						//comment += '좋아요 5개</button><button type="button">';
 						//comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>'; 
-						comment += '좋아요 5개</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>';
+						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like"><i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')" class="fa-regular fa-heart" style="cursor:pointer;"></i></div></div></li></ul>';
 					} 
 					
 					$("#comment_List").html(comment);
@@ -231,6 +238,48 @@
 		});
 	};
 	
+	datgleJohayo = function(key) {
+			
+		var ajaxUrl = "";
+		var status = $("#datgleLuv"+key).css('color');
+		
+		if(status == "rgb(255, 0, 0)") { //삭제
+			ajaxUrl ="/deleteCommentLuv";
+		}
+		else{  //추가
+			ajaxUrl ="/insertCommentLuv";
+		}
+		
+		$.ajax({
+			
+			url : ajaxUrl,
+			type : "POST",
+			data : {
+				luvWriter : ${sessSeq},
+				luvPostId : key
+			},
+			datatype : "json",
+			success:function(result){
+				if(result.list != null){
+					$("#commentLuv"+key).html("좋아요 " +result.list.length+"개" );
+					
+					if(status == "rgb(255, 0, 0)"){
+						$("#datgleLuv"+key).removeClass("fa-solid fa-heart");
+						$("#datgleLuv"+key).addClass("fa-regular fa-heart");
+						$("#datgleLuv"+key).css('color','black');							
+					}else {
+						$("#datgleLuv"+key).removeClass("fa-regular fa-heart");
+						$("#datgleLuv"+key).addClass("fa-solid fa-heart");
+						$("#datgleLuv"+key).css('color','red');
+					}
+				}
+			},
+			error:function(){
+				alert("error...");
+			}
+		});
+			
+	};
 	
 	openPost = function(postSeq) {
 		
@@ -249,6 +298,7 @@
 				if(result.rt == "success"){
 					$("#postImg").attr("src",result.imgSrc);
 					$("#postWriter").html(result.nickname);
+					$("#postWriter").attr("onclick","goProfile("+result.writer+")");
 					$("#postContentWriter").html(result.nickname);
 					$("#postContent").html(result.content);
 					$("#cmPostId").attr("value",postSeq);
@@ -273,14 +323,16 @@
 						
 						comment += '<ul><li><div class="row commentBlock"><div class="col-3 comment_header"><img src=';
 						comment += '"'+imgsrcTxt+'">';
-						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName">';
+						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName" onclick="goProfile('+ result.list[i].cmWriter +')">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
-						comment += result.list[i].cmCreateDate + '</span><button type="button">';
+						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv"'+result.list[i].cmSeq+'>';
 						//comment += '좋아요 5개</button><button type="button">';
 						//comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>'; 
-						comment += '좋아요 5개</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>'; 
+						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like"><i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')" class="fa-regular fa-heart" style="cursor:pointer;"></i></div></div></li></ul>';
+						
 					}
+					
 					if(result.followed ==="true"){
 						follower.css('display','none');
 					}

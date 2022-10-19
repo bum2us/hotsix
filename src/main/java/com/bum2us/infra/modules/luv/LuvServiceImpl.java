@@ -35,6 +35,34 @@ public class LuvServiceImpl implements LuvService{
 		dao.delete(dto);
 	}
 
+	@Override
+	public void insert4Comment(Luv dto) throws Exception {
+		// TODO Auto-generated method stub
+		dao.insert4Comment(dto);
+	}
+
+	@Override
+	public void delete4Comment(Luv dto) throws Exception {
+		// TODO Auto-generated method stub
+		dao.delete4Comment(dto);
+	}
+
+	@Override
+	public List<Luv> selectList4Comment(Luv dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectList4Comment(dto);
+	}
+
+	@Override
+	public int selectCount4Comment(Luv dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectCount4Comment(dto);
+	}
+
+	
+	
+	
+
 
 	
 }

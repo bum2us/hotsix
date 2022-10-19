@@ -1040,6 +1040,7 @@ footer{
 .post_rightSide .header .postWriter {
 	font-weight: 900;
 	font-size: 10pt;
+	cursor: pointer;
 }
 
 .post_rightSide .header .userImg {
@@ -1122,6 +1123,7 @@ footer{
     margin-top: 5px;
     font-size: 10pt;
     font-weight: 700;
+    cursor:pointer;
 }
 
 .comment_info {

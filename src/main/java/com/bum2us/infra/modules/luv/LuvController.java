@@ -45,5 +45,34 @@ public class LuvController {
 		return map;
 	}
 
+	@ResponseBody
+	@RequestMapping(value="/insertCommentLuv")
+	public Map<String,Object> insertCommentLuv(Luv dto) throws Exception{
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		service.insert4Comment(dto);
+		
+		List<Luv> list = service.selectList4Comment(dto);
+		
+		map.put("list", list);		
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteCommentLuv")
+	public Map<String,Object> deleteCommentLuv(Luv dto) throws Exception{
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		service.delete4Comment(dto);
+		
+		List<Luv> list = service.selectList4Comment(dto);
+		
+		map.put("list", list);
+		
+		return map;
+	}
 	
 }

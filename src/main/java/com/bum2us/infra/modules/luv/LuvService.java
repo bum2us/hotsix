@@ -12,4 +12,10 @@ public interface LuvService {
 	
 	public void delete(Luv dto) throws Exception;
 
+	
+	public void insert4Comment(Luv dto) throws Exception;
+	public void delete4Comment(Luv dto) throws Exception;
+	public List<Luv> selectList4Comment(Luv dto) throws Exception;
+	public int selectCount4Comment(Luv dto) throws Exception;
+	
 }

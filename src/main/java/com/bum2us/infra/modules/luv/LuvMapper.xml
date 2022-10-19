@@ -22,6 +22,21 @@
 		
 	</insert>
 	
+	<insert id="insert4Comment">
+		INSERT INTO luv
+		(
+			luvWriter
+			,luvPostId
+			,luvType
+		)
+		VALUES
+		(
+			#{luvWriter}
+			,#{luvPostId}
+			,2
+		)
+	</insert>
+	
 	<delete id="delete">
 	
 		DELETE 
@@ -29,6 +44,14 @@
 		WHERE luvWriter = #{luvWriter} 
 		AND luvPostId = #{luvPostId}
 		AND luvType = 1
+	</delete>
+
+	<delete id="delete4Comment">
+		DELETE 
+		FROM luv 
+		WHERE luvWriter = #{luvWriter} 
+		AND luvPostId = #{luvPostId}
+		AND luvType = 2
 	</delete>
 	
 	<select id="selectList" resultMap = "resultObj">
@@ -39,6 +62,15 @@
 		WHERE 1=1
 		AND luvPostId = #{luvPostId}
 		AND luvType = 1
+	</select>
+	
+	<select id="selectList4Comment" resultMap = "resultObj">
+		SELECT
+			*
+		FROM luv 
+		WHERE 1=1
+		AND luvPostId = #{luvPostId}
+		AND luvType = 2
 	</select>
 
 	<select id="selectCount" resultType="Integer">
@@ -51,4 +83,13 @@
 		AND luvType = 1
 	</select>
 
+	<select id="selectCount4Comment" resultType="Integer">
+	
+		SELECT
+			COUNT(*)
+		FROM luv 
+		WHERE 1=1
+		AND luvPostId = #{luvPostId}
+		AND luvType = 2
+	</select>
 </mapper>

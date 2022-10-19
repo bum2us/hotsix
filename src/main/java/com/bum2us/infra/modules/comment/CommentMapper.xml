@@ -30,6 +30,13 @@
 			,mm.mmNickname
 			,upm.upmUuidName
 			,upm.upmPath
+			,(
+				SELECT
+					COUNT(*)
+				FROM luv
+				WHERE luvPostId = cm.cmSeq
+				AND luvType = 2
+			) as luvCount
 		FROM
 			comment cm
 		JOIN post post
@@ -39,6 +46,7 @@
 		LEFT JOIN uploadMemberProfile upm
 		ON  cm.cmWriter = upm.upmMemberSeq
 		AND upm.upmDelNy = 0
+		
 		WHERE 1=1 
 		AND cmPostId = #{cmPostId}
 		ORDER BY cmCreateDate DESC
