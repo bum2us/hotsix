@@ -46,6 +46,7 @@
  		ON po.postSeq = up.upPostSeq
  		JOIN luv luv
  		ON luv.luvPostId = po.postSeq
+ 		AND luv.luvType = 1
  		GROUP BY luv.luvPostId
         ORDER BY luvCount DESC
  		LIMIT #{i}
@@ -96,6 +97,7 @@
 		JOIN luv luv 
 		ON post.postSeq = luv.luvPostId
         WHERE luv.luvWriter = #{loginUserSeq}
+        AND luvType = 1
         AND post.postSeq = #{postSeq}
 		
 	</select>

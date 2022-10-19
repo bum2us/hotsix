@@ -207,8 +207,8 @@
 						txt += '<div class="col-2">'
 						txt += '<img src="'+imgSrc+'" alt="" width="100%" height="100%" style="border-radius:50%;">'
 						txt += '</div>'
-						txt += '<div class="col-6 text-start" style="cursor:pointer;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
-						txt += '<div class="col-3 text-end">팔로우</div>'
+						txt += '<div class="col-6 text-start" style="cursor:pointer; font-size:10pt;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
+						txt += '<div class="col-3 text-end"></div>'
 						txt += '</div>'
 						
 					}
@@ -254,10 +254,9 @@
 						txt += '<div class="col-2">'
 						txt += '<img src="'+imgSrc+'" alt=""  style="border-radius:50%;">'
 						txt += '</div>'
-						txt += '<div class="col-6 text-start" style="cursor:pointer;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
-						txt += '<div class="col-3 text-end" style="cursor:pointer;">팔로우</div>'
+						txt += '<div class="col-6 text-start" style="cursor:pointer; font-size:10pt;" onclick="runForm(' + result.list[i].mmSeq +')">'+result.list[i].mmNickname+'</div>'
+						txt += '<div class="col-3 text-end" style="cursor:pointer;"></div>'
 						txt += '</div>'
-						
 					} 
 					
 					$('#modaldata').html(txt);

@@ -28,7 +28,7 @@
 		FROM luv 
 		WHERE luvWriter = #{luvWriter} 
 		AND luvPostId = #{luvPostId}
-	
+		AND luvType = 1
 	</delete>
 	
 	<select id="selectList" resultMap = "resultObj">
@@ -38,7 +38,7 @@
 		FROM luv 
 		WHERE 1=1
 		AND luvPostId = #{luvPostId}
-	
+		AND luvType = 1
 	</select>
 
 	<select id="selectCount" resultType="Integer">
@@ -48,7 +48,7 @@
 		FROM luv 
 		WHERE 1=1
 		AND luvPostId = #{luvPostId}
-	
+		AND luvType = 1
 	</select>
 
 </mapper>

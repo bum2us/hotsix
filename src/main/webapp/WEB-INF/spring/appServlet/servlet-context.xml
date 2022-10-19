@@ -35,7 +35,7 @@
 				<mapping path="/**/"/>                      
 				<!-- 매핑에서 제외시킬 것을 추가한다 -->    
 				<exclude-mapping path="/"/>
-				<exclude-mapping path="/resources*"/>
+				<exclude-mapping path="/resources/**"/> 
 				<exclude-mapping path="/signin"/>
 				<exclude-mapping path="/signup"/>
 				<exclude-mapping path="/member/chkId"/>

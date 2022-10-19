@@ -2,14 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-	<form id="postForm" method="POST">
-<div class="modal_overlay" onclick="javascript:closePost()" style="display:none;">
+<form id="postForm" method="POST">
+	<div class="modal_overlay" onclick="javascript:closePost()" style="display:none;">
 	<br><br>
 		<input id="cmPostId" name="cmPostId" type="hidden">
 		<input id="fwFollow" name="fwFollow" type="hidden">
 		<div class="row post_frame" onclick="event.stopPropagation()">
 			<div class="post_leftSide">
 				<img id="postImg" src="" alt="">
+				<!-- <video id="postImg" src="" autoplay="autoplay" muted="muted" loop="loop" width="100%"></video> -->
 			</div>
 			<div class="post_rightSide"> 
 				<div class="header">
@@ -90,13 +91,13 @@
 					  <textarea>&#x1f604;</textarea>
 					</div>
 					 -->		
-					<textarea id="cmContent" placeholder="댓글 달기.."></textarea>
+					<textarea class="comment_area" id="cmContent" placeholder="댓글 달기.."></textarea>
 					<i class="fa-regular fa-message" onclick="datgle()"></i>
 				</div>
 			</div>
 		</div>
-</div>
-	</form>
+	</div>
+</form>
 <script src="jquery.emojiarea.js"></script>
 
 <script type="text/javascript">
@@ -198,8 +199,13 @@
 					var comment = "";
 					for (var i = 0; i < result.list.length; i++) {
 						
+						var imgSrc="/resources/images/profile/empty.png";
+						
+						if(result.list[i].upmPath != null)
+							imgSrc = result.list[i].upmPath + result.list[i].upmUuidName;
+						
 						comment += '<ul><li><div class="row commentBlock"><div class="col-3 comment_header"><img src=';
-						comment += '"/resources/images/profile/empty.png">';
+						comment += imgSrc+'>';
 						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
