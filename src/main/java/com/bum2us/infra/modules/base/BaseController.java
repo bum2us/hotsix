@@ -84,7 +84,11 @@ public class BaseController {
 	}
 	
 	@RequestMapping(value = "/bookmark")
-	public String bookmark() throws Exception {
+	public String bookmark(Model model,HttpSession httpSession) throws Exception {
+		
+		List<Post> list = servicePost.selectListForBookmark((int)httpSession.getAttribute("sessSeq"));
+		
+		model.addAttribute("list", list);
 		
 		return "infra/user/bookmarkForm";
 	}
@@ -99,34 +103,6 @@ public class BaseController {
 	public String upload() throws Exception {
 		
 		return "infra/user/uploadForm";
-	}
-	
-	@RequestMapping(value = "/searchProfile")
-	public String searchProfile(Model model,PostVo vo,HttpSession httpSession) throws Exception {
-		
-		vo.setShOption(vo.getShMemberSeq());
-		
-		System.out.println(vo.getShOption());
-		
-		Member item = service.selectProfileImg(vo);
-		
-		System.out.println(item.getMmSeq()); 
-		
-		model.addAttribute("item", item);
-		
-		List<Post> list = servicePost.selectListForProfile(vo);
-		
-		model.addAttribute("list", list);
-		
-		int followCount = serviceFollow.selectCountFollowed(vo.getShOption());
-		
-		model.addAttribute("follower",followCount);
-		
-		int followingCount = serviceFollow.selectCountFollowing(vo.getShOption());
-		
-		model.addAttribute("following",followingCount);
-		
-		return "infra/user/profileForm";
 	}
 	
 	@RequestMapping(value = "/profile")

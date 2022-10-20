@@ -20,10 +20,7 @@ public class PostServiceImpl implements PostService{
 	
 	@Override
 	public List<Post> selectListForProfile(PostVo vo) throws Exception {
-		// TODO Auto-generated method stub
-		
-		System.out.println("impl");
-		
+		// TODO Auto-generated method stub		
 		return dao.selectListForProfile(vo);
 	}
 
@@ -102,7 +99,16 @@ public class PostServiceImpl implements PostService{
 	public Member selectPostWriteImg(Integer postSeq) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectPostWriteImg(postSeq);
-	}	
+	}
+
+
+	@Override
+	public List<Post> selectListForBookmark(Integer loginUserSeq) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.selectListForBookmark(loginUserSeq);
+	}
+
+
 	
 	
 	

@@ -20,10 +20,25 @@
 </head>
 <body>
 	<%@include file="../common/user/header.jsp" %>
-	<div class="container" style="height: 1300px;">
+	<div class="container text-center" style="min-height: 700px;">
 		<br><br>
 		<br><br>		
 		<div class="row favoraite_card_row">
+			
+			<c:forEach items="${list}" var="list" varStatus="status"> 
+				<div class="col-3 text-center">
+					<div class="row justify-content-center" style="width: 250px; height: 250px;">
+						<img src="${list.upPath}${list.upUuidName}" alt="" style="border:none; border-radius:10px; width:100%; height:100%;">	 					
+					</div>
+					<div class="row justify-content-center">
+						<h4><c:out value="${list.countLuv }"/><br><span>좋아요수</span></h4>
+						<h4><c:out value="${list.countComment }"/><br><span>댓글수</span></h4>
+					</div>
+				</div>
+			</c:forEach>
+			
+			<!--  카드  -->
+			<!-- 		
 			<div class="col-3">
 				<div class="favoraite_card">
 					<div class="imgBx">
@@ -45,241 +60,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_02.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>마운테인<br><span>산은 산이요</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_03.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>통통배<br><span>우린 거북선 다른배들 통통</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_04.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>거제도<br><span>비슷한 지형이 있지</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row favoraite_card_row">
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_05.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>플라월<br><span>흰 꽃이 꼭 팝콘 같다</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_06.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>불가사리 닮은 꽃<br><span>안녕하세요 뚱이에요</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_07.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>창공의 지배자 매<br><span>제가 날리던 드론을 저 조류가</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_08.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>산 정상의 풍경<br><span>디스 이즈 마운테인</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row favoraite_card_row">
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_09.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>강남의 풍경<br><span>강남 맞나요?</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_10.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>버스정류장<br><span>40분째 버스가 오질 않는다</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_11.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>해변의 나뭇가지<br><span>가지가지한다</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_12.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>물의 도시<br><span>waterrrrrrrrrrrrrrrrrrr</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
-							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			-->
+			
+			
 		</div>
 	</div>
 	<%@include file="../common/user/footer.jsp" %>

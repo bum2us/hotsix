@@ -53,6 +53,9 @@ public class PostDao {
 	public Member selectPostWriteImg(Integer postSeq) { return sqlSession.selectOne(namespace+".selectPostWriteImg", postSeq); }
 
 
+	public List<Post> selectListForBookmark(Integer loginUserSeq) { return sqlSession.selectList(namespace+".selectListForBookmark", loginUserSeq); }
+
+
 	
 	
 }

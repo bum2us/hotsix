@@ -25,4 +25,6 @@ public interface PostService {
 	
 	public Member selectPostWriteImg(Integer postSeq)throws Exception;
 	
+	public List<Post> selectListForBookmark(Integer loginUserSeq) throws Exception;
+	
 }

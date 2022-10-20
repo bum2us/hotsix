@@ -16,6 +16,8 @@ public class Post extends Base{
 	private Integer mmSeq;
 	private String mmNickname;
 	private String bdName;
+	private Integer countComment;
+	private Integer countLuv;
 	
 	
 	
@@ -86,6 +88,18 @@ public class Post extends Base{
 	}
 	public void setBdName(String bdName) {
 		this.bdName = bdName;
+	}
+	public Integer getCountComment() {
+		return countComment;
+	}
+	public void setCountComment(Integer countComment) {
+		this.countComment = countComment;
+	}
+	public Integer getCountLuv() {
+		return countLuv;
+	}
+	public void setCountLuv(Integer countLuv) {
+		this.countLuv = countLuv;
 	}
 	
 	

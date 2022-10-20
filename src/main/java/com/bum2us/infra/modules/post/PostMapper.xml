@@ -34,6 +34,37 @@
  		WHERE po.postWriter = #{shOption}
  		
  	</select>
+ 	
+ 	<select id="selectListForBookmark" resultMap="resultObj" parameterType="Integer">
+ 		
+ 		SELECT
+			po.postSeq
+		    ,po.postContent
+		    ,(
+		      SELECT
+		      	COUNT(*)
+		      FROM comment cm
+		      WHERE cm.cmPostId = po.postSeq
+		      ) as countComment
+		     ,(
+		      SELECT
+		      	COUNT(*)
+		      FROM luv
+		      WHERE luvPostId = po.postSeq
+		      ) as countLuv
+		     ,up.upPath
+		     ,up.upUuidName
+		FROM post po
+		JOIN luv luv
+		ON luv.luvPostId = po.postSeq
+		JOIN upload up
+		ON po.postSeq = up.upPostSeq
+		WHERE 1=1 
+		AND luv.luvType = 1 
+		AND luv.luvWriter = #{loginUserSeq}
+		ORDER BY luv.luvCreateDate DESC
+ 	
+ 	</select>
  
 	<select id="selectListForMain" resultMap = "resultObj"  parameterType="Integer">
 	
