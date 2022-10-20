@@ -2,12 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 
-<form id="postForm" method="POST">
+<!-- <form id="postForm" method="POST"> -->
 	<div class="modal_overlay" onclick="javascript:closePost()" style="display:none;">
 	<br><br>
 		<input id="cmPostId" name="cmPostId" type="hidden">
 		<input id="fwFollow" name="fwFollow" type="hidden">
-		<input id="shOption" name="shOption" type="hidden">
 		<div class="row post_frame" onclick="event.stopPropagation()">
 			<div class="post_leftSide">
 				<img id="postImg" src="" alt="">
@@ -25,25 +24,11 @@
 						팔로우
 					</div>
 				</div>
+				<div class="comment_List baseComment" id="contentArea"></div>
+				
 				<div class="comment_List" id="comment_List">
-					<ul>
-						<li>
-							<div class="row commentBlock">
-								<div class="col-3 comment_header">
-									<img src="/resources/images/profile/empty.png" alt="">
-								</div>
-								<div class="col comment_body">
-									<div class="comment_content">
-										<span>
-											<span class="comment_userName" id="postContentWriter"></span>
-											<span id="postContent"></span>
-										</span>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-					<ul>
+				
+					<!-- <ul>
 						<li>
 							<div class="row commentBlock">
 								<div class="col-3 comment_header">
@@ -59,7 +44,7 @@
 									<div class="comment_info">
 										<span>1일전</span>
 										<button type="button">좋아요 5개</button>
-										<!-- <button type="button">답글 달기</button> -->
+										<button type="button">답글 달기</button>
 									</div> 
 								</div>
 								<div class="col-1 comment_like">
@@ -67,7 +52,8 @@
 								</div>
 							</div>
 						</li>
-					</ul>
+					</ul> -->
+					
 				</div>
 				<div class="post_info">
 					<div class="col-8">
@@ -98,17 +84,17 @@
 			</div>
 		</div>
 	</div>
-</form>
+<!-- </form> -->
 <script src="jquery.emojiarea.js"></script>
 
 <script type="text/javascript">
 	
 	
 
-	goProfile = function(key) {
+	goProfile = function(key) { 
 		
-		$("#shOption").val(key);
-		$("#postForm").attr("action","/profile").submit();
+		$("#shOption").val(key); 
+		$("#mainForm").attr("action","/profile").submit();
 		
 	};
 	
@@ -299,19 +285,34 @@
 					$("#postImg").attr("src",result.imgSrc);
 					$("#postWriter").html(result.nickname);
 					$("#postWriter").attr("onclick","goProfile("+result.writer+")");
-					$("#postContentWriter").html(result.nickname);
-					$("#postContent").html(result.content);
 					$("#cmPostId").attr("value",postSeq);
 					$("#cmContent").val('');
+					$("#contentArea").html(result.content);
+					/*
+					var content = "";
 					
+					content += '<ul>';
+					content += '<li>';
+					content += '<div class="row commentBlock">';
+					content += '<div class="col-3 comment_header">';
+					content += '<img id="postWriterCommentImg" src="/resources/images/profile/empty.png" alt="">';
+					content += '</div>';
+					content += '<div class="col comment_body">';
+					content += '<div class="comment_content">';
+					content += '<span>';
+					content += '<span class="comment_userName" id="postContentWriter" onclick="goProfile('+result.writer+')">'+result.nickname+'</span>';
+					content += '<span id="postContent">'+result.content+'</span>';
+					content += '</span>';
+					content += '</div>';
+					content += '</div>';
+					content += '</div>';
+					content += '</li>';
+					content += '</ul>';
+					*/
 					
-					if(result.img != null){
-						$("#postWriterImg").attr("src",result.img);
-					}else{
-						$("#postWriterImg").attr("src","/resources/images/profile/empty.png");
-					}
 					
 					var comment = "";
+					
 					for (var i = 0; i < result.list.length; i++) {
 						
 						var imgsrcTxt = "";
@@ -356,6 +357,13 @@
 					$(".modal_overlay").show();
 					$("#postCreateTime").html(result.date.substring(2,4)+'년'+result.date.substring(5,7)+'월'+result.date.substring(8,10)+'일')
 					document.body.style.overflow = "hidden";
+					
+					if(result.img != null){
+						$("#postWriterImg").attr("src",result.img);
+						$("#postWriterCommentImg").attr("src",result.img);
+					}else{
+						$("#postWriterImg").attr("src","/resources/images/profile/empty.png");
+					}
 				}
 				else{
 					alert("게시글이 존재하지 않습니다.")

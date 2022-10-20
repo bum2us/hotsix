@@ -11,10 +11,10 @@
 	<link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-     <%@include file="./postForm.jsp" %>
      <%@include file="../common/user/header.jsp" %>
      <form id="mainForm" method="POST">
-     <input type="hidden" name="shOption" id="shOption">
+     <input type="hidden" id="shOption" name="shOption">
+     <%@include file="./postForm.jsp" %>
 	 <div class="container-sm" style="width:700px; min-height:1000px;">
         <br><br><br>
             <div class="row search-area" style=" margin-bottom: 20px; height: 50px;">
@@ -146,9 +146,7 @@
                         </div>
                     </div>           
 	            </div>
-            </div>
-            
-           
+            </div>         
 
     </div>
     </form>
@@ -167,14 +165,14 @@
 		
 		$("#mainForm").attr('action','/search').submit();
 	};
-	
+	/* 
 	goProfile = function(seq){
 		
 		$("#shOption").val(seq);
 		$("#mainForm").attr('action','/profile').submit();
 		
 	};
-
+ 	*/
 </script>
 </body>
 </html>

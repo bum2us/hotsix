@@ -31,7 +31,7 @@ public class MemberController {
 		return "infra/adnnin/memberList";
 	}
 	
-	@RequestMapping(value ="member/memberForm")
+	@RequestMapping(value ="/member/memberForm")
 	public String memberForm(@ModelAttribute("vo") MemberVo vo, Model model,HttpSession httpSession) throws Exception {
 		
 		/*

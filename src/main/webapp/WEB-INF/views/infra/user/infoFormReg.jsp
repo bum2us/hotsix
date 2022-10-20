@@ -26,7 +26,7 @@
         </div>
         <br>
         <div class="row justify-content-center">
-            <button class="basebutton" type="button" style="width:200px; margin:30px 0px 30px 0px;" onclick="location.href='/'">로그인 화면으로</button>
+            <button class="basebutton" type="button" style="width:200px; margin:30px 0px 30px 0px;" onclick="location.href='/signin'">로그인 화면으로</button>
         </div>
         
     </div>

@@ -15,6 +15,8 @@ public class BaseVo {
 	private Integer pageRange;
 	private Integer pageTotal;
 	
+	private Integer shMemberSeq;
+	
 	public String getShValue() {
 		return shValue;
 	}
@@ -107,4 +109,12 @@ public class BaseVo {
 		System.out.println("pageRange-"+pageRange);
 		System.out.println("pageTotal-"+pageTotal);
 	}
+	public Integer getShMemberSeq() {
+		return shMemberSeq;
+	}
+	public void setShMemberSeq(Integer shMemberSeq) {
+		this.shMemberSeq = shMemberSeq;
+	}
+	
+	
 }

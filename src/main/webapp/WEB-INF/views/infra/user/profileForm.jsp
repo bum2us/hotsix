@@ -19,11 +19,11 @@
     </style>
 </head>
 <body>
-	<%@include file="./postForm.jsp" %>
 	<%@include file="../common/user/header.jsp" %>
 	
-    <div class="container" style="min-height: 700px;"> 
-    	<form method="POST" id="mainForm">
+   	<form method="POST" id="mainForm">
+	<%@include file="./postForm.jsp" %>
+	    <div class="container" style="min-height: 700px;"> 
     		<input type="hidden" id="shOption" name="shOption" value="
     		<c:if test="${item.mmSeq eq null}">${sessSeq}</c:if>
     		<c:if test="${item.mmSeq ne null}">${item.mmSeq}</c:if>
@@ -87,8 +87,8 @@
 		    </div>
 			        
 
-        </form> 
-    </div>
+    	</div>
+    </form> 
     <%@include file="../common/user/footer.jsp" %>
 	
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>

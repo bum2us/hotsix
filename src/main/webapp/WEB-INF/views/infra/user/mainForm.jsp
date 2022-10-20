@@ -19,9 +19,10 @@
 	</style>
 </head>
 <body style="background: #000">
-	<%@include file="./postForm.jsp" %>
 	<%@include file="../common/user/header.jsp" %>
-	<form id="mainForm">
+	<form id="mainForm" method="POST">
+	<input type="hidden" name="shOption"  id="shOption">
+	<%@include file="./postForm.jsp" %>
 		<div class="grid-wrapper">
 			
 			<%-- 

@@ -13,6 +13,7 @@ public class Comment {
 	private String upmUuidName;
 	private String upmPath;
 	private Integer luvCount;
+	private Integer isLoginUserLuv;
 	
 	
 	public Integer getCmSeq() {
@@ -74,6 +75,12 @@ public class Comment {
 	}
 	public void setLuvCount(Integer luvCount) {
 		this.luvCount = luvCount;
+	}
+	public Integer getIsLoginUserLuv() {
+		return isLoginUserLuv;
+	}
+	public void setIsLoginUserLuv(Integer isLoginUserLuv) {
+		this.isLoginUserLuv = isLoginUserLuv;
 	}
 	
 	
