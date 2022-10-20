@@ -13,7 +13,8 @@ public class Comment {
 	private String upmUuidName;
 	private String upmPath;
 	private Integer luvCount;
-	private Integer isLoginUserLuv;
+	private Integer loginUserLuvNy;
+	private Integer loginUserSeq;
 	
 	
 	public Integer getCmSeq() {
@@ -76,11 +77,17 @@ public class Comment {
 	public void setLuvCount(Integer luvCount) {
 		this.luvCount = luvCount;
 	}
-	public Integer getIsLoginUserLuv() {
-		return isLoginUserLuv;
+	public Integer getLoginUserLuvNy() {
+		return loginUserLuvNy;
 	}
-	public void setIsLoginUserLuv(Integer isLoginUserLuv) {
-		this.isLoginUserLuv = isLoginUserLuv;
+	public void setLoginUserLuvNy(Integer loginUserLuvNy) {
+		this.loginUserLuvNy = loginUserLuvNy;
+	}
+	public Integer getLoginUserSeq() {
+		return loginUserSeq;
+	}
+	public void setLoginUserSeq(Integer loginUserSeq) {
+		this.loginUserSeq = loginUserSeq;
 	}
 	
 	

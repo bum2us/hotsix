@@ -22,8 +22,6 @@
                 <i onclick="runForm()" style="cursor:pointer; color:black; font-size: 16pt; position: relative; left: 93%; bottom: 70%;" class="fa-solid fa-magnifying-glass"></i>
             </div>
 
- 
-            
             <div class="row search-area" style="padding: 20px; margin-bottom: 20px;">
                 <div class="col">
                     <div class="row">

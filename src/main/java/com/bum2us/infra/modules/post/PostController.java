@@ -96,6 +96,7 @@ public class PostController {
 			//댓글 정보 select
 			Comment cm = new Comment();
 			cm.setCmPostId(dto.getPostSeq());
+			cm.setLoginUserSeq(loginUserSeq);
 			
 			List<Comment> list =  serviceComment.selectList(cm);
 			map.put("list", list);

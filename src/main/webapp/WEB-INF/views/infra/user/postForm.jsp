@@ -202,10 +202,19 @@
 						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName" onclick="goProfile('+ result.list[i].cmWriter +')">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
-						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv"'+result.list[i].cmSeq+'>';
+						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv'+result.list[i].cmSeq+'">';
 						//comment += '좋아요 5개</button><button type="button">';
 						//comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>'; 
-						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like"><i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')" class="fa-regular fa-heart" style="cursor:pointer;"></i></div></div></li></ul>';
+						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like">';
+						comment += '<i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')"';
+						comment += ' class="';
+						if(result.list[i].loginUserLuvNy == 1){
+							comment += 'fa-solid fa-heart" style="color:red';
+						}else{
+							comment += 'fa-regular fa-heart" style="color:black';
+						}
+						comment += '"></i></div></div></li></ul>';
+					
 					} 
 					
 					$("#comment_List").html(comment);
@@ -327,10 +336,18 @@
 						comment += '</div><div class="col comment_body"><div class="comment_content"><span><span class="comment_userName" onclick="goProfile('+ result.list[i].cmWriter +')">';
 						comment += result.list[i].mmNickname+ '   </span>';
 						comment += result.list[i].cmContent + '</span></div><div class="comment_info"><span>';
-						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv"'+result.list[i].cmSeq+'>';
+						comment += result.list[i].cmCreateDate + '</span><button type="button" id="commentLuv'+result.list[i].cmSeq+'">';
 						//comment += '좋아요 5개</button><button type="button">';
 						//comment += '답글 달기</button></div></div><div class="col-1 comment_like"><i class="fa-regular fa-heart"></i></div></div></li></ul>'; 
-						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like"><i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')" class="fa-regular fa-heart" style="cursor:pointer;"></i></div></div></li></ul>';
+						comment += '좋아요 ' +result.list[i].luvCount+'개</button></div></div><div class="col-1 comment_like">';
+						comment += '<i id="datgleLuv'+result.list[i].cmSeq+'" onclick="datgleJohayo('+ result.list[i].cmSeq +')"';
+						comment += ' class="';
+						if(result.list[i].loginUserLuvNy == 1){
+							comment += 'fa-solid fa-heart" style="color:red';
+						}else{
+							comment += 'fa-regular fa-heart" style="color:black';
+						}
+						comment += '"></i></div></div></li></ul>';
 						
 					}
 					

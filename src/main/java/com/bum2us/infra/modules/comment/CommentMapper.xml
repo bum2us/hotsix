@@ -24,7 +24,7 @@
 	</insert>
 	
 	<select id="selectList" resultMap="resultObj">
-	
+		
 		SELECT
 			cm.*
 			,mm.mmNickname
@@ -37,6 +37,14 @@
 				WHERE luvPostId = cm.cmSeq
 				AND luvType = 2
 			) as luvCount
+            ,(
+              	SELECT
+              		COUNT(*)
+              	FROM luv
+              	WHERE luvPostId = cm.cmSeq
+              	AND luvType = 2
+              	AND luvWriter = #{loginUserSeq}
+             )as loginUserLuvNy
 		FROM
 			comment cm
 		JOIN post post
@@ -46,10 +54,10 @@
 		LEFT JOIN uploadMemberProfile upm
 		ON  cm.cmWriter = upm.upmMemberSeq
 		AND upm.upmDelNy = 0
-		
 		WHERE 1=1 
 		AND cmPostId = #{cmPostId}
 		ORDER BY cmCreateDate DESC
+
 	</select>
 
 </mapper>
