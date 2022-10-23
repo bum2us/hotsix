@@ -93,12 +93,6 @@ public class BaseController {
 		return "infra/user/bookmarkForm";
 	}
 	
-	@RequestMapping(value = "/chat")
-	public String chat() throws Exception {
-		
-		return "infra/user/chatForm";
-	}
-	
 	@RequestMapping(value = "/upload")
 	public String upload() throws Exception {
 		

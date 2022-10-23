@@ -11,6 +11,7 @@
 <title>프로필</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <style>
         div	{
             /* border: solid 1px orange; */
@@ -24,6 +25,7 @@
    	<form method="POST" id="mainForm">
 	<%@include file="./postForm.jsp" %>
 	    <div class="container" style="min-height: 700px;"> 
+	    	<input type="hidden" id="chatUser" name="chatUser" value="">
     		<input type="hidden" id="shOption" name="shOption" value="
     		<c:if test="${item.mmSeq eq null}">${sessSeq}</c:if>
     		<c:if test="${item.mmSeq ne null}">${item.mmSeq}</c:if>
@@ -45,11 +47,16 @@
 	                        	<c:when test="${item.mmSeq eq sessSeq}"> 
 	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm(0)">프로필 편집</button>	                        	
 	                        	</c:when>
-	                        	<c:when test="${IsFollow ne null }"> 
-	  								<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우 취소</button>                      	
-	                        	</c:when>
 	                        	<c:otherwise>
-	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우</button>	                        	
+	                        		<c:choose>	                        		
+			                        	<c:when test="${IsFollow ne null }"> 
+			  								<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우 취소</button>                      	
+			                        	</c:when>
+			                        	<c:otherwise>
+			                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우</button>	                        	
+			                        	</c:otherwise>
+	                        		</c:choose> 
+		                        	<button type="button" class="basebutton" style="font-weight:700" onclick="dm(${item.mmSeq})">메시지 보내기</button> 
 	                        	</c:otherwise>
 	                        </c:choose>
 	                    </div> 
@@ -98,6 +105,13 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 <script>
+
+	var dm(seq){
+		
+		$("#chatUser").val(seq);
+		form.attr("action","/chat").submit();
+		
+	};
 	
 	var form = $("#mainForm");
 
