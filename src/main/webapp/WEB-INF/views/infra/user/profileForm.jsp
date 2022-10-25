@@ -45,7 +45,8 @@
 	                        <span class="profileUserName"><c:out value="${ item.mmNickname }"/></span>
 	                        <c:choose>
 	                        	<c:when test="${item.mmSeq eq sessSeq}"> 
-	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm(0)">프로필 편집</button>	                        	
+	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm(0)">프로필 편집</button>	     
+	                        		<button type="button" class="basebutton" style="font-weight:700" onclick="showPasswordForm()">비밀번호 변경</button>                    	
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<c:choose>	                        		
@@ -80,19 +81,57 @@
 	        	</c:forEach>
 	        </div>
  
-		<!--  모달 창 -->
-		  <div class="modal"  id="modal-notice">
-		        <div class="modal-content">
-		            <a href="javascript:closeModal()" class="modal-close">x</a>
-		            <span id="followTitle" style="font-weight:bold; font-size: 13pt; margin-bottom:5px;">팔로워</span>
-		            <div id="modaldata" class="modal-body">
-		            
-		                <!-- 팔로워 팔로우 정보 들어가는 곳  -->
-		                
-		            </div>
-		        </div>
-		    </div>
-			        
+			<!-- 팔로우 모달 창 -->
+			<div class="modal"  id="modal-notice">
+				<div class="modal-content">
+					<a href="javascript:closeModal('modal-notice')" class="modal-close">x</a>
+					<span id="followTitle" style="font-weight:bold; font-size: 13pt; margin-bottom:5px;">팔로워</span>
+					<div id="modaldata" class="modal-body">
+					
+					<!-- 팔로워 팔로우 정보 들어가는 곳  -->
+					            
+					</div>
+				</div>	
+			</div>
+			
+			<!-- 팔로우 모달 창 -->
+			<div class="modal"  id="modal-password">
+				<div class="modal-content" style="width: 500px; height: 350px; padding: 15px;">  
+					<a href="javascript:closeModal('modal-password')" class="modal-close">x</a>
+					<span id="followTitle" style="font-weight:bold; font-size: 13pt; margin-bottom:5px;">비밀번호 변경</span>
+					<div class="row justify-content-center my-4 px-4">   
+						<div class="col-4">
+							<span style=" font-size: 10pt;">기존 비밀번호</span>							
+						</div>
+						<div class="col">
+							<input type="password" id="oldpassword" />
+							<span style="margin-top:5px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
+						</div>
+					</div>
+					<div class="row justify-content-center my-4 px-4">   
+						<div class="col-4">
+							<span style=" font-size: 10pt;">새 비밀번호</span>							
+						</div>
+						<div class="col">
+							<input type="password" name="password" id="password" />
+						</div>
+					</div>
+					<div class="row justify-content-center my-4 px-4">   
+						<div class="col-4">
+							<span style=" font-size: 10pt;">새 비밀번호 확인</span>							
+						</div> 
+						<div class="col">
+							<input type="password" id="repassword" />
+						</div>
+					</div>
+					<div class="row justify-content-center my-4 px-4">   
+						<div class="col text-center">
+							<button type="button" class="basebutton" onclick="changePassword()">변경하기</button>							
+						</div>
+					</div>
+				</div>
+			</div>
+						        
 
     	</div>
     </form> 
@@ -105,6 +144,41 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 <script>
+
+	changePassword = function(){
+		
+	};
+	
+	checkPassword = function(){
+		
+		$.ajax({
+			url:'/member/chkPw'
+			,type:'POST'
+			,datatype:'json'
+			,data{
+				shPassword: $("#oldpassword").val()
+			},
+			success:function(result){
+				if(result.rt == "success"){
+					
+				}else{
+					
+				}
+			},
+			error:function(){
+				
+			}
+		});
+	};
+
+	showPasswordForm = function(){
+		
+		$("#oldpassword").val("");
+		$("#password").val("");
+		$("#repassword").val("");
+		
+		$("#modal-password").addClass('active'); 
+	};
 
 	dm = function(seq){
 		
@@ -289,11 +363,9 @@
 	};
 	
 	//모달 닫기
-	closeModal = function() {
-		$("#modal-notice").removeClass('active');
+	closeModal = function(modal) {
+		$("#"+modal).removeClass('active');
 	};
-	
-	//모달 열기
 	
 </script>
 </body>

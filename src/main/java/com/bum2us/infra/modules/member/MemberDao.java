@@ -40,4 +40,6 @@ public class MemberDao {
 	public Integer selectProfileImg(int i) { return sqlSession.selectOne(namespace + ".selectProfileImg", i); }
 
 	public void deleteProfileImg(Integer i) { sqlSession.update(namespace + ".deleteProfileImg", i); }
+
+	public int chkPw(MemberVo vo) { return sqlSession.selectOne(namespace+".chkPw",vo); }
 }

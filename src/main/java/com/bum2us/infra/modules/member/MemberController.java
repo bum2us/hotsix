@@ -86,6 +86,24 @@ public class MemberController {
 		return result; 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="member/chkPw")
+	public Map<String,Object> memberChkId(HttpSession httpSession,MemberVo vo) throws Exception{
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		vo.setShSeq((int)httpSession.getAttribute("sessSeq"));
+		
+		int count = service.chkPw(vo);
+		
+		if(count == 1)
+			result.put("rt", "success");
+		else
+			result.put("rt", "fail");
+		
+		return result; 
+	}
+	
 	@RequestMapping(value = "/member/memberIns")
 	public String memberIns(@ModelAttribute("vo") MemberVo vo, Model model,Member mb) throws Exception {
 		

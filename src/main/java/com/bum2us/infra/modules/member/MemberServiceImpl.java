@@ -118,9 +118,21 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
-	public int chkId(String id) throws Exception{
+	
+	
+	@Override
+	public int chkId(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.selectCount(id);
+	}
+
+	@Override
+	public int chkPw(MemberVo vo) throws Exception {
+		// TODO Auto-generated method stub
+		
+		vo.setShPassword(UtilSecurity.encryptSha256(vo.getShPassword()));
+		
+		return dao.chkPw(vo);
 	}
 
 	@Override
@@ -134,7 +146,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		
 	}
-	
+
 	
 	
 }

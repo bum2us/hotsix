@@ -44,7 +44,7 @@
 			</div>
 			<div class="row my-4 justify-content-center">
 				<div class="col text-center">				
-					<textarea id="postContent" name="postContent" rows="7" cols="20" style="width: 100%"></textarea>
+					<textarea id="postContent" name="postContent" rows="7" cols="20" style="width: 100%; padding: 10px;"></textarea>
 				</div>
 			</div>	 
 			<div class="row my-2 justify-content-end">

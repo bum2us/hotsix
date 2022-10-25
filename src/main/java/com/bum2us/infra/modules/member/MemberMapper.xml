@@ -138,9 +138,6 @@
 		UPDATE
 			member
 		SET
-			mmName = #{mmName}
-			,mmId = #{mmId}
-			,mmPassword = #{mmPassword}
 			,mmComment = #{mmComment}
 			,mmNickname = #{mmNickname}
 			,mmPhone = CONCAT('010',#{mmPhone1},#{mmPhone2})
@@ -216,6 +213,16 @@
 		WHERE upmMemberSeq = #{i}	
 		AND upmDelNy = 0
 		AND upmDefaultNy = 1 
+	</select>
+	
+	<select id="chkPw" resultType="Integer">
+		
+		SELECT
+		COUNT(*)
+		FROM member 
+		WHERE mmSeq = #{shSeq}
+		AND mmPassword = #{shPassword}
+	
 	</select>
 	
 </mapper> 

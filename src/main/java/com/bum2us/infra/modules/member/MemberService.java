@@ -18,5 +18,7 @@ public interface MemberService {
 
 	public int chkId(String id) throws Exception;
 	
+	public int chkPw(MemberVo vo) throws Exception;
+	
 	public void uelete(MemberVo vo) throws Exception;
 }

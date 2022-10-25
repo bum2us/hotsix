@@ -52,7 +52,16 @@
 					</div>
 					<div class="row my-4">
 						<div class="col">
-							<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="mmId" value="${item.mmId}">
+							<c:choose>
+								<c:when test = "${item.mmSeq eq null}">
+									<!-- 회원 추가  -->
+									<input type="text" onfocusout="chkId()" placeholder="아이디" id = "idbox" name="mmId" value="${item.mmId}">
+								</c:when>
+								<c:otherwise>
+									<!-- 회원 정보 수정	 -->					
+									<input type="text" disabled onfocusout="chkId()" placeholder="아이디" id = "idbox" name="mmId" value="${item.mmId}"> 
+								</c:otherwise>
+							</c:choose>
 						</div>
 					<span style="margin-top:5px" class="chk_sucess" id="id_check_sucess">사용가능한 아이디 입니다.</span>
 					<span style="margin-top:5px" class="chk_fail" id="id_check_fail">이미 존재하는 아이디입니다.</span>   
@@ -62,21 +71,39 @@
 							<input type="text" name="mmNickname" placeholder="닉네임" value="${item.mmNickname}">
 						</div>
 					</div>
-					<div class="row mb-4">
-						<div class="col">
-							<input type="password" id="passwordBox" placeholder="비밀번호" name="mmPassword">
-						</div>
-					</div>
-					<div class="row my-4">
-						<div class="col">
-							<input type="password" id="passwordBoxRe" onfocusout="chkPw()" placeholder="비밀번호 확인">  
-						</div>
-						<span  style="margin-top:5px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
-						<span  style="margin-top:5px" class="chk_fail" id="pw_check_fail">비밀번호가 일치하지 않습니다 다시 확인하세요.</span> 				
-					</div>
+					<c:choose>
+						<c:when test = "${item.mmSeq eq null}">
+							<!-- 회원 추가 -->
+							<div class="row mb-4">
+								<div class="col">
+									<input type="password" id="passwordBox" placeholder="비밀번호" name="mmPassword">
+								</div>
+							</div>
+							<div class="row my-4">
+								<div class="col">
+									<input type="password" id="passwordBoxRe" onfocusout="chkPw()" placeholder="비밀번호 확인">  
+								</div>
+								<span  style="margin-top:5px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
+								<span  style="margin-top:5px" class="chk_fail" id="pw_check_fail">비밀번호가 일치하지 않습니다 다시 확인하세요.</span> 				
+							</div>
+						</c:when>
+						<c:otherwise>
+							<!-- 회원 정보 수정	-->					
+						</c:otherwise>
+					</c:choose>
+					
 					<div class="row mb-4">
 						<div class="col-8">
-							<input type="text" placeholder="이름" name="mmName" value="${item.mmName}">
+							<c:choose>
+								<c:when test = "${item.mmSeq eq null}">
+									<!-- 회원 추가  -->
+									<input type="text" placeholder="이름" name="mmName" value="${item.mmName}">
+								</c:when>
+								<c:otherwise>
+									<!-- 회원 정보 수정	 -->
+									<input type="text" disabled placeholder="이름" name="mmName" value="${item.mmName}">					
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="col-4">
 							<select name="mmGender" id="gender" >
