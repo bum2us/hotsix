@@ -21,43 +21,37 @@
 <body>
 	<%@include file="../common/user/header.jsp" %>
 	<form method = "POST" action="postUpload" enctype="multipart/form-data">
-		<div class="container">
+		<div class="container-md" style="width:400px;;"> 
 		<br><br>
 			<div class="row justify-content-center">
 				<div class="col text-center">
-					<span class="page_title">사진 업로드</span>
+					<span class="page_title">게시물 업로드</span>
 				</div>
 			</div>
-			
-			<div class="row my-4">
-				<div class="col-2">
-					<h6>첨부파일</h6>
-				</div>
-				<div class="col">
+			 
+			<div class="row my-4 justify-content-center">
+				<div class="col text-center"> 
 					<!-- <button type="button" class="basebutton">첨부하기</button>  -->		
-					<img id="showImg"  alt="" src="" width="200" height="200">			
+					<img id="showImg"  alt="" src="/resources/images/upload.png" width="200" height="200">
 				</div>
 			</div>
-			<div class="row my-4">
-				<div class="col-2">
-					
+			<div class="row my-4 justify-content-center">
+				<div class="col text-center">	
+					<button type="button" class="upload-Btn">파일 첨부 			 
+				    	<input class="form-control form-control-sm" id="postImage" name="postImage" type="file" multiple="multiple" onChange="upload('postImage');">
+			    	</button>
 				</div> 
-				<div class="col">				 
-				    <input class="form-control form-control-sm" id="postImage" name="postImage" type="file" multiple="multiple" onChange="upload('postImage');">
-				</div>
 			</div>
-			<div class="row my-4">
-				<div class="col-2">
-					<h6>내용</h6>
+			<div class="row my-4 justify-content-center">
+				<div class="col text-center">				
+					<textarea id="postContent" name="postContent" rows="7" cols="20" style="width: 100%"></textarea>
 				</div>
-				<div class="col">				
-					<textarea id="postContent" name="postContent" rows="7" col="20" style="width: 100%"></textarea>
-				</div>
-			</div>	
+			</div>	 
 			<div class="row my-2 justify-content-end">
 				<button type="button" class="buttons" >내용삭제</button>
 				<button type="submit" class="buttons">게시하기</button>
-			</div>
+			</div>	
+			
 			<input type="hidden" name="postBoard" value="1">
 			<input type="hidden" name="postWriter" value = "${sessSeq}">
 		</div>

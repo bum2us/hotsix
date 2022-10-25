@@ -48,7 +48,7 @@ public class PostServiceImpl implements PostService{
 		int postSeq = dao.selectLastSeq(); //64
 		
 		int j = 0;
-		for(MultipartFile myFile : dto.getPostImage()) {
+		for(MultipartFile myFile : dto.getPostImage()) { 
 			
 			if(!myFile.isEmpty()) {
 				// postServiceImpl

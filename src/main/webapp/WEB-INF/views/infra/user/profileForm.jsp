@@ -106,7 +106,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>		
 <script>
 
-	var dm(seq){
+	dm = function(seq){
 		
 		$("#chatUser").val(seq);
 		form.attr("action","/chat").submit();

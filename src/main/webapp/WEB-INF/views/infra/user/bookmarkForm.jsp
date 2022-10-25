@@ -16,54 +16,63 @@
 			/* border: solid 1px orange; */
 		}
 		
+		.card-main {
+			font-size: 10pt;
+			font-weight: bold;		 
+		}
+		
+		.card-sub {
+			font-size: 8pt; 
+		}
+		
 	</style>
 </head>
 <body>
 	<%@include file="../common/user/header.jsp" %>
-	<div class="container text-center" style="min-height: 700px;">
-		<br><br>
-		<br><br>		
-		<div class="row favoraite_card_row">
-			
-			<c:forEach items="${list}" var="list" varStatus="status"> 
-				<div class="col-3 text-center">
-					<div class="row justify-content-center" style="width: 250px; height: 250px;">
-						<img src="${list.upPath}${list.upUuidName}" alt="" style="border:none; border-radius:10px; width:100%; height:100%;">	 					
-					</div>
-					<div class="row justify-content-center">
-						<h4><c:out value="${list.countLuv }"/><br><span>좋아요수</span></h4>
-						<h4><c:out value="${list.countComment }"/><br><span>댓글수</span></h4>
-					</div>
-				</div>
-			</c:forEach>
-			
-			<!--  카드  -->
-			<!-- 		
-			<div class="col-3">
-				<div class="favoraite_card">
-					<div class="imgBx">
-						<img src="/resources/images/image_01.jpg" alt="">
-					</div>
-					<div class="content">
-						<div class="detail">
-							<h2>풍력발전소<br><span>작가이름</span></h2>
-							<div class="data">
-								<h3>123<br><span>조회수</span></h3>
-								<h3>123<br><span>즐겨찾기</span></h3>
-								<h3>123<br><span>댓글수</span></h3>
+	<div class="container" style="min-height: 700px;"> 
+	<form id="mainForm" method="POST">
+		<input type="hidden" name="shOption"  id="shOption">
+		<%@include file="./postForm.jsp" %>
+			<br><br>
+			<br><br>		
+			<div class="row favoraite_card_row">
+				
+				<c:forEach items="${list}" var="list" varStatus="status"> 
+					<div class="card" style="width: 18rem; margin: auto; margin-bottom: 30px; height: 400px; padding:0px;">       
+						<img src="${list.upPath}${list.upUuidName}" class="card-img-top" alt="..." style="height: 250px; cursor:pointer;" onclick="openPost(${list.postSeq})"> 
+						<div class="card-body">
+							<div style="height: 50px; overflow: hidden; text-overflow: ellipsis; justify-content: center;">    
+								<p class="card-text" style="font-size: 10pt;"><c:out value="${list.postContent }"/></p>
 							</div>
-							<div class="actionBtn">
-								<button>보기</button>
-								<button>삭제</button>
+							<div class="row justify-content-center mt-2" style="height: 50px;">  
+								<div class="col text-center">
+									<span class="card-main"><c:out value="${list.countLuv }"/></span><br>
+									<span class="card-sub">좋아요</span>  
+								</div>
+								<div class="col text-center">
+									<span class="card-main"><c:out value="${list.countComment }"/></span><br>
+									<span class="card-sub">댓글수</span>
+								</div>
 							</div>
 						</div>
 					</div>
+				</c:forEach> 
+				
+				<!--  카드  -->
+				<!--
+				<div class="card" style="width: 18rem;">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Card title</h5>
+						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<a href="#" class="btn btn-primary">Go somewhere</a>
+					</div>
 				</div>
+				-->
+				
+				
 			</div>
-			-->
-			
-			
-		</div>
+		</form>
 	</div>
 	<%@include file="../common/user/footer.jsp" %>
 
