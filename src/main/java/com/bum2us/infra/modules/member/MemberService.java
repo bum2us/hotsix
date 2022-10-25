@@ -14,6 +14,8 @@ public interface MemberService {
 	
 	public Integer selectCount(MemberVo vo) throws Exception;
 	
+	public void updatePassword(Member mb) throws Exception;
+	
 	public void updateOne(Member mb) throws Exception; 
 
 	public int chkId(String id) throws Exception;

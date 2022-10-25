@@ -66,7 +66,7 @@ public class MemberController {
 		httpSession.setAttribute("sessId", item.getMmId());
 		httpSession.setAttribute("sessNickName", item.getMmNickname());
 		httpSession.setAttribute("sessComment", item.getMmComment());
-		
+		httpSession.setAttribute("sessImg", item.getUpPath()+item.getUpUuidName());
 		
 		return "redirect:/profile";
 	}
@@ -102,6 +102,18 @@ public class MemberController {
 			result.put("rt", "fail");
 		
 		return result; 
+	}
+	
+	@RequestMapping(value="/member/changePassword")
+	public String changePassword(HttpSession httpSession,Member mb) throws Exception{
+		
+		mb.setMmSeq((int)httpSession.getAttribute("sessSeq"));
+		
+		service.updatePassword(mb);
+		
+		httpSession.invalidate();
+		
+		return "infra/user/loginForm";
 	}
 	
 	@RequestMapping(value = "/member/memberIns")
@@ -149,6 +161,7 @@ public class MemberController {
 			httpSession.setAttribute("sessId", item.getMmId());
 			httpSession.setAttribute("sessNickName", item.getMmNickname());
 			httpSession.setAttribute("sessComment", item.getMmComment());
+			httpSession.setAttribute("sessImg", item.getUpPath()+item.getUpUuidName());
 		}
 		
 		return result;

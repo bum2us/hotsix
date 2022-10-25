@@ -26,7 +26,10 @@
         <div class="leftSide">
             <div class="userHeader">
                 <div class="userimg">
-                    <img class="cover" src="/resources/images/profile/profile_01.png">
+                    <img class="cover" src="
+                    <c:if test="${sessImg ne null}">${sessImg }</c:if>
+                    <c:if test="${sessImg eq null}">/resources/images/profile/empty.png</c:if>
+                    ">
                 </div>
                 <ul class="nav_icons">
                     <li><i class="fa-solid fa-comment-medical"></i></li>
@@ -34,13 +37,34 @@
             </div>
             <div class="chatSearch">
 				<div>
-					<input type="text" placeholder="채팅 검색">
+					<input type="text" placeholder="채팅 검색"> 
 					<i class="fa-solid fa-magnifying-glass"></i>
 				</div>
             </div>
 			<!-- 채팅 리스트 -->
 			<div class="chatlist">
+				<c:forEach items="${list }" var="list" varStatus="status">
+					<div class="block unread">
+						<div class="imgbx">
+							<img class="cover" src="
+							<c:if test="${list.upPath ne null}">${list.upPath}${list.upUuidName}</c:if>
+							<c:if test="${list.upPath eq null}">/resources/images/profile/empty.png</c:if>
+							">
+						</div>
+						<div class="details">
+							<div class="listhead">
+								<h4><c:out value="${list.mmNickname }"/></h4>
+								<p class="time">14:23</p>
+							</div>
+							<div class="message_p">
+								<p>안녕하세요 인상이 참 좋아보이셔서 dm 남겨요</p>
+								<b>1</b>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 				<!-- 채팅 -->
+				<!-- 
 				<div class="block active">
 					<div class="imgbx">
 						<img class="cover" src="/resources/images/profile/profile_02.png">
@@ -169,6 +193,7 @@
 						</div>
 					</div>
 				</div>
+				 -->
 			</div>
         </div>
 		<!-- 채팅창 -->

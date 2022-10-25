@@ -46,7 +46,7 @@
 	                        <c:choose>
 	                        	<c:when test="${item.mmSeq eq sessSeq}"> 
 	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="runForm(0)">프로필 편집</button>	     
-	                        		<button type="button" class="basebutton" style="font-weight:700" onclick="showPasswordForm()">비밀번호 변경</button>                    	
+	                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="showPasswordForm()">비밀번호 변경</button>                    	
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<c:choose>	                        		
@@ -57,7 +57,7 @@
 			                        		<button type="button" class="basebutton" style="font-weight:700;" onclick="follow(this)">팔로우</button>	                        	
 			                        	</c:otherwise>
 	                        		</c:choose> 
-		                        	<button type="button" class="basebutton" style="font-weight:700" onclick="dm(${item.mmSeq})">메시지 보내기</button> 
+		                        	<button type="button" class="basebutton" style="font-weight:700;" onclick="dm(${item.mmSeq})">메시지 보내기</button> 
 	                        	</c:otherwise>
 	                        </c:choose>
 	                    </div> 
@@ -101,19 +101,23 @@
 					<span id="followTitle" style="font-weight:bold; font-size: 13pt; margin-bottom:5px;">비밀번호 변경</span>
 					<div class="row justify-content-center my-4 px-4">   
 						<div class="col-4">
-							<span style=" font-size: 10pt;">기존 비밀번호</span>							
+							<span style=" font-size: 10pt;">현재 비밀번호</span>	
 						</div>
 						<div class="col">
 							<input type="password" id="oldpassword" />
-							<span style="margin-top:5px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
+						</div>
+						<div class="col-3 g-0"> 
+							<button type="button" class="basebutton" onclick="checkPassword()">비밀번호 확인</button>
 						</div>
 					</div>
-					<div class="row justify-content-center my-4 px-4">   
+					<span style="margin-top:1px" class="chk_sucess" id="pw_check_sucess">비밀번호가 일치합니다.</span>
+							<span style="margin-top:1px" class="chk_fail" id="id_check_fail">일치하지 않는 비밀번호입니다.</span>						
+					<div class="row justify-content-center mt-4 px-4">   
 						<div class="col-4">
 							<span style=" font-size: 10pt;">새 비밀번호</span>							
 						</div>
 						<div class="col">
-							<input type="password" name="password" id="password" />
+							<input type="password" name="mmPassword" id="password" />
 						</div>
 					</div>
 					<div class="row justify-content-center my-4 px-4">   
@@ -136,7 +140,8 @@
     	</div>
     </form> 
     <%@include file="../common/user/footer.jsp" %>
-	
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
@@ -146,23 +151,45 @@
 <script>
 
 	changePassword = function(){
+
+		if($("#pw_check_sucess").css("display")=="none"){
+			swal("ALBUM'S", "현재 비밀번호를 확인하세요.", "error");
+			return;
+		}
+		if( $("#password").val().length < 1){
+			swal("ALBUM'S","새로운 비밀번호를 입력하세요.","error");
+			return;
+		}
 		
+		if($("#password").val() != $("#repassword").val()){
+			swal("ALBUM'S","새로 입력한 비밀번호가 일치하지 않습니다.","error");
+			return;
+		}
+		
+		swal("ALBUM'S","비밀번호가 변경되어 로그아웃 됩니다. 다시 로그인 해주세요.","success").then((value) => {
+			$("#mainForm").attr("action","/member/changePassword").submit();		  
+		});
+		
+				
 	};
 	
 	checkPassword = function(){
+		
 		
 		$.ajax({
 			url:'/member/chkPw'
 			,type:'POST'
 			,datatype:'json'
-			,data{
+			,data: {
 				shPassword: $("#oldpassword").val()
 			},
 			success:function(result){
 				if(result.rt == "success"){
-					
+					$("#pw_check_sucess").show();
+					$("#id_check_fail").hide();
 				}else{
-					
+					$("#id_check_fail").show();
+					$("#pw_check_sucess").hide();
 				}
 			},
 			error:function(){

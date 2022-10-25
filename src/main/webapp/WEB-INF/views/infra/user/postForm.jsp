@@ -8,7 +8,7 @@
 		<input id="cmPostId" name="cmPostId" type="hidden">
 		<input id="fwFollow" name="fwFollow" type="hidden">
 		<div class="row post_frame" onclick="event.stopPropagation()">
-			<div class="post_leftSide">
+			<div class="post_leftSide" id="post_leftSide">
 				<img id="postImg" src="" alt="">
 				<!-- <video id="postImg" src="" autoplay="autoplay" muted="muted" loop="loop" width="100%"></video> -->
 			</div>
@@ -291,33 +291,21 @@
 			},
 			success:function(result){
 				if(result.rt == "success"){
-					$("#postImg").attr("src",result.imgSrc);
+					
+					var sourceText = "";
+					if(result.sourceType == "1") //영상
+						sourceText += '<video id="postImg" src="'+result.imgSrc+'" autoplay="autoplay" muted="muted" loop="loop" width="100%"></video>'
+					else if(result.sourceType == "2") //사진
+						sourceText += '<img id="postImg" src="'+ result.imgSrc +'" alt="">'
+						
+					$("#post_leftSide").html(sourceText);					
+					//$("#postImg").attr("src",result.imgSrc);					
 					$("#postWriter").html(result.nickname);
 					$("#postWriter").attr("onclick","goProfile("+result.writer+")");
 					$("#cmPostId").attr("value",postSeq);
 					$("#cmContent").val('');
 					$("#contentArea").html(result.content);
-					/*
-					var content = "";
 					
-					content += '<ul>';
-					content += '<li>';
-					content += '<div class="row commentBlock">';
-					content += '<div class="col-3 comment_header">';
-					content += '<img id="postWriterCommentImg" src="/resources/images/profile/empty.png" alt="">';
-					content += '</div>';
-					content += '<div class="col comment_body">';
-					content += '<div class="comment_content">';
-					content += '<span>';
-					content += '<span class="comment_userName" id="postContentWriter" onclick="goProfile('+result.writer+')">'+result.nickname+'</span>';
-					content += '<span id="postContent">'+result.content+'</span>';
-					content += '</span>';
-					content += '</div>';
-					content += '</div>';
-					content += '</div>';
-					content += '</li>';
-					content += '</ul>';
-					*/
 					
 					
 					var comment = "";

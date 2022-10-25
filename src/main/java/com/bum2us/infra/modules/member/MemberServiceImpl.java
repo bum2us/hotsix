@@ -79,6 +79,16 @@ public class MemberServiceImpl implements MemberService{
 		
 		return dao.selectCount(vo);
 	}
+	
+	
+
+	@Override
+	public void updatePassword(Member mb) throws Exception {
+		// TODO Auto-generated method stub
+		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
+		
+		dao.updatePassword(mb);
+	}
 
 	@Override
 	public void updateOne(Member mb) throws Exception {

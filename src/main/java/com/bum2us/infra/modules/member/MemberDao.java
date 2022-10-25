@@ -42,4 +42,6 @@ public class MemberDao {
 	public void deleteProfileImg(Integer i) { sqlSession.update(namespace + ".deleteProfileImg", i); }
 
 	public int chkPw(MemberVo vo) { return sqlSession.selectOne(namespace+".chkPw",vo); }
+
+	public void updatePassword(Member mb) { sqlSession.update(namespace+".updatePassword",mb); }
 }

@@ -22,6 +22,7 @@ public class ChatController {
 		int LoginUserSeq = (int)httpSession.getAttribute("sessSeq");
 		
 		List<Chat> list = service.selectListFromUser(LoginUserSeq);
+				
 		model.addAttribute("list", list);
 		
 		return "infra/user/chatForm";

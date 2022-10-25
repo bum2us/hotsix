@@ -150,6 +150,19 @@
 			mmSeq = #{mmSeq}		
 	</update>
 	
+	<update id="updatePassword">
+		
+		UPDATE
+			member
+		SET
+			mmPassword = #{mmPassword}
+		WHERE
+			1=1
+		AND
+			mmSeq = #{mmSeq}		
+	
+	</update>
+	
 	<update id ="uelete">
 		
 		UPDATE

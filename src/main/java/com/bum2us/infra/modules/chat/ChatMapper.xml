@@ -6,11 +6,35 @@
 
 	<resultMap id="resultMapObj" type="com.bum2us.infra.modules.chat.Chat"></resultMap>
 	
-	<select id="" resultMap="resultMapObj">
+	<select id="selectListFromUser" resultMap="resultMapObj">
 	
-		
+		SELECT
+			cuChatSeq as chatSeq
+			,cuMemberSeq
+		FROM chatUser
+        JOIN chat ch
+        ON ch.chatSeq = cuChatSeq
+        AND ch.chatDelNy = 0 
+		WHERE cuMemberSeq = #{cuMemberSeq}
 	
 	</select>
 
+	<select id="selectOneChat" resultMap ="resultMapObj">
+		SELECT
+			cu.cuChatSeq as chatSeq
+		    ,cu.cuMemberSeq
+            ,mmSeq
+            ,mmNickname
+            ,upm.upmPath as upPath
+            ,upm.upmUuidName as upUuidName
+		FROM chatUser cu
+        JOIN member mm
+        ON mm.mmSeq = cu.cuMemberSeq
+        LEFT JOIN uploadMemberProfile upm
+        ON mm.mmSeq = upm.upmMemberSeq
+        AND upm.upmDelNy = 0
+		WHERE cu.cuChatSeq = #{chatSeq}
+		AND cu.cuMemberSeq != #{cuMemberSeq}  
+	</select>
 
 </mapper>

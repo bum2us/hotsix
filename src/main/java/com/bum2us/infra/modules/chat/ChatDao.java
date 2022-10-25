@@ -19,4 +19,6 @@ public class ChatDao {
 	
 	public List<Chat> selectListFromUser(int loginUserSeq) { return sqlSession.selectList(namespace+".selectListFromUser", loginUserSeq); }
 
+	public Chat selectOneChat(Chat item) { return sqlSession.selectOne(namespace + ".selectOneChat", item); }
+
 }

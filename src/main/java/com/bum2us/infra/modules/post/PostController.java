@@ -115,6 +115,7 @@ public class PostController {
 			
 
 			map.put("rt", "success");
+			map.put("sourceType", item.getUpType());
 			map.put("imgSrc", item.getUpPath() + item.getUpUuidName());
 			map.put("nickname", item.getMmNickname());
 			map.put("content", item.getPostContent());
