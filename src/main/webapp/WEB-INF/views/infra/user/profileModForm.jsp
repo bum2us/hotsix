@@ -138,12 +138,24 @@
                             <input type="text" value="010" style="text-align:center">
                         </div>
                         <div class="col-3">
-                            <input type="text" name="mmPhone1" placeholder="XXXX" value="${item.mmPhone.substring(3,7)}" style="text-align:center">
+                            <input type="text" id="mmPhone1" name="mmPhone1" placeholder="XXXX" value="${item.mmPhone.substring(3,7)}" style="text-align:center">
                         </div>
                         <div class="col-3">
-                            <input type="text" name="mmPhone2" placeholder="XXXX" value="${item.mmPhone.substring(7,11)}" style="text-align:center">
+                            <input type="text" id="mmPhone2" name="mmPhone2" placeholder="XXXX" value="${item.mmPhone.substring(7,11)}" style="text-align:center">
                         </div>
-                    </div> 
+                    </div>                    
+                    <div class="row mb-4">
+                    	<div class="col">
+							<input type="text" name="" id="checkCode" placeholder="인증번호입력" style="text-align:center">
+							<input type="hidden" id="checkCodeFromSms" value="">
+						</div> 
+						<div class="col-2">
+                        	<button style="width: 60px; margin:0px;" type="button" class="basebutton" onclick="sendSms()">인증요청</button>
+						</div> 
+						<div class="col-2">
+                        	<button style="width: 60px; margin:0px;" type="button" class="basebutton" onclick="checkSms()">인증확인</button>
+						</div>
+                    </div>                     
                     <div class="row mb-4">
                    		<div class="col-8">
                    			<input type="text" id="mmZipCode" name="mmZipCode" placeholder="우편번호" value="${item.mmZipCode}" readonly>
@@ -215,6 +227,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45d424ec6ca5bb1db01d05b13aef2081&libraries=services,clusterer,drawing"></script> 
 <script>
@@ -242,6 +255,11 @@
   		}
 	  	case "add":
   		{
+	  		
+	  		if($("#id_check_sucess").css("display") == "none"){
+	  			 swal("ALBUM'S", "아이디를 확인하세요.", "error"); 
+	  			 return; 
+	  		}
 			form.attr("action","/member/memberIns").submit(); 
 			break;
   		}
@@ -254,22 +272,37 @@
 	  }
 	
   };
- 	
- 	function emailChange(){
- 		
- 		var email = $("#mmEmail");
- 		var emaildomain = $("#mmEmaildomain"); //emaildomain[0].selectedIndex
- 		var txt =  emaildomain[0].options[1].text;
- 		
- 		if(email.val().includes('@')){
- 			
- 		}
- 		else{
- 			email.attr('value',email.val()+'@'+ txt);
- 		}
- 		
- 	};
- 	
+  
+  checkSms = function() {
+	
+	  if($("#checkCodeFromSms").val() == $("#checkCode").val()){
+		  swal("ALBUM'S", "인증되었습니다.", "success");
+	  }else{
+		  swal("ALBUM'S", "인증번호가 틀립니다.", "error");
+	  }
+	  
+  };
+ 
+  sendSms = function() {
+	
+	  $.ajax({
+		 url:'/member/checkSms' 
+		 ,type: 'POST' 
+		 ,dataType:'json'
+		 ,data:{
+			 mmPhone : '010' + $("#mmPhone1").val() + $("#mmPhone2").val()
+		 }
+	  	 ,success:function(result){
+	  		
+	  		$("#checkCodeFromSms").val(result.rt);
+	  	 }
+	  	 ,error:function(){
+	  		swal("ALBUM'S", "ajax error..!", "error");
+	  	 }
+	  });
+	  
+  };
+  
   searchAdd = function() {
 		
 		new daum.Postcode({
@@ -355,7 +388,7 @@
   				}  				 
   			},
   			error:function(){
-  				alert("err");
+  				swal("ALBUM'S", "ajax error..!", "error");
   			}
   			
   			//성공시 = success → complete → done → always

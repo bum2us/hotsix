@@ -201,7 +201,12 @@
 		    <version>2.11.0</version>
 		</dependency>
 		
-		
+		<!-- 메세지 전송 API -->
+		<dependency>
+		  <groupId>net.nurigo</groupId>
+		  <artifactId>sdk</artifactId>
+		  <version>4.2.4</version>
+		</dependency>
 		
 	</dependencies>
     <build>

@@ -70,7 +70,7 @@
 								</a>
 							</div>
 							<div class="col-4 p-0">
-								<a href="./findIdPwForm.html" style="--clr:#FF9F29">
+								<a href="javascript:findidpw()" style="--clr:#FF9F29">
 									<span></span><span></span><span></span><span></span>Find ID/PW
 								</a>
 							</div>
@@ -89,13 +89,17 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
 	
+	findidpw = function() {
+		swal("ALBUM'S", "구현예정입니다.", "info");
+	}
+	
 	enterKey = function() {
 		
 		var keycode = event.keyCode;
 		
 		if(keycode == 13) //Enter
 			submitform();
-	}
+	};
 		
     submitform = function(){		
 		

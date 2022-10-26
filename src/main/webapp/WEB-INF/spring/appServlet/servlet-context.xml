@@ -39,6 +39,7 @@
 				<exclude-mapping path="/signin"/>
 				<exclude-mapping path="/signup"/>
 				<exclude-mapping path="/member/chkId"/>
+				<exclude-mapping path="/member/checkSms"/>
 				<exclude-mapping path="/member/login"/>
 				<exclude-mapping path="/member/memberIns"/>
 				<exclude-mapping path="/member/memberForm"/>
