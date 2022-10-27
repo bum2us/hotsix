@@ -14,7 +14,7 @@ public class Base {
 		this.shValue = shValue;
 	}
 
-	private String  upPath;
+	private String  upPath; 
 	private String  upOriginalName;
 	private String  upUuidName;
 	private String  upExt;
