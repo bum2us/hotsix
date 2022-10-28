@@ -30,7 +30,7 @@
                     <c:if test="${sessImg ne null}">${sessImg }</c:if>
                     <c:if test="${sessImg eq null}">/resources/images/profile/empty.png</c:if>
                     ">
-                </div>
+                </div> 
                 <ul class="nav_icons">
                     <li><i class="fa-solid fa-comment-medical"></i></li>
                 </ul>
