@@ -24,13 +24,13 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-    text-align: center;
+    text-align: center; 
     padding: 10px;
 }
 
 .modal {
     background-color: rgba(0, 0, 0, 0.4);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
@@ -66,12 +66,12 @@
 
 .modal-block img{
 	object-fit:auto;
-	width: 30px;
+	width: 30px; 
 	height: 30px;
 }
 
 .modal_overlay {
-  position: absolute;
+  position: fixed;
   top:0;
   left:0;
   z-index: 100;

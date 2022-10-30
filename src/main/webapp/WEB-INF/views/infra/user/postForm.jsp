@@ -1,10 +1,9 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <!-- <form id="postForm" method="POST"> -->
 	<div class="modal_overlay" onclick="javascript:closePost()" style="display:none;">
-	<br><br>
+	<br><br> 
 		<input id="cmPostId" name="cmPostId" type="hidden">
 		<input id="fwFollow" name="fwFollow" type="hidden">
 		<div class="row post_frame" onclick="event.stopPropagation()">
@@ -180,7 +179,9 @@
 		
 	};
 
-
+	
+	
+	
 	following = function(){
 		
 		$.ajax({
