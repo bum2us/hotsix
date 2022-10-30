@@ -105,14 +105,14 @@
 		
 		if($('#mmId').val() == null || $('#mmId').val().length < 1)
 		{ 
-			swal("안돼 돌아가", "아이디를 입력하세요", "error");
+			swal("로그인 오류", "아이디를 입력하세요", "error");
 			$('#mmId').focus();			
 			return false;
 		}
 		
 		if($('#mmPassword').val() == null || $('#mmPassword').val().length < 1)
 		{
-			swal("안돼 돌아가", "비밀번호를 입력하세요", "error");
+			swal("로그인 오류", "비밀번호를 입력하세요", "error");
 			$('#mmPassword').focus();
 			return false;
 		}

@@ -22,12 +22,13 @@
     <%@include file="../common/user/header.jsp" %>
         
     <input type="hidden" id="seq" name="seq" value="${sessSeq}">
+    <input type="hidden" id="roomNo"> 
     <div class="container chatContainer">
         <div class="leftSide">
             <div class="userHeader">
                 <div class="userimg">
                     <img class="cover" src="
-                    <c:if test="${sessImg ne null}">${sessImg }</c:if>
+                    <c:if test="${sessImg ne null}">${sessImg}</c:if>
                     <c:if test="${sessImg eq null}">/resources/images/profile/empty.png</c:if>
                     ">
                 </div> 
@@ -43,21 +44,21 @@
             </div>
 			<!-- 채팅 리스트 -->
 			<div class="chatlist">
-				<c:forEach items="${list }" var="list" varStatus="status">
-					<div class="block unread">
-						<div class="imgbx">
+				<c:forEach items="${list }" var="list" varStatus="status"> 
+					<div class="block unread room" id="${list.chatSeq}">
+						<div class="imgbx" id="${list.chatSeq}">
 							<img class="cover" src="
 							<c:if test="${list.upPath ne null}">${list.upPath}${list.upUuidName}</c:if>
 							<c:if test="${list.upPath eq null}">/resources/images/profile/empty.png</c:if>
-							">
+							" id="${list.chatSeq}">
 						</div>
-						<div class="details">
-							<div class="listhead">
-								<h4><c:out value="${list.mmNickname }"/></h4>
-								<p class="time">14:23</p>
+						<div class="details" id="${list.chatSeq}">
+							<div class="listhead" id="${list.chatSeq}">
+								<h4 id="${list.chatSeq}"><c:out value="${list.mmNickname }"/></h4>
+								<p class="time" id="${list.chatSeq}">14:23</p>
 							</div>
-							<div class="message_p">
-								<p>안녕하세요 인상이 참 좋아보이셔서 dm 남겨요</p>
+							<div class="message_p" id="${list.chatSeq}">
+								<p id="${list.chatSeq}">안녕하세요 인상이 참 좋아보이셔서 dm 남겨요</p>
 								<b>1</b>
 							</div>
 						</div>
@@ -211,33 +212,12 @@
 				</ul>
 			</div>
 			<!-- 메세지 -->
-			<div class="chatBox">
+			<div class="chatBox" id="chatBox">
 				<div class="message myMessage">
 					<p>안녕<br><span>10:48</span></p>
 				</div>
 				<div class="message frMessage">
 					<p>오랜만<br><span>10:48</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>랩 배틀 한판 ??<br><span>10:48</span></p>
-				</div>
-				<div class="message myMessage">
-					<p>바라던 바다 덤벼라<br><span>10:49</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>나는 정상수 백발백중하는 명사수 부산진구 유명가수<br><span>10:50</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>일취월장 하며 성장 중!<br><span>10:50</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>내가 대표해 이 거리를 누구도 막지못해 내 지껄임을<br><span>10:50</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>사양할게 너의 벌스 피쳐링은<br><span>10:51</span></p>
-				</div>
-				<div class="message frMessage">
-					<p>이건나의 track my swag 노린 rap attack<br><span>10:51</span></p>
 				</div>
 			</div>
 			<!-- 채팅 입력 -->
@@ -257,7 +237,7 @@
 <!-- <script type="module" src="/resources/firebase/index.js"></script> -->     
 
 <script type="text/javascript">
-	
+
 	getnow = function() {
 		
 		var timestamp = new Date().getTime();
@@ -297,7 +277,7 @@
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	import { getDatabase, ref, get, set, child, update, remove }
+	import { getDatabase, ref, get, set, child, query, update, remove, onValue, limitToLast }
 	from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 	
 	const db = getDatabase();
@@ -307,8 +287,10 @@
 	function InsertData(){
 
 	var message = $("#chatMessage").val();
-		
-		set(ref(db,'chat/'+seq+'/'+getnow() ),{
+
+		var room = $("#roomNo").val();		
+
+		set(ref(db,'chat/'+room+'/'+getnow()+'/'+seq ),{
 			Masseage: message
 		})
 
@@ -321,20 +303,62 @@
 		})
 	}
 
-	function SelectData(){
-		const dbref = ref(db);
-		
-		get(child(dbref,'students/'+seq)).then((snapshot) => {
-			if(snapshot.exists()){
-				alert('이름 : ' + snapshot.val().name + '메세지 : ' + snapshot.val().messagse);
-			}		
+	$(".room").click(function(){
+		//event.target.id
+		SelectData(event.target.id);
+	}); 
+
+	function SelectData(room){ 
+		const dbRef = ref(db, 'chat/'+room);
+		const txt = "";
+		//https://firebase.google.com/docs/database/web/lists-of-data?hl=ko&authuser=0
+		onValue(dbRef,(snapshot) => {
+ 			snapshot.forEach((childSnapshot) => {
+   			const timetable = childSnapshot.key;
+			console.log(timetable);
+
+				onValue(ref(db,'chat/'+room+'/'+timetable),(snapshot2) => {
+					snapshot2.forEach((childSnapshot2) => {
+						const writer = childSnapshot2.key
+						console.log(writer);
+						
+						onValue(ref(db,'chat/'+room+'/'+timetable+'/'+writer),(snapshot3) => {
+							snapshot3.forEach((childSnapshot3) => {
+							const message = childSnapshot3.val()
+							console.log(message);
+								/*
+								txt += '<div class="message ';								
+								if(seq == writer)
+									txt += 'myMessage">';
+								else								
+									txt += 'frMessage">';
+								txt += '<p>';
+								txt += message;
+								txt += '<br><span>';
+								txt += timetable;
+								txt += '</span></p></div>';
+								*/
+							});
+						}, { 
+ 							onlyOnce: true
+						});
+							
+					});
+				});
+ 			});
 		});
+		
+				
 
+		//get(child(dbref,'chat/'+room+'/'+seq)).then((snapshot) => {
+		//	if(snapshot.exists()){
+		//		alert('이름 : ' + snapshot.val().name + '메세지 : ' + snapshot.val().messagse);
+		//	}		
+		//});
+		
+		$("#chatBox").html(txt);
+		$("#roomNo").val(room);
 	}
-
-	var selBtn = document.getElementById("selectBtn");
-
-	selBtn.addEventListener('click',SelectData);
 
 	var insBtn = document.getElementById("insertBtn");
 
@@ -343,12 +367,7 @@
 </script>
 
 <script type="text/javascript">
- 
-	push = function() {
-		
-		//writeUserData('bum2us','신범수','bumtv@naver.com','image.png');
-		
-	};
+ 	
 	
 </script>
 

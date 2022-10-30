@@ -18,7 +18,6 @@ public class UtilUpload {
 		String pathModule = className;
 		String nowString = UtilDateTime.nowString();
 		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10);
-		// 1994/04/20/보리.png
 		String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
 		String pathForView = "/resources/uploaded/" + pathModule + "/" + pathDate + "/";
 		
