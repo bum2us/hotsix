@@ -45,7 +45,7 @@
 						<div class="row mb-4">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="text" required="required" id="mmId" name="id">
+									<input type="text" required="required" id="mmId" name="id" value="shinbeomsu">
 									<span>USER ID</span>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 						<div class="row mb-3">
 							<div class="col gx-0">
 								<div class="inputBox">
-									<input type="password" required="required" id="mmPassword" name="password" onkeyup="enterKey()">
+									<input type="password" required="required" id="mmPassword" value="1234" name="password" onkeyup="enterKey()">
 									<span>PASSWORD</span>
 								</div>
 							</div>

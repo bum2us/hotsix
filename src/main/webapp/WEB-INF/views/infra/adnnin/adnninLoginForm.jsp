@@ -31,10 +31,10 @@
             <div class="row justify-content-center">
                 <div style="width: 300px;">
                     <div class="row mb-1">
-                        <input type="text" name="mmId" id="mmId" placeholder="관리자 아이디">
+                        <input type="text" name="mmId" id="mmId" placeholder="관리자 아이디" value="adnnin">
                     </div>
                     <div class="row">
-                        <input type="password" name="mmPassword" id="mmPassword" placeholder="비밀번호">
+                        <input type="password" name="mmPassword" id="mmPassword" placeholder="비밀번호" value="Passw0rd!!">
                     </div>
                 </div>
                 <div class="text-center mt-1">
