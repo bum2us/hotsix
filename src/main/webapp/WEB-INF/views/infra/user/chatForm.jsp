@@ -234,8 +234,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/63aa3074b3.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-<!-- <script type="module" src="/resources/firebase/index.js"></script> -->     
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+	const [content, setContent] = React.useState(1);
+	const [time, setTime] = React.useState(2);
+	const [isWriter, setIsWriter] = React.useState(3);	
 
+	function Message(){
+		return(
+			<div class="message {isWriter}">
+				<p>{content}<span>{time}</span></p>
+			</div>
+		);
+	}
+	const root = document.getElementById("chatBox");
+	ReactDOM.render(<Message />, root);
+	
+</script>
+ 
 <script type="text/javascript">
 
 	getnow = function() {
@@ -326,18 +345,7 @@
 							snapshot3.forEach((childSnapshot3) => {
 							const message = childSnapshot3.val()
 							console.log(message);
-								/*
-								txt += '<div class="message ';								
-								if(seq == writer)
-									txt += 'myMessage">';
-								else								
-									txt += 'frMessage">';
-								txt += '<p>';
-								txt += message;
-								txt += '<br><span>';
-								txt += timetable;
-								txt += '</span></p></div>';
-								*/
+								
 							});
 						}, { 
  							onlyOnce: true
@@ -347,14 +355,7 @@
 				});
  			});
 		});
-		
 				
-
-		//get(child(dbref,'chat/'+room+'/'+seq)).then((snapshot) => {
-		//	if(snapshot.exists()){
-		//		alert('이름 : ' + snapshot.val().name + '메세지 : ' + snapshot.val().messagse);
-		//	}		
-		//});
 		
 		$("#chatBox").html(txt);
 		$("#roomNo").val(room);
