@@ -239,19 +239,31 @@
 <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-	const [content, setContent] = React.useState(1);
-	const [time, setTime] = React.useState(2);
-	const [isWriter, setIsWriter] = React.useState(3);	
 
-	function Message(){
+	function Message(props){
+	
+		const [content, setContent] = React.useState(props.Msg);
+		const [time, setTime] = React.useState("2004-01-22 09:32:23");
+		const [isWriter, setIsWriter] = React.useState(props.IsWriter);	
+
 		return(
-			<div class="message {isWriter}">
+			<div onClick={props.onClick} className={ `message ${isWriter ? 'myMessage' : 'frMessage'}`}>
 				<p>{content}<span>{time}</span></p>
 			</div>
+		); 
+	}; 
+	
+	function fire() {
+		
+    };
+	
+	function App(){
+		return(
+			<Message Msg="안녕하세요" IsWriter={true} onClick={fire}/>
 		);
-	}
+	};
 	const root = document.getElementById("chatBox");
-	ReactDOM.render(<Message />, root);
+	ReactDOM.render(<App />, root);
 	
 </script>
  

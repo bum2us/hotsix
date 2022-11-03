@@ -1,18 +1,29 @@
 package com.bum2us.infra.modules.member;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.bum2us.infra.modules.code.CodeServiceImpl;
 
 import net.nurigo.sdk.NurigoApp;
 import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
@@ -25,6 +36,9 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl service;
 	
+	@Autowired
+	CodeServiceImpl serviceCode;
+	
 	@RequestMapping(value = "/member/memberList")
 	public String memberList (@ModelAttribute("vo")MemberVo vo, Model model) throws Exception {
 	
@@ -35,6 +49,90 @@ public class MemberController {
 		model.addAttribute("list", list);
 		
 		return "infra/adnnin/memberList";
+	}
+	
+	@RequestMapping(value="/member/memberList/excel")
+	public void memberListExcel(@ModelAttribute("vo")MemberVo vo,HttpServletResponse httpServletResponse) throws Exception {
+		
+		vo.setPageTotal(service.selectCount(vo));
+		
+		List<Member> list = service.selectList(vo);
+		
+		Workbook xlBook = new XSSFWorkbook();
+		Sheet xlSheet = xlBook.createSheet("출력");
+		CellStyle xlStyle = xlBook.createCellStyle();
+		Row row;
+		Cell cell;
+		
+		String[] colHead = {"#","이름","ID","닉네임","생년월일","EMAIN","연락처","성별","가입일"};
+		
+		row = xlSheet.createRow(0);
+		int count = 0;
+		
+		for(String head : colHead) {
+			cell = row.createCell(count++);
+			xlStyle.setAlignment(HorizontalAlignment.CENTER);
+			xlStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+			xlStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			cell.setCellStyle(xlStyle);
+			cell.setCellValue(head);
+		}
+
+		count = 1;
+		xlStyle = xlBook.createCellStyle();
+		xlStyle.setAlignment(HorizontalAlignment.CENTER);
+		
+		for(Member item : list) {
+			
+			row = xlSheet.createRow(count++);
+			
+			cell = row.createCell(0);
+			cell.setCellValue(item.getMmSeq());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(1);
+			cell.setCellValue(item.getMmName());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(2);
+			cell.setCellValue(item.getMmId());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(3);
+			cell.setCellValue(item.getMmNickname());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(4);
+			cell.setCellValue(item.getMmDob());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(5);
+			cell.setCellValue(item.getMmEmail());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(6);
+			cell.setCellValue(item.getMmPhone());
+			cell.setCellStyle(xlStyle);
+			
+			cell = row.createCell(7);
+			cell.setCellValue(serviceCode.selectOneCachedCode2Name("2",""+item.getMmGender()));
+			//cell.setCellValue(item.getMmGender() == 1 ? "남자" : "여자");
+			cell.setCellStyle(xlStyle);
+		
+			cell = row.createCell(8);
+			cell.setCellValue(item.getMmCreateDate());
+			cell.setCellStyle(xlStyle);
+		}
+		
+		for(int i=0; i< count; i++) {
+			xlSheet.autoSizeColumn(i);
+		}
+
+		httpServletResponse.setContentType("ms-vnd/excel");
+		httpServletResponse.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
+
+		xlBook.write(httpServletResponse.getOutputStream());
+		xlBook.close();
 	}
 	
 	@RequestMapping(value ="/member/memberForm")

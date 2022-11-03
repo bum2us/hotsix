@@ -113,12 +113,13 @@
 			
 		</form>	 
 		<div class="row">
-			<div class="col-2">
+			<div class="col-2 text-start gx-0"> 
 				<button type="button" class="buttons" onclick="uelitem()"><i class="fa-solid fa-xmark"></i></button>
 				<button type="button" class="buttons"><i class="fa-solid fa-trash-can"></i></button> 
 			</div>
-			<div class="col-1 offset-9 text-end">
+			<div class="col-2 offset-8 text-end gx-0">
 				<button type="button" class="buttons" onclick="runForm('add',0)"><i class="fa-solid fa-plus"></i></button>
+				<button type="button" class="buttons" onclick="runForm('excel',0)"><i class="fa-regular fa-file-excel"></i></button>
 			</div>
 		</div>
     </div>
@@ -157,6 +158,11 @@
 		  
 		  switch(key)
 		  {
+			case "excel":
+		  	{
+		  		form.attr("action", "/member/memberList/excel" ).submit();
+		  		break;	
+		  	}
 		  	case "src":
 		  	{
 		  		form.attr("action", "/member/memberList" ).submit();

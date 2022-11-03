@@ -133,4 +133,16 @@ public class CodeServiceImpl implements CodeService{
 		return rt;
 	}
 	
+	public static String selectOneCachedCode2Name(String group,String code) throws Exception  {
+		String rt="";
+		for(Code codeRow : Code.cacheCodeList) {
+			if (codeRow.getGroupSeq().equals(group) && codeRow.getCcKey().equals(code)) {
+				rt = codeRow.getCcName();
+			} else {
+				// by pass
+			}
+		}
+		return rt;
+	}
+	
 }
