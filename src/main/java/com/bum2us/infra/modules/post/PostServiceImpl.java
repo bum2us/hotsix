@@ -53,15 +53,15 @@ public class PostServiceImpl implements PostService{
 			if(!myFile.isEmpty()) {
 				// postServiceImpl
 				String pathModule = this.getClass().getSimpleName().toString().toLowerCase().replace("serviceimpl", "");
-				UtilUpload.uploadPost(myFile, pathModule, dto);
+				System.out.println( UtilUpload.uploadPost(myFile, pathModule, dto) );
 				
 				dto.setUpType(2);
-				dto.setUpDefaultNy(j == 0 ? 1 : 0);
+				dto.setUpDefaultNy(j == 0 ? 1 : 0); 
 				dto.setUpSort(j+1);
 				dto.setPostSeq(postSeq);
 				
-				dao.insertUpload(dto);
-				j++;
+				dao.insertUpload(dto); 
+				j++; 
 			}
 			
 		}
