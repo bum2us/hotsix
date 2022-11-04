@@ -18,19 +18,20 @@ public class UtilUpload {
 		String pathModule = className;
 		String nowString = UtilDateTime.nowString();
 		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10);
-		String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
+		//String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
+		String path = "//01_DEV//wsEzen//hotsix//resources//uploaded" + "//" + pathModule + "//" + pathDate + "//";
 		String pathForView = "/resources/uploaded/" + pathModule + "/" + pathDate + "/";
 		
 		createPath(path); //위에서 정의한 경로를 생성해주는 메소드
-		  
+		
 		multipartFile.transferTo(new File(path + uuidFileName)); //실제로 이미지 물리파일이 저장되는 코드(메소드)
 		
-		dto.setUpPath(pathForView);
-		dto.setUpOriginalName(fileName);
+		dto.setUpPath(pathForView); 
+		dto.setUpOriginalName(fileName); 
 		dto.setUpUuidName(uuidFileName);
 		dto.setUpExt(ext);
-		String size = ""+ multipartFile.getSize();
-		dto.setUpSize(size); 
+		String size = ""+ multipartFile.getSize();  
+		dto.setUpSize(size);  
 	}
 	
 	public static void uploadProfile (MultipartFile multipartFile, String className, Member dto) throws Exception {
@@ -38,13 +39,14 @@ public class UtilUpload {
 		String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String uuid = UUID.randomUUID().toString();
 		String uuidFileName = uuid + "." + ext;
-		String pathModule = className;
+		String pathModule = className; 
 		String nowString = UtilDateTime.nowString();
 		String pathDate = nowString.substring(0,4) + "/" + nowString.substring(5,7) + "/" + nowString.substring(8,10); 
-		String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
+		String path = "/01_DEV/wsEzen/hotsix/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
+		//String path = "D://01_DEV/wsEzen/hotsix/src/main/webapp/resources/uploaded" + "/" + pathModule + "/" + pathDate + "/";
 		String pathForView = "/resources/uploaded/" + pathModule + "/" + pathDate + "/";
-		
-		createPath(path);
+		 
+		createPath(path); 
 		  
 		multipartFile.transferTo(new File(path + uuidFileName));
 		
@@ -58,7 +60,6 @@ public class UtilUpload {
 	
 	public static void createPath (String path) {
 		File uploadPath = new File(path);
-		
 		if (!uploadPath.exists()) {
 			uploadPath.mkdir();
 		} else {
