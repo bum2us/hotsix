@@ -69,9 +69,16 @@ public class MemberServiceImpl implements MemberService{
 		
 		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
 		
-		return dao.selectOne(mb);
+		return dao.chkLogin(mb);
 	}
 
+	
+
+	@Override
+	public Member chkLoginKakao(Member mb) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.chkLoginKakao(mb);
+	}
 
 	@Override
 	public Integer selectCount(MemberVo vo) throws Exception {

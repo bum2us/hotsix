@@ -12,6 +12,8 @@ public interface MemberService {
 	
 	public Member chkLogin(Member mb) throws Exception;
 	
+	public Member chkLoginKakao(Member mb) throws Exception;
+	
 	public Integer selectCount(MemberVo vo) throws Exception;
 	
 	public void updatePassword(Member mb) throws Exception;

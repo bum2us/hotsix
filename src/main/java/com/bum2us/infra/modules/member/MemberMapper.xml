@@ -133,6 +133,15 @@
 		AND #{mmPassword} LIKE mmPassword
 	</select>
 	
+	<select id="chkLoginKakao" resultMap="resultObj">
+		SELECT
+			*
+		FROM member
+		WHERE
+			1=1
+		AND #{mmId} LIKE mmId  
+	</select>
+	
 	<update id="upadteOne">
 		
 		UPDATE
@@ -147,7 +156,7 @@
 		WHERE
 			1=1
 		AND
-			mmSeq = #{mmSeq}		
+			mmSeq = #{mmSeq} 	
 	</update>
 	
 	<update id="updatePassword">

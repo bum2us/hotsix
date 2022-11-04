@@ -21,7 +21,9 @@ public class MemberDao {
 	
 	public void insertList(Member mb) { sqlSession.insert(namespace + ".insertList", mb); }
 
-	public Member selectOne(Member mb) { return sqlSession.selectOne(namespace + ".chkLogin", mb); }
+	public Member chkLogin(Member mb) { return sqlSession.selectOne(namespace + ".chkLogin", mb); }
+
+	public Member chkLoginKakao(Member mb) { return sqlSession.selectOne(namespace+".chkLoginKakao",mb); }
 	
 	public Integer selectCount(MemberVo vo) { return sqlSession.selectOne(namespace + ".selectCount",vo); }
 	
@@ -44,4 +46,5 @@ public class MemberDao {
 	public int chkPw(MemberVo vo) { return sqlSession.selectOne(namespace+".chkPw",vo); }
 
 	public void updatePassword(Member mb) { sqlSession.update(namespace+".updatePassword",mb); }
+
 }

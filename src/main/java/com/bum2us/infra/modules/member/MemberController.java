@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bum2us.infra.modules.code.CodeServiceImpl;
@@ -250,11 +251,43 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping(value="/member/login")
-	public Map<String,Object> loginChk(Member mb,HttpSession httpSession) throws Exception{
+	public Map<String,Object> loginChk(HttpSession httpSession,Member mb) throws Exception{
 		
 		Map<String,Object> result = new HashMap<String,Object>();
 		
 		Member item = service.chkLogin(mb);
+		
+		if(item == null)
+			result.put("rt", "error");
+		else {
+			result.put("rt","success");
+
+			httpSession.setAttribute("sessSeq", item.getMmSeq());
+			httpSession.setAttribute("sessId", item.getMmId());
+			httpSession.setAttribute("sessNickName", item.getMmNickname());
+			httpSession.setAttribute("sessComment", item.getMmComment());
+			httpSession.setAttribute("sessImg", item.getUpPath()+item.getUpUuidName());
+		}
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/member/login/kakao")
+	public Map<String,Object> loginChkKakao(HttpSession httpSession,Member mb) throws Exception{
+		
+		Map<String,Object> result = new HashMap<String,Object>();		
+		
+		System.out.println(mb.getMmId());
+		System.out.println(mb.getMmGender());
+		System.out.println(mb.getMmName());
+		
+		if(mb.getMmId().contains("@")) {
+			String[] split = mb.getMmId().split("@");
+			mb.setMmId(split[0]);
+		}
+		
+		Member item = service.chkLoginKakao(mb);
 		
 		if(item == null)
 			result.put("rt", "error");

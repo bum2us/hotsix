@@ -42,6 +42,9 @@
 						<div class="row" style="object-fit: cover;">
 							<img src="/resources/images/logo_white.png" alt="">
 						</div>
+						<div class="row text-center mb-3">
+							<span id="errmsg" style="font-size:8pt; color:red; display: none;">잘못된 아이디/비밀번호 입니다. 다시 시도하세요.</span>
+						</div>
 						<div class="row mb-4">
 							<div class="col gx-0">
 								<div class="inputBox">
@@ -59,24 +62,30 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-4 p-0"> 
+							<div class="col p-0"> 
 								<a style="--clr:#FF9F29; color:gray;" href="javascript:submitform()">
 									<span></span><span></span><span></span><span></span>Login
 								</a>
 							</div>
-							<div class="col-4 p-0">
+							<div class="col p-0">
 								<a href="/member/memberForm" style="--clr:#FF9F29">
 									<span></span><span></span><span></span><span></span>SignUp
 								</a>
 							</div>
-							<div class="col-4 p-0">
-								<a href="javascript:findidpw()" style="--clr:#FF9F29">
-									<span></span><span></span><span></span><span></span>Find ID/PW
-								</a>
-							</div>
 						</div>
-						<div class="row text-center mt-3">
-							<span id="errmsg" style="font-size:8pt; color:red; display: none;">잘못된 아이디/비밀번호 입니다. 다시 시도하세요.</span>
+						<div class="row">
+							<div class="col p-0">
+								<a href="javascript:loginKakao()" style="--clr:#FF9F29">
+									<span></span><span></span><span></span><span></span>Kakao Login
+								</a>
+							</div>						
+						</div>
+						<div class="row">
+							<div class="col p-0">
+								<a href="javascript:loginNaver()" style="--clr:#FF9F29">
+									<span></span><span></span><span></span><span></span>Naver Login
+								</a>
+							</div>						
 						</div>
 					</div>
 				</div>
@@ -141,6 +150,66 @@
 	}
 		
 		
+	</script>
+	
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script>
+	
+	loginNaver = function(){
+		swal("info","구현중인 기능입니다.","info");
+	}
+	
+	 Kakao.init('45d424ec6ca5bb1db01d05b13aef2081'); // 사용하려는 앱의 JavaScript 키 입력
+	
+	 loginKakao = function () {
+	  Kakao.Auth.login({
+	   	success:function(result){
+	   		Kakao.API.request({ 
+	   			url:'/v2/user/me',
+	   			success:function(result){
+	   				
+	   				var token = Kakao.Auth.getAccessToken(); 
+	   				console.log(token);
+	   				
+	   				Kakao.Auth.setAccessToken(token);
+	   				var account = result.kakao_account;
+	   				console.log(account);
+	   				
+	   				$.ajax({
+	   					url:'/member/login/kakao'
+	   					,type: 'POST'
+	   					,datatype: 'json'
+	   					,data: {
+	   						mmId : account.email
+	   						,mmEmail : account.email
+	   						,mmName : account.profile.nickname  
+	   						,mmGender : account.gender == 'male' ? 1 : 2
+	   					}
+	   				
+	   					,success:function(result){
+	   						if(result.rt == "success" ){  
+	   							location.href="/main";
+	   						}else{
+	   							$("#errmsg").show();
+	   						}		
+	   					}
+	   					,error:function(){
+	   						alert("ajax error...!");
+	   					}	    					
+	   				});
+	   				
+	   			},
+	   			fail:function(){
+	   				alert("kakao request error..!");
+	   			}
+	   		});	    		
+	   	}
+	    	,fail:function(){
+	   		alert("kako login error..!");
+	   	}
+	    });	  
+	  
+	 }
 	</script>
 </body>
 </html>
