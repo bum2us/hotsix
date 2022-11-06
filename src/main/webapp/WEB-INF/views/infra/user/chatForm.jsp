@@ -213,12 +213,14 @@
 			</div>
 			<!-- 메세지 -->
 			<div class="chatBox" id="chatBox">
+				<!-- 기존 채팅 UI 			
 				<div class="message myMessage">
 					<p>안녕<br><span>10:48</span></p>
 				</div>
 				<div class="message frMessage">
 					<p>오랜만<br><span>10:48</span></p>
 				</div>
+				 -->
 			</div>
 			<!-- 채팅 입력 -->
 			<div class="chatBox_input">
@@ -263,7 +265,7 @@
 		);
 	};
 	const root = document.getElementById("chatBox");
-	ReactDOM.render(<App />, root);
+	//ReactDOM.render(<App />, root);
 	
 </script>
  
@@ -319,6 +321,9 @@
 	function InsertData(){
 
 	var message = $("#chatMessage").val();
+		
+		//새 메세지 추가하면 채팅방에 이전 기록도 다시 다 불러와서 한번 비워줌
+		$("#chatBox").html(""); 		
 
 		var room = $("#roomNo").val();		
 
@@ -337,10 +342,8 @@
 
 	$(".room").click(function(){
 		//event.target.id
-		SelectData(event.target.id);
-	}); 
-
-	function SelectData(room){ 
+		const room = event.target.id;
+		$("#roomNo").val(room);
 		const dbRef = ref(db, 'chat/'+room);
 		const txt = "";
 		//https://firebase.google.com/docs/database/web/lists-of-data?hl=ko&authuser=0
@@ -359,6 +362,14 @@
 							const message = childSnapshot3.val()
 							console.log(message);
 								
+							var txt = ''; 
+							txt+='<div class="message ';
+							txt+= writer == seq ? 'myMessage' : 'frMessage';
+							txt+='">';
+							txt+='	<p>'+message+'<br><span>'+ getTimeFormat(timetable) +'</span></p>';
+							txt+='</div>';				
+							$("#chatBox").append(txt);
+
 							});
 						}, { 
  							onlyOnce: true
@@ -369,15 +380,16 @@
  			});
 		});
 				
-		
-		$("#chatBox").html(txt);
-		$("#roomNo").val(room);
-	}
+	}); 
 
 	var insBtn = document.getElementById("insertBtn");
 
 	insBtn.addEventListener('click',InsertData);
 
+	function getTimeFormat(timetable){
+		//221105080634 
+		return timetable.substring(0,2)+"-"+timetable.substring(2,4)+"-"+timetable.substring(4,6)+" "+timetable.substring(6,8)+":"+timetable.substring(8,10)+":"+timetable.substring(10,12);	
+	}
 </script>
 
 <script type="text/javascript">
