@@ -289,6 +289,7 @@
 </script>
 
 <script type="module">
+	//채팅 기능은 그냥 따로 프로젝트를 만든 뒤에 구현해봐야겠다
 	// Import the functions you need from the SDKs you need
 	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-app.js";
 	// TODO: Add SDKs for Firebase products that you want to use
