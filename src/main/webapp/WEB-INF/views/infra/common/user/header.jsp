@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 <header>
-	<div class="logo">
+	<div class="logo" onclick="location.href='/main'" style="cursor:pointer;"> 
 		<img src="/resources/images/mark_white.png" class="logoImage" alt="">
 		<span class="logoName">AL<span class="logoName2">BUM</span>'S</span>
 	</div>
