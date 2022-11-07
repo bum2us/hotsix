@@ -9,11 +9,11 @@
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>신규가입</title>
+<title>채팅</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/style.css">
     <style>
-        div {
+        div { 
             /* border: 1px solid orange; */
         }
     </style>
@@ -46,19 +46,19 @@
 			<div class="chatlist">
 				<c:forEach items="${list }" var="list" varStatus="status"> 
 					<div class="block unread room" id="${list.chatSeq}">
-						<div class="imgbx" id="${list.chatSeq}">
+						<div class="imgbx">
 							<img class="cover" src="
 							<c:if test="${list.upPath ne null}">${list.upPath}${list.upUuidName}</c:if>
 							<c:if test="${list.upPath eq null}">/resources/images/profile/empty.png</c:if>
-							" id="${list.chatSeq}">
+							">
 						</div>
-						<div class="details" id="${list.chatSeq}">
-							<div class="listhead" id="${list.chatSeq}">
-								<h4 id="${list.chatSeq}"><c:out value="${list.mmNickname }"/></h4>
-								<p class="time" id="${list.chatSeq}">14:23</p>
+						<div class="details">
+							<div class="listhead">
+								<h4><c:out value="${list.mmNickname }"/></h4>
+								<p class="time" >14:23</p>
 							</div>
-							<div class="message_p" id="${list.chatSeq}">
-								<p id="${list.chatSeq}">안녕하세요 인상이 참 좋아보이셔서 dm 남겨요</p>
+							<div class="message_p">
+								<p>안녕하세요 인상이 참 좋아보이셔서 dm 남겨요</p> 
 								<b>1</b>
 							</div>
 						</div>
@@ -203,9 +203,9 @@
 			<div class="userHeader">
 				<div class="imgText">
 					<div class="userimg">
-						<img class="cover" src="/resources/images/profile/profile_02.png">
+						<img id="currentChatUserImg" class="cover" src="">
 					</div>
-					<h4>mins0052<br><span>Online</span></h4>
+					<span id="currentChatUserId" style="font-size:12pt; font-weight:bold; padding:10px;"></span>
 				</div>
 				<ul class="nav_icons">
 					<li><i class="fa-solid fa-magnifying-glass"></i></li>
@@ -311,21 +311,49 @@
 	// Initialize Firebase
 	const app = initializeApp(firebaseConfig);
 
-	import { getDatabase, ref, get, set, child, query, update, remove, onValue, limitToLast }
+	import { getDatabase, ref, set, onValue }
 	from "https://www.gstatic.com/firebasejs/9.12.1/firebase-database.js";
 	
 	const db = getDatabase();
 
 	var seq = $("#seq").val();
 
+	var insMsg = document.getElementById("chatMessage");
+
+	insMsg.addEventListener('keyup',enterKey);
+
+	var insBtn = document.getElementById("insertBtn");
+
+	insBtn.addEventListener('click',InsertData);
+
+
+	function enterKey() {
+		
+		var keycode = event.keyCode;
+		
+		if(keycode == 13) //Enter
+			InsertData();
+	};
+		
+
 	function InsertData(){
 
-	var message = $("#chatMessage").val();
+		var room = $("#roomNo").val();
+	
+		if(room == "") {
+			//채팅방을 선택하지 않고 메세지 보내면 동작하지 않도록
+			$("#chatMessage").val("");
+			return;
+		}
+
+		var message = $("#chatMessage").val();
+
+		//메시지 입력창 초기화
+		$("#chatMessage").val("");
 		
 		//새 메세지 추가하면 채팅방에 이전 기록도 다시 다 불러와서 한번 비워줌
 		$("#chatBox").html(""); 		
 
-		var room = $("#roomNo").val();		
 
 		set(ref(db,'chat/'+room+'/'+getnow()+'/'+seq ),{
 			Masseage: message
@@ -338,12 +366,24 @@
 		.catch((error)=> {
 			alert("unsuccess..! " + error); 
 		})
+
+		//스크롤을 제일 아래로 유지
+		$("#chatBox").scrollTop($("#chatBox")[0].scrollHeight);
 	}
 
 	$(".room").click(function(){
-		//event.target.id
-		const room = event.target.id;
+
+		//채팅을 누르면 기존 채팅은 지우고 새로 불러오게
+		$("#chatBox").html("");
+
+		const room = event.currentTarget.id; 
 		$("#roomNo").val(room);
+		
+		$("#currentChatUserId").html(event.currentTarget.children[1].children[0].children[0].innerText);
+		$("#currentChatUserImg").attr("src", event.currentTarget.children[0].children[0].src);
+		//var imgSrc = event.currentTarget.children[0].children[0].src;
+		//var nickName = event.currentTarget.children[1].children[0].children[0].innerText;
+ 
 		const dbRef = ref(db, 'chat/'+room);
 		const txt = "";
 		//https://firebase.google.com/docs/database/web/lists-of-data?hl=ko&authuser=0
@@ -369,7 +409,8 @@
 							txt+='	<p>'+message+'<br><span>'+ getTimeFormat(timetable) +'</span></p>';
 							txt+='</div>';				
 							$("#chatBox").append(txt);
-
+							console.log($("#chatBox")[0].scrollTop + "  " + $("#chatBox")[0].scrollHeight);
+							$("#chatBox").scrollTop($("#chatBox")[0].scrollHeight);
 							});
 						}, { 
  							onlyOnce: true
@@ -382,9 +423,6 @@
 				
 	}); 
 
-	var insBtn = document.getElementById("insertBtn");
-
-	insBtn.addEventListener('click',InsertData);
 
 	function getTimeFormat(timetable){
 		//221105080634 
