@@ -25,7 +25,7 @@
    	<form method="POST" id="mainForm">
 	<%@include file="./postForm.jsp" %>
 	    <div class="container" style="min-height: 700px;"> 
-	    	<input type="hidden" id="chatUser" name="chatUser" value="">
+	    	<input type="hidden" id="chatUser" name="cuMemberSeq" value="">
     		<input type="hidden" id="shOption" name="shOption" value="
     		<c:if test="${item.mmSeq eq null}">${sessSeq}</c:if>
     		<c:if test="${item.mmSeq ne null}">${item.mmSeq}</c:if>

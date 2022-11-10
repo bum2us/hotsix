@@ -21,4 +21,8 @@ public class ChatDao {
 
 	public Chat selectOneChat(Chat item) { return sqlSession.selectOne(namespace + ".selectOneChat", item); }
 
+	public void insert(Chat dto) { sqlSession.insert(namespace+".insert", dto); }
+
+	public void insertChatUser(Chat dto) { sqlSession.insert(namespace+".insertChatUser", dto); }
+
 }

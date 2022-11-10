@@ -101,8 +101,6 @@ public class MemberServiceImpl implements MemberService{
 	public void updateOne(Member mb) throws Exception {
 		// TODO Auto-generated method stub
 		
-		mb.setMmPassword(UtilSecurity.encryptSha256(mb.getMmPassword()));
-		
 		dao.updateOne(mb);
 		
 		

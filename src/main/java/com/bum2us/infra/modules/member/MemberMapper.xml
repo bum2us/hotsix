@@ -149,10 +149,10 @@
 	
 	<update id="upadteOne">
 		
-		UPDATE
+		UPDATE 
 			member
 		SET
-			,mmComment = #{mmComment}
+			mmComment = #{mmComment}
 			,mmNickname = #{mmNickname}
 			,mmPhone = CONCAT('010',#{mmPhone1},#{mmPhone2})
 			,mmZipCode = #{mmZipCode}

@@ -36,5 +36,34 @@
 		WHERE cu.cuChatSeq = #{chatSeq}
 		AND cu.cuMemberSeq != #{cuMemberSeq}  
 	</select>
+	
+	<insert id="insert">
+		INSERT INTO
+		chat
+		(
+			chatDelNy
+		)
+		VALUES
+		(
+			0
+		)
+		<selectKey resultType="Integer" keyProperty="chatSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert> 
+	
+	<insert id="insertChatUser">
+		INSERT INTO
+		chatUser
+		(
+			cuChatSeq
+			,cuMemberSeq
+		)
+		VALUES
+		(
+			#{chatSeq}
+			,#{cuMemberSeq}
+		)
+	</insert>
 
 </mapper>
