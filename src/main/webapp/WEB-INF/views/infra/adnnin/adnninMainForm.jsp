@@ -21,14 +21,15 @@
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
-				<span class="page_title">메인 페이지 대시보드 만들어야 함</span><br><br><br><br>
+				<span class="page_title">메인 페이지 대시보드 공사중..</span><br><br><br><br>
 			</div>
 		</div>
 		<form id="mainForm">
 		<div class="text-center">
-			<span class="page_title">ᘏ▸◂ᘏ</span><br>
+			<!-- <span class="page_title">ᘏ▸◂ᘏ</span><br>
 			<span class="page_title">꒰ ɞ̴̶̷ ·̮ ɞ̴̶̷ ꒱</span><br> 
-			<span class="page_title">/>🥩c\ ♡ </span><br> <br> <br> <br> 
+			<span class="page_title">/>🥩c\ ♡ </span><br> <br> <br> <br>  -->
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
 		</form>	 
     </div>
