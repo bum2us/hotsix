@@ -21,7 +21,7 @@
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
-				<span class="page_title">메인 페이지 대시보드 공사중..</span><br><br><br><br>
+				<span class="page_title">메인 페이지 대시보드 공사중..  </span><br><br><br><br>
 			</div>
 		</div>
 		<form id="mainForm">
