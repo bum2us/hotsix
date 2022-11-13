@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-	<div class="container-md" style="width: 500px">
+	<div class="container-md" style="width: 500px; min-height:700px;">
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">

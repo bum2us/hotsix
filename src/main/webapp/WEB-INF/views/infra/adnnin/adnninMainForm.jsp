@@ -17,7 +17,7 @@
 </head>
 <body>
 	<%@include file="../common/adnnin/header.jsp" %>
-	<div class="container">
+	<div class="container" style="min-height:700px;">
         <br><br>
 		<div class="row justify-content-center">
 			<div class="col text-center">
@@ -29,7 +29,7 @@
 			<!-- <span class="page_title">ᘏ▸◂ᘏ</span><br>
 			<span class="page_title">꒰ ɞ̴̶̷ ·̮ ɞ̴̶̷ ꒱</span><br> 
 			<span class="page_title">/>🥩c\ ♡ </span><br> <br> <br> <br>  -->
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			
 		</div>
 		</form>	 
     </div>

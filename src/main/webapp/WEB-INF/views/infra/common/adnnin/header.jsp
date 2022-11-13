@@ -6,11 +6,11 @@
 	</div>
 	<nav>
 		<ul class="nav_links">
-			<li><a href="">메인</a></li>
-			<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
-			<li><a href="/code/CodeList">코드</a></li>
+			<li><a href="/administrator/main">메인</a></li>
 			<li><a href="/member/memberList">멤버</a></li>
 			<li><a href="/postList">게시물</a></li>
+			<li><a href="/codegroup/codeGroupList">코드그룹</a></li>
+			<li><a href="/code/CodeList">코드</a></li>
 		</ul>
 	</nav>
 	<div class="profile">
