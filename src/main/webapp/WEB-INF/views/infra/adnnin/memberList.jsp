@@ -177,9 +177,23 @@
 		  	}
 		  	case "page":
 	  		{
-		  		var pageno = $("#pageNumber");
-		  		pageno.attr("value",no);
-		  		form.attr("action", "/member/memberList").submit();
+		  		$.ajax({
+		  			url:''
+		  			,type:'POST'
+		  			,dataType:'json'
+		  			,data: {
+		  				pageNumber : no
+		  			},
+		  			success:function(result){
+		  				
+		  			},
+		  			error:function(){
+		  				alert("ajax error...!");
+		  			}
+		  		});
+		  		//var pageno = $("#pageNumber");
+		  		//pageno.attr("value",no);
+		  		//form.attr("action", "/member/memberList").submit();
 		  		break;
 	  		}
 		  	case "add":

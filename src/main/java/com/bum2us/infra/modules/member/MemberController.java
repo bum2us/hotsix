@@ -52,6 +52,17 @@ public class MemberController {
 		return "infra/adnnin/memberList";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/member/merberListAjax")
+	public Map<String,Object> merberListAjax(@ModelAttribute("vo")MemberVo vo, Model model) throws Exception{
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		//ajax
+		
+		return result;
+	}
+	
 	@RequestMapping(value="/member/memberList/excel")
 	public void memberListExcel(@ModelAttribute("vo")MemberVo vo,HttpServletResponse httpServletResponse) throws Exception {
 		
