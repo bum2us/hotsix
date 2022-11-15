@@ -25,4 +25,6 @@ public interface MemberService {
 	public int chkPw(MemberVo vo) throws Exception;
 	
 	public void uelete(MemberVo vo) throws Exception;
+	
+	public Object chkIdforNaver(Member vo) throws Exception; 
 }

@@ -162,6 +162,14 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
+	@Override
+	public Member chkIdforNaver(Member vo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.chkIdforNaver(vo);
+	}
+
+	
+
 	
 	
 }

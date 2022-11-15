@@ -47,4 +47,6 @@ public class MemberDao {
 
 	public void updatePassword(Member mb) { sqlSession.update(namespace+".updatePassword",mb); }
 
+	public Member chkIdforNaver(Member vo) { return sqlSession.selectOne(namespace+".chkIdforNaver", vo); }
+
 }

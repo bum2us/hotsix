@@ -202,6 +202,25 @@ public class MemberController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="member/chkId/naver")
+	public Map<String,Object> memberChkIdnaver(Member vo,HttpSession httpSession) throws Exception{
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		Member user = service.chkIdforNaver(vo);
+		
+		if(user != null) {
+			
+			result.put("rt", "success");
+			result.put("userInfo", user);
+			httpSession.setAttribute("sessSeq", user.getMmSeq());
+		}else
+			result.put("rt", "success");
+		
+		return result; 
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="member/chkPw")
 	public Map<String,Object> memberChkId(HttpSession httpSession,MemberVo vo) throws Exception{
 		

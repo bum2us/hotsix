@@ -43,6 +43,7 @@
 				<exclude-mapping path="/member/checkSms"/>
 				<exclude-mapping path="/member/login"/>
 				<exclude-mapping path="/member/login/kakao"/>
+				<exclude-mapping path="/member/chkId/naver"/>
 				<exclude-mapping path="/member/memberIns"/>
 				<exclude-mapping path="/member/memberForm"/>
 				<exclude-mapping path="/administrator"/>

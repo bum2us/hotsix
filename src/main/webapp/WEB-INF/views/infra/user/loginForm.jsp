@@ -75,14 +75,14 @@
 						</div>
 						<div class="row">
 							<div class="col p-0">
-								<a href="javascript:loginKakao()" style="--clr:#FF9F29">
+								<a href="javascript:loginKakao()" style="--clr:#FF9F29; color:yellow;" > 
 									<span></span><span></span><span></span><span></span>Kakao Login
 								</a>
 							</div>						
-						</div>
+						</div>  
 						<div class="row">
 							<div class="col p-0">
-								<a href="javascript:loginNaver()" style="--clr:#FF9F29">
+								<a href="javascript:loginNaver()" style="--clr:#FF9F29; color:green;"> 
 									<span></span><span></span><span></span><span></span>Naver Login
 								</a>
 							</div>						
@@ -151,65 +151,112 @@
 		
 		
 	</script>
+	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+	<script>
+	
+		var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "oWJJlc2ehy7nlWILKoyh", 
+				callbackUrl: "http://localhost:8080/signin",
+				isPopup: false
+			}
+		);
+		
+		naverLogin.init();
+		
+		loginNaver = function(){
+			
+			
+			naverLogin.getLoginStatus(function (status) { 
+				console.log(naverLogin);
+				if(!status)
+					naverLogin.authorize(function(result) {
+						console.log(result);
+					});
+				
+				
+				$.ajax({
+					url: '/member/chkId/naver'
+					,type: 'POST'
+					,datatype: 'json'
+					,data: {
+						mmName : ""+naverLogin.user.name
+						,mmEmail : ""+naverLogin.user.email
+					},
+					success:function(result){
+						if(result.rt=="success"){
+							alert("소셜가입된 유저"); 
+							location.href="/main";
+						}else{
+							alert("소셜가입된 유저 없음");
+							
+							
+							
+							$("#loginform").attr("action","/member/memberForm").submit();
+						}
+					},
+					error:function(){
+						alert("ajax error..!");
+					}
+				});
+			});
+		};
+	
+	</script>
 	
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
-	
-	loginNaver = function(){
-		swal("info","구현중인 기능입니다.","info");
-	}
-	
-	 Kakao.init('45d424ec6ca5bb1db01d05b13aef2081'); // 사용하려는 앱의 JavaScript 키 입력
-	
-	 loginKakao = function () {
-	  Kakao.Auth.login({
-	   	success:function(result){
-	   		Kakao.API.request({ 
-	   			url:'/v2/user/me',
-	   			success:function(result){
-	   				
-	   				var token = Kakao.Auth.getAccessToken(); 
-	   				console.log(token);
-	   				
-	   				Kakao.Auth.setAccessToken(token);
-	   				var account = result.kakao_account;
-	   				console.log(account);
-	   				
-	   				$.ajax({
-	   					url:'/member/login/kakao'
-	   					,type: 'POST'
-	   					,datatype: 'json'
-	   					,data: {
-	   						mmId : account.email
-	   						,mmEmail : account.email
-	   						,mmName : account.profile.nickname  
-	   						,mmGender : account.gender == 'male' ? 1 : 2
-	   					}
-	   				
-	   					,success:function(result){
-	   						if(result.rt == "success" ){  
-	   							location.href="/main";
-	   						}else{
-	   							$("#errmsg").show();
-	   						}		
-	   					}
-	   					,error:function(){
-	   						alert("ajax error...!");
-	   					}	    					
-	   				});
-	   				
-	   			},
-	   			fail:function(){
-	   				alert("kakao request error..!");
-	   			}
-	   		});	    		
-	   	}
-	    	,fail:function(){
-	   		alert("kako login error..!");
-	   	}
-	    });	  
-	  
-	 }
+		Kakao.init('45d424ec6ca5bb1db01d05b13aef2081'); // 사용하려는 앱의 JavaScript 키 입력
+		
+		loginKakao = function () {
+		  Kakao.Auth.login({
+		   	success:function(result){
+		   		Kakao.API.request({ 
+		   			url:'/v2/user/me',
+		   			success:function(result){
+		   				
+		   				var token = Kakao.Auth.getAccessToken(); 
+		   				console.log(token);
+		   				
+		   				Kakao.Auth.setAccessToken(token);
+		   				var account = result.kakao_account;
+		   				console.log(account);
+		   				
+		   				$.ajax({
+		   					url:'/member/login/kakao'
+		   					,type: 'POST'
+		   					,datatype: 'json'
+		   					,data: {
+		   						mmId : account.email
+		   						,mmEmail : account.email
+		   						,mmName : account.profile.nickname  
+		   						,mmGender : account.gender == 'male' ? 1 : 2
+		   					}
+		   				
+		   					,success:function(result){
+		   						if(result.rt == "success" ){  
+		   							location.href="/main";
+		   						}else{
+		   							$("#errmsg").show();
+		   						}		
+		   					}
+		   					,error:function(){
+		   						alert("ajax error...!");
+		   					}	    					
+		   				});
+		   				
+		   			},
+		   			fail:function(){
+		   				alert("kakao request error..!");
+		   			}
+		   		});	    		
+		   	}
+		    	,fail:function(){
+		   		alert("kako login error..!");
+		   	}
+		    });	  
+		  
+		 }
 	</script>
 </body>
 </html>

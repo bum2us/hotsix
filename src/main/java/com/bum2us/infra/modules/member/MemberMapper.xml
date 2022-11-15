@@ -252,4 +252,13 @@
 	
 	</select>
 	
+	<select id="chkIdforNaver"  resultMap="resultObj">
+		SELECT
+			*
+		FROM member
+		WHERE mmSnsAccountType = 1
+		AND mmEmail = #{mmEmail}
+		AND mmName = #{mmName}
+	</select>
+	
 </mapper> 
