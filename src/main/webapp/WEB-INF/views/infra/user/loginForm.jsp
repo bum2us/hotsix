@@ -153,55 +153,52 @@
 	</script>
 	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 	<script>
-	
+		
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "oWJJlc2ehy7nlWILKoyh", 
 				callbackUrl: "http://localhost:8080/signin",
-				isPopup: false
+				isPopup: true
 			}
 		);
-		
 		naverLogin.init();
-		
+	
 		loginNaver = function(){
-			
-			
 			naverLogin.getLoginStatus(function (status) { 
 				console.log(naverLogin);
 				if(!status)
-					naverLogin.authorize(function(result) {
-						console.log(result);
-					});
-				
-				
-				$.ajax({
-					url: '/member/chkId/naver'
-					,type: 'POST'
-					,datatype: 'json'
-					,data: {
-						mmName : ""+naverLogin.user.name
-						,mmEmail : ""+naverLogin.user.email
-					},
-					success:function(result){
-						if(result.rt=="success"){
-							alert("소셜가입된 유저"); 
-							location.href="/main";
-						}else{
-							alert("소셜가입된 유저 없음");
-							
-							
-							
-							$("#loginform").attr("action","/member/memberForm").submit();
-						}
-					},
-					error:function(){
-						alert("ajax error..!");
-					}
-				});
+					naverLogin.authorize();
+				ajaxNaverLogin();
 			});
 		};
-	
+		
+		ajaxNaverLogin = function(){
+			
+			$.ajax({
+				url: '/member/chkId/naver'
+				,type: 'POST'
+				,datatype: 'json'
+				,data: {
+					mmName : naverLogin.user.name
+					,mmEmail : naverLogin.user.email
+				},
+				success:function(result){
+					if(result.rt=="success"){
+						alert("소셜가입된 유저"); 
+						
+						location.href="/main";
+					}else{
+						alert("소셜가입된 유저 없음");
+						
+						$("#loginform").attr("action","/member/memberForm").submit();
+					}
+				},
+				error:function(){
+					alert("ajax error..!");
+				}
+			});
+		}
+		
 	</script>
 	
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

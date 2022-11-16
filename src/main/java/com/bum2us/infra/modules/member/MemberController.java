@@ -207,6 +207,10 @@ public class MemberController {
 		
 		Map<String,Object> result = new HashMap<String,Object>();
 		
+		System.out.println("naver login module");
+		System.out.println(vo.getMmName());
+		System.out.println(vo.getMmEmail());
+		
 		Member user = service.chkIdforNaver(vo);
 		
 		if(user != null) {

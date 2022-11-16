@@ -414,9 +414,7 @@
 	}
 	
 	function loadData(e){
-		//채팅을 누르면 기존 채팅은 지우고 새로 불러오게
-		$("#chatBox").html("");
-
+		
 		const room = e.id; 
 		$("#roomNo").val(room);
 		
@@ -428,39 +426,41 @@
 		const dbRef = ref(db, 'chat/'+room);
 		const txt = "";
 		//https://firebase.google.com/docs/database/web/lists-of-data?hl=ko&authuser=0
-		onValue(dbRef,(snapshot) => {
- 			snapshot.forEach((childSnapshot) => {
-   			const timetable = childSnapshot.key;
-			console.log(timetable);
+		
+        onValue(dbRef,(snapshot) => {
+            if(snapshot.key == $("#roomNo").val()){
+				//채팅을 누르면 기존 채팅은 지우고 새로 불러오게
+				$("#chatBox").html("");
+                snapshot.forEach((childSnapshot) => {
+                    const timetable = childSnapshot.key;
+                    console.log(timetable); 
 
-				onValue(ref(db,'chat/'+room+'/'+timetable),(snapshot2) => {
-					snapshot2.forEach((childSnapshot2) => {
-						const writer = childSnapshot2.key
-						console.log(writer);
-						
-						onValue(ref(db,'chat/'+room+'/'+timetable+'/'+writer),(snapshot3) => {
-							snapshot3.forEach((childSnapshot3) => {
-							const message = childSnapshot3.val()
-							console.log(message);
-								
-							var txt = ''; 
-							txt+='<div class="message ';
-							txt+= writer == seq ? 'myMessage' : 'frMessage';
-							txt+='">';
-							txt+='	<p>'+message+'<br><span>'+ getTimeFormat(timetable) +'</span></p>';
-							txt+='</div>';				
-							$("#chatBox").append(txt);
-							console.log($("#chatBox")[0].scrollTop + "  " + $("#chatBox")[0].scrollHeight);
-							$("#chatBox").scrollTop($("#chatBox")[0].scrollHeight);
-							});
-						}, { 
- 							onlyOnce: true
-						});
-							
-					}); 
-				});
- 			});
-		});
+                    onValue(ref(db,'chat/'+room+'/'+timetable),(snapshot2) => {
+                        snapshot2.forEach((childSnapshot2) => {
+                            const writer = childSnapshot2.key
+                            console.log(writer);
+                        
+                            onValue(ref(db,'chat/'+room+'/'+timetable+'/'+writer),(snapshot3) => {
+                                snapshot3.forEach((childSnapshot3) => {
+                                        const message = childSnapshot3.val()
+                                        console.log(message);
+                                            
+                                        var txt = ''; 
+                                        txt+='<div class="message ';
+                                        txt+= writer == seq ? 'myMessage' : 'frMessage';
+                                        txt+='">';
+                                        txt+='	<p>'+message+'<br><span>'+ getTimeFormat(timetable) +'</span></p>';
+                                        txt+='</div>';				
+                                        $("#chatBox").append(txt);
+                                        console.log($("#chatBox")[0].scrollTop + "  " + $("#chatBox")[0].scrollHeight);
+                                        $("#chatBox").scrollTop($("#chatBox")[0].scrollHeight);
+                                    });
+                                }); 
+                            }); 
+                        });
+                    });
+                 }		
+            });	
 	}
 
 	$(".room").click(function(){
