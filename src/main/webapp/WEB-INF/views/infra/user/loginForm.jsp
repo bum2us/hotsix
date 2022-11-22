@@ -14,9 +14,12 @@
 	<style>
 		div {
 			/* border: 1px orange solid; */
-		}
+		} 
+		
+				
+		
 	</style>
-</head>
+</head> 
 <body style="background-color:#000;">
 		<div class="container">
 			<form action="/main" id="loginform">
@@ -74,6 +77,13 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="col p-0"> 
+								<a href="" style="--clr:#FF9F29;" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+									<span></span><span></span><span></span><span></span>ID / PW FIND
+								</a>
+							</div>						
+						</div>  
+						<div class="row">
 							<div class="col p-0">
 								<a href="javascript:loginKakao()" style="--clr:#FF9F29; color:yellow;" > 
 									<span></span><span></span><span></span><span></span>Kakao Login
@@ -89,6 +99,49 @@
 						</div>
 					</div>
 				</div>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				    <div class="modal-dialog modal-dialog-centered"> 
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <h3 class="modal-title fs-5" id="exampleModalLabel">ID / PW 찾기</h3>
+				                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				            </div>
+				            <div class="modal-body">
+				            	<div class="container-fluid">
+				            		<div class="row">
+				            			 <input type="radio" name="size" id="small" checked>
+				            			 <label for="small">아이디 찾기</label><br>
+				            			 <input type="radio" name="size" id="big">
+				            			 <label for="big">비밀번호 찾기</label>   
+				            		</div>
+				            		<div class="row">
+				            			<div class="col m-1">
+				            				<div class="row my-2 justify-content-center">
+						            			<input class="form-control" type="text" placeholder="아이디">		
+				            				</div>				            				
+				            				<div class="row my-2 justify-content-center">
+						            			<input class="form-control" type="text" placeholder="이름">		
+				            				</div>
+				            				<div class="row my-2 justify-content-center">
+						            			<input class="form-control" type="text" placeholder="생년월일 ex)1999-01-01">		
+				            				</div> 
+				            				<div class="row my-2 justify-content-center">
+						            			<input class="form-control" type="text" placeholder="휴대폰번호 ex)010-1234-1234">		
+				            				</div>
+				            			</div> 
+				            			<div class="col m-1">
+				            				<div class="row my-2 justify-content-center">
+						            			<button type="button">찾기</button>		
+				            				</div>
+				            			</div>
+				            		</div>
+				            	</div>
+				            </div>
+				        </div>
+				    </div>
+				</div>
 			</form>	
 		</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -97,11 +150,7 @@
 	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>	
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript">
-	
-	findidpw = function() {
-		swal("ALBUM'S", "구현예정입니다.", "info");
-	}
-	
+
 	enterKey = function() {
 		
 		var keycode = event.keyCode;
@@ -110,7 +159,7 @@
 			submitform();
 	};
 		
-    submitform = function(){		
+    submitform = function(){		 
 		
 		if($('#mmId').val() == null || $('#mmId').val().length < 1)
 		{ 

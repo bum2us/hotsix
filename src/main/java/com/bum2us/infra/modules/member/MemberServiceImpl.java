@@ -134,7 +134,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	
-	
 	@Override
 	public int chkId(String id) throws Exception {
 		// TODO Auto-generated method stub
@@ -157,9 +156,7 @@ public class MemberServiceImpl implements MemberService{
 		for (MemberVo item : vo.getSeqVoList()) {
 			
 			dao.uelete(item);
-		}
-		
-		
+		}		
 	}
 
 	@Override
