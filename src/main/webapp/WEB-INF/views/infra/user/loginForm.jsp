@@ -213,6 +213,8 @@
 		naverLogin.init();
 	
 		loginNaver = function(){
+			alert('네이버 기능 구현중');
+			return false;
 			naverLogin.getLoginStatus(function (status) { 
 				console.log(naverLogin);
 				if(!status)
