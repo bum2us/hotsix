@@ -92,10 +92,10 @@
 	            <div class="row" style="width:250px; height:150px; border:none; border-radius:10px; box-shadow: 0 7px 25px rgba(0,0,0,0.08);">
 	                <div class="col-7" style="padding-top:36px;">
 	                    <div class="row"> 
-	                        <span style="font-size:26pt; font-weight:bold;">1004</span>
+	                        <span style="font-size:26pt; font-weight:bold;">데이터없음</span>
 	                    </div>
 	                    <div class="row">
-	                        <span style="color:gray; font-size:10pt; font-weight:500; padding-left:15px;">지각횟수</span>   
+	                        <span style="color:gray; font-size:10pt; font-weight:500; padding-left:15px;">-</span>   
 	                    </div>
 	                </div>
 	                <div class="col text-center" style="padding-top:50px;">
